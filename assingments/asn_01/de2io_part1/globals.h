@@ -4,9 +4,9 @@
 #define DISABLE	0
 #define ENABLE	1
 
-extern volatile int count = 0;
+volatile int count = 0;
 
-const unsigned char digits[10] = {
+extern volatile unsigned char digits[10] = {
     0x3F, // 0
     0x06, // 1
     0x5B, // 2
