@@ -9,19 +9,6 @@ volatile int pattern = 0x0000000F;  // pattern for shifting
 volatile int shift_dir = LEFT;      // direction to shift the pattern
 volatile int shift_enable = ENABLE; // enable/disable shifting of the pattern
 
-const unsigned char digits[10] = {
-    0x3F, // 0
-    0x06, // 1
-    0x5B, // 2
-    0x4F, // 3
-    0x66, // 4
-    0x6D, // 5
-    0x7D, // 6
-    0x07, // 7
-    0x7F, // 8
-    0x6F  // 9
-};
-
 /*******************************************************************************
  * This program demonstrates use of interrupts. It
  * first starts the interval timer with 50 msec timeouts, and then enables
