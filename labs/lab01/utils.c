@@ -1,6 +1,14 @@
+#include "globals.h"
 #include "address_map_nios2.h"
 
 int digits[10];
+
+int hex_3_0_val;
+int hex_5_4_val;
+
+int hex_count;
+int questions_count;
+int random_number;
 
 int generate_random_value(int lower, int upper)
 {
@@ -24,6 +32,11 @@ int hex_2_val(int value)
 
 void reset_system()
 {
+	
+	hex_count = 0;
+	random_number = 0;
+	questions_count = 0;
+
 	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
 	volatile int *HEX5_HEX4_ptr = (int *)HEX5_HEX4_BASE;
 
@@ -37,8 +50,6 @@ void reset_system()
 
 	/* Resetting HEX 3:0 */
 
-	int hex_3_0_val = 0;
-
 	hex_3_0_val = digits[hex_2] << 16;
 	hex_3_0_val |= digits[hex_1] << 8;
 	hex_3_0_val |= digits[hex_0];
@@ -46,7 +57,6 @@ void reset_system()
 	*(HEX3_HEX0_ptr) = hex_3_0_val;
 
 	/* Resetting HEX 5:4 */
-	int hex_5_4_val;
 
 	hex_5_4_val = digits[hex_5] << 8;
 	hex_5_4_val |= digits[hex_4];

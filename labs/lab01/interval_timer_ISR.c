@@ -9,7 +9,9 @@ extern volatile int pattern, shift_dir, shift_enable;
 int digits[10];
 int random_number;
 int hex_count;
+
 int questions_count;
+int hex_5_4_val;
 int reset;
 
 /*******************************************************************************
@@ -34,7 +36,7 @@ void interval_timer_ISR()
 	int hex_4 = 0;
 	int hex_5 = 0;
 
-	if (reset) /* Prevent it from doing anything if reset flag is set */
+	if (pause && reset) /* Prevent it from doing anything if reset flag is set */
 	{
 		reset_system();
 		return;
@@ -68,15 +70,14 @@ void interval_timer_ISR()
 	hex_4 = hex_0_val(hex_count);
 	hex_5 = hex_1_val(hex_count);
 
-	int hex_count_value;
 
-	hex_count_value = digits[hex_5] << 8;
-	hex_count_value |= digits[hex_4];
+	hex_5_4_val = digits[hex_5] << 8;
+	hex_5_4_val |= digits[hex_4];
 
 	/* Loading all values to HEX pointers for Display */
 
 	*(HEX3_HEX0_ptr) = random_number;
-	*(HEX5_HEX4_ptr) = hex_count_value;
+	*(HEX5_HEX4_ptr) = hex_5_4_val;
 
 	return;
 }

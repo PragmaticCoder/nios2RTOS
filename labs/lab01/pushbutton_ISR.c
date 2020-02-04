@@ -30,7 +30,7 @@ void pushbutton_ISR(void)
         reset ^= 1;
     }
 
-    if (reset)
+    if (pause && reset)
         reset_system();
 
     return;
