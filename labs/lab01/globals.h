@@ -5,7 +5,11 @@
 #define ENABLE	1
 
 #define MAX_QUESTIONS 10
-#define PROPER_RESET pause && reset
+
+/* States */
+#define RESET_AFTER_PAUSE pause && reset
+#define UNPAUSE_AFTER_RESET !pause && reset
+#define PAUSE_STATE pause && !reset
 
 extern int reset;
 extern int pause;

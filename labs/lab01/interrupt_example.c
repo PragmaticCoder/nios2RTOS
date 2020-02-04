@@ -7,7 +7,6 @@
  * these as volatile to avoid the compiler caching their values in registers */
 volatile int pattern = 0x0000000F;  // pattern for shifting
 volatile int shift_dir = LEFT;      // direction to shift the pattern
-volatile int shift_enable = ENABLE; // enable/disable shifting of the pattern
 
 int count;
 int hex_count;

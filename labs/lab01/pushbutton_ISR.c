@@ -2,7 +2,6 @@
 #include "globals.h" // defines global values
 #include "utils.h"
 
-extern volatile int pattern, shift_enable;
 /*******************************************************************************
  * Pushbutton - Interrupt Service Routine
  *
@@ -23,17 +22,17 @@ void pushbutton_ISR(void)
 
     if (press & 0x2) // KEY1
         pause ^= 1;
-    
-    if(!pause && reset)
+
+    if (UNPAUSE_AFTER_RESET)
         reset = 0;
 
-    if (pause && reset){
+    if (RESET_AFTER_PAUSE)
+    {
         idle_state();
     }
 
     if (pause)
         hex_5_4_val &= ~0xFFFFFFFF;
-
 
     return;
 }

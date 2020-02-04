@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "type_traits": "c",
-        "address_map_nios2.h": "c"
+        "address_map_nios2.h": "c",
+        "utils.h": "c",
+        "globals.h": "c"
     }
 }

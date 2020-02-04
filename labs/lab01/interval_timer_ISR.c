@@ -4,7 +4,7 @@
 #include "utils.h"
 // defines global values
 
-extern volatile int pattern, shift_dir, shift_enable;
+extern volatile int shift_dir;
 
 int digits[10];
 int random_number;
@@ -36,16 +36,17 @@ void interval_timer_ISR()
 	int hex_4 = 0;
 	int hex_5 = 0;
 
-	if (pause && reset) /* Prevent it from doing anything if reset flag is set */
+	if (RESET_AFTER_PAUSE) /* Prevent it from doing anything if reset flag is set */
 	{
 		idle_state();
 		return;
 	}
 
-	if (pause && !reset){
+	if (PAUSE_STATE){
 		*(HEX3_HEX0_ptr) &= ~0xFFFFFFFF;
 		return;
 	}
+
 
 	if (questions_count >= MAX_QUESTIONS)
 		questions_count = 0;
