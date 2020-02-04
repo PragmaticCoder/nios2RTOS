@@ -1,4 +1,3 @@
-#include "utils.h"
 
 
 int generate_random_value(int lower, int upper)
