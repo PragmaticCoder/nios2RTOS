@@ -9,6 +9,7 @@ extern volatile int pattern, shift_dir, shift_enable;
 int digits[10];
 int random_number;
 int hex_count;
+int questions_count;
 
 /*******************************************************************************
 * Interval timer interrupt service routine#include <math.h>
@@ -32,19 +33,24 @@ void interval_timer_ISR()
 	int hex_4 = 0;
 	int hex_5 = 0;
 
+	if (questions_count >= MAX_QUESTIONS)
+		questions_count = 0;
+	else
+		questions_count++;
+
 	/* HEX 2:0 Random Generator */
-	if (shift_dir == LEFT)
+	if (hex_count == 30 && shift_dir == LEFT)
 	{
 		random_number = generate_random_value(1, 255);
+		
+		hex_0 = hex_0_val(random_number);
+		hex_1 = hex_1_val(random_number);
+		hex_2 = hex_2_val(random_number);
+
+		random_number = digits[hex_2] << 16;
+		random_number |= digits[hex_1] << 8;
+		random_number |= digits[hex_0];
 	}
-
-	hex_0 = hex_0_val(random_number);
-	hex_1 = hex_1_val(random_number);
-	hex_2 = hex_2_val(random_number);
-
-	random_number = digits[hex_2] << 16;
-	random_number |= digits[hex_1] << 8;
-	random_number |= digits[hex_0];
 
 	/* Handling HEX 5:4 counter */
 	if (hex_count == 0)
