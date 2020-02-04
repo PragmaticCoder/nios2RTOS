@@ -7,28 +7,29 @@ extern volatile int pattern, shift_dir, shift_enable;
 int digits[10];
 int count;
 
-int generate_random_value()
+int generate_random_value(int lower, int upper)
 {
-	return 0;
+	return (rand() % (upper - lower + 1)) + lower;
 }
 
-int digit_zero(int value)
+int hex_0_val(int value)
 {
 	return value % 10;
 }
 
-int digit_one(int value)
+int hex_1_val(int value)
 {
-	return value % 100;
+	return (value / 10) % 10;
 }
 
-int digit_two(int value)
+int hex_2_val(int value)
 {
-	return value % 1000;
+	return (value / 100) % 10;
 }
 
 /*******************************************************************************
-* Interval timer interrupt service routine
+* Interval timer interrupt service routine#include <math.h>
+
 * Shifts a PATTERN being displayed on the HEX displays. The shift direction
 * is determined by the external variable key_pressed.
 ******************************************************************************/
@@ -40,28 +41,24 @@ void interval_timer_ISR()
 
 	*(interval_timer_ptr) = 0; // clear the interrupt
 
-	int zero_hex;
-	int one_hex;
-	int two_hex;
+	int value = 0;
 
-	two_hex = rand() % 2;
+	int hex_0 = 0;
+	int hex_1 = 0;
+	int hex_2 = 0;
 
 	if (shift_dir == LEFT)
-	{
-		
-	}
-	else
-	{
-		// TODO: Reset count to zero
-	}
-	
-	int x;
-	x = digits[two_hex] << 16;
-	x = x ^ digits[one_hex] << 8;
-	x = x ^ digits[zero_hex];
-	*(HEX3_HEX0_ptr) = x;
+		value = generate_random_value(1, 255);
 
-	//*(HEX3_HEX0_ptr) = digits[count]<<8;
+	hex_0 = hex_0_val(value);
+	hex_1 = hex_1_val(value);
+	hex_2 = hex_2_val(value);
+
+	value = digits[hex_2] << 16;
+	value = value ^ digits[hex_1] << 8;
+	value = value ^ digits[hex_0];
+
+	*(HEX3_HEX0_ptr) = value;
 
 	return;
 }
