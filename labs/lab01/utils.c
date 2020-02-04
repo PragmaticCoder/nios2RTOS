@@ -54,7 +54,7 @@ void reset_system()
 	hex_3_0_val |= digits[hex_1] << 8;
 	hex_3_0_val |= digits[hex_0];
 
-	*(HEX3_HEX0_ptr) = hex_3_0_val;
+	*(HEX3_HEX0_ptr) &= ~ 0xFFFFFFFF;
 
 	/* Resetting HEX 5:4 */
 
