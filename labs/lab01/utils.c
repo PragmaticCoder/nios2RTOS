@@ -64,5 +64,4 @@ void reset_system()
 
 	*(HEX5_HEX4_ptr) = hex_5_4_val;
 
-	reset = 0;
 }

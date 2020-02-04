@@ -42,6 +42,11 @@ void interval_timer_ISR()
 		return;
 	}
 
+	if (pause && !reset){
+		*(HEX3_HEX0_ptr) &= ~0xFFFFFFFF;
+		return;
+	}
+
 	if (questions_count >= MAX_QUESTIONS)
 		questions_count = 0;
 	else
@@ -75,7 +80,7 @@ void interval_timer_ISR()
 	hex_5_4_val |= digits[hex_4];
 
 	/* Loading all values to HEX pointers for Display */
-
+	
 	*(HEX3_HEX0_ptr) = random_number;
 	*(HEX5_HEX4_ptr) = hex_5_4_val;
 

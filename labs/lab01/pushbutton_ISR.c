@@ -3,7 +3,6 @@
 #include "utils.h"
 
 extern volatile int pattern, shift_enable;
-int reset;
 /*******************************************************************************
  * Pushbutton - Interrupt Service Routine
  *
@@ -20,18 +19,21 @@ void pushbutton_ISR(void)
     *(KEY_ptr + 3) = press; // Clear the interrupt
 
     if (press & 0x1) // KEY0
-        pattern = *slider_switch_ptr;
+        reset |= 1;
 
     if (press & 0x2) // KEY1
         pause ^= 1;
+    
+    if(!pause && reset)
+        reset = 0;
 
-    if (press & 0x4) // KEY3
-    {
-        reset ^= 1;
+    if (pause && reset){
+        reset_system();
     }
 
-    if (pause && reset)
-        reset_system();
+    if (pause)
+        hex_5_4_val &= ~0xFFFFFFFF;
+
 
     return;
 }
