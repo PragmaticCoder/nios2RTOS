@@ -38,7 +38,7 @@ void interval_timer_ISR()
 
 	if (pause && reset) /* Prevent it from doing anything if reset flag is set */
 	{
-		reset_system();
+		idle_state();
 		return;
 	}
 

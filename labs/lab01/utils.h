@@ -7,6 +7,6 @@ int hex_0_val(int value);
 int hex_1_val(int value);
 int hex_2_val(int value);
 
-int reset_system();
+int idle_state();
 
 #endif

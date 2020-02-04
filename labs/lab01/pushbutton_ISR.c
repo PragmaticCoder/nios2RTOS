@@ -28,7 +28,7 @@ void pushbutton_ISR(void)
         reset = 0;
 
     if (pause && reset){
-        reset_system();
+        idle_state();
     }
 
     if (pause)

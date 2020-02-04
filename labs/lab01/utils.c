@@ -31,7 +31,7 @@ int hex_2_val(int value)
 	return (value / 100) % 10;
 }
 
-void reset_system()
+void idle_state()
 {
 	
 	hex_count = 0;
@@ -41,7 +41,6 @@ void reset_system()
 	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
 	volatile int *HEX5_HEX4_ptr = (int *)HEX5_HEX4_BASE;
 
-	/* TODO: This is display time elapsed later on */
 	int hex_2 = 0;
 	int hex_1 = 0;
 	int hex_0 = 0;
