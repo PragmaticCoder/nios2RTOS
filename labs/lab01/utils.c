@@ -9,6 +9,7 @@ int hex_5_4_val;
 int hex_count;
 int questions_count;
 int random_number;
+int reset;
 
 int generate_random_value(int lower, int upper)
 {
@@ -54,7 +55,7 @@ void reset_system()
 	hex_3_0_val |= digits[hex_1] << 8;
 	hex_3_0_val |= digits[hex_0];
 
-	*(HEX3_HEX0_ptr) &= ~ 0xFFFFFFFF;
+	*(HEX3_HEX0_ptr) = hex_3_0_val;
 
 	/* Resetting HEX 5:4 */
 
@@ -62,4 +63,6 @@ void reset_system()
 	hex_5_4_val |= digits[hex_4];
 
 	*(HEX5_HEX4_ptr) = hex_5_4_val;
+
+	reset = 0;
 }
