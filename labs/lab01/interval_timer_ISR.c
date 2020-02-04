@@ -10,6 +10,7 @@ int digits[10];
 int random_number;
 int hex_count;
 int questions_count;
+int reset;
 
 /*******************************************************************************
 * Interval timer interrupt service routine#include <math.h>
