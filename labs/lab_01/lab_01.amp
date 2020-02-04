@@ -3,7 +3,7 @@
     <system>
         <sample_system_title>DE2-115 Computer for Nios II</sample_system_title>
         <board>Not Required</board>
-        <cable>null</cable>
+        <cable>USB-Blaster [3-3]</cable>
         <processor>Nios2</processor>
         <reset_processor_during_load>true</reset_processor_during_load>
         <terminal>JTAG_UART</terminal>
