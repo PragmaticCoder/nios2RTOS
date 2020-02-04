@@ -1,5 +1,7 @@
 #include "address_map_nios2.h"
 
+int digits[10];
+
 int generate_random_value(int lower, int upper)
 {
 	return (rand() % (upper - lower + 1)) + lower;
@@ -30,6 +32,24 @@ void reset_system()
 	int hex_1 = 0;
 	int hex_0 = 0;
 
-	int hex_5 = 0;
-	int hex_4 = 0;	
+	int hex_5 = 3;
+	int hex_4 = 0;
+
+	/* Resetting HEX 3:0 */
+
+	int hex_3_0_val = 0;
+
+	hex_3_0_val = digits[hex_2] << 16;
+	hex_3_0_val |= digits[hex_1] << 8;
+	hex_3_0_val |= digits[hex_0];
+
+	*(HEX3_HEX0_ptr) = hex_3_0_val;
+
+	/* Resetting HEX 5:4 */
+	int hex_5_4_val;
+
+	hex_5_4_val = digits[hex_5] << 8;
+	hex_5_4_val |= digits[hex_4];
+
+	*(HEX5_HEX4_ptr) = hex_5_4_val;
 }
