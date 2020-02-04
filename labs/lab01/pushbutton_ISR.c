@@ -1,7 +1,9 @@
 #include "address_map_nios2.h"
 #include "globals.h" // defines global values
+#include "utils.h"
 
-extern volatile int pattern, shift_enable, reset;
+extern volatile int pattern, shift_enable;
+int reset;
 /*******************************************************************************
  * Pushbutton - Interrupt Service Routine
  *
@@ -21,10 +23,15 @@ void pushbutton_ISR(void)
         pattern = *slider_switch_ptr;
 
     if (press & 0x2) // KEY1
-        pause = pause ^ 1;
+        pause ^= 1;
 
-    if (press & 0x3) // KEY3
-        reset = reset ^ 1;
+    if (press & 0x4) // KEY3
+    {
+        reset ^= 1;
+    }
+
+    if (reset)
+        reset_system();
 
     return;
 }

@@ -34,6 +34,12 @@ void interval_timer_ISR()
 	int hex_4 = 0;
 	int hex_5 = 0;
 
+	if (reset) /* Prevent it from doing anything if reset flag is set */
+	{
+		reset_system();
+		return;
+	}
+
 	if (questions_count >= MAX_QUESTIONS)
 		questions_count = 0;
 	else

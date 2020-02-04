@@ -45,6 +45,8 @@ int main(void)
         (int *)TIMER_BASE;                   // interal timer base address
     volatile int *KEY_ptr = (int *)KEY_BASE; // pushbutton KEY address
 
+    /* Initialization */
+    reset = 0;
     count = 0;
     pause = 0;
     questions_count = 0;
