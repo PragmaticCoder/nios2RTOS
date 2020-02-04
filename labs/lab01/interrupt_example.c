@@ -8,6 +8,7 @@
 volatile int pattern = 0x0000000F;  // pattern for shifting
 volatile int shift_dir = LEFT;      // direction to shift the pattern
 volatile int shift_enable = ENABLE; // enable/disable shifting of the pattern
+
 int count;
 int digits[10] = {
     0x3F, // 0

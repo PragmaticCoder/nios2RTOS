@@ -7,58 +7,61 @@ extern volatile int pattern, shift_dir, shift_enable;
 int digits[10];
 int count;
 
+int generate_random_value()
+{
+	return 0;
+}
+
+int digit_zero(int value)
+{
+	return value % 10;
+}
+
+int digit_one(int value)
+{
+	return value % 100;
+}
+
+int digit_two(int value)
+{
+	return value % 1000;
+}
+
 /*******************************************************************************
 * Interval timer interrupt service routine
 * Shifts a PATTERN being displayed on the HEX displays. The shift direction
 * is determined by the external variable key_pressed.
 ******************************************************************************/
+
 void interval_timer_ISR()
 {
-	volatile int * interval_timer_ptr = (int *) TIMER_BASE;
-	volatile int * HEX3_HEX0_ptr = (int *) HEX3_HEX0_BASE;
-	
-	*(interval_timer_ptr) = 0;	// clear the interrupt
-	
-	int twoHex;
-	int oneHex;
-	int zeroHex;
+	volatile int *interval_timer_ptr = (int *)TIMER_BASE;
+	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
 
-	twoHex = rand()%2;
-	if(twoHex == 2)
-		oneHex = rand()%5;
-	else
-		oneHex = rand()%9;
-	if(twoHex == 2 && oneHex == 5)
-		zeroHex = rand()%5;
-	else
-		zeroHex = rand()%9;
+	*(interval_timer_ptr) = 0; // clear the interrupt
 
-	if(shift_dir == LEFT)
+	int zero_hex;
+	int one_hex;
+	int two_hex;
+
+	two_hex = rand() % 2;
+
+	if (shift_dir == LEFT)
 	{
-		twoHex = rand()%2;
-		if(twoHex == 2)
-			oneHex = rand()%5;
-		else
-			oneHex = rand()%9;
-		if(twoHex == 2 && oneHex == 5)
-			zeroHex = rand()%5;
-		else
-			zeroHex = rand()%9;
+		
 	}
 	else
 	{
-		twoHex = 0;
-		oneHex = 0;
-		zeroHex = 0;
+		// TODO: Reset count to zero
 	}
+	
 	int x;
-	x = digits[twoHex]<<16;
-	x = x^digits[oneHex]<<8;
-	x = x^digits[zeroHex];
+	x = digits[two_hex] << 16;
+	x = x ^ digits[one_hex] << 8;
+	x = x ^ digits[zero_hex];
 	*(HEX3_HEX0_ptr) = x;
 
-	//*(HEX3_HEX0_ptr) = digits[count]<<8; 
-
+	//*(HEX3_HEX0_ptr) = digits[count]<<8;
 
 	return;
 }
