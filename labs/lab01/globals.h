@@ -1,10 +1,11 @@
-#define LEFT 0
-#define RIGHT 1
+#define LEFT	0
+#define RIGHT	1
 
-#define DISABLE 0
-#define ENABLE 1
+#define DISABLE	0
+#define ENABLE	1
 
 #define MAX_QUESTIONS 10
+#define PROPER_RESET pause && reset
 
 extern int reset;
 extern int pause;
