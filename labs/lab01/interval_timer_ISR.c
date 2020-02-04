@@ -1,36 +1,64 @@
 #include "address_map_nios2.h"
-#include "globals.h" // defines global values
+#include "globals.h"
+// defines global values
 
 extern volatile int pattern, shift_dir, shift_enable;
+
+int digits[10];
+int count;
+
 /*******************************************************************************
- * Interval timer interrupt service routine
- *
- * Shifts a PATTERN being displayed on the LED lights. The shift direction
- * is determined by the external variable key_dir.
- ******************************************************************************/
-void interval_timer_ISR() {
-    volatile int * interval_timer_ptr = (int *)TIMER_BASE;
-    volatile int * LEDG_ptr           = (int *)LED_BASE; // LED address
+* Interval timer interrupt service routine
+* Shifts a PATTERN being displayed on the HEX displays. The shift direction
+* is determined by the external variable key_pressed.
+******************************************************************************/
+void interval_timer_ISR()
+{
+	volatile int * interval_timer_ptr = (int *) TIMER_BASE;
+	volatile int * HEX3_HEX0_ptr = (int *) HEX3_HEX0_BASE;
+	
+	*(interval_timer_ptr) = 0;	// clear the interrupt
+	
+	int twoHex;
+	int oneHex;
+	int zeroHex;
 
-    *(interval_timer_ptr) = 0; // clear the interrupt
+	twoHex = rand()%2;
+	if(twoHex == 2)
+		oneHex = rand()%5;
+	else
+		oneHex = rand()%9;
+	if(twoHex == 2 && oneHex == 5)
+		zeroHex = rand()%5;
+	else
+		zeroHex = rand()%9;
 
-    *(LEDG_ptr) = pattern; // display pattern on LED
+	if(shift_dir == LEFT)
+	{
+		twoHex = rand()%2;
+		if(twoHex == 2)
+			oneHex = rand()%5;
+		else
+			oneHex = rand()%9;
+		if(twoHex == 2 && oneHex == 5)
+			zeroHex = rand()%5;
+		else
+			zeroHex = rand()%9;
+	}
+	else
+	{
+		twoHex = 0;
+		oneHex = 0;
+		zeroHex = 0;
+	}
+	int x;
+	x = digits[twoHex]<<16;
+	x = x^digits[oneHex]<<8;
+	x = x^digits[zeroHex];
+	*(HEX3_HEX0_ptr) = x;
 
-    if (shift_enable == DISABLE) // check if shifting is disabled
-        return;
+	//*(HEX3_HEX0_ptr) = digits[count]<<8; 
 
-    /* rotate the pattern shown on the LEDG lights */
-    if (shift_dir == LEFT) // rotate left
-        if (pattern & 0x80000000)
-            pattern = (pattern << 1) | 1;
-        else
-            pattern = pattern << 1;
-    else // rotate right
-        if (pattern & 0x00000001)
-        pattern = (pattern >> 1) | 0x80000000;
-    else
-        pattern = (pattern >> 1) & 0x7FFFFFFF;
 
-    return;
+	return;
 }
-
