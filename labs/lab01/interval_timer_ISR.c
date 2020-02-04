@@ -1,31 +1,13 @@
 #include "address_map_nios2.h"
 #include "globals.h"
+#include "utils.h"
 // defines global values
 
 extern volatile int pattern, shift_dir, shift_enable;
 
 int digits[10];
-int count;
-
-int generate_random_value(int lower, int upper)
-{
-	return (rand() % (upper - lower + 1)) + lower;
-}
-
-int hex_0_val(int value)
-{
-	return value % 10;
-}
-
-int hex_1_val(int value)
-{
-	return (value / 10) % 10;
-}
-
-int hex_2_val(int value)
-{
-	return (value / 100) % 10;
-}
+int random_number;
+int hex_count;
 
 /*******************************************************************************
 * Interval timer interrupt service routine#include <math.h>
@@ -41,24 +23,24 @@ void interval_timer_ISR()
 
 	*(interval_timer_ptr) = 0; // clear the interrupt
 
-	int value = 0;
-
 	int hex_0 = 0;
 	int hex_1 = 0;
 	int hex_2 = 0;
 
 	if (shift_dir == LEFT)
-		value = generate_random_value(1, 255);
+	{
+		random_number = generate_random_value(1, 255);
+	}
 
-	hex_0 = hex_0_val(value);
-	hex_1 = hex_1_val(value);
-	hex_2 = hex_2_val(value);
+	hex_0 = hex_0_val(random_number);
+	hex_1 = hex_1_val(random_number);
+	hex_2 = hex_2_val(random_number);
 
-	value = digits[hex_2] << 16;
-	value = value ^ digits[hex_1] << 8;
-	value = value ^ digits[hex_0];
+	random_number = digits[hex_2] << 16;
+	random_number = random_number ^ digits[hex_1] << 8;
+	random_number = random_number ^ digits[hex_0];
 
-	*(HEX3_HEX0_ptr) = value;
+	*(HEX3_HEX0_ptr) = random_number;
 
 	return;
 }

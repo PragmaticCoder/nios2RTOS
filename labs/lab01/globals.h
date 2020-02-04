@@ -3,3 +3,5 @@
 
 #define DISABLE	0
 #define ENABLE	1
+
+extern int hex_count;
