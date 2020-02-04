@@ -7,6 +7,7 @@ int hex_0_val(int value);
 int hex_1_val(int value);
 int hex_2_val(int value);
 
-int idle_state();
+int Task_idle_state();
+void Task_power();
 
 #endif

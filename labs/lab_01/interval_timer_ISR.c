@@ -38,7 +38,7 @@ void interval_timer_ISR()
 
 	if (RESET_AFTER_PAUSE) /* Prevent it from doing anything if reset flag is set */
 	{
-		idle_state();
+		Task_idle_state();
 		return;
 	}
 

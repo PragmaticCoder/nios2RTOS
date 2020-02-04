@@ -27,9 +27,7 @@ void pushbutton_ISR(void)
         reset = 0;
 
     if (RESET_AFTER_PAUSE)
-    {
-        idle_state();
-    }
+        Task_idle_state();
 
     if (pause)
         hex_5_4_val &= ~0xFFFFFFFF;
