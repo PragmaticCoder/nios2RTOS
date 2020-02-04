@@ -43,8 +43,8 @@ void interval_timer_ISR()
 	hex_2 = hex_2_val(random_number);
 
 	random_number = digits[hex_2] << 16;
-	random_number = random_number ^ digits[hex_1] << 8;
-	random_number = random_number ^ digits[hex_0];
+	random_number |= digits[hex_1] << 8;
+	random_number |= digits[hex_0];
 
 	/* Handling HEX 5:4 counter */
 	if (hex_count == 0)
