@@ -47,24 +47,23 @@ void interval_timer_ISR()
 	random_number = random_number ^ digits[hex_0];
 
 	/* Handling HEX 5:4 counter */
-	if (hex_count == 30)
-		hex_count = 0;
+	if (hex_count == 0)
+		hex_count = 30;
 	else
-		hex_count++;
-	
+		hex_count--;
+
 	hex_4 = hex_0_val(hex_count);
 	hex_5 = hex_1_val(hex_count);
 
 	int hex_count_value;
 
-	hex_count_value = hex_count_value ^ digits[hex_1] << 8;
-	hex_count_value = hex_count_value ^ digits[hex_4];	
+	hex_count_value = digits[hex_5] << 8;
+	hex_count_value |= digits[hex_4];
 
 	/* Loading all values to HEX pointers for Display */
 
 	*(HEX3_HEX0_ptr) = random_number;
 	*(HEX5_HEX4_ptr) = hex_count_value;
-
 
 	return;
 }
