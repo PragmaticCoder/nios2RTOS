@@ -12,6 +12,7 @@ volatile int shift_enable = ENABLE; // enable/disable shifting of the pattern
 int count;
 int hex_count;
 int questions_count;
+int pause;
 
 int digits[10] = {
     0x3F, // 0
@@ -45,6 +46,7 @@ int main(void)
     volatile int *KEY_ptr = (int *)KEY_BASE; // pushbutton KEY address
 
     count = 0;
+    pause = 0;
     questions_count = 0;
     hex_count = 30;
 

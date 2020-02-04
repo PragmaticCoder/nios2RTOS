@@ -8,3 +8,4 @@
 
 extern int hex_count; /* timer digit count */
 extern int questions_count;
+extern int pause;

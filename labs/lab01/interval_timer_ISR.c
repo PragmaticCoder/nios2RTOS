@@ -39,10 +39,10 @@ void interval_timer_ISR()
 		questions_count++;
 
 	/* HEX 2:0 Random Generator */
-	if (hex_count == 30 && shift_dir == LEFT)
+	if (!pause && hex_count == 30 && shift_dir == LEFT)
 	{
 		random_number = generate_random_value(1, 255);
-		
+
 		hex_0 = hex_0_val(random_number);
 		hex_1 = hex_1_val(random_number);
 		hex_2 = hex_2_val(random_number);
@@ -55,7 +55,7 @@ void interval_timer_ISR()
 	/* Handling HEX 5:4 counter */
 	if (hex_count == 0)
 		hex_count = 30;
-	else
+	else if (!pause)
 		hex_count--;
 
 	hex_4 = hex_0_val(hex_count);
