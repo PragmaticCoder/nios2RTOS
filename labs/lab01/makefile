@@ -28,7 +28,7 @@ OCFLAGS		:= -O srec
 
 # Files
 HDRS		:= nios2_ctrl_reg_macros.h globals.h address_map_nios2.h
-SRCS		:= interrupt_example.c exception_handler.c interval_timer_ISR.c pushbutton_ISR.c amp/lib/src/niosII_jtag_uart.c utils.c utils.h
+SRCS		:= interrupt_example.c exception_handler.c interval_timer_ISR.c pushbutton_ISR.c amp/lib/src/niosII_jtag_uart.c
 OBJS		:= $(patsubst %, %.o, $(SRCS))
 
 # Targets
