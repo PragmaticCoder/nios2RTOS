@@ -1,36 +1,89 @@
 #include "address_map_nios2.h"
-#include "globals.h" // defines global values
+#include "globals.h"
 
-extern volatile int pattern, shift_dir, shift_enable;
+#include "utils.h"
+// defines global values
+
+extern volatile int shift_dir;
+
+int digits[10];
+int random_number;
+int hex_count;
+
+int questions_count;
+int hex_5_4_val;
+int reset;
+
 /*******************************************************************************
- * Interval timer interrupt service routine
- *
- * Shifts a PATTERN being displayed on the LED lights. The shift direction
- * is determined by the external variable key_dir.
- ******************************************************************************/
-void interval_timer_ISR() {
-    volatile int * interval_timer_ptr = (int *)TIMER_BASE;
-    volatile int * LEDG_ptr           = (int *)LED_BASE; // LED address
+* Interval timer interrupt service routine#include <math.h>
 
-    *(interval_timer_ptr) = 0; // clear the interrupt
+* Shifts a PATTERN being displayed on the HEX displays. The shift direction
+* is determined by the external variable key_pressed.
+******************************************************************************/
 
-    *(LEDG_ptr) = pattern; // display pattern on LED
+void interval_timer_ISR()
+{
+	volatile int *interval_timer_ptr = (int *)TIMER_BASE;
+	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
+	volatile int *HEX5_HEX4_ptr = (int *)HEX5_HEX4_BASE;
 
-    if (shift_enable == DISABLE) // check if shifting is disabled
-        return;
+	*(interval_timer_ptr) = 0; // clear the interrupt
 
-    /* rotate the pattern shown on the LEDG lights */
-    if (shift_dir == LEFT) // rotate left
-        if (pattern & 0x80000000)
-            pattern = (pattern << 1) | 1;
-        else
-            pattern = pattern << 1;
-    else // rotate right
-        if (pattern & 0x00000001)
-        pattern = (pattern >> 1) | 0x80000000;
-    else
-        pattern = (pattern >> 1) & 0x7FFFFFFF;
+	int hex_0 = 0;
+	int hex_1 = 0;
+	int hex_2 = 0;
 
-    return;
+	int hex_4 = 0;
+	int hex_5 = 0;
+
+	if (RESET_AFTER_PAUSE) /* Prevent it from doing anything if reset flag is set */
+	{
+		Task_idle_state();
+		return;
+	}
+
+	if (PAUSE_STATE){
+		*(HEX3_HEX0_ptr) &= ~0xFFFFFFFF;
+		return;
+	}
+
+
+	if (questions_count >= MAX_QUESTIONS)
+		questions_count = 0;
+	else
+		questions_count++;
+
+	/* HEX 2:0 Random Generator */
+	if (!pause && hex_count == 30 && shift_dir == LEFT)
+	{
+		random_number = generate_random_value(1, 255);
+
+		hex_0 = hex_0_val(random_number);
+		hex_1 = hex_1_val(random_number);
+		hex_2 = hex_2_val(random_number);
+
+		random_number = digits[hex_2] << 16;
+		random_number |= digits[hex_1] << 8;
+		random_number |= digits[hex_0];
+	}
+
+	/* Handling HEX 5:4 counter */
+	if (hex_count == 0)
+		hex_count = 30;
+	else if (!pause)
+		hex_count--;
+
+	hex_4 = hex_0_val(hex_count);
+	hex_5 = hex_1_val(hex_count);
+
+
+	hex_5_4_val = digits[hex_5] << 8;
+	hex_5_4_val |= digits[hex_4];
+
+	/* Loading all values to HEX pointers for Display */
+	
+	*(HEX3_HEX0_ptr) = random_number;
+	*(HEX5_HEX4_ptr) = hex_5_4_val;
+
+	return;
 }
-
