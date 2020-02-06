@@ -20,7 +20,6 @@ typedef enum
 } GameState;
 
 extern GameState state;
-extern int just_started;
 
 /* Global Variables */
 extern int hex_count; /* timer digit count */

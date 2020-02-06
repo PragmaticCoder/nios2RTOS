@@ -19,6 +19,7 @@ void pushbutton_ISR(void)
     if ((state == PAUSE) && press & 0x1) // KEY0
     {
         state = IDLE;
+        Task_idle_state();
         return;
     }
 
@@ -26,13 +27,15 @@ void pushbutton_ISR(void)
     if ((state == PLAY) && (press & 0x2))
     {
         state = PAUSE;
+        Task_paused_state();
         return;
     }
 
     /* In PAUSED or IDLE state, and KEY 1 pressed */
     if (((state == PAUSE) || (state == IDLE)) && (press & 0x2))
-    {
+    {  
         state = PLAY;
+        Task_play_state();
         return;
     }
 }

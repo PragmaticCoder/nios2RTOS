@@ -5,7 +5,6 @@
 int hex_count;
 int random_number;
 int questions_count;
-int just_started;
 
 int hex_3_0_val;
 int hex_5_4_val;
@@ -80,7 +79,7 @@ void Task_play_state()
 	volatile int *HEX5_HEX4_ptr = (int *)HEX5_HEX4_BASE;
 
 	/* HEX 2:0 Random Generator */
-	if (hex_count == 0 || just_started)
+	if (hex_count == 0)
 	{
 		random_number = generate_random_value(1, 255);
 
@@ -92,9 +91,6 @@ void Task_play_state()
 		random_number |= digits[hex_1] << 8;
 		random_number |= digits[hex_0];
 	}
-
-	if (just_started)
-		just_started = 0;
 
 	/* Handling HEX 5:4 counter */
 	if (hex_count == 0)

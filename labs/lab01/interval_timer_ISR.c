@@ -4,6 +4,7 @@
 #include "utils.h"
 // defines global values
 GameState state;
+int just_started;
 
 /*******************************************************************************
  * Handles all task associated with Timer Interrupt
@@ -12,8 +13,13 @@ GameState state;
 void interval_timer_ISR()
 {
 	volatile int *interval_timer_ptr = (int *)TIMER_BASE;
+	volatile int *slider_switch_ptr = (int *)SW_BASE;
 
 	*(interval_timer_ptr) = 0; // clear the interrupt
+
+	/* Power on handler*/
+	if (*(slider_switch_ptr) & 0x20000)
+		state = IDLE;
 
 	if (state == IDLE)
 	{

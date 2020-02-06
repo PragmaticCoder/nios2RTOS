@@ -1,6 +1,7 @@
 #include "address_map_nios2.h"
 #include "nios2_ctrl_reg_macros.h"
 #include "globals.h" // defines global values
+#include "utils.h"
 /*******************************************************************************
  * This program demonstrates use of interrupts. It
  * first starts the interval timer with 50 msec timeouts, and then enables
@@ -10,7 +11,6 @@
  * the LED lights, and shifts this pattern either left or right. The shifting
  * direction is reversed when KEY[1] is pressed
 ********************************************************************************/
-int just_started;
 int digits[10] = {
     0x3F, // 0
     0x06, // 1
@@ -31,18 +31,22 @@ int main(void)
      * instead of regular memory loads and stores)
      */
     volatile int *interval_timer_ptr = (int *)TIMER_BASE;  /* interal timer base address */
-
+	volatile int *slider_switch_ptr = (int *)SW_BASE;
     volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
 
     /* Initialization */
     hex_count = MAX_TIMER_COUNT;
 
     /* Initial State */
-    state = PLAY;
-    just_started = 1;
+    if (*(slider_switch_ptr) & 0x20000)
+    {
+        state = IDLE;
+        Task_idle_state();
+    }
+
 
     /* set the interval timer period for scrolling the LED lights */
-    int counter = 50000000; // 1/(50 MHz) x (50000000) = 1sec
+    int counter = 25000000; // 1/(50 MHz) x (50000000) = 1sec
 
     *(interval_timer_ptr + 0x2) = (counter & 0xFFFF);
     *(interval_timer_ptr + 0x3) = (counter >> 16) & 0xFFFF;
