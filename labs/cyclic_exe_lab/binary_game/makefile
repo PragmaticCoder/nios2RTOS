@@ -27,18 +27,18 @@ LDFLAGS		:= $(patsubst %, -Wl$(DEFINE_COMMA)%, $(ARCHLDFLAGS)) $(patsubst %, -Wl
 OCFLAGS		:= -O srec
 
 # Files
-HDRS		:=
-SRCS		:= address_map_nios2.h exception_handler.c globals.h interrupt_example.c interval_timer_ISR.c nios2_ctrl_reg_macros.h pushbutton_ISR.c utils.c utils.h amp/lib/src/niosII_jtag_uart.c
+HDRS		:= utils.h nios2_ctrl_reg_macros.h globals.h address_map_nios2.h
+SRCS		:= utils.c interrupt_example.c exception_handler.c interval_timer_ISR.c pushbutton_ISR.c amp/lib/src/niosII_jtag_uart.c
 OBJS		:= $(patsubst %, %.o, $(SRCS))
 
 # Targets
-COMPILE: address_map_nios2.srec
+COMPILE: interrupt_example.srec
 
-address_map_nios2.srec: address_map_nios2.elf
+interrupt_example.srec: interrupt_example.elf
 	$(RM) $@
 	$(OC) $(OCFLAGS) $< $@
 
-address_map_nios2.elf: $(OBJS)
+interrupt_example.elf: $(OBJS)
 	$(RM) $@
 	$(CC) $(LDFLAGS) $(OBJS) -o $@
 
@@ -51,5 +51,5 @@ address_map_nios2.elf: $(OBJS)
 	$(AS) $(ASFLAGS) $< -o $@
 
 CLEAN: 
-	$(RM) address_map_nios2.srec address_map_nios2.elf $(OBJS)
+	$(RM) interrupt_example.srec interrupt_example.elf $(OBJS)
 
