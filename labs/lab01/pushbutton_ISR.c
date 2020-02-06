@@ -9,7 +9,6 @@ GameState state;
 void pushbutton_ISR(void)
 {
     volatile int *KEY_ptr = (int *)KEY_BASE;
-    volatile int *slider_switch_ptr = (int *)SW_BASE;
 
     int press;
     int questions;
@@ -41,10 +40,19 @@ void pushbutton_ISR(void)
     }
 
     /* in Play state, and KEY 2 is pressed */
-    if ((state == PLAY) && (*(slider_switch_ptr) & 0x4))
+    if (press & 0x4)
     {
         /* will remain in PLAY state */
         Task_score_calculation();
+
+        if(questions >= MAX_QUESTIONS)
+        {
+            state = GAMEOVER;
+            Task_gameover_state();
+        }
+
         return;
     }
+
+
 }
