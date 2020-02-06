@@ -21,14 +21,19 @@ GameState state;
         state = IDLE;
     }
 
-    if (press & 0x2) // KEY1
-        pause ^= 1;
+    /* KEY 1 is pressed and current state is PLAY */
+    if ((press & 0x2) && state == PLAY)
+    {
+        pause |= 1;
+        state = PAUSE;
+    }
 
-    if (UNPAUSE_AFTER_RESET)
-        reset = 0;
-
-    if (RESET_AFTER_PAUSE)
-        Task_idle_state();
+    /* KEY 1 is pressed and current state is PLAY */
+    if ((press & 0x2) && state == PLAY)
+    {
+        pause |= 0;
+        state = PAUSE;
+    }
 
     if (pause)
         hex_5_4_val &= ~0xFFFFFFFF;

@@ -1,6 +1,6 @@
 #include "address_map_nios2.h"
-#include "globals.h" // defines global values
 #include "nios2_ctrl_reg_macros.h"
+#include "globals.h" // defines global values
 
 /* the global variables are written by interrupt service routines; we have to
  * declare
@@ -50,6 +50,9 @@ int main(void)
     pause = 0;
     questions_count = 0;
     hex_count = 30;
+
+    /* Initial State */
+    state = PLAY;
 
     /* set the interval timer period for scrolling the LED lights */
     int counter = 50000000/4; // 1/(50 MHz) x (50000000) = 1sec
