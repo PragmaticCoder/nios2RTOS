@@ -13,10 +13,10 @@
 
 typedef enum
 {
-    Idle,
-    Play,
-    Pause,
-    Off
+    IDLE,
+    PLAY,
+    PAUSE,
+    OFF
 } GameState;
 
 extern GameState state;
