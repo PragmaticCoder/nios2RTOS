@@ -13,9 +13,6 @@ int random_number;
 int reset;
 int power_on;
 
-volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
-volatile int *HEX5_HEX4_ptr = (int *)HEX5_HEX4_BASE;
-
 int generate_random_value(int lower, int upper)
 {
 	return (rand() % (upper - lower + 1)) + lower;
@@ -41,6 +38,9 @@ int hex_2_val(int value)
 void Task_idle_state()
 {
 
+	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
+	volatile int *HEX5_HEX4_ptr = (int *)HEX5_HEX4_BASE;
+
 	hex_count = 0;
 	random_number = 0;
 	questions_count = 0;
@@ -53,7 +53,6 @@ void Task_idle_state()
 	int hex_4 = 0;
 
 	/* Resetting HEX 3:0 */
-
 	hex_3_0_val = digits[hex_2] << 16;
 	hex_3_0_val |= digits[hex_1] << 8;
 	hex_3_0_val |= digits[hex_0];
@@ -61,7 +60,6 @@ void Task_idle_state()
 	*(HEX3_HEX0_ptr) = hex_3_0_val;
 
 	/* Resetting HEX 5:4 */
-
 	hex_5_4_val = digits[hex_5] << 8;
 	hex_5_4_val |= digits[hex_4];
 
@@ -114,12 +112,15 @@ void Task_play_state()
 
 void Task_paused_state()
 {
+	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
 	*(HEX3_HEX0_ptr) &= ~0xFFFFFFFF;
 }
 
 void Task_power_off()
 {
-	power_on = 0;
+	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
+	volatile int *HEX5_HEX4_ptr = (int *)HEX5_HEX4_BASE;
+
 	hex_count = 0;
 	random_number = 30;
 
