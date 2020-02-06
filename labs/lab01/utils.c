@@ -103,7 +103,7 @@ void Task_play_state()
 	else
 		hex_count--;
 
-	/* Handling HEX 7:7 Score */
+	/* Handling HEX 7:6 Score */
 	/* TODO:
 	 * Increment the score if the answers match! 
 	 */
@@ -167,7 +167,7 @@ void Task_gameover_state()
 	hex_4 = hex_0_val(score);
 	hex_5 = hex_1_val(score);
 
-	hex_7_4_val |= digits[hex_5] << 8;
+	hex_7_4_val = digits[hex_5] << 8;
 	hex_7_4_val |= digits[hex_4];
 
 	*(HEX7_HEX4_ptr) = hex_7_4_val;
