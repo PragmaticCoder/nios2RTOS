@@ -4,6 +4,7 @@
 #include "utils.h"
 // defines global values
 GameState state;
+int questions;
 
 /*******************************************************************************
  * Handles all task associated with Timer Interrupt
@@ -22,6 +23,13 @@ void interval_timer_ISR()
 		state = OFF;
 		Task_power_off();
 	}
+
+	if(questions > 10)
+	{
+		Task_gameover_state();
+		return;
+	}
+
 
 	/* Idle state handler */
 	if (state == IDLE || ((state == OFF) && (*(slider_switch_ptr)&0x20000)))

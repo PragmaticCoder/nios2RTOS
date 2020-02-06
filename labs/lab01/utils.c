@@ -5,6 +5,7 @@
 int hex_count;
 int random_number;
 int questions;
+int score;
 
 int hex_3_0_val;
 int hex_7_4_val;
@@ -139,7 +140,36 @@ void Task_power_off()
 
 	hex_count = 0;
 	random_number = 0;
+	questions = 0;
+	score = 0;
 
 	*(HEX7_HEX4_ptr) &= ~0xFFFFFFFF;
 	*(HEX3_HEX0_ptr) &= ~0XFFFFFFFF;
+}
+
+void Task_gameover_state()
+{
+	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
+	volatile int *HEX7_HEX4_ptr = (int *)HEX7_HEX4_BASE;	
+
+	int hex_0 = 0;
+	int hex_1 = 0;
+	int hex_2 = 0;
+	int hex_3 = 0;
+
+	int hex_4 = 0;
+	int hex_5 = 0;
+
+	// Display correct answer in hex 5 and hex 4
+	// Display elapsed time in hours & minute in hex 2 to 0
+	// Just for display - for now
+	score = 10;
+	hex_4 = hex_0_val(score);
+	hex_5 = hex_1_val(score);
+
+	hex_7_4_val |= digits[hex_5] << 8;
+	hex_7_4_val |= digits[hex_4];
+
+	*(HEX7_HEX4_ptr) = hex_7_4_val;
+	
 }

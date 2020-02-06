@@ -16,7 +16,8 @@ typedef enum
   IDLE,
   PLAY,
   PAUSE,
-  OFF
+  OFF,
+  GAMEOVER
 } GameState;
 
 extern GameState state;
