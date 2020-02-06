@@ -96,7 +96,7 @@ void Task_play_state()
 	volatile int *slider_switch_ptr = (int *)SW_BASE;
 
 	/* HEX 2:0 Random Generator */
-	if (hex_count == 0)
+	if (hex_count <= 0)
 	{
 		random_number = generate_random_value(1, 255);
 	}
@@ -118,6 +118,8 @@ void Task_play_state()
 		hex_count = MAX_TIMER_COUNT;
 		questions++;
 	}
+	else if (hex_count < 0)
+		hex_count = MAX_TIMER_COUNT;
 	else
 		hex_count--;
 
@@ -156,6 +158,9 @@ void Task_power_off()
 	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
 	volatile int *HEX7_HEX4_ptr = (int *)HEX7_HEX4_BASE;
 
+	volatile int *red_LED_ptr = (int *)LEDR_BASE;
+	*(red_LED_ptr) &= ~0xFF;
+
 	hex_count = 0;
 	random_number = 0;
 	questions = 0;
@@ -171,6 +176,9 @@ void Task_gameover_state()
 {
 	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
 	volatile int *HEX7_HEX4_ptr = (int *)HEX7_HEX4_BASE;
+
+	volatile int *red_LED_ptr = (int *)LEDR_BASE;
+	*(red_LED_ptr) &= ~0xFF;
 
 	int hex_0 = 0;
 	int hex_1 = 0;
@@ -221,5 +229,8 @@ void Task_score_calculation()
 	if (switch_value == random_number)
 		score++;
 
-	hex_count = 0;
+	/* minor hack: just to skip the cycle and prevent
+	*  questions increment twice
+	*/
+	hex_count = -1;
 }
