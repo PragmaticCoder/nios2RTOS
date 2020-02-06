@@ -8,7 +8,7 @@
 #define ENABLE 1
 
 #define MAX_QUESTIONS 10
-#define MAX_TIMER_COUNT 5
+#define MAX_TIMER_COUNT 30
 
 /* States */
 typedef enum

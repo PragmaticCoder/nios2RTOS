@@ -4,6 +4,7 @@
 #include "utils.h"
 // defines global values
 GameState state;
+
 int questions;
 int elapsed_time;
 /*******************************************************************************

@@ -39,4 +39,12 @@ void pushbutton_ISR(void)
         Task_play_state();
         return;
     }
+
+    /* in Play state, and KEY 2 is pressed */
+    if ((state == PLAY) && (*(slider_switch_ptr) & 0x4))
+    {
+        /* will remain in PLAY state */
+        Task_score_calculation();
+        return;
+    }
 }

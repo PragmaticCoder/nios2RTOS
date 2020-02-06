@@ -48,7 +48,7 @@ int main(void)
         state = IDLE;
 
     /* set the interval timer period for scrolling the LED lights */
-    int counter = 25000000; // 1/(50 MHz) x (50000000) = 1sec
+    int counter = 50000000; // (1/50 MHz) x (50000000) = 1sec
 
     *(interval_timer_ptr + 0x2) = (counter & 0xFFFF);
     *(interval_timer_ptr + 0x3) = (counter >> 16) & 0xFFFF;
@@ -60,8 +60,8 @@ int main(void)
 
     /* set interrupt mask bits for levels 0 (interval timer) and level 1
      * (pushbuttons) */
-    NIOS2_WRITE_IENABLE(0x3);
 
+    NIOS2_WRITE_IENABLE(0x3);
     NIOS2_WRITE_STATUS(1); // enable Nios II interrupts
 
     while (1)

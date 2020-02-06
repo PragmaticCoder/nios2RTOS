@@ -85,7 +85,12 @@ void Task_play_state()
 	int hex_7 = 0;
 
 	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
-	volatile int *HEX7_HEX4_ptr = (int *)HEX7_HEX4_BASE;		
+	volatile int *HEX7_HEX4_ptr = (int *)HEX7_HEX4_BASE;
+	
+	volatile int *red_LED_ptr = (int *)LEDR_BASE;
+
+	/* reading sw 7-0 value */
+	volatile int *slider_switch_ptr = (int *)SW_BASE;
 
 	/* HEX 2:0 Random Generator */
 	if (hex_count == 0)
@@ -110,11 +115,13 @@ void Task_play_state()
 	else
 		hex_count--;
 
-	/* Handling HEX 7:6 Score */
-	/* TODO:
-	 * Increment the score if the answers match! 
-	 */
-	score = questions;
+	/* when switch 16 is on, show answer */
+	if(*(slider_switch_ptr) & 0x10000)
+		*(red_LED_ptr) = random_number;
+	else /* clear */
+		*(red_LED_ptr) &= ~random_number;
+
+	/* Handling score display */
 
 	hex_4 = hex_0_val(hex_count);
 	hex_5 = hex_1_val(hex_count);
@@ -195,4 +202,16 @@ void Task_gameover_state()
 	elapsed_hex |= digits[hex_0];
 
 	*(HEX3_HEX0_ptr) = elapsed_hex;
+}
+
+
+void Task_score_calculation()
+{
+	questions++;
+
+	volatile int *slider_switch_ptr = (int *)SW_BASE;
+	int switch_value = *(slider_switch_ptr) & 0xFF;
+
+	if (switch_value == random_number)
+		score++;
 }
