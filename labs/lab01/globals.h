@@ -19,8 +19,6 @@ extern int hex_count; /* timer digit count */
 extern int random_number;
 extern int questions_count;
 extern int power_on;
-extern int just_turned_on;
-extern int switch_17_on;
 
 /* Global value storage registers */
 extern int hex_3_0_val;
