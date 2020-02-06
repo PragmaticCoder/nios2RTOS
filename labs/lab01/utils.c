@@ -1,17 +1,7 @@
 #include "globals.h"
 #include "address_map_nios2.h"
 
-int digits[10];
-
-int hex_3_0_val;
-int hex_5_4_val;
-
-int hex_count;
-int questions_count;
-int random_number;
-
-int reset;
-int power_on;
+extern int digits[10];
 
 int generate_random_value(int lower, int upper)
 {
@@ -108,6 +98,9 @@ void Task_play_state()
 
 	*(HEX3_HEX0_ptr) = random_number;
 	*(HEX5_HEX4_ptr) = hex_5_4_val;
+
+	if (hex_count == 30)
+		return;
 }
 
 void Task_paused_state()

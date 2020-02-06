@@ -4,16 +4,6 @@
 #include "utils.h"
 // defines global values
 
-extern volatile int shift_dir;
-
-int digits[10];
-int random_number;
-int hex_count;
-
-int questions_count;
-int hex_5_4_val;
-int reset;
-
 /*******************************************************************************
  * Handles all task associated with Timer Interrupt
  * Task handlers are defined in utils.c

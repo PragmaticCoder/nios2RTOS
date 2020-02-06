@@ -12,23 +12,22 @@
 /* States */
 typedef enum
 {
-    IDLE,
-    PLAY,
-    PAUSE,
-    OFF
+  IDLE,
+  PLAY,
+  PAUSE,
+  OFF
 } GameState;
 
-extern GameState state;
+GameState state;
 
 /* Global Variables */
-extern int hex_count; /* timer digit count */
-extern int random_number;
-extern int questions_count;
-extern int power_on;
+volatile int hex_count; /* timer digit count */
+volatile int random_number;
+volatile int questions_count;
 
 /* Global value storage registers */
-extern int hex_3_0_val;
-extern int hex_5_4_val;
-extern int switch_val;
+volatile int hex_3_0_val;
+volatile int hex_5_4_val;
+volatile int switch_val;
 
 #endif

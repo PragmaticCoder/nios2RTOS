@@ -1,7 +1,15 @@
 #include "address_map_nios2.h"
 #include "nios2_ctrl_reg_macros.h"
 #include "globals.h" // defines global values
-
+/*******************************************************************************
+ * This program demonstrates use of interrupts. It
+ * first starts the interval timer with 50 msec timeouts, and then enables
+ * Nios II interrupts from the interval timer and pushbutton KEYs
+ *
+ * The interrupt service routine for the interval timer displays a pattern on
+ * the LED lights, and shifts this pattern either left or right. The shifting
+ * direction is reversed when KEY[1] is pressed
+********************************************************************************/
 int digits[10] = {
     0x3F, // 0
     0x06, // 1
@@ -14,15 +22,7 @@ int digits[10] = {
     0x7F, // 8
     0x6F  // 9
 };
-/*******************************************************************************
- * This program demonstrates use of interrupts. It
- * first starts the interval timer with 50 msec timeouts, and then enables
- * Nios II interrupts from the interval timer and pushbutton KEYs
- *
- * The interrupt service routine for the interval timer displays a pattern on
- * the LED lights, and shifts this pattern either left or right. The shifting
- * direction is reversed when KEY[1] is pressed
-********************************************************************************/
+
 int main(void)
 {
     /* Declare volatile pointers to I/O registers (volatile means that IO load
@@ -40,7 +40,7 @@ int main(void)
     state = PLAY;
 
     /* set the interval timer period for scrolling the LED lights */
-    int counter = 50000000/8; // 1/(50 MHz) x (50000000) = 1sec
+    int counter = 5000000; // 1/(50 MHz) x (50000000) = 1sec
 
     *(interval_timer_ptr + 0x2) = (counter & 0xFFFF);
     *(interval_timer_ptr + 0x3) = (counter >> 16) & 0xFFFF;
