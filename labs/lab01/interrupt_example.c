@@ -10,6 +10,7 @@
  * the LED lights, and shifts this pattern either left or right. The shifting
  * direction is reversed when KEY[1] is pressed
 ********************************************************************************/
+int just_started;
 int digits[10] = {
     0x3F, // 0
     0x06, // 1
@@ -38,6 +39,7 @@ int main(void)
 
     /* Initial State */
     state = PLAY;
+    just_started = 1;
 
     /* set the interval timer period for scrolling the LED lights */
     int counter = 50000000; // 1/(50 MHz) x (50000000) = 1sec

@@ -5,6 +5,8 @@
 int hex_count;
 int random_number;
 int questions_count;
+int just_started;
+
 int hex_3_0_val;
 int hex_5_4_val;
 
@@ -74,8 +76,11 @@ void Task_play_state()
 	int hex_4 = 0;
 	int hex_5 = 0;
 
+	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
+	volatile int *HEX5_HEX4_ptr = (int *)HEX5_HEX4_BASE;
+
 	/* HEX 2:0 Random Generator */
-	if (hex_count == MAX_TIMER_COUNT)
+	if (hex_count == 0 || just_started)
 	{
 		random_number = generate_random_value(1, 255);
 
@@ -87,6 +92,9 @@ void Task_play_state()
 		random_number |= digits[hex_1] << 8;
 		random_number |= digits[hex_0];
 	}
+
+	if (just_started)
+		just_started = 0;
 
 	/* Handling HEX 5:4 counter */
 	if (hex_count == 0)
@@ -100,16 +108,11 @@ void Task_play_state()
 	hex_5_4_val = digits[hex_5] << 8;
 	hex_5_4_val |= digits[hex_4];
 
-	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
-	volatile int *HEX5_HEX4_ptr = (int *)HEX5_HEX4_BASE;
-
 	/* Loading all values to HEX pointers for Display */
 
 	*(HEX3_HEX0_ptr) = random_number;
 	*(HEX5_HEX4_ptr) = hex_5_4_val;
 
-	if (hex_count == MAX_TIMER_COUNT)
-		return;
 }
 
 void Task_paused_state()

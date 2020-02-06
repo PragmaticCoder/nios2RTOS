@@ -8,7 +8,7 @@
 #define ENABLE 1
 
 #define MAX_QUESTIONS 10
-#define MAX_TIMER_COUNT 30
+#define MAX_TIMER_COUNT 5
 
 /* States */
 typedef enum
@@ -20,6 +20,7 @@ typedef enum
 } GameState;
 
 extern GameState state;
+extern int just_started;
 
 /* Global Variables */
 extern int hex_count; /* timer digit count */
