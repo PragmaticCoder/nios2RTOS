@@ -4,6 +4,8 @@
 /* shared global variables */
 int hex_count;
 int random_number;
+int elapsed_time;
+
 int questions;
 int score;
 
@@ -32,6 +34,11 @@ int hex_1_val(int value)
 int hex_2_val(int value)
 {
 	return (value / 100) % 10;
+}
+
+int hex_3_val(int value)
+{
+	return (value / 1000) % 10;
 }
 
 /* Task Handlers */
@@ -111,9 +118,9 @@ void Task_play_state()
 
 	hex_4 = hex_0_val(hex_count);
 	hex_5 = hex_1_val(hex_count);
+
 	hex_6 = hex_0_val(score);
 	hex_7 = hex_1_val(score);
-
 
 	hex_7_4_val = digits[hex_7] << 24;
 	hex_7_4_val |= digits[hex_6] << 16; 
@@ -121,7 +128,6 @@ void Task_play_state()
 	hex_7_4_val |= digits[hex_4];
 
 	/* Loading all values to HEX pointers for Display */
-
 	*(HEX3_HEX0_ptr) = random_number;
 	*(HEX7_HEX4_ptr) = hex_7_4_val;
 
@@ -160,10 +166,8 @@ void Task_gameover_state()
 	int hex_4 = 0;
 	int hex_5 = 0;
 
-	// Display correct answer in hex 5 and hex 4
 	// Display elapsed time in hours & minute in hex 2 to 0
 	// Just for display - for now
-	score = 10;
 	hex_4 = hex_0_val(score);
 	hex_5 = hex_1_val(score);
 
@@ -171,5 +175,24 @@ void Task_gameover_state()
 	hex_7_4_val |= digits[hex_4];
 
 	*(HEX7_HEX4_ptr) = hex_7_4_val;
-	
+
+	/* displaying elapsed time */
+	int m, s;
+	int elapsed_hex;
+
+	m = elapsed_time / 60;
+	s = elapsed_time % 60;
+
+	hex_0 = hex_0_val(s);
+	hex_1 = hex_1_val(s);
+
+	hex_2 = hex_0_val(m);
+	hex_3 = hex_1_val(m);
+
+	elapsed_hex = digits[hex_3] << 24;
+	elapsed_hex |= digits[hex_2] << 16;
+	elapsed_hex |= digits[hex_1] << 8;
+	elapsed_hex |= digits[hex_0];
+
+	*(HEX3_HEX0_ptr) = elapsed_hex;
 }

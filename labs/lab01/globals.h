@@ -27,10 +27,12 @@ extern int hex_count; /* timer digit count */
 extern int random_number;
 extern int questions;
 extern int score;
+extern int elapsed_time;
 
-/* Global value storage registers */
 extern int hex_3_0_val;
 extern int hex_5_4_val;
+
+extern int switch_val;
 extern int switch_val;
 
 extern int digits[10];

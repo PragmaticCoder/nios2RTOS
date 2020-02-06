@@ -23,7 +23,7 @@ int digits[10] = {
     0x6F  // 9
 };
 
-int score;
+int elapsed_time, score;
 
 int main(void)
 {
@@ -39,6 +39,7 @@ int main(void)
     hex_count = MAX_TIMER_COUNT;
     score = 0;
     questions = 0;
+    elapsed_time = 0;
 
     /* Initial State */
     if (!(*(slider_switch_ptr)&0x20000))
