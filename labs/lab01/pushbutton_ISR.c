@@ -40,7 +40,7 @@ void pushbutton_ISR(void)
     }
 
     /* in Play state, and KEY 2 is pressed */
-    if (press & 0x4)
+    if ((state == PLAY) && (press & 0x4))
     {
         /* will remain in PLAY state */
         Task_score_calculation();

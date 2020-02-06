@@ -21,7 +21,8 @@ int switch_value;
 
 int generate_random_value(int lower, int upper)
 {
-	return (rand() % (upper - lower + 1)) + lower;
+	int random_num = ((rand() % upper) + lower);
+	return random_num;
 }
 
 int hex_0_val(int value)
@@ -89,7 +90,7 @@ void Task_play_state()
 
 	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
 	volatile int *HEX7_HEX4_ptr = (int *)HEX7_HEX4_BASE;
-	
+
 	volatile int *red_LED_ptr = (int *)LEDR_BASE;
 
 	/* reading sw 7-0 value */
@@ -98,24 +99,19 @@ void Task_play_state()
 	/* HEX 2:0 Random Generator */
 	if (hex_count == 0)
 	{
-		// random_number = generate_random_value(1, 255);
-		// TODO: REMOVE THIS
-		if ((random_number % 2) == 0)
-			random_number = 2;
-		else
-			random_number = 1;
+		random_number = generate_random_value(1, 10);
 
 		hex_0 = hex_0_val(random_number);
 		hex_1 = hex_1_val(random_number);
 		hex_2 = hex_2_val(random_number);
 
-		random_number = digits[hex_2] << 16;
-		random_number |= digits[hex_1] << 8;
-		random_number |= digits[hex_0];
+		int hex_rand = digits[hex_2] << 16;
+		hex_rand |= digits[hex_1] << 8;
+		hex_rand |= digits[hex_0];
 	}
 
 	/* Reading switch 7 - 0 value */
-	switch_value = (*(slider_switch_ptr) & 0xFF);
+	switch_value = ((*(slider_switch_ptr)) & 0xFF);
 
 	/* Handling HEX 5:4 counter */
 	if (hex_count == 0)
@@ -127,7 +123,7 @@ void Task_play_state()
 		hex_count--;
 
 	/* when switch 16 is on, show answer */
-	if(*(slider_switch_ptr) & 0x10000)
+	if ((*(slider_switch_ptr)) & 0x10000)
 		*(red_LED_ptr) = random_number;
 	else /* clear */
 		*(red_LED_ptr) &= ~random_number;
@@ -141,14 +137,13 @@ void Task_play_state()
 	hex_7 = hex_1_val(score);
 
 	hex_7_4_val = digits[hex_7] << 24;
-	hex_7_4_val |= digits[hex_6] << 16; 
+	hex_7_4_val |= digits[hex_6] << 16;
 	hex_7_4_val |= digits[hex_5] << 8;
 	hex_7_4_val |= digits[hex_4];
 
 	/* Loading all values to HEX pointers for Display */
 	*(HEX3_HEX0_ptr) = random_number;
 	*(HEX7_HEX4_ptr) = hex_7_4_val;
-
 }
 
 void Task_paused_state()
@@ -176,7 +171,7 @@ void Task_power_off()
 void Task_gameover_state()
 {
 	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
-	volatile int *HEX7_HEX4_ptr = (int *)HEX7_HEX4_BASE;	
+	volatile int *HEX7_HEX4_ptr = (int *)HEX7_HEX4_BASE;
 
 	int hex_0 = 0;
 	int hex_1 = 0;
@@ -217,15 +212,15 @@ void Task_gameover_state()
 	*(HEX3_HEX0_ptr) = elapsed_hex;
 }
 
-
 void Task_score_calculation()
 {
 	questions++;
 
 	volatile int *slider_switch_ptr = (int *)SW_BASE;
-	switch_value = (*(slider_switch_ptr) & 0xFF);
+	switch_value = ((*(slider_switch_ptr)) & 0xFF);
 
-	// TODO: Fix the compare here - remove 2
-	if (switch_value == 2)
+	if (switch_value == random_number)
 		score++;
+
+	hex_count = 0;
 }
