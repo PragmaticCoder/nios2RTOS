@@ -2,17 +2,6 @@
 #include "nios2_ctrl_reg_macros.h"
 #include "globals.h" // defines global values
 
-/* the global variables are written by interrupt service routines; we have to
- * declare
- * these as volatile to avoid the compiler caching their values in registers */
-volatile int pattern = 0x0000000F;  // pattern for shifting
-volatile int shift_dir = LEFT;      // direction to shift the pattern
-
-int count;
-int hex_count;
-int questions_count;
-int pause;
-
 int digits[10] = {
     0x3F, // 0
     0x06, // 1
@@ -45,17 +34,13 @@ int main(void)
     volatile int *KEY_ptr = (int *)KEY_BASE; // pushbutton KEY address
 
     /* Initialization */
-    reset = 0;
-    count = 0;
-    pause = 0;
-    questions_count = 0;
     hex_count = 30;
 
     /* Initial State */
     state = PLAY;
 
     /* set the interval timer period for scrolling the LED lights */
-    int counter = 50000000/4; // 1/(50 MHz) x (50000000) = 1sec
+    int counter = 50000000/8; // 1/(50 MHz) x (50000000) = 1sec
 
     *(interval_timer_ptr + 0x2) = (counter & 0xFFFF);
     *(interval_timer_ptr + 0x3) = (counter >> 16) & 0xFFFF;

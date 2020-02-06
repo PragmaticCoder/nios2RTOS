@@ -17,26 +17,22 @@ GameState state;
 
     if (press & 0x1) // KEY0
     {
-        reset |= 1;
         state = IDLE;
+        return;
     }
 
-    /* KEY 1 is pressed and current state is PLAY */
-    if ((press & 0x2) && state == PLAY)
+    /* In PLAY state and KEY1 Pressed */
+    if ((state == PLAY) && (press & 0x2) )
     {
-        pause |= 1;
         state = PAUSE;
+        return;
     }
 
-    /* KEY 1 is pressed and current state is PLAY */
-    if ((press & 0x2) && state == PLAY)
+    /* In PAUSED or IDLE state, and KEY 1 pressed */
+    if (((state == PAUSE) || (state == IDLE)) && (press & 0x2))
     {
-        pause |= 0;
-        state = PAUSE;
+        state = PLAY;
+        return;
     }
 
-    if (pause)
-        hex_5_4_val &= ~0xFFFFFFFF;
-
-    return;
 }
