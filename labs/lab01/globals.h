@@ -1,15 +1,25 @@
-#define LEFT	0
-#define RIGHT	1
+#define LEFT 0
+#define RIGHT 1
 
-#define DISABLE	0
-#define ENABLE	1
+#define DISABLE 0
+#define ENABLE 1
 
 #define MAX_QUESTIONS 10
 
 /* States */
-#define RESET_AFTER_PAUSE pause && reset
+#define RESET_AFTER_PAUSE pause &&reset
 #define UNPAUSE_AFTER_RESET !pause && reset
 #define PAUSE_STATE pause && !reset
+
+typedef enum
+{
+    Idle,
+    Play,
+    Pause,
+    Off
+} GameState;
+
+extern GameState state;
 
 /* Global Flags */
 extern int reset;
