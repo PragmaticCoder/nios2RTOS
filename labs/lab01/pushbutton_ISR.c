@@ -12,6 +12,7 @@ void pushbutton_ISR(void)
     volatile int *slider_switch_ptr = (int *)SW_BASE;
 
     int press;
+    int questions;
 
     press = *(KEY_ptr + 3); // read the pushbutton interrupt register
     *(KEY_ptr + 3) = press; // Clear the interrupt

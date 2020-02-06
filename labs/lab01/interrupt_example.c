@@ -38,16 +38,13 @@ int main(void)
     /* Initializaion */
     hex_count = MAX_TIMER_COUNT;
     score = 0;
+    questions = 0;
 
     /* Initial State */
     if (!(*(slider_switch_ptr)&0x20000))
-    {
         state = OFF;
-    }
     else
-    {
         state = IDLE;
-    }
 
     /* set the interval timer period for scrolling the LED lights */
     int counter = 25000000; // 1/(50 MHz) x (50000000) = 1sec

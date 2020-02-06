@@ -23,18 +23,21 @@ void interval_timer_ISR()
 		Task_power_off();
 	}
 
+	/* Idle state handler */
 	if (state == IDLE || ((state == OFF) && (*(slider_switch_ptr)&0x20000)))
 	{
 		Task_idle_state();
 		return;
 	}
 
+	/* Paused state handler */
 	if (state == PAUSE)
 	{
 		Task_paused_state();
 		return;
 	}
 
+	/* Play state handler */
 	if (state == PLAY)
 	{
 		Task_play_state();

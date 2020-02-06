@@ -4,7 +4,7 @@
 /* shared global variables */
 int hex_count;
 int random_number;
-int questions_count;
+int questions;
 
 int hex_3_0_val;
 int hex_7_4_val;
@@ -43,7 +43,7 @@ void Task_idle_state()
 
 	hex_count = 0;
 	random_number = 0;
-	questions_count = 0;
+	questions = 0;
 
 	int hex_2 = 0;
 	int hex_1 = 0;
@@ -77,7 +77,7 @@ void Task_play_state()
 	int hex_7 = 0;
 
 	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
-	volatile int *HEX7_HEX4_ptr = (int *)HEX7_HEX4_BASE;
+	volatile int *HEX7_HEX4_ptr = (int *)HEX7_HEX4_BASE;		
 
 	/* HEX 2:0 Random Generator */
 	if (hex_count == 0)
@@ -95,16 +95,18 @@ void Task_play_state()
 
 	/* Handling HEX 5:4 counter */
 	if (hex_count == 0)
+	{
 		hex_count = MAX_TIMER_COUNT;
+		questions++;
+	}
 	else
 		hex_count--;
-
 
 	/* Handling HEX 7:7 Score */
 	/* TODO:
 	 * Increment the score if the answers match! 
 	 */
-	score = score + 1;
+	score = questions;
 
 	hex_4 = hex_0_val(hex_count);
 	hex_5 = hex_1_val(hex_count);
