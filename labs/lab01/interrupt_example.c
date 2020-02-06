@@ -29,9 +29,9 @@ int main(void)
      * and store instructions will be used to access these pointer locations,
      * instead of regular memory loads and stores)
      */
-    volatile int *interval_timer_ptr =
-        (int *)TIMER_BASE;                   // interal timer base address
-    volatile int *KEY_ptr = (int *)KEY_BASE; // pushbutton KEY address
+    volatile int *interval_timer_ptr = (int *)TIMER_BASE;  /* interal timer base address */
+
+    volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
 
     /* Initialization */
     hex_count = 30;
@@ -40,7 +40,7 @@ int main(void)
     state = PLAY;
 
     /* set the interval timer period for scrolling the LED lights */
-    int counter = 5000000; // 1/(50 MHz) x (50000000) = 1sec
+    int counter = 50000000; // 1/(50 MHz) x (50000000) = 1sec
 
     *(interval_timer_ptr + 0x2) = (counter & 0xFFFF);
     *(interval_timer_ptr + 0x3) = (counter >> 16) & 0xFFFF;

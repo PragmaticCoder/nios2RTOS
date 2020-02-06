@@ -1,5 +1,5 @@
-#ifndef GLOBALS_H
-#define GLOBALS_H
+#ifndef _globals_h_
+#define _globals_h_
 
 #define LEFT 0
 #define RIGHT 1
@@ -8,6 +8,7 @@
 #define ENABLE 1
 
 #define MAX_QUESTIONS 10
+#define MAX_TIMER_COUNT 30
 
 /* States */
 typedef enum
@@ -18,16 +19,18 @@ typedef enum
   OFF
 } GameState;
 
-GameState state;
+extern GameState state;
 
 /* Global Variables */
-volatile int hex_count; /* timer digit count */
-volatile int random_number;
-volatile int questions_count;
+extern int hex_count; /* timer digit count */
+extern int random_number;
+extern int questions_count;
 
 /* Global value storage registers */
-volatile int hex_3_0_val;
-volatile int hex_5_4_val;
-volatile int switch_val;
+extern int hex_3_0_val;
+extern int hex_5_4_val;
+extern int switch_val;
+
+extern int digits[10];
 
 #endif

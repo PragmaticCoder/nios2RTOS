@@ -2,7 +2,7 @@
 #include "globals.h" // defines global values
 #include "utils.h"
 
-/* Global Variables */
+/* shared global variable */
 GameState state;
 
 /* ISR Handler */
@@ -10,6 +10,7 @@ void pushbutton_ISR(void)
 {
     volatile int *KEY_ptr = (int *)KEY_BASE;
     volatile int *slider_switch_ptr = (int *)SW_BASE;
+
     int press;
 
     press = *(KEY_ptr + 3); // read the pushbutton interrupt register

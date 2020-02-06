@@ -1,7 +1,16 @@
 #include "globals.h"
 #include "address_map_nios2.h"
 
-extern int digits[10];
+/* shared global variables */
+int hex_count;
+int random_number;
+int questions_count;
+int hex_3_0_val;
+int hex_5_4_val;
+
+int digits[10];
+
+/* utility functions */
 
 int generate_random_value(int lower, int upper)
 {
@@ -66,7 +75,7 @@ void Task_play_state()
 	int hex_5 = 0;
 
 	/* HEX 2:0 Random Generator */
-	if (hex_count == 30)
+	if (hex_count == MAX_TIMER_COUNT)
 	{
 		random_number = generate_random_value(1, 255);
 
@@ -99,7 +108,7 @@ void Task_play_state()
 	*(HEX3_HEX0_ptr) = random_number;
 	*(HEX5_HEX4_ptr) = hex_5_4_val;
 
-	if (hex_count == 30)
+	if (hex_count == MAX_TIMER_COUNT)
 		return;
 }
 
@@ -115,7 +124,7 @@ void Task_power_off()
 	volatile int *HEX5_HEX4_ptr = (int *)HEX5_HEX4_BASE;
 
 	hex_count = 0;
-	random_number = 30;
+	random_number = 0;
 
 	*(HEX5_HEX4_ptr) &= ~0xFFFFFFFF;
 	*(HEX3_HEX0_ptr) &= ~0XFFFFFFFF;

@@ -3,12 +3,12 @@
 
 #include "utils.h"
 // defines global values
+GameState state;
 
 /*******************************************************************************
  * Handles all task associated with Timer Interrupt
  * Task handlers are defined in utils.c
 ******************************************************************************/
-
 void interval_timer_ISR()
 {
 	volatile int *interval_timer_ptr = (int *)TIMER_BASE;
