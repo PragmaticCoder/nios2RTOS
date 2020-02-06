@@ -19,6 +19,8 @@
             <header_file filepath="true">globals.h</header_file>
             <header_file filepath="true">address_map_nios2.h</header_file>
             <source_file filepath="true">amp/lib/src/niosII_jtag_uart.c</source_file>
+            <source_file filepath="true">utils.c</source_file>
+            <source_file filepath="true">utils.h</source_file>
         </source_files>
         <options>
             <compiler_flags>-g -O1 -ffunction-sections -fverbose-asm -fno-inline -mno-cache-volatile</compiler_flags>
