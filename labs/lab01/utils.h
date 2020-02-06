@@ -1,3 +1,9 @@
+/**
+ * Name: Alvi Akbar
+ * Student No: 11118887
+ * NSID: ala273
+ */
+
 #ifndef UTILS_H
 #define UTILS_H
 

@@ -7,6 +7,12 @@
 #define DISABLE 0
 #define ENABLE 1
 
+/**
+ * Name: Alvi Akbar
+ * Student No: 11118887
+ * NSID: ala273
+ */
+
 #define MAX_QUESTIONS 10
 #define MAX_TIMER_COUNT 30
 

@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "globals.h": "c"
+        "globals.h": "c",
+        "address_map_nios2.h": "c"
     }
 }

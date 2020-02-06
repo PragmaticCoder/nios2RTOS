@@ -1,3 +1,9 @@
+/**
+ * Name: Alvi Akbar
+ * Student No: 11118887
+ * NSID: ala273
+ */
+
 #include "globals.h"
 #include "address_map_nios2.h"
 

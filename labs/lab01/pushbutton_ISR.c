@@ -1,3 +1,9 @@
+/**
+ * Name: Alvi Akbar
+ * Student No: 11118887
+ * NSID: ala273
+ */
+
 #include "address_map_nios2.h"
 #include "globals.h" // defines global values
 #include "utils.h"
@@ -33,7 +39,7 @@ void pushbutton_ISR(void)
 
     /* In PAUSED or IDLE state, and KEY 1 pressed */
     if (((state == OFF) || (state == PAUSE) || (state == IDLE)) && (press & 0x2))
-    {  
+    {
         state = PLAY;
         Task_play_state();
         return;
@@ -45,7 +51,7 @@ void pushbutton_ISR(void)
         /* will remain in PLAY state */
         Task_score_calculation();
 
-        if(questions >= MAX_QUESTIONS)
+        if (questions >= MAX_QUESTIONS)
         {
             state = GAMEOVER;
             Task_gameover_state();
@@ -53,6 +59,4 @@ void pushbutton_ISR(void)
 
         return;
     }
-
-
 }

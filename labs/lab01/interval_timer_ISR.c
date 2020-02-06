@@ -1,3 +1,9 @@
+/**
+ * Name: Alvi Akbar
+ * Student No: 11118887
+ * NSID: ala273
+ */
+
 #include "address_map_nios2.h"
 #include "globals.h"
 
@@ -19,7 +25,7 @@ void interval_timer_ISR()
 	*(interval_timer_ptr) = 0; // clear the interrupt
 
 	/* keep track of time elapsed */
-	if(questions <= 10)
+	if (questions <= 10)
 		elapsed_time++;
 
 	/* Power on handler*/
@@ -29,7 +35,7 @@ void interval_timer_ISR()
 		Task_power_off();
 	}
 
-	if(questions > 10)
+	if (questions > 10)
 	{
 		Task_gameover_state();
 		return;
