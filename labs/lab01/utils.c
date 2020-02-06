@@ -21,8 +21,7 @@ int switch_value;
 
 int generate_random_value(int lower, int upper)
 {
-	int random_num = ((rand() % upper) + lower);
-	return random_num;
+	return ((rand() % upper) + lower);
 }
 
 int hex_0_val(int value)
@@ -99,16 +98,16 @@ void Task_play_state()
 	/* HEX 2:0 Random Generator */
 	if (hex_count == 0)
 	{
-		random_number = generate_random_value(1, 10);
-
-		hex_0 = hex_0_val(random_number);
-		hex_1 = hex_1_val(random_number);
-		hex_2 = hex_2_val(random_number);
-
-		int hex_rand = digits[hex_2] << 16;
-		hex_rand |= digits[hex_1] << 8;
-		hex_rand |= digits[hex_0];
+		random_number = generate_random_value(1, 255);
 	}
+
+	hex_0 = hex_0_val(random_number);
+	hex_1 = hex_1_val(random_number);
+	hex_2 = hex_2_val(random_number);
+
+	int hex_rand = digits[hex_2] << 16;
+	hex_rand |= digits[hex_1] << 8;
+	hex_rand |= digits[hex_0];
 
 	/* Reading switch 7 - 0 value */
 	switch_value = ((*(slider_switch_ptr)) & 0xFF);
@@ -142,7 +141,7 @@ void Task_play_state()
 	hex_7_4_val |= digits[hex_4];
 
 	/* Loading all values to HEX pointers for Display */
-	*(HEX3_HEX0_ptr) = random_number;
+	*(HEX3_HEX0_ptr) = hex_rand;
 	*(HEX7_HEX4_ptr) = hex_7_4_val;
 }
 
