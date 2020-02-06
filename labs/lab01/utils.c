@@ -7,7 +7,7 @@ int random_number;
 int questions_count;
 
 int hex_3_0_val;
-int hex_5_4_val;
+int hex_7_4_val;
 
 int digits[10];
 
@@ -39,7 +39,7 @@ void Task_idle_state()
 {
 
 	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
-	volatile int *HEX5_HEX4_ptr = (int *)HEX5_HEX4_BASE;
+	volatile int *HEX7_HEX4_ptr = (int *)HEX7_HEX4_BASE;
 
 	hex_count = 0;
 	random_number = 0;
@@ -60,23 +60,24 @@ void Task_idle_state()
 	*(HEX3_HEX0_ptr) = hex_3_0_val;
 
 	/* Resetting HEX 5:4 */
-	hex_5_4_val = digits[hex_5] << 8;
-	hex_5_4_val |= digits[hex_4];
+	hex_7_4_val = digits[hex_5] << 8;
+	hex_7_4_val |= digits[hex_4];
 
-	*(HEX5_HEX4_ptr) = hex_5_4_val;
+	*(HEX7_HEX4_ptr) = hex_7_4_val;
 }
 
 void Task_play_state()
 {
-
 	int hex_0 = 0;
 	int hex_1 = 0;
 	int hex_2 = 0;
 	int hex_4 = 0;
 	int hex_5 = 0;
+	int hex_6 = 0;
+	int hex_7 = 0;
 
 	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
-	volatile int *HEX5_HEX4_ptr = (int *)HEX5_HEX4_BASE;
+	volatile int *HEX7_HEX4_ptr = (int *)HEX7_HEX4_BASE;
 
 	/* HEX 2:0 Random Generator */
 	if (hex_count == 0)
@@ -98,16 +99,28 @@ void Task_play_state()
 	else
 		hex_count--;
 
+
+	/* Handling HEX 7:7 Score */
+	/* TODO:
+	 * Increment the score if the answers match! 
+	 */
+	score = score + 1;
+
 	hex_4 = hex_0_val(hex_count);
 	hex_5 = hex_1_val(hex_count);
+	hex_6 = hex_0_val(score);
+	hex_7 = hex_1_val(score);
 
-	hex_5_4_val = digits[hex_5] << 8;
-	hex_5_4_val |= digits[hex_4];
+
+	hex_7_4_val = digits[hex_7] << 24;
+	hex_7_4_val |= digits[hex_6] << 16; 
+	hex_7_4_val |= digits[hex_5] << 8;
+	hex_7_4_val |= digits[hex_4];
 
 	/* Loading all values to HEX pointers for Display */
 
 	*(HEX3_HEX0_ptr) = random_number;
-	*(HEX5_HEX4_ptr) = hex_5_4_val;
+	*(HEX7_HEX4_ptr) = hex_7_4_val;
 
 }
 
@@ -120,11 +133,11 @@ void Task_paused_state()
 void Task_power_off()
 {
 	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
-	volatile int *HEX5_HEX4_ptr = (int *)HEX5_HEX4_BASE;
+	volatile int *HEX7_HEX4_ptr = (int *)HEX7_HEX4_BASE;
 
 	hex_count = 0;
 	random_number = 0;
 
-	*(HEX5_HEX4_ptr) &= ~0xFFFFFFFF;
+	*(HEX7_HEX4_ptr) &= ~0xFFFFFFFF;
 	*(HEX3_HEX0_ptr) &= ~0XFFFFFFFF;
 }

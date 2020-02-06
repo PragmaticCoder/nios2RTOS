@@ -4,7 +4,6 @@
 #include "utils.h"
 // defines global values
 GameState state;
-int just_started;
 
 /*******************************************************************************
  * Handles all task associated with Timer Interrupt
@@ -18,15 +17,13 @@ void interval_timer_ISR()
 	*(interval_timer_ptr) = 0; // clear the interrupt
 
 	/* Power on handler*/
-	if (!(*(slider_switch_ptr) & 0x20000))
+	if (!(*(slider_switch_ptr)&0x20000))
 	{
 		state = OFF;
 		Task_power_off();
 	}
-  else if((*(slider_switch_ptr) & 0x20000) && state == OFF)
-		state = IDLE;
 
-	if (state == IDLE)
+	if (state == IDLE || ((state == OFF) && (*(slider_switch_ptr)&0x20000)))
 	{
 		Task_idle_state();
 		return;

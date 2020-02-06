@@ -25,6 +25,7 @@ extern GameState state;
 extern int hex_count; /* timer digit count */
 extern int random_number;
 extern int questions_count;
+extern int score;
 
 /* Global value storage registers */
 extern int hex_3_0_val;

@@ -23,6 +23,8 @@ int digits[10] = {
     0x6F  // 9
 };
 
+int score;
+
 int main(void)
 {
     /* Declare volatile pointers to I/O registers (volatile means that IO load
@@ -35,6 +37,7 @@ int main(void)
 
     /* Initializaion */
     hex_count = MAX_TIMER_COUNT;
+    score = 0;
 
     /* Initial State */
     if (!(*(slider_switch_ptr)&0x20000))
