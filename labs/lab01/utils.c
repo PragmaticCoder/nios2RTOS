@@ -157,6 +157,9 @@ void Task_paused_state()
 {
 	volatile int *HEX3_HEX0_ptr = (int *)HEX3_HEX0_BASE;
 	*(HEX3_HEX0_ptr) &= ~0xFFFFFFFF;
+
+	volatile int *red_LED_ptr = (int *)LEDR_BASE;
+	*(red_LED_ptr) &= ~0xFF;
 }
 
 void Task_power_off()

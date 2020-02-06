@@ -55,7 +55,7 @@ int main(void)
         state = IDLE;
 
     /* set the interval timer period for scrolling the LED lights */
-    int counter = 25000000; // (1/50 MHz) x (50000000) = 1sec
+    int counter = 50000000; // (1/50 MHz) x (50000000) = 1sec
 
     *(interval_timer_ptr + 0x2) = (counter & 0xFFFF);
     *(interval_timer_ptr + 0x3) = (counter >> 16) & 0xFFFF;
