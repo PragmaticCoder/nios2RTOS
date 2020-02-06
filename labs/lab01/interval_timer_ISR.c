@@ -5,7 +5,7 @@
 // defines global values
 GameState state;
 int questions;
-int total_seconds;
+int elapsed_time;
 /*******************************************************************************
  * Handles all task associated with Timer Interrupt
  * Task handlers are defined in utils.c
@@ -17,8 +17,9 @@ void interval_timer_ISR()
 
 	*(interval_timer_ptr) = 0; // clear the interrupt
 
-	/* keep track of total seconds */
-	total_seconds++;
+	/* keep track of time elapsed */
+	if(questions <= 10)
+		elapsed_time++;
 
 	/* Power on handler*/
 	if (!(*(slider_switch_ptr)&0x20000))
