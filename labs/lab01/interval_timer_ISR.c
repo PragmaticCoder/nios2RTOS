@@ -18,7 +18,12 @@ void interval_timer_ISR()
 	*(interval_timer_ptr) = 0; // clear the interrupt
 
 	/* Power on handler*/
-	if (*(slider_switch_ptr) & 0x20000)
+	if (!(*(slider_switch_ptr) & 0x20000))
+	{
+		state = OFF;
+		Task_power_off();
+	}
+  else if((*(slider_switch_ptr) & 0x20000) && state == OFF)
 		state = IDLE;
 
 	if (state == IDLE)

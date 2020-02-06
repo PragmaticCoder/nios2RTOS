@@ -32,7 +32,7 @@ void pushbutton_ISR(void)
     }
 
     /* In PAUSED or IDLE state, and KEY 1 pressed */
-    if (((state == PAUSE) || (state == IDLE)) && (press & 0x2))
+    if (((state == OFF) || (state == PAUSE) || (state == IDLE)) && (press & 0x2))
     {  
         state = PLAY;
         Task_play_state();
