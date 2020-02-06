@@ -34,7 +34,7 @@ int main(void)
     volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
 
     /* Initialization */
-    hex_count = 30;
+    hex_count = MAX_TIMER_COUNT;
 
     /* Initial State */
     state = PLAY;

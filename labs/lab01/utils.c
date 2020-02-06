@@ -90,7 +90,7 @@ void Task_play_state()
 
 	/* Handling HEX 5:4 counter */
 	if (hex_count == 0)
-		hex_count = 30;
+		hex_count = MAX_TIMER_COUNT;
 	else
 		hex_count--;
 
