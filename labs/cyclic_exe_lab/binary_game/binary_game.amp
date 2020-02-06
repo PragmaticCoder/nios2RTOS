@@ -11,15 +11,14 @@
     <program>
         <type>C Program</type>
         <source_files>
-            <source_file filepath="true">address_map_nios2.h</source_file>
-            <source_file filepath="true">exception_handler.c</source_file>
-            <source_file filepath="true">globals.h</source_file>
             <source_file filepath="true">interrupt_example.c</source_file>
+            <source_file filepath="true">exception_handler.c</source_file>
             <source_file filepath="true">interval_timer_ISR.c</source_file>
-            <source_file filepath="true">nios2_ctrl_reg_macros.h</source_file>
             <source_file filepath="true">pushbutton_ISR.c</source_file>
+            <header_file filepath="true">nios2_ctrl_reg_macros.h</header_file>
+            <header_file filepath="true">globals.h</header_file>
+            <header_file filepath="true">address_map_nios2.h</header_file>
             <source_file filepath="true">utils.c</source_file>
-            <source_file filepath="true">utils.h</source_file>
             <source_file filepath="true">amp/lib/src/niosII_jtag_uart.c</source_file>
         </source_files>
         <options>
@@ -27,10 +26,24 @@
             <emulate_unimpl_instructions>true</emulate_unimpl_instructions>
             <use_small_c_library>false</use_small_c_library>
         </options>
-        <linker_sections type="Basic">
-            <linker_section name=".text">
+        <linker_sections type="Exceptions">
+            <linker_section name=".reset">
                 <memory_device>SDRAM.s1</memory_device>
                 <base_address>0x00000000</base_address>
+                <end_address>0x0000001F</end_address>
+                <required_section/>
+                <fixed_base_address/>
+            </linker_section>
+            <linker_section name=".exceptions">
+                <memory_device>SDRAM.s1</memory_device>
+                <base_address>0x00000020</base_address>
+                <end_address>0x000001FF</end_address>
+                <required_section/>
+                <fixed_base_address/>
+            </linker_section>
+            <linker_section name=".text">
+                <memory_device>SDRAM.s1</memory_device>
+                <base_address>0x00000200</base_address>
                 <end_address>0x07FFFFFF</end_address>
                 <required_section/>
             </linker_section>
