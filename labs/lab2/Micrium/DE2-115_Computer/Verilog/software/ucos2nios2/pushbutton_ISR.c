@@ -16,10 +16,16 @@ void pushbutton_ISR(void)
     volatile int *KEY_ptr = (int *)KEY_BASE;
 
     int press;
-    int questions;
 
     press = *(KEY_ptr + 3); // read the pushbutton interrupt register
+    
+    printf("Got here to pushbutton_ISR");
     *(KEY_ptr + 3) = press; // Clear the interrupt
+
+    if (press & 0x2){
+        printf("Pushbutton pressed");
+        return;
+    }
 
     return;
 }

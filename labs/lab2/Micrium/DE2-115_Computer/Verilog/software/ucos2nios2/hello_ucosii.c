@@ -40,9 +40,9 @@ OS_STK task_read_key_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
 
-#define TASK_READ_KEY_PRIORITY    3
-#define TASK1_PRIORITY            1
-#define TASK2_PRIORITY            2
+#define TASK_READ_KEY_PRIORITY 3
+#define TASK1_PRIORITY 1
+#define TASK2_PRIORITY 2
 
 void task_read_key_input(void *pdata)
 {
@@ -66,7 +66,7 @@ void task_read_key_input(void *pdata)
     if (RAVAIL > 0)
     {
       byte5 = PS2_data & 0xFF;
-      
+
       /* Refactor this code */
       if (byte5 == -16)
         flag = 1;
@@ -135,6 +135,12 @@ int main(void)
   printf("Email: sales@micrium.com\n");
   printf("URL: www.micrium.com\n\n\n");
 
+  /* Setting up interrupts */
+  volatile int *slider_switch_ptr = (int *)SW_BASE;
+  volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
+
+  *(KEY_ptr + 2) = 0xF; // enable interrupts for all pushbuttons
+
   OSTaskCreateExt(task1,
                   NULL,
                   (void *)&task1_stk[TASK_STACKSIZE - 1],
@@ -166,6 +172,14 @@ int main(void)
                   0);
 
   OSStart();
+
+  // NIOS2_WRITE_IENABLE(0x3);
+  // NIOS2_WRITE_STATUS(1); // enable Nios II interrupts
+
+
+  // while (1)
+    // ;
+
   return 0;
 }
 
