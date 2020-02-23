@@ -142,9 +142,7 @@ ACDS_VERSION := 18.1
 ELF := ucos2nios2.elf
 
 # Paths to C, C++, and assembly source files.
-C_SRCS += hello_ucosii.c
-C_SRCS += exception_handler.c
-C_SRCS += pushbutton_ISR.c
+C_SRCS := hello_ucosii.c
 CXX_SRCS :=
 ASM_SRCS :=
 

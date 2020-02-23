@@ -37,12 +37,29 @@
 OS_STK task1_stk[TASK_STACKSIZE];
 OS_STK task2_stk[TASK_STACKSIZE];
 OS_STK task_read_keyboard_stk[TASK_STACKSIZE];
+OS_STK task_read_KEY_press_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
 
+#define TASK_READ_KEYPRESS_PRIORITY 4
 #define TASK_READ_KEYBOARD_PRIORITY 3
 #define TASK1_PRIORITY 1
 #define TASK2_PRIORITY 2
+
+void task_read_KEY_press(void *pdata)
+{
+  volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
+  int press;
+
+  while (1)
+  {
+    press = *(KEY_ptr + 3);
+    *(KEY_ptr + 3) = press;
+
+    if (press & 0x2)
+      printf("KEY 2 Pressed!");
+  }
+}
 
 void task_read_keyboard_input(void *pdata)
 {
@@ -61,6 +78,16 @@ void task_read_keyboard_input(void *pdata)
 
   while (1)
   {
+
+    // volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
+    // int press;
+
+    // press = *(KEY_ptr + 3);
+    // *(KEY_ptr + 3) = press;
+
+    // if (press & 0x2)
+    //   printf("KEY 2 Pressed!\n");
+
     PS2_data = *(PS2_ptr);                  // read the Data register in the PS/2 port
     RAVAIL = (PS2_data & 0xFFFF0000) >> 16; // extract the RAVAIL field
     if (RAVAIL > 0)
@@ -95,6 +122,7 @@ void task_read_keyboard_input(void *pdata)
         else if (byte5 == 70 || byte5 == 125)
           printf("9 pressed\n");
       }
+      
     }
   }
 }
@@ -169,14 +197,17 @@ int main(void)
                   NULL,
                   0);
 
-
+  OSTaskCreateExt(task_read_KEY_press,
+                  NULL,
+                  (void *)&task_read_KEY_press_stk[TASK_STACKSIZE - 1],
+                  TASK_READ_KEYPRESS_PRIORITY,
+                  TASK_READ_KEYPRESS_PRIORITY,
+                  task_read_KEY_press_stk,
+                  TASK_STACKSIZE,
+                  NULL,
+                  0);
 
   OSStart();
-
-
-
-  // while (1)
-    // ;
 
   return 0;
 }
