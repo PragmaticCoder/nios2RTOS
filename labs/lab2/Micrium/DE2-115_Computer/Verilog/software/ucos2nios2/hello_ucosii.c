@@ -27,77 +27,91 @@
 *     minutes per iteration.                                             *
 **************************************************************************/
 
-
 #include <stdio.h>
 #include "includes.h"
 #include "address_map_nios2.h"
 
 /* Definition of Task Stacks */
-#define   TASK_STACKSIZE       2048
-OS_STK    task1_stk[TASK_STACKSIZE];
-OS_STK    task2_stk[TASK_STACKSIZE];
+#define TASK_STACKSIZE 2048
+
+OS_STK task1_stk[TASK_STACKSIZE];
+OS_STK task2_stk[TASK_STACKSIZE];
+OS_STK task_read_key_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
 
-#define TASK1_PRIORITY      1
-#define TASK2_PRIORITY      2
+#define TASK_READ_KEY_PRIORITY    1
+#define TASK1_PRIORITY            2
+#define TASK2_PRIORITY             3
 
-void task_read_key_input()
+void task_read_key_input(void *pdata)
 {
-	 volatile int * PS2_ptr = (int *) PS2_BASE;
-	  char byte1, byte2, byte3, byte4, byte5;
-	  int PS2_data, RAVAIL;
-	  byte1 = 0; byte2 = 0; byte3 = 0; byte4 = 0; byte5 = 0;
-	  *(PS2_ptr) = 0xFF; // reset PS/2
-	  int flag = 0;
+  volatile int *PS2_ptr = (int *)PS2_BASE;
+  char byte1, byte2, byte3, byte4, byte5;
+  int PS2_data, RAVAIL;
 
-	  while (1) {
-	 PS2_data = *(PS2_ptr); // read the Data register in the PS/2 port
-	 RAVAIL = (PS2_data & 0xFFFF0000) >> 16; // extract the RAVAIL field
-	 if (RAVAIL > 0) {
-	 byte5 = PS2_data & 0xFF;
-	 if( byte5 == -16)
-	 flag = 1;
-	 else if (flag == 1) {
-	 flag = 0;
+  byte1 = 0;
+  byte2 = 0;
+  byte3 = 0;
+  byte4 = 0;
+  byte5 = 0;
 
-	 if(byte5 == 69 || byte5 == 112)
-	 printf("0 pressed\n");
-	 else if(byte5 == 22 || byte5 == 105)
-	 printf("1 pressed\n");
-	 else if(byte5 == 30 || byte5 == 114)
-	 printf("2 pressed\n");
-	 else if(byte5 == 38 || byte5 == 122)
-	 printf("3 pressed\n");
-	 else if(byte5 == 37 || byte5 == 107)
-	 printf("4 pressed\n");
-	 else if(byte5 == 46 || byte5 == 115)
-	 printf("5 pressed\n");
-	 else if(byte5 == 54 || byte5 == 116)
-	 printf("6 pressed\n");
-	 else if(byte5 == 61 || byte5 == 108)
-	 printf("7 pressed\n");
-	 else if(byte5 == 62 || byte5 == 117)
-	 printf("8 pressed\n");
-	 else if(byte5 == 70 || byte5 == 125)
-	 printf("9 pressed\n");
+  *(PS2_ptr) = 0xFF; // reset PS/2
+  int flag = 0;
 
+  while (1)
+  {
+    PS2_data = *(PS2_ptr);                  // read the Data register in the PS/2 port
+    RAVAIL = (PS2_data & 0xFFFF0000) >> 16; // extract the RAVAIL field
+    if (RAVAIL > 0)
+    {
+      byte5 = PS2_data & 0xFF;
+      
+      if (byte5 == -16)
+        flag = 1;
+      else if (flag == 1)
+      {
+        flag = 0;
+
+        if (byte5 == 69 || byte5 == 112)
+          printf("0 pressed\n");
+        else if (byte5 == 22 || byte5 == 105)
+          printf("1 pressed\n");
+        else if (byte5 == 30 || byte5 == 114)
+          printf("2 pressed\n");
+        else if (byte5 == 38 || byte5 == 122)
+          printf("3 pressed\n");
+        else if (byte5 == 37 || byte5 == 107)
+          printf("4 pressed\n");
+        else if (byte5 == 46 || byte5 == 115)
+          printf("5 pressed\n");
+        else if (byte5 == 54 || byte5 == 116)
+          printf("6 pressed\n");
+        else if (byte5 == 61 || byte5 == 108)
+          printf("7 pressed\n");
+        else if (byte5 == 62 || byte5 == 117)
+          printf("8 pressed\n");
+        else if (byte5 == 70 || byte5 == 125)
+          printf("9 pressed\n");
+      }
+    }
+  }
 }
 
 /* Prints "Hello World" and sleeps for three seconds */
-void task1(void* pdata)
+void task1(void *pdata)
 {
   while (1)
-  { 
+  {
     printf("Hello from task1\n");
     OSTimeDlyHMSM(0, 0, 3, 0);
   }
 }
 /* Prints "Hello World" and sleeps for three seconds */
-void task2(void* pdata)
+void task2(void *pdata)
 {
   while (1)
-  { 
+  {
     printf("Hello from task2\n");
     OSTimeDlyHMSM(0, 0, 3, 0);
   }
@@ -118,22 +132,21 @@ int main(void)
   printf("Licensing information is available at:\n");
   printf("Phone: +1 954-217-2036\n");
   printf("Email: sales@micrium.com\n");
-  printf("URL: www.micrium.com\n\n\n");  
+  printf("URL: www.micrium.com\n\n\n");
 
   OSTaskCreateExt(task1,
                   NULL,
-                  (void *)&task1_stk[TASK_STACKSIZE-1],
+                  (void *)&task1_stk[TASK_STACKSIZE - 1],
                   TASK1_PRIORITY,
                   TASK1_PRIORITY,
                   task1_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);
-              
-               
+
   OSTaskCreateExt(task2,
                   NULL,
-                  (void *)&task2_stk[TASK_STACKSIZE-1],
+                  (void *)&task2_stk[TASK_STACKSIZE - 1],
                   TASK2_PRIORITY,
                   TASK2_PRIORITY,
                   task2_stk,
@@ -141,15 +154,16 @@ int main(void)
                   NULL,
                   0);
 
-  OSTaskCreateExt(task2,
-                    NULL,
-                    (void *)&task2_stk[TASK_STACKSIZE-1],
-                    TASK2_PRIORITY,
-                    TASK2_PRIORITY,
-                    task2_stk,
-                    TASK_STACKSIZE,
-                    NULL,
-                    0);
+  OSTaskCreateExt(task_read_key_input,
+                  NULL,
+                  (void *)&task_read_key_stk[TASK_STACKSIZE - 1],
+                  TASK_READ_KEY_PRIORITY,
+                  TASK_READ_KEY_PRIORITY,
+                  task_read_key_stk,
+                  TASK_STACKSIZE,
+                  NULL,
+                  0);
+
   OSStart();
   return 0;
 }
