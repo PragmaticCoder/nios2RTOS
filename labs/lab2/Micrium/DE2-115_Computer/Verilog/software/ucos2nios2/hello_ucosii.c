@@ -36,15 +36,15 @@
 
 OS_STK task1_stk[TASK_STACKSIZE];
 OS_STK task2_stk[TASK_STACKSIZE];
-OS_STK task_read_key_stk[TASK_STACKSIZE];
+OS_STK task_read_keyboard_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
 
-#define TASK_READ_KEY_PRIORITY 3
+#define TASK_READ_KEYBOARD_PRIORITY 3
 #define TASK1_PRIORITY 1
 #define TASK2_PRIORITY 2
 
-void task_read_key_input(void *pdata)
+void task_read_keyboard_input(void *pdata)
 {
   volatile int *PS2_ptr = (int *)PS2_BASE;
   char byte1, byte2, byte3, byte4, byte5;
@@ -139,8 +139,6 @@ int main(void)
   volatile int *slider_switch_ptr = (int *)SW_BASE;
   volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
 
-  *(KEY_ptr + 2) = 0xF; // enable interrupts for all pushbuttons
-
   OSTaskCreateExt(task1,
                   NULL,
                   (void *)&task1_stk[TASK_STACKSIZE - 1],
@@ -161,20 +159,20 @@ int main(void)
                   NULL,
                   0);
 
-  OSTaskCreateExt(task_read_key_input,
+  OSTaskCreateExt(task_read_keyboard_input,
                   NULL,
-                  (void *)&task_read_key_stk[TASK_STACKSIZE - 1],
-                  TASK_READ_KEY_PRIORITY,
-                  TASK_READ_KEY_PRIORITY,
-                  task_read_key_stk,
+                  (void *)&task_read_keyboard_stk[TASK_STACKSIZE - 1],
+                  TASK_READ_KEYBOARD_PRIORITY,
+                  TASK_READ_KEYBOARD_PRIORITY,
+                  task_read_keyboard_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);
 
+
+
   OSStart();
 
-  // NIOS2_WRITE_IENABLE(0x3);
-  // NIOS2_WRITE_STATUS(1); // enable Nios II interrupts
 
 
   // while (1)
