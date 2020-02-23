@@ -40,9 +40,9 @@ OS_STK task_read_key_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
 
-#define TASK_READ_KEY_PRIORITY    1
-#define TASK1_PRIORITY            2
-#define TASK2_PRIORITY             3
+#define TASK_READ_KEY_PRIORITY    3
+#define TASK1_PRIORITY            1
+#define TASK2_PRIORITY            2
 
 void task_read_key_input(void *pdata)
 {
@@ -67,6 +67,7 @@ void task_read_key_input(void *pdata)
     {
       byte5 = PS2_data & 0xFF;
       
+      /* Refactor this code */
       if (byte5 == -16)
         flag = 1;
       else if (flag == 1)
