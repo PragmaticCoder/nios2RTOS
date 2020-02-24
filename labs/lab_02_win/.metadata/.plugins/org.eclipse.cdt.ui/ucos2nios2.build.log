@@ -1,0 +1,6 @@
+01:02:00 **** Clean-only build of configuration Nios II for project ucos2nios2 ****
+make clean 
+[ucos2nios2 clean complete]
+
+01:02:00 Build Finished (took 212ms)
+
