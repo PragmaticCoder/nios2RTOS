@@ -26,10 +26,12 @@
 *     If this design is run on the ISS, terminal output will take several*
 *     minutes per iteration.                                             *
 **************************************************************************/
+#undef NDEBUG
 
 #include <stdio.h>
 #include "includes.h"
 #include "address_map_nios2.h"
+#include "debug.h"
 
 /* Definition of Task Stacks */
 #define TASK_STACKSIZE 2048
@@ -49,6 +51,7 @@ OS_STK task_read_KEY_press_stk[TASK_STACKSIZE];
 
 void task_read_KEY_press(void *pdata)
 {
+  debug("Started: task_read_KEY_press");
   volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
   int press;
 
@@ -58,12 +61,15 @@ void task_read_KEY_press(void *pdata)
     *(KEY_ptr + 3) = press;
 
     if (press & 0x2)
-      printf("KEY 1 Pressed!");
+      debug("KEY 1 Pressed!");
   }
 }
 
 void task_read_keyboard_input(void *pdata)
 {
+
+  debug("Started: task_read_keyboard_input");
+
   volatile int *PS2_ptr = (int *)PS2_BASE;
   char byte1, byte2, byte3, byte4, byte5;
   int PS2_data, RAVAIL;
@@ -123,8 +129,11 @@ void task1(void *pdata)
 {
   while (1)
   {
-    printf("Hello from task1\n");
+    debug("Started: task1");
+
+    printf("%u: Hello from task1\n", OSTime);
     OSTimeDlyHMSM(0, 0, 5, 0);
+    
   }
 }
 /* Prints "Hello World" and sleeps for three seconds */
@@ -132,7 +141,8 @@ void task2(void *pdata)
 {
   while (1)
   {
-    printf("Hello from task2\n");
+    debug("Started: task2");
+    printf("%u: Hello from task2\n", OSTime);
     OSTimeDlyHMSM(0, 0, 10, 0);
   }
 }
