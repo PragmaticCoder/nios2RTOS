@@ -133,7 +133,7 @@ void task1(void *pdata)
   while (1)
   {
     printf("Hello from task1\n");
-    OSTimeDlyHMSM(0, 0, 5, 0);
+    OSTimeDlyHMSM(0, 0, 3, 0);
   }
 }
 /* Prints "Hello World" and sleeps for three seconds */
@@ -142,7 +142,7 @@ void task2(void *pdata)
   while (1)
   {
     printf("Hello from task2\n");
-    OSTimeDlyHMSM(0, 0, 10, 0);
+    OSTimeDlyHMSM(0, 0, 3, 0);
   }
 }
 /* The main function creates two task and starts multi-tasking */

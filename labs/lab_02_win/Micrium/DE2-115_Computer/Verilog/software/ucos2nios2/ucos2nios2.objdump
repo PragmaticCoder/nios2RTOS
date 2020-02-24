@@ -1493,9 +1493,9 @@ void task1(void *pdata)
      514:	010000b4 	movhi	r4,2
      518:	21251604 	addi	r4,r4,-27560
      51c:	000087c0 	call	87c <puts>
-    OSTimeDlyHMSM(0, 0, 3, 0);
+    OSTimeDlyHMSM(0, 0, 5, 0);
      520:	000f883a 	mov	r7,zero
-     524:	018000c4 	movi	r6,3
+     524:	01800144 	movi	r6,5
      528:	000b883a 	mov	r5,zero
      52c:	0009883a 	mov	r4,zero
      530:	00150ac0 	call	150ac <OSTimeDlyHMSM>
@@ -1518,9 +1518,9 @@ void task2(void *pdata)
      54c:	010000b4 	movhi	r4,2
      550:	21251b04 	addi	r4,r4,-27540
      554:	000087c0 	call	87c <puts>
-    OSTimeDlyHMSM(0, 0, 3, 0);
+    OSTimeDlyHMSM(0, 0, 10, 0);
      558:	000f883a 	mov	r7,zero
-     55c:	018000c4 	movi	r6,3
+     55c:	01800284 	movi	r6,10
      560:	000b883a 	mov	r5,zero
      564:	0009883a 	mov	r4,zero
      568:	00150ac0 	call	150ac <OSTimeDlyHMSM>

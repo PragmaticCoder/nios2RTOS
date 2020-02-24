@@ -70,3 +70,12 @@ Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING
 
 !ENTRY com.altera.sbtgui.launch 1 0 2020-02-23 22:34:45.213
 !MESSAGE Executing: [C:/intelfpga_lite/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0xff202040 --id=0x0 --timestamp=1555017408 /cygdrive/c/Users/Alvi/Desktop/cme332_2020/labs/lab_02_win/Micrium/DE2-115_Computer/Verilog/software/ucos2nios2/ucos2nios2.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2020-02-23 23:33:11.444
+!MESSAGE Terminated Launch with connection: 10USB-Blaster on localhost [USB-0]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2020-02-23 23:33:11.992
+!MESSAGE Executing: [C:/intelfpga_lite/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0xff202040 --id=0x0 --timestamp=1555017408]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2020-02-23 23:33:14.040
+!MESSAGE Executing: [C:/intelfpga_lite/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0xff202040 --id=0x0 --timestamp=1555017408 /cygdrive/c/Users/Alvi/Desktop/cme332_2020/labs/lab_02_win/Micrium/DE2-115_Computer/Verilog/software/ucos2nios2/ucos2nios2.elf]
