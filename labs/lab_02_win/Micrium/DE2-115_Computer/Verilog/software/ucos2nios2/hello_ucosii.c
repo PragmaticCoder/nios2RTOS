@@ -80,15 +80,6 @@ void task_read_keyboard_input(void *pdata)
   while (1)
   {
 
-    // volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
-    // int press;
-
-    // press = *(KEY_ptr + 3);
-    // *(KEY_ptr + 3) = press;
-
-    // if (press & 0x2)
-    //   printf("KEY 2 Pressed!\n");
-
     PS2_data = *(PS2_ptr);                  // read the Data register in the PS/2 port
     RAVAIL = (PS2_data & 0xFFFF0000) >> 16; // extract the RAVAIL field
     if (RAVAIL > 0)
@@ -149,7 +140,6 @@ void task2(void *pdata)
 /* The main function creates two task and starts multi-tasking */
 int main(void)
 {
-
   printf("MicroC/OS-II Licensing Terms\n");
   printf("============================\n");
   printf("Micrium\'s uC/OS-II is a real-time operating system (RTOS) available in source code.\n");
