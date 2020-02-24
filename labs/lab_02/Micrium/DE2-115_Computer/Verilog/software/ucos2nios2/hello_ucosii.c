@@ -46,8 +46,8 @@ OS_STK task_read_KEY_press_stk[TASK_STACKSIZE];
 #define TASK1_PRIORITY 1
 #define TASK2_PRIORITY 2
 
-#define TASK_READ_KEYPRESS_PRIORITY 3
-#define TASK_READ_KEYBOARD_PRIORITY 4
+#define TASK_READ_KEYPRESS_PRIORITY 4
+#define TASK_READ_KEYBOARD_PRIORITY 3
 
 void task_read_KEY_press(void *pdata)
 {
@@ -97,7 +97,7 @@ void task_read_keyboard_input(void *pdata)
       if (byte5 == -16)
         flag = 1;
 
-      if (flag == 1)
+      else if (flag == 1)
       {
         flag = 0;
 
