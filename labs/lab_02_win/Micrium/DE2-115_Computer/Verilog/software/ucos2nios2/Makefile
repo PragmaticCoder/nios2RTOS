@@ -142,7 +142,7 @@ ACDS_VERSION := 18.1
 ELF := ucos2nios2.elf
 
 # Paths to C, C++, and assembly source files.
-C_SRCS := main.c
+C_SRCS += main.c
 CXX_SRCS :=
 ASM_SRCS :=
 
