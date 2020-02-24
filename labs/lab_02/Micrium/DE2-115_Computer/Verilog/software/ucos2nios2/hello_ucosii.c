@@ -87,10 +87,10 @@ void Task_read_keypress(void *pdata)
   }
 }
 
-void task_read_keyboard_input(void *pdata)
+void Task_read_keyboard_input(void *pdata)
 {
 
-  debug("Started: task_read_keyboard_input");
+  debug("Started: Task_read_keyboard_input");
 
   char byte5;
   int PS2_data, RAVAIL;
@@ -230,7 +230,7 @@ int main(void)
                   NULL,
                   0);
 
-  OSTaskCreateExt(task_read_keyboard_input,
+  OSTaskCreateExt(Task_read_keyboard_input,
                   NULL,
                   (void *)&task_read_keyboard_stk[TASK_STACKSIZE - 1],
                   TASK_READ_KEYBOARD_PRIORITY,
