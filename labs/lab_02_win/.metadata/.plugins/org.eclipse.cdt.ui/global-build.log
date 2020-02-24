@@ -516,3 +516,315 @@ Info:                  65372 KBytes free for stack + heap.
 Info: Creating ucos2nios2.objdump
 nios2-elf-objdump --disassemble --syms --all-header --source ucos2nios2.elf >ucos2nios2.objdump
 [ucos2nios2 build complete]
+23:36:52 **** Incremental Build of configuration Nios II for project ucos2nios2 ****
+make all 
+Info: Building ../ucos2nios2_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../ucos2nios2_bsp/
+[BSP build complete]
+Info: Compiling hello_ucosii.c to obj/default/hello_ucosii.o
+nios2-elf-gcc -xc -MP -MMD -c -I../ucos2nios2_bsp//UCOSII/inc -I../ucos2nios2_bsp//HAL/inc -I../ucos2nios2_bsp/ -I../ucos2nios2_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -D__ucosii__    -O0 -g -Wall   -mhw-div -mcustom-fpu-cfg=60-2 -mhw-mul -mhw-mulx -mgpopt=global  -o obj/default/hello_ucosii.o hello_ucosii.c
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:19:0: warning: "SDRAM_BASE" redefined
+ #define SDRAM_BASE   0x00000000
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:524:0: note: this is the location of the previous definition
+ #define SDRAM_BASE 0x0
+ ^
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:38:0: warning: "HEX3_HEX0_BASE" redefined
+ #define HEX3_HEX0_BASE   0xFF200020
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:304:0: note: this is the location of the previous definition
+ #define HEX3_HEX0_BASE 0xff200020
+ ^
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:39:0: warning: "HEX7_HEX4_BASE" redefined
+ #define HEX7_HEX4_BASE   0xFF200030
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:331:0: note: this is the location of the previous definition
+ #define HEX7_HEX4_BASE 0xff200030
+ ^
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:46:0: warning: "USB_BASE" redefined
+ #define USB_BASE   0xFF200110
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:684:0: note: this is the location of the previous definition
+ #define USB_BASE 0xff200110
+ ^
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:47:0: warning: "JTAG_UART_BASE" redefined
+ #define JTAG_UART_BASE   0xFF201000
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:424:0: note: this is the location of the previous definition
+ #define JTAG_UART_BASE 0xff201000
+ ^
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:52:0: warning: "AV_CONFIG_BASE" redefined
+ #define AV_CONFIG_BASE   0xFF203000
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:64:0: note: this is the location of the previous definition
+ #define AV_CONFIG_BASE 0xff203000
+ ^
+hello_ucosii.c: In function 'task_read_keyboard_input':
+hello_ucosii.c:67:29: warning: variable 'byte4' set but not used [-Wunused-but-set-variable]
+   char byte1, byte2, byte3, byte4, byte5;
+                             ^
+hello_ucosii.c:67:22: warning: variable 'byte3' set but not used [-Wunused-but-set-variable]
+   char byte1, byte2, byte3, byte4, byte5;
+                      ^
+hello_ucosii.c:67:15: warning: variable 'byte2' set but not used [-Wunused-but-set-variable]
+   char byte1, byte2, byte3, byte4, byte5;
+               ^
+hello_ucosii.c:67:8: warning: variable 'byte1' set but not used [-Wunused-but-set-variable]
+   char byte1, byte2, byte3, byte4, byte5;
+        ^
+hello_ucosii.c: In function 'main':
+hello_ucosii.c:168:17: warning: unused variable 'KEY_ptr' [-Wunused-variable]
+   volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
+                 ^
+hello_ucosii.c:167:17: warning: unused variable 'slider_switch_ptr' [-Wunused-variable]
+   volatile int *slider_switch_ptr = (int *)SW_BASE;
+                 ^
+Info: Linking ucos2nios2.elf
+nios2-elf-g++  -T'../ucos2nios2_bsp//linker.x' -msys-crt0='../ucos2nios2_bsp//obj/HAL/src/crt0.o' -msys-lib=ucosii_bsp -L../ucos2nios2_bsp/  -mcustom-fpu-cfg=60-2  -Wl,-Map=ucos2nios2.map   -O0 -g -Wall   -mhw-div -mcustom-fpu-cfg=60-2 -mhw-mul -mhw-mulx -mgpopt=global  -o ucos2nios2.elf obj/default/hello_ucosii.o -lm -msys-lib=m
+nios2-elf-insert ucos2nios2.elf --thread_model ucosii --cpu_name Nios2 --qsys true --simulation_enabled false --id 0 --sidp 0xff202040 --timestamp 1555017408 --stderr_dev JTAG_UART --stdin_dev JTAG_UART --stdout_dev JTAG_UART --sopc_system_name Computer_System --quartus_project_dir "C:/Users/Alvi/Desktop/cme332_2020/labs/lab_02_win/Micrium/DE2-115_Computer/Verilog" --sopcinfo C:/Users/Alvi/Desktop/cme332_2020/labs/lab_02_win/Micrium/DE2-115_Computer/Verilog/software/ucos2nios2_bsp/../../Computer_System.sopcinfo
+Info: (ucos2nios2.elf) 155 KBytes program size (code + initialized data).
+Info:                  65372 KBytes free for stack + heap.
+Info: Creating ucos2nios2.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source ucos2nios2.elf >ucos2nios2.objdump
+[ucos2nios2 build complete]
+23:53:37 **** Incremental Build of configuration Nios II for project ucos2nios2 ****
+make all 
+Info: Building ../ucos2nios2_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../ucos2nios2_bsp/
+[BSP build complete]
+Info: Compiling hello_ucosii.c to obj/default/hello_ucosii.o
+nios2-elf-gcc -xc -MP -MMD -c -I../ucos2nios2_bsp//UCOSII/inc -I../ucos2nios2_bsp//HAL/inc -I../ucos2nios2_bsp/ -I../ucos2nios2_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -D__ucosii__    -O0 -g -Wall   -mhw-div -mcustom-fpu-cfg=60-2 -mhw-mul -mhw-mulx -mgpopt=global  -o obj/default/hello_ucosii.o hello_ucosii.c
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:19:0: warning: "SDRAM_BASE" redefined
+ #define SDRAM_BASE   0x00000000
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:524:0: note: this is the location of the previous definition
+ #define SDRAM_BASE 0x0
+ ^
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:38:0: warning: "HEX3_HEX0_BASE" redefined
+ #define HEX3_HEX0_BASE   0xFF200020
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:304:0: note: this is the location of the previous definition
+ #define HEX3_HEX0_BASE 0xff200020
+ ^
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:39:0: warning: "HEX7_HEX4_BASE" redefined
+ #define HEX7_HEX4_BASE   0xFF200030
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:331:0: note: this is the location of the previous definition
+ #define HEX7_HEX4_BASE 0xff200030
+ ^
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:46:0: warning: "USB_BASE" redefined
+ #define USB_BASE   0xFF200110
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:684:0: note: this is the location of the previous definition
+ #define USB_BASE 0xff200110
+ ^
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:47:0: warning: "JTAG_UART_BASE" redefined
+ #define JTAG_UART_BASE   0xFF201000
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:424:0: note: this is the location of the previous definition
+ #define JTAG_UART_BASE 0xff201000
+ ^
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:52:0: warning: "AV_CONFIG_BASE" redefined
+ #define AV_CONFIG_BASE   0xFF203000
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:64:0: note: this is the location of the previous definition
+ #define AV_CONFIG_BASE 0xff203000
+ ^
+hello_ucosii.c: In function 'task_read_keyboard_input':
+hello_ucosii.c:69:29: warning: variable 'byte4' set but not used [-Wunused-but-set-variable]
+   char byte1, byte2, byte3, byte4, byte5;
+                             ^
+hello_ucosii.c:69:22: warning: variable 'byte3' set but not used [-Wunused-but-set-variable]
+   char byte1, byte2, byte3, byte4, byte5;
+                      ^
+hello_ucosii.c:69:15: warning: variable 'byte2' set but not used [-Wunused-but-set-variable]
+   char byte1, byte2, byte3, byte4, byte5;
+               ^
+hello_ucosii.c:69:8: warning: variable 'byte1' set but not used [-Wunused-but-set-variable]
+   char byte1, byte2, byte3, byte4, byte5;
+        ^
+hello_ucosii.c: In function 'main':
+hello_ucosii.c:170:17: warning: unused variable 'KEY_ptr' [-Wunused-variable]
+   volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
+                 ^
+hello_ucosii.c:169:17: warning: unused variable 'slider_switch_ptr' [-Wunused-variable]
+   volatile int *slider_switch_ptr = (int *)SW_BASE;
+                 ^
+Info: Linking ucos2nios2.elf
+nios2-elf-g++  -T'../ucos2nios2_bsp//linker.x' -msys-crt0='../ucos2nios2_bsp//obj/HAL/src/crt0.o' -msys-lib=ucosii_bsp -L../ucos2nios2_bsp/  -mcustom-fpu-cfg=60-2  -Wl,-Map=ucos2nios2.map   -O0 -g -Wall   -mhw-div -mcustom-fpu-cfg=60-2 -mhw-mul -mhw-mulx -mgpopt=global  -o ucos2nios2.elf obj/default/hello_ucosii.o -lm -msys-lib=m
+nios2-elf-insert ucos2nios2.elf --thread_model ucosii --cpu_name Nios2 --qsys true --simulation_enabled false --id 0 --sidp 0xff202040 --timestamp 1555017408 --stderr_dev JTAG_UART --stdin_dev JTAG_UART --stdout_dev JTAG_UART --sopc_system_name Computer_System --quartus_project_dir "C:/Users/Alvi/Desktop/cme332_2020/labs/lab_02_win/Micrium/DE2-115_Computer/Verilog" --sopcinfo C:/Users/Alvi/Desktop/cme332_2020/labs/lab_02_win/Micrium/DE2-115_Computer/Verilog/software/ucos2nios2_bsp/../../Computer_System.sopcinfo
+Info: (ucos2nios2.elf) 155 KBytes program size (code + initialized data).
+Info:                  65372 KBytes free for stack + heap.
+Info: Creating ucos2nios2.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source ucos2nios2.elf >ucos2nios2.objdump
+[ucos2nios2 build complete]
+23:53:40 **** Incremental Build of configuration Nios II for project ucos2nios2_bsp ****
+make all 
+[BSP build complete]
+23:53:42 **** Incremental Build of configuration Nios II for project ucos2nios2 ****
+make all 
+Info: Building ../ucos2nios2_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../ucos2nios2_bsp/
+[BSP build complete]
+[ucos2nios2 build complete]
+23:54:51 **** Incremental Build of configuration Nios II for project ucos2nios2 ****
+make all 
+Info: Building ../ucos2nios2_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../ucos2nios2_bsp/
+[BSP build complete]
+Info: Compiling hello_ucosii.c to obj/default/hello_ucosii.o
+nios2-elf-gcc -xc -MP -MMD -c -I../ucos2nios2_bsp//UCOSII/inc -I../ucos2nios2_bsp//HAL/inc -I../ucos2nios2_bsp/ -I../ucos2nios2_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -D__ucosii__    -O0 -g -Wall   -mhw-div -mcustom-fpu-cfg=60-2 -mhw-mul -mhw-mulx -mgpopt=global  -o obj/default/hello_ucosii.o hello_ucosii.c
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:19:0: warning: "SDRAM_BASE" redefined
+ #define SDRAM_BASE   0x00000000
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:524:0: note: this is the location of the previous definition
+ #define SDRAM_BASE 0x0
+ ^
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:38:0: warning: "HEX3_HEX0_BASE" redefined
+ #define HEX3_HEX0_BASE   0xFF200020
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:304:0: note: this is the location of the previous definition
+ #define HEX3_HEX0_BASE 0xff200020
+ ^
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:39:0: warning: "HEX7_HEX4_BASE" redefined
+ #define HEX7_HEX4_BASE   0xFF200030
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:331:0: note: this is the location of the previous definition
+ #define HEX7_HEX4_BASE 0xff200030
+ ^
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:46:0: warning: "USB_BASE" redefined
+ #define USB_BASE   0xFF200110
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:684:0: note: this is the location of the previous definition
+ #define USB_BASE 0xff200110
+ ^
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:47:0: warning: "JTAG_UART_BASE" redefined
+ #define JTAG_UART_BASE   0xFF201000
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:424:0: note: this is the location of the previous definition
+ #define JTAG_UART_BASE 0xff201000
+ ^
+In file included from hello_ucosii.c:32:0:
+address_map_nios2.h:52:0: warning: "AV_CONFIG_BASE" redefined
+ #define AV_CONFIG_BASE   0xFF203000
+ ^
+In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
+                 from ../ucos2nios2_bsp//HAL/inc/os_cpu.h:59,
+                 from ../ucos2nios2_bsp//HAL/inc/includes.h:21,
+                 from hello_ucosii.c:31:
+../ucos2nios2_bsp/system.h:64:0: note: this is the location of the previous definition
+ #define AV_CONFIG_BASE 0xff203000
+ ^
+hello_ucosii.c: In function 'task_read_keyboard_input':
+hello_ucosii.c:70:29: warning: variable 'byte4' set but not used [-Wunused-but-set-variable]
+   char byte1, byte2, byte3, byte4, byte5;
+                             ^
+hello_ucosii.c:70:22: warning: variable 'byte3' set but not used [-Wunused-but-set-variable]
+   char byte1, byte2, byte3, byte4, byte5;
+                      ^
+hello_ucosii.c:70:15: warning: variable 'byte2' set but not used [-Wunused-but-set-variable]
+   char byte1, byte2, byte3, byte4, byte5;
+               ^
+hello_ucosii.c:70:8: warning: variable 'byte1' set but not used [-Wunused-but-set-variable]
+   char byte1, byte2, byte3, byte4, byte5;
+        ^
+hello_ucosii.c: In function 'main':
+hello_ucosii.c:171:17: warning: unused variable 'KEY_ptr' [-Wunused-variable]
+   volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
+                 ^
+hello_ucosii.c:170:17: warning: unused variable 'slider_switch_ptr' [-Wunused-variable]
+   volatile int *slider_switch_ptr = (int *)SW_BASE;
+                 ^
+Info: Linking ucos2nios2.elf
+nios2-elf-g++  -T'../ucos2nios2_bsp//linker.x' -msys-crt0='../ucos2nios2_bsp//obj/HAL/src/crt0.o' -msys-lib=ucosii_bsp -L../ucos2nios2_bsp/  -mcustom-fpu-cfg=60-2  -Wl,-Map=ucos2nios2.map   -O0 -g -Wall   -mhw-div -mcustom-fpu-cfg=60-2 -mhw-mul -mhw-mulx -mgpopt=global  -o ucos2nios2.elf obj/default/hello_ucosii.o -lm -msys-lib=m
+nios2-elf-insert ucos2nios2.elf --thread_model ucosii --cpu_name Nios2 --qsys true --simulation_enabled false --id 0 --sidp 0xff202040 --timestamp 1555017408 --stderr_dev JTAG_UART --stdin_dev JTAG_UART --stdout_dev JTAG_UART --sopc_system_name Computer_System --quartus_project_dir "C:/Users/Alvi/Desktop/cme332_2020/labs/lab_02_win/Micrium/DE2-115_Computer/Verilog" --sopcinfo C:/Users/Alvi/Desktop/cme332_2020/labs/lab_02_win/Micrium/DE2-115_Computer/Verilog/software/ucos2nios2_bsp/../../Computer_System.sopcinfo
+Info: (ucos2nios2.elf) 155 KBytes program size (code + initialized data).
+Info:                  65372 KBytes free for stack + heap.
+Info: Creating ucos2nios2.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source ucos2nios2.elf >ucos2nios2.objdump
+[ucos2nios2 build complete]

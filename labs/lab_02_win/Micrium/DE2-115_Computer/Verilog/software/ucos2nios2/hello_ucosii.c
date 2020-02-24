@@ -41,10 +41,11 @@ OS_STK task_read_KEY_press_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
 
-#define TASK_READ_KEYPRESS_PRIORITY 4
-#define TASK_READ_KEYBOARD_PRIORITY 3
 #define TASK1_PRIORITY 1
 #define TASK2_PRIORITY 2
+
+#define TASK_READ_KEYPRESS_PRIORITY 3
+#define TASK_READ_KEYBOARD_PRIORITY 4
 
 void task_read_KEY_press(void *pdata)
 {
@@ -79,14 +80,14 @@ void task_read_keyboard_input(void *pdata)
   while (1)
   {
 
-    volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
-    int press;
+    // volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
+    // int press;
 
-    press = *(KEY_ptr + 3);
-    *(KEY_ptr + 3) = press;
+    // press = *(KEY_ptr + 3);
+    // *(KEY_ptr + 3) = press;
 
-    if (press & 0x2)
-      printf("KEY 2 Pressed!\n");
+    // if (press & 0x2)
+    //   printf("KEY 2 Pressed!\n");
 
     PS2_data = *(PS2_ptr);                  // read the Data register in the PS/2 port
     RAVAIL = (PS2_data & 0xFFFF0000) >> 16; // extract the RAVAIL field
@@ -144,6 +145,7 @@ void task2(void *pdata)
     OSTimeDlyHMSM(0, 0, 10, 0);
   }
 }
+
 /* The main function creates two task and starts multi-tasking */
 int main(void)
 {

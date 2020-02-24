@@ -1,4 +1,4 @@
-23:33:08 **** Incremental Build of configuration Nios II for project ucos2nios2 ****
+23:54:51 **** Incremental Build of configuration Nios II for project ucos2nios2 ****
 make all 
 Info: Building ../ucos2nios2_bsp/
 C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../ucos2nios2_bsp/
@@ -72,23 +72,23 @@ In file included from ../ucos2nios2_bsp//HAL/inc/sys/alt_irq.h:52:0,
  #define AV_CONFIG_BASE 0xff203000
  ^
 hello_ucosii.c: In function 'task_read_keyboard_input':
-hello_ucosii.c:67:29: warning: variable 'byte4' set but not used [-Wunused-but-set-variable]
+hello_ucosii.c:70:29: warning: variable 'byte4' set but not used [-Wunused-but-set-variable]
    char byte1, byte2, byte3, byte4, byte5;
                              ^
-hello_ucosii.c:67:22: warning: variable 'byte3' set but not used [-Wunused-but-set-variable]
+hello_ucosii.c:70:22: warning: variable 'byte3' set but not used [-Wunused-but-set-variable]
    char byte1, byte2, byte3, byte4, byte5;
                       ^
-hello_ucosii.c:67:15: warning: variable 'byte2' set but not used [-Wunused-but-set-variable]
+hello_ucosii.c:70:15: warning: variable 'byte2' set but not used [-Wunused-but-set-variable]
    char byte1, byte2, byte3, byte4, byte5;
                ^
-hello_ucosii.c:67:8: warning: variable 'byte1' set but not used [-Wunused-but-set-variable]
+hello_ucosii.c:70:8: warning: variable 'byte1' set but not used [-Wunused-but-set-variable]
    char byte1, byte2, byte3, byte4, byte5;
         ^
 hello_ucosii.c: In function 'main':
-hello_ucosii.c:168:17: warning: unused variable 'KEY_ptr' [-Wunused-variable]
+hello_ucosii.c:171:17: warning: unused variable 'KEY_ptr' [-Wunused-variable]
    volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
                  ^
-hello_ucosii.c:167:17: warning: unused variable 'slider_switch_ptr' [-Wunused-variable]
+hello_ucosii.c:170:17: warning: unused variable 'slider_switch_ptr' [-Wunused-variable]
    volatile int *slider_switch_ptr = (int *)SW_BASE;
                  ^
 Info: Linking ucos2nios2.elf
@@ -100,5 +100,5 @@ Info: Creating ucos2nios2.objdump
 nios2-elf-objdump --disassemble --syms --all-header --source ucos2nios2.elf >ucos2nios2.objdump
 [ucos2nios2 build complete]
 
-23:33:11 Build Finished (took 2s.391ms)
+23:54:53 Build Finished (took 2s.404ms)
 
