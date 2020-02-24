@@ -31,6 +31,7 @@
 #include <stdio.h>
 #include "includes.h"
 #include "address_map_nios2.h"
+#include "globals.h"
 #include "debug.h"
 
 /* Definition of Task Stacks */
@@ -46,22 +47,44 @@ OS_STK task_read_KEY_press_stk[TASK_STACKSIZE];
 #define TASK1_PRIORITY 1
 #define TASK2_PRIORITY 2
 
-#define TASK_READ_KEYPRESS_PRIORITY 4
-#define TASK_READ_KEYBOARD_PRIORITY 3
+#define TASK_READ_KEYPRESS_PRIORITY 3
+#define TASK_READ_KEYBOARD_PRIORITY 4
 
-void task_read_KEY_press(void *pdata)
+/* Tasks Implementation */
+
+void Task_read_keypress(void *pdata)
 {
-  debug("Started: task_read_KEY_press");
-  volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
-  int press;
+  debug("Started: Task_read_keypress");
 
   while (1)
   {
-    press = *(KEY_ptr + 3);
-    *(KEY_ptr + 3) = press;
+    // OSSemPend(SEM_keypress, 0, &err);
 
-    if (press & 0x2)
+    KEY_val = *(KEY_ptr)&0xF;
+
+    if (KEY_val & KEY0)
+    {
+      KEY0_flag = 1;
+      debug("KEY 0 Pressed!");
+    }
+    else if (KEY_val & KEY1)
+    {
+      KEY1_flag = 1;
       debug("KEY 1 Pressed!");
+    }
+    else if (KEY_val & KEY2)
+    {
+      KEY2_flag = 1;
+      debug("KEY 2 Pressed!");
+    }
+    else if (KEY_val & KEY3)
+    {
+      KEY3_flag = 1;
+      debug("KEY 3 Pressed!");
+    }
+
+    // OSSemPost(SEM_keypress);
+    OSTimeDlyHMSM(0, 0, 0, 100);
   }
 }
 
@@ -70,15 +93,8 @@ void task_read_keyboard_input(void *pdata)
 
   debug("Started: task_read_keyboard_input");
 
-  volatile int *PS2_ptr = (int *)PS2_BASE;
-  char byte1, byte2, byte3, byte4, byte5;
+  char byte5;
   int PS2_data, RAVAIL;
-
-  byte1 = 0;
-  byte2 = 0;
-  byte3 = 0;
-  byte4 = 0;
-  byte5 = 0;
 
   *(PS2_ptr) = 0xFF; // reset PS/2
   int flag = 0;
@@ -86,8 +102,8 @@ void task_read_keyboard_input(void *pdata)
   while (1)
   {
 
-    PS2_data = *(PS2_ptr);                  // read the Data register in the PS/2 port
-    RAVAIL = (PS2_data & 0xFFFF0000) >> 16; // extract the RAVAIL field
+    PS2_data = *(PS2_ptr);                  /* read the Data register in the PS/2 port */
+    RAVAIL = (PS2_data & 0xFFFF0000) >> 16; /* extract the RAVAIL field */
 
     if (RAVAIL > 0)
     {
@@ -102,27 +118,49 @@ void task_read_keyboard_input(void *pdata)
         flag = 0;
 
         if (byte5 == 69 || byte5 == 112)
-          printf("0 pressed\n");
+        {
+
+          debug("0 pressed");
+        }
         else if (byte5 == 22 || byte5 == 105)
-          printf("1 pressed\n");
+        {
+          debug("1 pressed");
+        }
         else if (byte5 == 30 || byte5 == 114)
-          printf("2 pressed\n");
+        {
+          debug("2 pressed");
+        }
         else if (byte5 == 38 || byte5 == 122)
-          printf("3 pressed\n");
+        {
+          debug("3 pressed");
+        }
         else if (byte5 == 37 || byte5 == 107)
-          printf("4 pressed\n");
+        {
+          debug("4 pressed");
+        }
         else if (byte5 == 46 || byte5 == 115)
-          printf("5 pressed\n");
+        {
+          debug("5 pressed");
+        }
         else if (byte5 == 54 || byte5 == 116)
-          printf("6 pressed\n");
+        {
+          debug("6 pressed");
+        }
         else if (byte5 == 61 || byte5 == 108)
-          printf("7 pressed\n");
+        {
+          debug("7 pressed");
+        }
         else if (byte5 == 62 || byte5 == 117)
-          printf("8 pressed\n");
+        {
+          debug("8 pressed");
+        }
         else if (byte5 == 70 || byte5 == 125)
-          printf("9 pressed\n");
+        {
+          debug("9 pressed");
+        }
       }
     }
+    OSTimeDlyHMSM(0, 0, 100, 0);
   }
 }
 
@@ -166,10 +204,9 @@ int main(void)
   printf("Email: sales@micrium.com\n");
   printf("URL: www.micrium.com\n\n\n");
 
-  /* Setting up interrupts */
-  volatile int *slider_switch_ptr = (int *)SW_BASE;
-  volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
+  KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
 
+  /* Task creation */
   OSTaskCreateExt(task1,
                   NULL,
                   (void *)&task1_stk[TASK_STACKSIZE - 1],
@@ -200,7 +237,7 @@ int main(void)
                   NULL,
                   0);
 
-  OSTaskCreateExt(task_read_KEY_press,
+  OSTaskCreateExt(Task_read_keypress,
                   NULL,
                   (void *)&task_read_KEY_press_stk[TASK_STACKSIZE - 1],
                   TASK_READ_KEYPRESS_PRIORITY,
@@ -209,6 +246,8 @@ int main(void)
                   TASK_STACKSIZE,
                   NULL,
                   0);
+
+  int SEM_keypress = OSSemCreate(1);
 
   OSStart();
 
