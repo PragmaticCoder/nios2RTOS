@@ -122,8 +122,7 @@ void task_read_keyboard_input(void *pdata)
         else if (byte5 == 70 || byte5 == 125)
           printf("9 pressed\n");
       }
-      
-    }
+        }
   }
 }
 
