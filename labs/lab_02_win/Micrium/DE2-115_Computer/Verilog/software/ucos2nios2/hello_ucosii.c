@@ -120,30 +120,30 @@ void task_read_keyboard_input(void *pdata)
         else if (byte5 == 70 || byte5 == 125)
           printf("9 pressed\n");
       }
-        }
+    }
   }
 }
 
 /* Prints "Hello World" and sleeps for three seconds */
 void task1(void *pdata)
 {
+  debug("Started: task1");
+
   while (1)
   {
-    debug("Started: task1");
-
     printf("%u: Hello from task1\n", OSTime);
-    OSTimeDlyHMSM(0, 0, 5, 0);
-    
+    OSTimeDlyHMSM(0, 0, 2, 0);
   }
 }
 /* Prints "Hello World" and sleeps for three seconds */
 void task2(void *pdata)
 {
+  debug("Started: task2");
+  
   while (1)
   {
-    debug("Started: task2");
     printf("%u: Hello from task2\n", OSTime);
-    OSTimeDlyHMSM(0, 0, 10, 0);
+    OSTimeDlyHMSM(0, 0, 3, 0);
   }
 }
 
