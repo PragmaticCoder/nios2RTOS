@@ -57,7 +57,7 @@ void task_read_KEY_press(void *pdata)
     *(KEY_ptr + 3) = press;
 
     if (press & 0x2)
-      printf("KEY 2 Pressed!");
+      printf("KEY 1 Pressed!");
   }
 }
 
@@ -79,14 +79,14 @@ void task_read_keyboard_input(void *pdata)
   while (1)
   {
 
-    // volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
-    // int press;
+    volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
+    int press;
 
-    // press = *(KEY_ptr + 3);
-    // *(KEY_ptr + 3) = press;
+    press = *(KEY_ptr + 3);
+    *(KEY_ptr + 3) = press;
 
-    // if (press & 0x2)
-    //   printf("KEY 2 Pressed!\n");
+    if (press & 0x2)
+      printf("KEY 2 Pressed!\n");
 
     PS2_data = *(PS2_ptr);                  // read the Data register in the PS/2 port
     RAVAIL = (PS2_data & 0xFFFF0000) >> 16; // extract the RAVAIL field
