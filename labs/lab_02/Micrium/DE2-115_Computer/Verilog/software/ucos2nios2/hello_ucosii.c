@@ -82,8 +82,6 @@ void Task_read_keypress(void *pdata)
       debug("KEY 3 Pressed!");
     }
 
-    debug("Reached Here!");
-
     OSSemPost(SEM_keypress);
     OSTimeDlyHMSM(0, 0, 0, 100);
   }
