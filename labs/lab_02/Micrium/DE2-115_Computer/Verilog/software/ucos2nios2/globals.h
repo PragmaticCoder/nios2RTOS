@@ -20,6 +20,7 @@
 
 /* Definition of Semaphores */
 OS_EVENT *SEM_keypress;
+OS_EVENT *SEM_read_keyboard;
 
 
 /* States */

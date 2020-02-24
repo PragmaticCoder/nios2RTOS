@@ -58,8 +58,7 @@ void Task_read_keypress(void *pdata)
 
   while (1)
   {
-    // OSSemPend(SEM_keypress, 0, &err);
-
+    OSSemPend(SEM_keypress, 0, &err);
     KEY_val = *(KEY_ptr)&0xF;
 
     if (KEY_val & KEY0)
@@ -83,7 +82,9 @@ void Task_read_keypress(void *pdata)
       debug("KEY 3 Pressed!");
     }
 
-    // OSSemPost(SEM_keypress);
+    debug("Reached Here!");
+
+    OSSemPost(SEM_keypress);
     OSTimeDlyHMSM(0, 0, 0, 100);
   }
 }
@@ -101,6 +102,8 @@ void task_read_keyboard_input(void *pdata)
 
   while (1)
   {
+
+    OSSemPend(SEM_read_keyboard, 0, &err);
 
     PS2_data = *(PS2_ptr);                  /* read the Data register in the PS/2 port */
     RAVAIL = (PS2_data & 0xFFFF0000) >> 16; /* extract the RAVAIL field */
@@ -160,6 +163,8 @@ void task_read_keyboard_input(void *pdata)
         }
       }
     }
+
+    OSSemPost(SEM_read_keyboard);
     OSTimeDlyHMSM(0, 0, 100, 0);
   }
 }
@@ -248,6 +253,7 @@ int main(void)
                   0);
 
   int SEM_keypress = OSSemCreate(1);
+  int SEM_read_keyboard = OSSemCreate(1);
 
   OSStart();
 
