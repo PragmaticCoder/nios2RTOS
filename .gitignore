@@ -49,14 +49,8 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-labs/lab_02_win/.metadata/.plugins/org.eclipse.core.resources/0.snap
-labs/lab_02_win/.metadata/.plugins/org.eclipse.core.resources/.projects/RemoteSystemsTempFiles/.markers.snap
-labs/lab_02_win/.metadata/.plugins/org.eclipse.core.resources/.projects/RemoteSystemsTempFiles/.syncinfo.snap
-labs/lab_02_win/.metadata/.plugins/org.eclipse.core.resources/.projects/ucos2nios2/.markers.snap
-labs/lab_02_win/.metadata/.plugins/org.eclipse.core.resources/.projects/ucos2nios2/.syncinfo.snap
-labs/lab_02_win/.metadata/.plugins/org.eclipse.core.resources/.projects/ucos2nios2_bsp/.markers.snap
-labs/lab_02_win/.metadata/.plugins/org.eclipse.core.resources/.projects/ucos2nios2_bsp/.syncinfo.snap
-labs/lab_02_win/.metadata/.plugins/org.eclipse.core.resources/.root/.markers.snap
-labs/lab_02_win/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources
-labs/lab_02_win/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi
-labs/lab_02_win/.metadata/.plugins/org.eclipse.cdt.core/ucos2nios2.1582517731632.pdom
+
+# Project Artifacts
+labs/lab02_win/.metadata/
+*.snap
+*.log
