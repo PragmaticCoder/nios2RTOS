@@ -120,7 +120,6 @@ void Task_read_keyboard_input(void *pdata)
 
         if (byte5 == 69 || byte5 == 112)
         {
-
           debug("0 pressed");
         }
         else if (byte5 == 22 || byte5 == 105)
