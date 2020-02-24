@@ -26,43 +26,132 @@
 *     If this design is run on the ISS, terminal output will take several*
 *     minutes per iteration.                                             *
 **************************************************************************/
-
+#undef NDEBUG
 
 #include <stdio.h>
 #include "includes.h"
+#include "address_map_nios2.h"
+#include "debug.h"
 
 /* Definition of Task Stacks */
-#define   TASK_STACKSIZE       2048
-OS_STK    task1_stk[TASK_STACKSIZE];
-OS_STK    task2_stk[TASK_STACKSIZE];
+#define TASK_STACKSIZE 2048
+
+OS_STK task1_stk[TASK_STACKSIZE];
+OS_STK task2_stk[TASK_STACKSIZE];
+OS_STK task_read_keyboard_stk[TASK_STACKSIZE];
+OS_STK task_read_KEY_press_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
 
-#define TASK1_PRIORITY      1
-#define TASK2_PRIORITY      2
+#define TASK1_PRIORITY 1
+#define TASK2_PRIORITY 2
+
+#define TASK_READ_KEYPRESS_PRIORITY 3
+#define TASK_READ_KEYBOARD_PRIORITY 4
+
+void task_read_KEY_press(void *pdata)
+{
+  debug("Started: task_read_KEY_press");
+  volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
+  int press;
+
+  while (1)
+  {
+    press = *(KEY_ptr + 3);
+    *(KEY_ptr + 3) = press;
+
+    if (press & 0x2)
+      debug("KEY 1 Pressed!");
+  }
+}
+
+void task_read_keyboard_input(void *pdata)
+{
+
+  debug("Started: task_read_keyboard_input");
+
+  volatile int *PS2_ptr = (int *)PS2_BASE;
+  char byte1, byte2, byte3, byte4, byte5;
+  int PS2_data, RAVAIL;
+
+  byte1 = 0;
+  byte2 = 0;
+  byte3 = 0;
+  byte4 = 0;
+  byte5 = 0;
+
+  *(PS2_ptr) = 0xFF; // reset PS/2
+  int flag = 0;
+
+  while (1)
+  {
+
+    PS2_data = *(PS2_ptr);                  // read the Data register in the PS/2 port
+    RAVAIL = (PS2_data & 0xFFFF0000) >> 16; // extract the RAVAIL field
+
+    if (RAVAIL > 0)
+    {
+      byte5 = PS2_data & 0xFF;
+
+      /* TODO: Refactor this code */
+      if (byte5 == -16)
+        flag = 1;
+
+      if (flag == 1)
+      {
+        flag = 0;
+
+        if (byte5 == 69 || byte5 == 112)
+          printf("0 pressed\n");
+        else if (byte5 == 22 || byte5 == 105)
+          printf("1 pressed\n");
+        else if (byte5 == 30 || byte5 == 114)
+          printf("2 pressed\n");
+        else if (byte5 == 38 || byte5 == 122)
+          printf("3 pressed\n");
+        else if (byte5 == 37 || byte5 == 107)
+          printf("4 pressed\n");
+        else if (byte5 == 46 || byte5 == 115)
+          printf("5 pressed\n");
+        else if (byte5 == 54 || byte5 == 116)
+          printf("6 pressed\n");
+        else if (byte5 == 61 || byte5 == 108)
+          printf("7 pressed\n");
+        else if (byte5 == 62 || byte5 == 117)
+          printf("8 pressed\n");
+        else if (byte5 == 70 || byte5 == 125)
+          printf("9 pressed\n");
+      }
+    }
+  }
+}
 
 /* Prints "Hello World" and sleeps for three seconds */
-void task1(void* pdata)
+void task1(void *pdata)
 {
+  debug("Started: task1");
+
   while (1)
-  { 
-    printf("Hello from task1\n");
-    OSTimeDlyHMSM(0, 0, 3, 0);
+  {
+    printf("%u: Hello from task1\n", OSTime);
+    OSTimeDlyHMSM(0, 0, 2, 0);
   }
 }
 /* Prints "Hello World" and sleeps for three seconds */
-void task2(void* pdata)
+void task2(void *pdata)
 {
+  debug("Started: task2");
+
   while (1)
-  { 
-    printf("Hello from task2\n");
+  {
+    printf("%u: Hello from task2\n", OSTime);
     OSTimeDlyHMSM(0, 0, 3, 0);
   }
 }
+
 /* The main function creates two task and starts multi-tasking */
 int main(void)
 {
-
   printf("MicroC/OS-II Licensing Terms\n");
   printf("============================\n");
   printf("Micrium\'s uC/OS-II is a real-time operating system (RTOS) available in source code.\n");
@@ -75,29 +164,54 @@ int main(void)
   printf("Licensing information is available at:\n");
   printf("Phone: +1 954-217-2036\n");
   printf("Email: sales@micrium.com\n");
-  printf("URL: www.micrium.com\n\n\n");  
+  printf("URL: www.micrium.com\n\n\n");
+
+  /* Setting up interrupts */
+  volatile int *slider_switch_ptr = (int *)SW_BASE;
+  volatile int *KEY_ptr = (int *)KEY_BASE; /* pushbutton KEY address */
 
   OSTaskCreateExt(task1,
                   NULL,
-                  (void *)&task1_stk[TASK_STACKSIZE-1],
+                  (void *)&task1_stk[TASK_STACKSIZE - 1],
                   TASK1_PRIORITY,
                   TASK1_PRIORITY,
                   task1_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);
-              
-               
+
   OSTaskCreateExt(task2,
                   NULL,
-                  (void *)&task2_stk[TASK_STACKSIZE-1],
+                  (void *)&task2_stk[TASK_STACKSIZE - 1],
                   TASK2_PRIORITY,
                   TASK2_PRIORITY,
                   task2_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);
+
+  OSTaskCreateExt(task_read_keyboard_input,
+                  NULL,
+                  (void *)&task_read_keyboard_stk[TASK_STACKSIZE - 1],
+                  TASK_READ_KEYBOARD_PRIORITY,
+                  TASK_READ_KEYBOARD_PRIORITY,
+                  task_read_keyboard_stk,
+                  TASK_STACKSIZE,
+                  NULL,
+                  0);
+
+  OSTaskCreateExt(task_read_KEY_press,
+                  NULL,
+                  (void *)&task_read_KEY_press_stk[TASK_STACKSIZE - 1],
+                  TASK_READ_KEYPRESS_PRIORITY,
+                  TASK_READ_KEYPRESS_PRIORITY,
+                  task_read_KEY_press_stk,
+                  TASK_STACKSIZE,
+                  NULL,
+                  0);
+
   OSStart();
+
   return 0;
 }
 
