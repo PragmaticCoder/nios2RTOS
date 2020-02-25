@@ -100,7 +100,7 @@ void Task_read_PS2(void *pdata)
   while (1)
   {
 
-    OSSemPend(SEM_read_keyboard, 0, &err);
+    OSSemPend(SEM_read_PS2, 0, &err);
 
     PS2_data = *(PS2_ptr);                  /* read the Data register in the PS/2 port */
     RAVAIL = (PS2_data & 0xFFFF0000) >> 16; /* extract the RAVAIL field */
@@ -160,7 +160,7 @@ void Task_read_PS2(void *pdata)
       }
     }
 
-    OSSemPost(SEM_read_keyboard);
+    OSSemPost(SEM_read_PS2);
     OSTimeDlyHMSM(0, 0, 100, 0);
   }
 }
@@ -218,7 +218,9 @@ int main(void)
 
   /* Initialization Code */
   state = INIT;
-  SEM_read_keyboard = OSSemCreate(1);
+  
+  SEM_read_PS2 = OSSemCreate(1);
+  SEM_read_KEYS = OSSemCreate(1);
 
   /* Task creation */
   OSTaskCreateExt(Task_read_KEYs,

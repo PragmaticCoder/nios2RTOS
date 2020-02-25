@@ -19,7 +19,8 @@
 #define PS2_ptr (((volatile unsigned long *)PS2_BASE))
 
 /* Definition of Semaphores */
-OS_EVENT *SEM_read_keyboard;
+OS_EVENT *SEM_read_PS2;
+OS_EVENT *SEM_read_KEYS;
 
 /* States */
 typedef enum
