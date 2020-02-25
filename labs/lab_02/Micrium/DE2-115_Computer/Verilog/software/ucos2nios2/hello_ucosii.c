@@ -40,7 +40,6 @@
 OS_STK task1_stk[TASK_STACKSIZE];
 OS_STK task2_stk[TASK_STACKSIZE];
 OS_STK task_read_keyboard_stk[TASK_STACKSIZE];
-OS_STK task_read_KEY_press_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
 
@@ -50,43 +49,46 @@ OS_STK task_read_KEY_press_stk[TASK_STACKSIZE];
 #define TASK_READ_KEYPRESS_PRIORITY 3
 #define TASK_READ_KEYBOARD_PRIORITY 4
 
-/* Tasks Implementation */
+/* function prototypes */
+void check_KEYs(int *, int *, int *, int *);
+void Task_read_keyboard_input(void *);
 
-void Task_read_keypress(void *pdata)
+/* Helper functions */
+void check_KEYs(int *KEY0_ptr, int *KEY1_ptr, int *KEY2_ptr, int *KEY3_ptr)
 {
-  debug("Started: Task_read_keypress");
+  OSSemPend(SEM_keypress, 0, &err);
 
-  while (1)
+  int KEY_value;
+  KEY_value = *(KEY_ptr);
+
+  if (KEY_value == KEY0)
   {
-    OSSemPend(SEM_keypress, 0, &err);
-    KEY_val = *(KEY_ptr)&0xF;
-
-    if (KEY_val & KEY0)
-    {
-      KEY0_flag = 1;
-      debug("KEY 0 Pressed!");
-    }
-    else if (KEY_val & KEY1)
-    {
-      KEY1_flag = 1;
-      debug("KEY 1 Pressed!");
-    }
-    else if (KEY_val & KEY2)
-    {
-      KEY2_flag = 1;
-      debug("KEY 2 Pressed!");
-    }
-    else if (KEY_val & KEY3)
-    {
-      KEY3_flag = 1;
-      debug("KEY 3 Pressed!");
-    }
-
-    OSSemPost(SEM_keypress);
-    OSTimeDlyHMSM(0, 0, 0, 100);
+    debug("KEY0 Pressed!"); // check KEY0
+    *KEY0_ptr = 1;
   }
+  else if (KEY_value == KEY1) // check KEY1
+  {
+    debug("KEY1 Pressed!");
+    *KEY1_ptr = 1;
+  }
+  else if (KEY_value == KEY2) // check KEY2
+  {
+    debug("KEY2 Pressed!");
+    *KEY2_ptr = 1;
+  }
+  else if (KEY_value == KEY3) // check KEY3
+  {
+    debug("KEY3 Pressed!");
+    *KEY3_ptr = 1;
+  }
+
+  if (KEY_value)
+    debug("KEY_value: %d", KEY_value);
+
+  OSSemPost(SEM_keypress);
 }
 
+/* Tasks Implementation */
 void Task_read_keyboard_input(void *pdata)
 {
 
@@ -174,6 +176,15 @@ void task1(void *pdata)
   while (1)
   {
     printf("%u: Hello from task1\n", OSTime);
+    check_KEYs(0, &KEY1_flag, 0, 0);
+
+    /* Example of KEY1_flag usage */
+    if (KEY1_flag)
+    {
+      debug("KEY1_flag: %d", KEY1_flag);
+      KEY1_flag = 0;
+    }
+
     OSTimeDlyHMSM(0, 0, 2, 0);
   }
 }
@@ -235,16 +246,6 @@ int main(void)
                   TASK_READ_KEYBOARD_PRIORITY,
                   TASK_READ_KEYBOARD_PRIORITY,
                   task_read_keyboard_stk,
-                  TASK_STACKSIZE,
-                  NULL,
-                  0);
-
-  OSTaskCreateExt(Task_read_keypress,
-                  NULL,
-                  (void *)&task_read_KEY_press_stk[TASK_STACKSIZE - 1],
-                  TASK_READ_KEYPRESS_PRIORITY,
-                  TASK_READ_KEYPRESS_PRIORITY,
-                  task_read_KEY_press_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);

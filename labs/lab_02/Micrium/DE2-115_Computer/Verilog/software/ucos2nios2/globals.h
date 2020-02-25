@@ -10,10 +10,10 @@
 #define TRUE  (1==1)
 #define FALSE (!TRUE)
 
-#define KEY0 0x01
-#define KEY1 0x02
-#define KEY2 0x04
-#define KEY3 0x08
+#define KEY0 0x1
+#define KEY1 0x2
+#define KEY2 0x4
+#define KEY3 0x8
 
 #define KEY_ptr (((volatile unsigned long *)KEY_BASE))
 #define PS2_ptr (((volatile unsigned long *)PS2_BASE))
@@ -21,7 +21,6 @@
 /* Definition of Semaphores */
 OS_EVENT *SEM_keypress;
 OS_EVENT *SEM_read_keyboard;
-
 
 /* States */
 typedef enum
