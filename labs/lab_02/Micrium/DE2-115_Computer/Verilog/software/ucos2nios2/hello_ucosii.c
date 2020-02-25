@@ -37,16 +37,14 @@
 /* Definition of Task Stacks */
 #define TASK_STACKSIZE 2048
 
-OS_STK task1_stk[TASK_STACKSIZE];
+OS_STK task_read_keys_stk[TASK_STACKSIZE];
 OS_STK task2_stk[TASK_STACKSIZE];
 OS_STK task_read_ps2_stk[TASK_STACKSIZE];
-OS_STK task_keypress_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
 
-#define TASK1_PRIORITY 1
+#define TASK_READ_KEYS_PRIORITY 1
 #define TASK2_PRIORITY 2
-#define TASK_READ_KEYPRESS_PRIORITY 3
 #define TASK_READ_PS2_PRIORITY 4
 
 /* Global Variables */
@@ -168,13 +166,13 @@ void Task_read_PS2(void *pdata)
 }
 
 /* Prints "Hello World" and sleeps for three seconds */
-void task1(void *pdata)
+void Task_read_KEYs(void *pdata)
 {
-  debug("Started: task1");
+  debug("Started: Task_read_KEYs");
 
   while (1)
   {
-    printf("%u: Hello from task1\n", OSTime);
+    printf("%u: Hello from Task_read_KEYs\n", OSTime);
     Check_KEYs(0, &KEY1_flag, 0, 0);
 
     /* Example of KEY1_flag usage */
@@ -184,7 +182,7 @@ void task1(void *pdata)
       KEY1_flag = 0;
     }
 
-    OSTimeDlyHMSM(0, 0, 2, 0);
+    OSTimeDlyHMSM(0, 0, 0, 100);
   }
 }
 /* Prints "Hello World" and sleeps for three seconds */
@@ -223,12 +221,12 @@ int main(void)
   SEM_read_keyboard = OSSemCreate(1);
 
   /* Task creation */
-  OSTaskCreateExt(task1,
+  OSTaskCreateExt(Task_read_KEYs,
                   NULL,
-                  (void *)&task1_stk[TASK_STACKSIZE - 1],
-                  TASK1_PRIORITY,
-                  TASK1_PRIORITY,
-                  task1_stk,
+                  (void *)&task_read_keys_stk[TASK_STACKSIZE - 1],
+                  TASK_READ_KEYS_PRIORITY,
+                  TASK_READ_KEYS_PRIORITY,
+                  task_read_keys_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);
