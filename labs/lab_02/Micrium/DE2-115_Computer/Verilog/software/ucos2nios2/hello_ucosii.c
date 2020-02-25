@@ -40,6 +40,7 @@
 OS_STK task1_stk[TASK_STACKSIZE];
 OS_STK task2_stk[TASK_STACKSIZE];
 OS_STK task_read_keyboard_stk[TASK_STACKSIZE];
+OS_STK task_keypress_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
 
@@ -58,7 +59,7 @@ void check_KEYs(int *KEY0_ptr, int *KEY1_ptr, int *KEY2_ptr, int *KEY3_ptr)
 {
 
   KEY_val = *(KEY_ptr);
-  
+
   if (KEY_val == KEY0)
   {
     debug("KEY0 Pressed!"); // check KEY0

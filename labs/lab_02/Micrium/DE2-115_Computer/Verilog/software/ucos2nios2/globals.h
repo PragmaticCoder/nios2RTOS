@@ -7,7 +7,7 @@
 #ifndef _globals_h_
 #define _globals_h_
 
-#define TRUE  (1==1)
+#define TRUE (1 == 1)
 #define FALSE (!TRUE)
 
 #define KEY0 0x1
@@ -25,11 +25,18 @@ OS_EVENT *SEM_read_keyboard;
 /* States */
 typedef enum
 {
-  LOCKED,
-  UNLOCKED
-} LockState;
+  INIT,
+  OPEN,
+  CLOSE,
+  LOCK,
+  CODE,
+  PROG,
+  VERIFIED,
+  ADD_CODE,
+  DELETE_CODE
+} DoorState;
 
-extern LockState lock_state;
+extern DoorState state;
 
 /* Global Variables */
 INT8U err;
