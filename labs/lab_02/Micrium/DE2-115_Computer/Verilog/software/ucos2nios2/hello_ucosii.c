@@ -172,7 +172,7 @@ void Task_read_KEYs(void *pdata)
 
   while (1)
   {
-    printf("%u: Hello from Task_read_KEYs\n", OSTime);
+    log_info("%u: Hello from Task_read_KEYs", OSTime);
     Check_KEYs(0, &KEY1_flag, 0, 0);
 
     /* Example of KEY1_flag usage */
@@ -192,8 +192,8 @@ void task2(void *pdata)
 
   while (1)
   {
-    printf("%u: Hello from task2\n", OSTime);
-    OSTimeDlyHMSM(0, 0, 3, 0);
+    log_info("%u: Hello from task2", OSTime);
+    OSTimeDlyHMSM(0, 0, 2, 0);
   }
 }
 
