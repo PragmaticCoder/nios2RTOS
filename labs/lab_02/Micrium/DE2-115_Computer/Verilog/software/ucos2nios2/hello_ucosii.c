@@ -39,20 +39,22 @@
 
 OS_STK task1_stk[TASK_STACKSIZE];
 OS_STK task2_stk[TASK_STACKSIZE];
-OS_STK task_read_keyboard_stk[TASK_STACKSIZE];
+OS_STK task_read_ps2_stk[TASK_STACKSIZE];
 OS_STK task_keypress_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
 
 #define TASK1_PRIORITY 1
 #define TASK2_PRIORITY 2
-
 #define TASK_READ_KEYPRESS_PRIORITY 3
-#define TASK_READ_KEYBOARD_PRIORITY 4
+#define TASK_READ_PS2_PRIORITY 4
+
+/* Global Variables */
+DoorState state;
 
 /* function prototypes */
 void Check_KEYs(int *, int *, int *, int *);
-void Task_read_keyboard_input(void *);
+void Task_read_PS2(void *);
 
 /* Helper functions */
 void Check_KEYs(int *KEY0_ptr, int *KEY1_ptr, int *KEY2_ptr, int *KEY3_ptr)
@@ -86,10 +88,10 @@ void Check_KEYs(int *KEY0_ptr, int *KEY1_ptr, int *KEY2_ptr, int *KEY3_ptr)
 }
 
 /* Tasks Implementation */
-void Task_read_keyboard_input(void *pdata)
+void Task_read_PS2(void *pdata)
 {
 
-  debug("Started: Task_read_keyboard_input");
+  debug("Started: Task_read_PS2");
 
   char byte5;
   int PS2_data, RAVAIL;
@@ -216,6 +218,10 @@ int main(void)
 
   KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
 
+  /* Initialization Code */
+  state = INIT;
+  SEM_read_keyboard = OSSemCreate(1);
+
   /* Task creation */
   OSTaskCreateExt(task1,
                   NULL,
@@ -237,17 +243,15 @@ int main(void)
                   NULL,
                   0);
 
-  OSTaskCreateExt(Task_read_keyboard_input,
+  OSTaskCreateExt(Task_read_PS2,
                   NULL,
-                  (void *)&task_read_keyboard_stk[TASK_STACKSIZE - 1],
-                  TASK_READ_KEYBOARD_PRIORITY,
-                  TASK_READ_KEYBOARD_PRIORITY,
-                  task_read_keyboard_stk,
+                  (void *)&task_read_ps2_stk[TASK_STACKSIZE - 1],
+                  TASK_READ_PS2_PRIORITY,
+                  TASK_READ_PS2_PRIORITY,
+                  task_read_ps2_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);
-
-  int SEM_read_keyboard = OSSemCreate(1);
 
   OSStart();
 

@@ -35,7 +35,6 @@ typedef enum
   DELETE_CODE
 } DoorState;
 
-extern DoorState state;
 
 /* Global Variables */
 INT8U err;
