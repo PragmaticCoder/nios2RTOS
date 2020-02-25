@@ -56,36 +56,32 @@ void Task_read_keyboard_input(void *);
 /* Helper functions */
 void check_KEYs(int *KEY0_ptr, int *KEY1_ptr, int *KEY2_ptr, int *KEY3_ptr)
 {
-  OSSemPend(SEM_keypress, 0, &err);
 
-  int KEY_value;
-  KEY_value = *(KEY_ptr);
-
-  if (KEY_value == KEY0)
+  KEY_val = *(KEY_ptr);
+  
+  if (KEY_val == KEY0)
   {
     debug("KEY0 Pressed!"); // check KEY0
     *KEY0_ptr = 1;
   }
-  else if (KEY_value == KEY1) // check KEY1
+  else if (KEY_val == KEY1) // check KEY1
   {
     debug("KEY1 Pressed!");
     *KEY1_ptr = 1;
   }
-  else if (KEY_value == KEY2) // check KEY2
+  else if (KEY_val == KEY2) // check KEY2
   {
     debug("KEY2 Pressed!");
     *KEY2_ptr = 1;
   }
-  else if (KEY_value == KEY3) // check KEY3
+  else if (KEY_val == KEY3) // check KEY3
   {
     debug("KEY3 Pressed!");
     *KEY3_ptr = 1;
   }
 
-  if (KEY_value)
-    debug("KEY_value: %d", KEY_value);
-
-  OSSemPost(SEM_keypress);
+  if (KEY_val)
+    debug("KEY_value: %d", KEY_val);
 }
 
 /* Tasks Implementation */
