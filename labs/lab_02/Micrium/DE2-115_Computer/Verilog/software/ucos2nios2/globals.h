@@ -19,7 +19,6 @@
 #define PS2_ptr (((volatile unsigned long *)PS2_BASE))
 
 /* Definition of Semaphores */
-OS_EVENT *SEM_keypress;
 OS_EVENT *SEM_read_keyboard;
 
 /* States */

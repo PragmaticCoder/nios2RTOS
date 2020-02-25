@@ -51,11 +51,11 @@ OS_STK task_keypress_stk[TASK_STACKSIZE];
 #define TASK_READ_KEYBOARD_PRIORITY 4
 
 /* function prototypes */
-void check_KEYs(int *, int *, int *, int *);
+void Check_KEYs(int *, int *, int *, int *);
 void Task_read_keyboard_input(void *);
 
 /* Helper functions */
-void check_KEYs(int *KEY0_ptr, int *KEY1_ptr, int *KEY2_ptr, int *KEY3_ptr)
+void Check_KEYs(int *KEY0_ptr, int *KEY1_ptr, int *KEY2_ptr, int *KEY3_ptr)
 {
 
   KEY_val = *(KEY_ptr);
@@ -173,7 +173,7 @@ void task1(void *pdata)
   while (1)
   {
     printf("%u: Hello from task1\n", OSTime);
-    check_KEYs(0, &KEY1_flag, 0, 0);
+    Check_KEYs(0, &KEY1_flag, 0, 0);
 
     /* Example of KEY1_flag usage */
     if (KEY1_flag)
@@ -247,7 +247,6 @@ int main(void)
                   NULL,
                   0);
 
-  int SEM_keypress = OSSemCreate(1);
   int SEM_read_keyboard = OSSemCreate(1);
 
   OSStart();
