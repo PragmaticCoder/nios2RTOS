@@ -220,6 +220,7 @@ void Task_read_KEYs(void *pdata)
     if ((state == INIT && SW0_VALUE == 1) || 
     (state == ADD_CODE && KEY1_flag) ||
     ((state == VERIFIED) && (state_timer < 10) && (SW0_VALUE == 1))
+    // TODO: Need to add transition logic from PROG State
     )
     {
       OSSemPend(SEM_state_change, 0, &err);
