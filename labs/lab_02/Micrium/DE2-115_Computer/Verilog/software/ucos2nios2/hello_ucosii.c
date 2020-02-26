@@ -151,9 +151,14 @@ void Task_read_KEYs(void *pdata)
   while (1)
   {
     OSSemPend(SEM_read_KEYS, 0, &err);
+
     /* Signalling Semaphores used for Activity Control */
     if (state == PROG || state == LOCK || state == CODE)
       OSSemPost(SEM_read_PS2);
+
+    if (state == PROG || state == VERIFIED || state == CLOSE)
+      OSSemPost(SEM_timer_start);
+
     /**************************************************/
 
     if (KEY1_flag)
@@ -205,8 +210,8 @@ void Task_state_timer(void *pdata)
   debug("Started: Task_state_timer");
   while (1)
   {
-    log_info("%u: State: %s\t State Time: %ds", OSTime, Get_state_name(state), state_timer);
-
+    log_info("%u: \tState: %s\t State Time: %ds", OSTime, Get_state_name(state), state_timer);
+    
     if (prev_state != state)
     {
       OSSemPend(SEM_state_change, 0, &err);
@@ -250,6 +255,7 @@ int main(void)
 
   /* Semaphore for activity/sequence control */
   SEM_read_PS2 = OSSemCreate(0); /* Blocking initially */
+  SEM_timer_start = OSSemCreate(0); /* Blocking initially */
 
   SEM_read_KEYS = OSSemCreate(1);
   SEM_state_change = OSSemCreate(1);
