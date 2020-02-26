@@ -216,10 +216,6 @@ void Task_read_KEYs(void *pdata)
     //   debug("KEY1_flag: %d", KEY1_flag);
     //   KEY1_flag = 0;
     // }
-    // if (KEY1_flag)
-    // {
-    // debug();
-    // }
 
     OSSemPost(SEM_read_KEYS);
 
@@ -233,7 +229,7 @@ void Task_state_timer(void *pdata)
 
   while (1)
   {
-    log_info("%u: State: %s\t State Time: %d s", OSTime, Get_state_name(state), state_timer);
+    log_info("%u: State: %s\t State Time: %ds", OSTime, Get_state_name(state), state_timer);
 
     if (prev_state != state)
     {
@@ -246,7 +242,19 @@ void Task_state_timer(void *pdata)
 
     state_timer++;
 
-    // if(state == INIT && )
+    if (state == INIT && SW0_VALUE == 1)
+    {
+      OSSemPend(SEM_state_change, 0, &err);
+      state = OPEN;
+      OSSemPost(SEM_state_change);
+    }
+
+    if (state == INIT && SW0_VALUE == 0)
+    {
+      OSSemPend(SEM_state_change, 0, &err);
+      state = CLOSE;
+      OSSemPost(SEM_state_change);
+    }
 
     OSTimeDlyHMSM(0, 0, 1, 0);
   }

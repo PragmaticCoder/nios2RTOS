@@ -16,7 +16,10 @@
 #define KEY3 0x8
 
 #define KEY_ptr (((volatile unsigned long *)KEY_BASE))
+#define SW_ptr (((volatile unsigned long *)SW_BASE))
 #define PS2_ptr (((volatile unsigned long *)PS2_BASE))
+
+#define SW0_VALUE (*(SW_ptr)&0x1)
 
 /* Definition of Semaphores */
 OS_EVENT *SEM_read_PS2;
@@ -36,7 +39,6 @@ typedef enum
   ADD_CODE,
   DELETE_CODE
 } DoorState;
-
 
 /* Global Variables */
 INT8U err;
