@@ -211,11 +211,11 @@ void Task_read_KEYs(void *pdata)
     Check_KEYs(0, &KEY1_flag, 0, 0);
 
     /* Example of KEY1_flag usage */
-    // if (KEY1_flag)
-    // {
-    //   debug("KEY1_flag: %d", KEY1_flag);
-    //   KEY1_flag = 0;
-    // }
+    if (KEY1_flag)
+    {
+      debug("KEY1_flag: %d", KEY1_flag);
+      KEY1_flag = 0;
+    }
 
     OSSemPost(SEM_read_KEYS);
 
@@ -246,6 +246,7 @@ void Task_state_timer(void *pdata)
     {
       OSSemPend(SEM_state_change, 0, &err);
       state = OPEN;
+      state_timer = 0;
       OSSemPost(SEM_state_change);
     }
 
@@ -253,6 +254,7 @@ void Task_state_timer(void *pdata)
     {
       OSSemPend(SEM_state_change, 0, &err);
       state = CLOSE;
+      state_timer = 0;
       OSSemPost(SEM_state_change);
     }
 
