@@ -47,5 +47,6 @@ unsigned KEY_val;
 
 int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 int state_timer;
+int valid_input;
 
 #endif

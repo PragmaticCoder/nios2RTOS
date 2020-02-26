@@ -207,18 +207,34 @@ void Task_read_KEYs(void *pdata)
   while (1)
   {
     OSSemPend(SEM_read_KEYS, 0, &err);
-    // log_info("%u: Hello from Task_read_KEYs", OSTime);
+
+    if (KEY1_flag)
+      KEY1_flag = 0;
+
     Check_KEYs(0, &KEY1_flag, 0, 0);
 
-    /* Example of KEY1_flag usage */
     if (KEY1_flag)
-    {
       debug("KEY1_flag: %d", KEY1_flag);
-      KEY1_flag = 0;
+
+    /* Logic for getting to Open State */
+    if ((state == INIT && SW0_VALUE == 1) || (state == ADD_CODE && KEY1_flag))
+    {
+      OSSemPend(SEM_state_change, 0, &err);
+      state = OPEN;
+      state_timer = 0;
+      OSSemPost(SEM_state_change);
+    }
+
+    /* Logic for moving to Close State */
+    if (state == INIT && SW0_VALUE == 0)
+    {
+      OSSemPend(SEM_state_change, 0, &err);
+      state = CLOSE;
+      state_timer = 0;
+      OSSemPost(SEM_state_change);
     }
 
     OSSemPost(SEM_read_KEYS);
-
     OSTimeDlyHMSM(0, 0, 0, 100);
   }
 }
@@ -233,7 +249,6 @@ void Task_state_timer(void *pdata)
 
     if (prev_state != state)
     {
-
       OSSemPend(SEM_state_change, 0, &err);
       prev_state = state;
       state_timer = 0;
@@ -241,22 +256,6 @@ void Task_state_timer(void *pdata)
     }
 
     state_timer++;
-
-    if (state == INIT && SW0_VALUE == 1)
-    {
-      OSSemPend(SEM_state_change, 0, &err);
-      state = OPEN;
-      state_timer = 0;
-      OSSemPost(SEM_state_change);
-    }
-
-    if (state == INIT && SW0_VALUE == 0)
-    {
-      OSSemPend(SEM_state_change, 0, &err);
-      state = CLOSE;
-      state_timer = 0;
-      OSSemPost(SEM_state_change);
-    }
 
     OSTimeDlyHMSM(0, 0, 1, 0);
   }
@@ -282,7 +281,12 @@ int main(void)
   KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
 
   /* Initialization Code */
-  state = INIT;
+  // state = INIT;
+
+  // TODO: Uncomment this code in Production
+  /* For Debugging Purpose */
+  state = ADD_CODE;
+  /************************/
   state_timer = 0;
 
   SEM_read_PS2 = OSSemCreate(1);
