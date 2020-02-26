@@ -7,6 +7,11 @@
 #ifndef _globals_h_
 #define _globals_h_
 
+#include <stdio.h>
+#include "includes.h"
+#include "debug.h"
+#include "address_map_nios2.h"
+
 #define TRUE (1 == 1)
 #define FALSE (!TRUE)
 
@@ -42,11 +47,13 @@ typedef enum
 
 /* Global Variables */
 INT8U err;
+extern unsigned KEY_val;
+extern int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 
-unsigned KEY_val;
+extern int state_timer;
+extern int valid_input;
 
-int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
-int state_timer;
-int valid_input;
+extern DoorState state;
+extern DoorState prev_state;
 
 #endif

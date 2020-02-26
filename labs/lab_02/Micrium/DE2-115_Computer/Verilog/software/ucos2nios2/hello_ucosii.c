@@ -32,7 +32,6 @@
 #include "includes.h"
 #include "address_map_nios2.h"
 #include "globals.h"
-#include "debug.h"
 
 /* Definition of Task Stacks */
 #define TASK_STACKSIZE 2048
@@ -48,71 +47,19 @@ OS_STK task_read_ps2_stk[TASK_STACKSIZE];
 #define TASK_READ_PS2_PRIORITY 4
 
 /* Global Variables */
+unsigned KEY_val;
+int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
+
+int state_timer;
+int valid_input;
+
 DoorState state;
 DoorState prev_state;
 
 /* function prototypes */
-void Check_KEYs(int *, int *, int *, int *);
 void Task_read_PS2(void *);
-
-/* Helper functions */
-
-const char *Get_state_name(DoorState door_state)
-{
-  switch (door_state)
-  {
-  case INIT:
-    return "INIT";
-  case OPEN:
-    return "OPEN";
-  case CLOSE:
-    return "CLOSE";
-  case LOCK:
-    return "LOCK";
-  case CODE:
-    return "CODE";
-  case PROG:
-    return "PROG";
-  case VERIFIED:
-    return "VERIFIED";
-  case ADD_CODE:
-    return "ADD_CODE";
-  case DELETE_CODE:
-    return "DELETE_CODE";
-  default:
-    return "INVALID";
-  }
-}
-
-void Check_KEYs(int *KEY0_ptr, int *KEY1_ptr, int *KEY2_ptr, int *KEY3_ptr)
-{
-
-  KEY_val = *(KEY_ptr);
-
-  if (KEY_val == KEY0)
-  {
-    debug("KEY0 Pressed!"); // check KEY0
-    *KEY0_ptr = 1;
-  }
-  else if (KEY_val == KEY1) // check KEY1
-  {
-    debug("KEY1 Pressed!");
-    *KEY1_ptr = 1;
-  }
-  else if (KEY_val == KEY2) // check KEY2
-  {
-    debug("KEY2 Pressed!");
-    *KEY2_ptr = 1;
-  }
-  else if (KEY_val == KEY3) // check KEY3
-  {
-    debug("KEY3 Pressed!");
-    *KEY3_ptr = 1;
-  }
-
-  if (KEY_val)
-    debug("KEY_value: %d", KEY_val);
-}
+void Task_read_KEYs(void *);
+void Task_state_timer(void *);
 
 /* Tasks Implementation */
 void Task_read_PS2(void *pdata)
@@ -199,7 +146,6 @@ void Task_read_PS2(void *pdata)
   }
 }
 
-/* Prints "Hello World" and sleeps for three seconds */
 void Task_read_KEYs(void *pdata)
 {
   debug("Started: Task_read_KEYs");
@@ -217,10 +163,10 @@ void Task_read_KEYs(void *pdata)
       debug("KEY1_flag: %d", KEY1_flag);
 
     /* Logic for getting to Open State */
-    if ((state == INIT && SW0_VALUE == 1) || 
-    (state == ADD_CODE && KEY1_flag) ||
-    ((state == VERIFIED) && (state_timer < 10) && (SW0_VALUE == 1))
-    // TODO: Need to add transition logic from PROG State
+    if ((state == INIT && SW0_VALUE == 1) ||
+        (state == ADD_CODE && KEY1_flag) ||
+        ((state == VERIFIED) && (state_timer < 10) && (SW0_VALUE == 1))
+        // TODO: Need to add transition logic from PROG State
     )
     {
       OSSemPend(SEM_state_change, 0, &err);
@@ -242,11 +188,9 @@ void Task_read_KEYs(void *pdata)
     OSTimeDlyHMSM(0, 0, 0, 100);
   }
 }
-/* Prints "Hello World" and sleeps for three seconds */
 void Task_state_timer(void *pdata)
 {
   debug("Started: Task_state_timer");
-
   while (1)
   {
     log_info("%u: State: %s\t State Time: %ds", OSTime, Get_state_name(state), state_timer);
