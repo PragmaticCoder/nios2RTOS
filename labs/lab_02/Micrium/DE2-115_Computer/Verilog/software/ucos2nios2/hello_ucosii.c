@@ -49,12 +49,41 @@ OS_STK task_read_ps2_stk[TASK_STACKSIZE];
 
 /* Global Variables */
 DoorState state;
+DoorState prev_state;
 
 /* function prototypes */
 void Check_KEYs(int *, int *, int *, int *);
 void Task_read_PS2(void *);
 
 /* Helper functions */
+
+const char *Get_state_name(DoorState door_state)
+{
+  switch (door_state)
+  {
+  case INIT:
+    return "INIT";
+  case OPEN:
+    return "OPEN";
+  case CLOSE:
+    return "CLOSE";
+  case LOCK:
+    return "LOCK";
+  case CODE:
+    return "CODE";
+  case PROG:
+    return "PROG";
+  case VERIFIED:
+    return "VERIFIED";
+  case ADD_CODE:
+    return "ADD_CODE";
+  case DELETE_CODE:
+    return "DELETE_CODE";
+  default:
+    return "INVALID";
+  }
+}
+
 void Check_KEYs(int *KEY0_ptr, int *KEY1_ptr, int *KEY2_ptr, int *KEY3_ptr)
 {
 
@@ -178,7 +207,7 @@ void Task_read_KEYs(void *pdata)
   while (1)
   {
     OSSemPend(SEM_read_KEYS, 0, &err);
-    log_info("%u: Hello from Task_read_KEYs", OSTime);
+    // log_info("%u: Hello from Task_read_KEYs", OSTime);
     Check_KEYs(0, &KEY1_flag, 0, 0);
 
     /* Example of KEY1_flag usage */
@@ -189,23 +218,32 @@ void Task_read_KEYs(void *pdata)
     // }
     // if (KEY1_flag)
     // {
-      // debug();
+    // debug();
     // }
 
     OSSemPost(SEM_read_KEYS);
 
-    OSTimeDlyHMSM(0, 0, 1, 0);
+    OSTimeDlyHMSM(0, 0, 0, 100);
   }
 }
 /* Prints "Hello World" and sleeps for three seconds */
-void task2(void *pdata)
+void Task_state_timer(void *pdata)
 {
-  debug("Started: task2");
+  debug("Started: Task_state_timer");
 
   while (1)
   {
-    log_info("%u: Hello from task2", OSTime);
-    OSTimeDlyHMSM(0, 0, 2, 0);
+    log_info("%u: State: %s\t State Time: %d s", OSTime, Get_state_name(state), state_timer);
+
+    if (prev_state != state)
+    {
+      prev_state = state;
+      state_timer = 0;
+    }
+
+    state_timer++;
+
+    OSTimeDlyHMSM(0, 0, 1, 0);
   }
 }
 
@@ -230,8 +268,9 @@ int main(void)
 
   /* Initialization Code */
   state = INIT;
+  state_timer = 0;
 
-  SEM_read_PS2 = OSSemCreate(1);
+  SEM_read_PS2 = OSSemCreate(0);
   SEM_read_KEYS = OSSemCreate(1);
 
   /* Task creation */
@@ -245,7 +284,7 @@ int main(void)
                   NULL,
                   0);
 
-  OSTaskCreateExt(task2,
+  OSTaskCreateExt(Task_state_timer,
                   NULL,
                   (void *)&task2_stk[TASK_STACKSIZE - 1],
                   TASK2_PRIORITY,
