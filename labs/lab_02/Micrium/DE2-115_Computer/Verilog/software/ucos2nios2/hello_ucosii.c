@@ -237,11 +237,16 @@ void Task_state_timer(void *pdata)
 
     if (prev_state != state)
     {
+
+      OSSemPend(SEM_state_change, 0, &err);
       prev_state = state;
       state_timer = 0;
+      OSSemPost(SEM_state_change);
     }
 
     state_timer++;
+
+    // if(state == INIT && )
 
     OSTimeDlyHMSM(0, 0, 1, 0);
   }
@@ -270,8 +275,9 @@ int main(void)
   state = INIT;
   state_timer = 0;
 
-  SEM_read_PS2 = OSSemCreate(0);
+  SEM_read_PS2 = OSSemCreate(1);
   SEM_read_KEYS = OSSemCreate(1);
+  SEM_state_change = OSSemCreate(1);
 
   /* Task creation */
   OSTaskCreateExt(Task_read_KEYs,

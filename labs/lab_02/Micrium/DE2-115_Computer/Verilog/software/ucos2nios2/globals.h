@@ -21,6 +21,7 @@
 /* Definition of Semaphores */
 OS_EVENT *SEM_read_PS2;
 OS_EVENT *SEM_read_KEYS;
+OS_EVENT *SEM_state_change;
 
 /* States */
 typedef enum
