@@ -117,45 +117,50 @@ void Task_read_PS2(void *pdata)
       {
         flag = 0;
 
-        if (byte5 == 69 || byte5 == 112)
+        switch (byte5)
         {
+        case 69:
+        case 112:
           debug("0 pressed");
-        }
-        else if (byte5 == 22 || byte5 == 105)
-        {
+          break;
+        case 22:
+        case 105:
           debug("1 pressed");
-        }
-        else if (byte5 == 30 || byte5 == 114)
-        {
+          break;
+        case 30:
+        case 114:
           debug("2 pressed");
-        }
-        else if (byte5 == 38 || byte5 == 122)
-        {
+          break;
+        case 38:
+        case 122:
           debug("3 pressed");
-        }
-        else if (byte5 == 37 || byte5 == 107)
-        {
+          break;
+        case 37:
+        case 107:
           debug("4 pressed");
-        }
-        else if (byte5 == 46 || byte5 == 115)
-        {
+          break;
+        case 46:
+        case 115:
           debug("5 pressed");
-        }
-        else if (byte5 == 54 || byte5 == 116)
-        {
+          break;
+        case 54:
+        case 116:
           debug("6 pressed");
-        }
-        else if (byte5 == 61 || byte5 == 108)
-        {
+          break;
+        case 61:
+        case 108:
           debug("7 pressed");
-        }
-        else if (byte5 == 62 || byte5 == 117)
-        {
+          break;
+        case 62:
+        case 117:
           debug("8 pressed");
-        }
-        else if (byte5 == 70 || byte5 == 125)
-        {
+          break;
+        case 70:
+        case 125:
           debug("9 pressed");
+          break;
+        default:
+          debug("Nothing Pressed");
         }
       }
     }
@@ -172,17 +177,24 @@ void Task_read_KEYs(void *pdata)
 
   while (1)
   {
+    OSSemPend(SEM_read_KEYS, 0, &err);
     log_info("%u: Hello from Task_read_KEYs", OSTime);
     Check_KEYs(0, &KEY1_flag, 0, 0);
 
     /* Example of KEY1_flag usage */
-    if (KEY1_flag)
-    {
-      debug("KEY1_flag: %d", KEY1_flag);
-      KEY1_flag = 0;
-    }
+    // if (KEY1_flag)
+    // {
+    //   debug("KEY1_flag: %d", KEY1_flag);
+    //   KEY1_flag = 0;
+    // }
+    // if (KEY1_flag)
+    // {
+      // debug();
+    // }
 
-    OSTimeDlyHMSM(0, 0, 0, 100);
+    OSSemPost(SEM_read_KEYS);
+
+    OSTimeDlyHMSM(0, 0, 1, 0);
   }
 }
 /* Prints "Hello World" and sleeps for three seconds */
@@ -218,7 +230,7 @@ int main(void)
 
   /* Initialization Code */
   state = INIT;
-  
+
   SEM_read_PS2 = OSSemCreate(1);
   SEM_read_KEYS = OSSemCreate(1);
 
