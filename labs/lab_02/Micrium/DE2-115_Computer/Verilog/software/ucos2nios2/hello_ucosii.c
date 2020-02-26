@@ -140,8 +140,6 @@ void Task_read_PS2(void *pdata)
         }
       }
     }
-
-    OSSemPost(SEM_read_PS2);
     OSTimeDlyHMSM(0, 0, 100, 0);
   }
 }
@@ -153,6 +151,10 @@ void Task_read_KEYs(void *pdata)
   while (1)
   {
     OSSemPend(SEM_read_KEYS, 0, &err);
+    /* Signalling Semaphores used for Activity Control */
+    if (state == PROG || state == LOCK || state == CODE)
+      OSSemPost(SEM_read_PS2);
+    /**************************************************/
 
     if (KEY1_flag)
       KEY1_flag = 0;
@@ -175,7 +177,7 @@ void Task_read_KEYs(void *pdata)
       OSSemPost(SEM_state_change);
     }
 
-    /* Logic for moving to Close State */
+    /* Logic for moving to CLOSE State */
     if (state == INIT && SW0_VALUE == 0)
     {
       OSSemPend(SEM_state_change, 0, &err);
@@ -184,10 +186,20 @@ void Task_read_KEYs(void *pdata)
       OSSemPost(SEM_state_change);
     }
 
+    /* Logics for Transitioning to PROG State */
+    if (state == OPEN && KEY1_flag)
+    {
+      OSSemPend(SEM_state_change, 0, &err);
+      state = PROG;
+      state_timer = 0;
+      OSSemPost(SEM_state_change);
+    }
+
     OSSemPost(SEM_read_KEYS);
-    OSTimeDlyHMSM(0, 0, 0, 100);
+    OSTimeDlyHMSM(0, 0, 0, 100); /* Delay */
   }
 }
+
 void Task_state_timer(void *pdata)
 {
   debug("Started: Task_state_timer");
@@ -204,7 +216,6 @@ void Task_state_timer(void *pdata)
     }
 
     state_timer++;
-
     OSTimeDlyHMSM(0, 0, 1, 0);
   }
 }
@@ -237,7 +248,9 @@ int main(void)
   /************************/
   state_timer = 0;
 
-  SEM_read_PS2 = OSSemCreate(1);
+  /* Semaphore for activity/sequence control */
+  SEM_read_PS2 = OSSemCreate(0); /* Blocking initially */
+
   SEM_read_KEYS = OSSemCreate(1);
   SEM_state_change = OSSemCreate(1);
 
