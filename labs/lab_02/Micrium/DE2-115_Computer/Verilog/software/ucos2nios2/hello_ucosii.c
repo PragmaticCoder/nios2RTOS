@@ -217,7 +217,10 @@ void Task_read_KEYs(void *pdata)
       debug("KEY1_flag: %d", KEY1_flag);
 
     /* Logic for getting to Open State */
-    if ((state == INIT && SW0_VALUE == 1) || (state == ADD_CODE && KEY1_flag))
+    if ((state == INIT && SW0_VALUE == 1) || 
+    (state == ADD_CODE && KEY1_flag) ||
+    ((state == VERIFIED) && (state_timer < 10) && (SW0_VALUE == 1))
+    )
     {
       OSSemPend(SEM_state_change, 0, &err);
       state = OPEN;
@@ -285,7 +288,7 @@ int main(void)
 
   // TODO: Uncomment this code in Production
   /* For Debugging Purpose */
-  state = ADD_CODE;
+  state = OPEN;
   /************************/
   state_timer = 0;
 
