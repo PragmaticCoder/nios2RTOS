@@ -138,6 +138,7 @@ void Task_read_PS2(void *pdata)
         default:
           debug("Nothing Pressed");
         }
+        
       }
     }
     OSTimeDlyHMSM(0, 0, 100, 0);
@@ -152,13 +153,15 @@ void Task_read_KEYs(void *pdata)
   {
     OSSemPend(SEM_read_KEYS, 0, &err);
 
+    /***************************************************/
     /* Signalling Semaphores used for Activity Control */
+    /***************************************************/
     if (state == PROG || state == LOCK || state == CODE)
       OSSemPost(SEM_read_PS2);
 
     if (state == PROG || state == VERIFIED || state == CLOSE)
       OSSemPost(SEM_timer_start);
-
+    /**************************************************/
     /**************************************************/
 
     if (KEY1_flag)
@@ -211,7 +214,7 @@ void Task_state_timer(void *pdata)
   while (1)
   {
     log_info("%u: \tState: %s\t State Time: %ds", OSTime, Get_state_name(state), state_timer);
-    
+
     if (prev_state != state)
     {
       OSSemPend(SEM_state_change, 0, &err);
