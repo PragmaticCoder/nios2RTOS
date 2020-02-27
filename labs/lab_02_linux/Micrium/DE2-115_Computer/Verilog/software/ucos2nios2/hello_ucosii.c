@@ -247,7 +247,7 @@ void Task_read_KEYs(void *pdata)
     }
 
     /* Logics for Transitioning to LOCK State */
-    if (state == CLOSE && state_timer >= 5 && KEY1_flag)
+    if (state == CLOSE && state_timer >= 5)
     {
       OSSemPend(SEM_state_change, 0, &err);
       state = LOCK;
@@ -313,12 +313,12 @@ void Task_read_KEYs(void *pdata)
     }
 
     /* Logics for Transitioning to PROG State */
-    if (state == OPEN)
+    if (state == LOCK)
     {
       *(LEDG_ptr) |= 0x01;
       *(LEDR_ptr) &= ~0x01;
     }
-    else if (state == CLOSE)
+    else if (state == OPEN)
     {
       *(LEDG_ptr) &= ~0x01;
       *(LEDR_ptr) |= 0x01;
