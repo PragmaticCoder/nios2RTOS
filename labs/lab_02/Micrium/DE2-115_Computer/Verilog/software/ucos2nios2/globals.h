@@ -35,6 +35,8 @@ OS_EVENT *SEM_read_PS2;
 OS_EVENT *SEM_read_KEYS;
 OS_EVENT *SEM_state_change;
 OS_EVENT *SEM_timer_start;
+OS_EVENT *SEM_flash_success;
+OS_EVENT *SEM_flash_fail;
 /* States */
 typedef enum
 {

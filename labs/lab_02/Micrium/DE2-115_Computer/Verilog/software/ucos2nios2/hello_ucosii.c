@@ -186,7 +186,7 @@ void Task_read_KEYs(void *pdata)
   while (1)
   {
     OSSemPend(SEM_read_KEYS, 0, &err);
-    log_info("%u: \tState: %s", OSTime, Get_state_name(state));
+    // debug("%u: \tState: %s", OSTime, Get_state_name(state));
 
     /***************************************************/
     /* Signaling Semaphores used for Activity Control */
@@ -260,13 +260,18 @@ void Task_read_KEYs(void *pdata)
     }
 
     /* Logics for transitioning to Verified State */
+    int matched = 0;
+
     if (state == CODE && KEY1_flag)
     {
+
       for (int i = 0; i < MAX_CODES; i++)
       {
-        int matched = 0;
         for (int j = 0; j < MAX_DIGITS; j++)
         {
+          if (stored_codes[i][j] != cur_input_code[j] && i >= MAX_CODES && j >= MAX_DIGITS - 1)
+            goto fail;
+
           if (stored_codes[i][j] != cur_input_code[j])
             continue;
 
@@ -285,12 +290,16 @@ void Task_read_KEYs(void *pdata)
 
         if (matched == 1)
         {
+          OSSemPost(SEM_flash_success); /* Signal flash fail if not matched! */
           /* resetting input digits */
           for (int j = 0; j < MAX_DIGITS; j++)
             cur_input_code[j] = -1;
           break;
         }
       }
+      
+    fail:
+      OSSemPost(SEM_flash_fail); /* Signal flash fail if not matched! */
     }
 
     OSSemPost(SEM_read_KEYS);
@@ -325,18 +334,20 @@ void Task_flash_success(void *pdata)
 
   while (1)
   {
-
+    OSSemPend(SEM_flash_success, 0, &err);
+    debug("Flashing SUCCESS");
     OSTimeDlyHMSM(0, 0, 1, 0);
   }
 }
 
 void Task_flash_fail(void *pdata)
 {
-  debug("Started: Task_flash_success");
+  debug("Started: Task_flash_fail");
 
   while (1)
   {
-
+    OSSemPend(SEM_flash_fail, 0, &err);
+    debug("Flashing FAIL");
     OSTimeDlyHMSM(0, 0, 1, 0);
   }
 }
@@ -372,8 +383,10 @@ int main(void)
   state_timer = 0;
 
   /* Semaphore for activity/sequence control */
-  SEM_read_PS2 = OSSemCreate(0);    /* Blocking initially */
-  SEM_timer_start = OSSemCreate(0); /* Blocking initially */
+  SEM_read_PS2 = OSSemCreate(0);      /* Blocking initially */
+  SEM_timer_start = OSSemCreate(0);   /* Blocking initially */
+  SEM_flash_success = OSSemCreate(0); /* Blocking initially */
+  SEM_flash_fail = OSSemCreate(0);    /* Blocking initially */
 
   SEM_read_KEYS = OSSemCreate(1);
   SEM_state_change = OSSemCreate(1);
@@ -410,6 +423,26 @@ int main(void)
                   TASK_READ_PS2_PRIORITY,
                   TASK_READ_PS2_PRIORITY,
                   task_read_ps2_stk,
+                  TASK_STACKSIZE,
+                  NULL,
+                  0);
+
+  OSTaskCreateExt(Task_flash_success,
+                  NULL,
+                  (void *)&task_flash_success_stk[TASK_STACKSIZE - 1],
+                  TASK_FLASH_SUCCESS_PRIORITY,
+                  TASK_FLASH_SUCCESS_PRIORITY,
+                  task_flash_success_stk,
+                  TASK_STACKSIZE,
+                  NULL,
+                  0);
+
+  OSTaskCreateExt(Task_flash_fail,
+                  NULL,
+                  (void *)&task_flash_fail_stk[TASK_STACKSIZE - 1],
+                  TASK_FLASH_FAIL_PRIORITY,
+                  TASK_FLASH_FAIL_PRIORITY,
+                  task_flash_fail_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);
