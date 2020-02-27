@@ -169,7 +169,7 @@ void Task_read_KEYs(void *pdata)
     OSSemPend(SEM_read_KEYS, 0, &err);
 
     /***************************************************/
-    /* Signalling Semaphores used for Activity Control */
+    /* Signaling Semaphores used for Activity Control */
     /***************************************************/
     if (state == PROG || state == LOCK || state == CODE)
       OSSemPost(SEM_read_PS2);
