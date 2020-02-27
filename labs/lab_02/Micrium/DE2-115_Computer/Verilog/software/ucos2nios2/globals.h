@@ -21,7 +21,7 @@
 #define KEY3 0x8
 
 #define MAX_CODES 16
-#define MAX_DIGITS 8
+#define MAX_DIGITS 4
 
 #define KEY_ptr (((volatile unsigned long *)KEY_BASE))
 #define SW_ptr (((volatile unsigned long *)SW_BASE))
