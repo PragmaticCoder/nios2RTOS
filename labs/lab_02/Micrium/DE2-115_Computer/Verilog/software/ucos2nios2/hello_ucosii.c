@@ -54,7 +54,7 @@ int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 int state_timer;
 int valid_input;
 
-int stored_codes[8][16] = {{0, 1, 0, 1}};
+int stored_codes[MAX_CODES][MAX_DIGITS] = {{0, 1, 0, 1}};
 
 int PS2_num;
 
