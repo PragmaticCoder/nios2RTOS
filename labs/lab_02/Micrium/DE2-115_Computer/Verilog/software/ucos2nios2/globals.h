@@ -34,11 +34,15 @@
 
 /* Definition of Semaphores */
 OS_EVENT *SEM_read_PS2;
+OS_EVENT *SEM_read_PS2_done;
 OS_EVENT *SEM_read_KEYS;
 OS_EVENT *SEM_state_change;
 OS_EVENT *SEM_timer_start;
 OS_EVENT *SEM_flash_success;
 OS_EVENT *SEM_flash_fail;
+OS_EVENT *SEM_add_code;
+OS_EVENT *SEM_delete_code;
+
 /* States */
 typedef enum
 {
