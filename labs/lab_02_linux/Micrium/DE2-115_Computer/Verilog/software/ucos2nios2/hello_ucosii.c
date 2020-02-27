@@ -42,14 +42,17 @@ OS_STK task_read_ps2_stk[TASK_STACKSIZE];
 OS_STK task_verify_access_code[TASK_STACKSIZE];
 OS_STK task_flash_success_stk[TASK_STACKSIZE];
 OS_STK task_flash_fail_stk[TASK_STACKSIZE];
+OS_STK task_add_code_stk[TASK_STACKSIZE];
+OS_STK task_delete_code_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
-
 #define TASK_READ_KEYS_PRIORITY 1
 #define TASK_STATE_TIMER_PRIORITY 2
 #define TASK_READ_PS2_PRIORITY 3
 #define TASK_FLASH_SUCCESS_PRIORITY 4
 #define TASK_FLASH_FAIL_PRIORITY 5
+#define TASK_ADD_CODE_PRIORITY 6
+#define TASK_DELETE_CODE_PRIORITY 7
 
 /* Global Variables */
 unsigned KEY_val;
@@ -70,6 +73,8 @@ DoorState prev_state;
 void Task_read_PS2(void *);
 void Task_read_KEYs(void *);
 void Task_state_timer(void *);
+void Task_add_code(void *);
+void Task_delete_code(void *);
 
 // TODO: Implement Rendouvouz Synchnorization between Task_read_PS2 and
 // a new Timer Task.
@@ -266,7 +271,7 @@ void Task_read_KEYs(void *pdata)
       OSSemPost(SEM_state_change);
     }
 
-    /* Logics for transitioning to Verified State */
+    /* Logics for transitioning to VERIFIED State */
     int matched = 0;
 
     if (state == CODE && KEY1_flag)
@@ -313,7 +318,7 @@ void Task_read_KEYs(void *pdata)
     }
 
     /* Logics for Transitioning to PROG State */
-    if (state == LOCK)
+    if (state == OPEN)
     {
       *(LEDG_ptr) |= 0x01;
       *(LEDR_ptr) &= ~0x01;
@@ -381,6 +386,30 @@ void Task_flash_fail(void *pdata)
     OSSemPend(SEM_flash_fail, 0, &err);
     debug("Flashing FAIL");
     OSTimeDlyHMSM(0, 0, 1, 0);
+  }
+}
+
+void Task_add_code(void *pdata)
+{
+  debug("Started: Task_add_code");
+
+  while (1)
+  {
+    OSSemPend(SEM_add_code, 0, &err);
+    debug("Within Task Add Code");
+    OSTimeDlyHMSM(0, 0, 300, 0);
+  }
+}
+
+void Task_delete_code(void *pdata)
+{
+  debug("Started: Task_delete_code");
+
+  while (1)
+  {
+    OSSemPend(SEM_delete_code, 0, &err);
+    debug("Within Task Delete Code");
+    OSTimeDlyHMSM(0, 0, 300, 0);
   }
 }
 
@@ -476,6 +505,26 @@ int main(void)
                   TASK_FLASH_FAIL_PRIORITY,
                   TASK_FLASH_FAIL_PRIORITY,
                   task_flash_fail_stk,
+                  TASK_STACKSIZE,
+                  NULL,
+                  0);
+
+  OSTaskCreateExt(Task_add_code,
+                  NULL,
+                  (void *)&task_add_code_stk[TASK_STACKSIZE - 1],
+                  TASK_ADD_CODE_PRIORITY,
+                  TASK_ADD_CODE_PRIORITY,
+                  task_add_code_stk,
+                  TASK_STACKSIZE,
+                  NULL,
+                  0);
+
+  OSTaskCreateExt(Task_delete_code,
+                  NULL,
+                  (void *)&task_delete_code_stk[TASK_STACKSIZE - 1],
+                  TASK_DELETE_CODE_PRIORITY,
+                  TASK_DELETE_CODE_PRIORITY,
+                  task_delete_code_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);
