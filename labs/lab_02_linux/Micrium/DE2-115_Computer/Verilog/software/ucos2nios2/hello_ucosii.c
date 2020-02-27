@@ -99,8 +99,8 @@ void Task_read_PS2(void *pdata)
 
   while (1)
   {
-
     OSSemPend(SEM_read_PS2, 0, &err);
+    debug("Executing Read PS2");
 
     PS2_data = *(PS2_ptr);                  /* read the Data register in the PS/2 port */
     RAVAIL = (PS2_data & 0xFFFF0000) >> 16; /* extract the RAVAIL field */
@@ -187,6 +187,9 @@ void Task_read_PS2(void *pdata)
     debug("Current Input Array: %d %d %d %d",
           cur_input_code[0], cur_input_code[1], cur_input_code[2], cur_input_code[3]);
 
+    if (KEY1_flag && cur_input_code[MIN_DIGITS - 1] != -1)
+      OSSemPost(SEM_read_PS2_done);
+
     OSTimeDlyHMSM(0, 0, 100, 0);
   }
 }
@@ -199,15 +202,26 @@ void Task_read_KEYs(void *pdata)
   {
     OSSemPend(SEM_read_KEYS, 0, &err);
     // debug("%u: \tState: %s", OSTime, Get_state_name(state));
-
     /***************************************************/
     /* Signaling Semaphores used for Activity Control */
     /***************************************************/
-    if (state == PROG || state == LOCK || state == CODE)
+    if (state == LOCK || state == CODE)
       OSSemPost(SEM_read_PS2);
 
-    if (state == PROG || state == VERIFIED || state == CLOSE)
+    if (state == VERIFIED || state == CLOSE)
       OSSemPost(SEM_timer_start);
+
+    /* OPEN & CLOSE STATE LED */
+    if (state == OPEN)
+    {
+      *(LEDG_ptr) |= 0x01;
+      *(LEDR_ptr) &= ~0x01;
+    }
+    else if (state == OPEN)
+    {
+      *(LEDG_ptr) &= ~0x01;
+      *(LEDR_ptr) |= 0x01;
+    }
 
     /**************************************************/
     /**************************************************/
@@ -242,12 +256,24 @@ void Task_read_KEYs(void *pdata)
       OSSemPost(SEM_state_change);
     }
 
+    /* Logics for Transitioning to PROG STATE */
     if (state == OPEN && KEY1_flag)
     {
       OSSemPend(SEM_state_change, 0, &err);
       state = PROG;
       state_timer = 0;
+      OSSemPost(SEM_state_change);
+    }
+    /* Signalling tasks associated with PROG State */
+    if (state == PROG && KEY1_flag)
+      OSSemPost(SEM_add_code);
 
+    /* Logics for Transitioning to PROG State */
+    if (state == OPEN && SW0_VALUE == 1)
+    {
+      OSSemPend(SEM_state_change, 0, &err);
+      state = PROG;
+      state_timer = 0;
       OSSemPost(SEM_state_change);
     }
 
@@ -312,21 +338,9 @@ void Task_read_KEYs(void *pdata)
     fail:
       if (matched == 0)
         OSSemPost(SEM_flash_fail); /* Signal flash fail if not matched! */
-      
-      matched = 1;                           /* Initializing rest of the array elements to -1 */
-      reset_PS2_input();
-    }
 
-    /* Logics for Transitioning to PROG State */
-    if (state == OPEN)
-    {
-      *(LEDG_ptr) |= 0x01;
-      *(LEDR_ptr) &= ~0x01;
-    }
-    else if (state == OPEN)
-    {
-      *(LEDG_ptr) &= ~0x01;
-      *(LEDR_ptr) |= 0x01;
+      matched = 1; /* Initializing rest of the array elements to -1 */
+      reset_PS2_input();
     }
 
     OSSemPost(SEM_read_KEYS);
@@ -349,7 +363,6 @@ void Task_state_timer(void *pdata)
       state_timer = 0;
       OSSemPost(SEM_state_change);
     }
-
     state_timer++;
     OSTimeDlyHMSM(0, 0, 1, 0);
   }
@@ -395,8 +408,34 @@ void Task_add_code(void *pdata)
 
   while (1)
   {
+
     OSSemPend(SEM_add_code, 0, &err);
+    debug("Running Task_add_code");
+
+    /* signaling the read ps2 input into cur_input_code array */
+    debug("Signalling read_PS2");
+    OSSemPost(SEM_read_PS2);
+
+    /* signaling the read ps2 input into cur_input_code array */
+    OSSemPost(SEM_timer_start);
+
+    /* wait for Task read PS input to populate the global array */
+    while (cur_input_code[MIN_DIGITS - 1] == -1)
+    {
+      OSSemPend(SEM_read_PS2_done, 0, &err);
+      debug("Finished Reading values into the array and now in Task_add_code");
+    }
+    // TODO:
+    // 1. Check the array for same input
+    // 2. If same input does not exist:
+    // - Add new value to Array
+    // - Signal Success
+    //    else:
+    // Signal Failure
+
+    debug("Attempting to Add values inside Array");
     debug("Within Task Add Code");
+
     OSTimeDlyHMSM(0, 0, 300, 0);
   }
 }
@@ -446,9 +485,12 @@ int main(void)
 
   /* Semaphore for activity/sequence control */
   SEM_read_PS2 = OSSemCreate(0);      /* Blocking initially */
+  SEM_read_PS2_done = OSSemCreate(0); /* Blocking initially */
   SEM_timer_start = OSSemCreate(0);   /* Blocking initially */
   SEM_flash_success = OSSemCreate(0); /* Blocking initially */
   SEM_flash_fail = OSSemCreate(0);    /* Blocking initially */
+  SEM_add_code = OSSemCreate(0);      /* Blocking initially */
+  SEM_read_PS2_done = OSSemCreate(0); /* Blocking initially */
 
   SEM_read_KEYS = OSSemCreate(1);
   SEM_state_change = OSSemCreate(1);
