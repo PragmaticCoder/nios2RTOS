@@ -27,6 +27,8 @@
 #define KEY_ptr (((volatile unsigned long *)KEY_BASE))
 #define SW_ptr (((volatile unsigned long *)SW_BASE))
 #define PS2_ptr (((volatile unsigned long *)PS2_BASE))
+#define LEDG_ptr (((volatile unsigned long *)LEDG_BASE))
+#define LEDR_ptr (((volatile unsigned long *)LEDR_BASE))
 
 #define SW0_VALUE (*(SW_ptr)&0x1)
 

@@ -74,9 +74,10 @@ void Task_state_timer(void *);
 // TODO: Implement Rendouvouz Synchnorization between Task_read_PS2 and
 // a new Timer Task.
 
-void reset_PS2_input(){
-  for (int i = 0; i < MAX_DIGITS ; i++)
-          cur_input_code[i] = -1;
+void reset_PS2_input()
+{
+  for (int i = 0; i < MAX_DIGITS; i++)
+    cur_input_code[i] = -1;
   cur_input_idx = 0;
 }
 
@@ -236,12 +237,12 @@ void Task_read_KEYs(void *pdata)
       OSSemPost(SEM_state_change);
     }
 
-    /* Logics for Transitioning to PROG State */
     if (state == OPEN && KEY1_flag)
     {
       OSSemPend(SEM_state_change, 0, &err);
       state = PROG;
       state_timer = 0;
+
       OSSemPost(SEM_state_change);
     }
 
@@ -304,9 +305,23 @@ void Task_read_KEYs(void *pdata)
       }
 
     fail:
-      OSSemPost(SEM_flash_fail); /* Signal flash fail if not matched! */
-                                 /* Initializing rest of the array elements to -1 */
+      if (matched == 0)
+        OSSemPost(SEM_flash_fail); /* Signal flash fail if not matched! */
+      
+      matched = 1;                           /* Initializing rest of the array elements to -1 */
       reset_PS2_input();
+    }
+
+    /* Logics for Transitioning to PROG State */
+    if (state == OPEN)
+    {
+      *(LEDG_ptr) |= 0x01;
+      *(LEDR_ptr) &= ~0x01;
+    }
+    else if (state == CLOSE)
+    {
+      *(LEDG_ptr) &= ~0x01;
+      *(LEDR_ptr) |= 0x01;
     }
 
     OSSemPost(SEM_read_KEYS);
@@ -342,7 +357,17 @@ void Task_flash_success(void *pdata)
   while (1)
   {
     OSSemPend(SEM_flash_success, 0, &err);
+    int pattern = 0x01;
     debug("Flashing SUCCESS");
+
+    for (int i = 0; i < 1; i++)
+    {
+      pattern = pattern << 1;
+      *(LEDG_ptr) |= pattern;
+      OSTimeDlyHMSM(0, 0, 1, 0);
+      *(LEDG_ptr) &= ~pattern;
+    }
+
     OSTimeDlyHMSM(0, 0, 1, 0);
   }
 }
@@ -380,6 +405,8 @@ int main(void)
   PS2_num = -1;
   cur_input_idx = 0;
 
+  state_timer = 0;
+
   /* Initialization Code */
   // state = INIT;
 
@@ -387,7 +414,6 @@ int main(void)
   /* For Debugging Purpose */
   state = INIT;
   /************************/
-  state_timer = 0;
 
   /* Semaphore for activity/sequence control */
   SEM_read_PS2 = OSSemCreate(0);      /* Blocking initially */
