@@ -53,6 +53,8 @@ int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 int state_timer;
 int valid_input;
 
+int PS2_num;
+
 DoorState state;
 DoorState prev_state;
 
@@ -62,7 +64,7 @@ void Task_read_KEYs(void *);
 void Task_state_timer(void *);
 
 // TODO: Implement Rendouvouz Synchnorization between Task_read_PS2 and
-// a new Timer Task. 
+// a new Timer Task.
 
 /* Tasks Implementation */
 void Task_read_PS2(void *pdata)
@@ -70,10 +72,9 @@ void Task_read_PS2(void *pdata)
 
   debug("Started: Task_read_PS2");
 
-  char byte5;
   int PS2_data, RAVAIL;
-
   *(PS2_ptr) = 0xFF; // reset PS/2
+
   int flag = 0;
 
   while (1)
@@ -86,62 +87,73 @@ void Task_read_PS2(void *pdata)
 
     if (RAVAIL > 0)
     {
-      byte5 = PS2_data & 0xFF;
+      char PS2_val = PS2_data & 0xFF;
 
       /* TODO: Refactor this code */
-      if (byte5 == -16)
+      if (PS2_val == -16)
+      {
         flag = 1;
-
+        PS2_num = -1; /* resetting PS2 num press */
+      }
       else if (flag == 1)
       {
         flag = 0;
 
-        switch (byte5)
+        switch (PS2_val)
         {
         case 69:
         case 112:
+          PS2_num = 0;
           debug("0 pressed");
           break;
         case 22:
         case 105:
+          PS2_num = 1;
           debug("1 pressed");
           break;
         case 30:
         case 114:
+          PS2_num = 2;
           debug("2 pressed");
           break;
         case 38:
         case 122:
+          PS2_num = 3;
           debug("3 pressed");
           break;
         case 37:
         case 107:
+          PS2_num = 4;
           debug("4 pressed");
           break;
         case 46:
         case 115:
+          PS2_num = 5;
           debug("5 pressed");
           break;
         case 54:
         case 116:
+          PS2_num = 6;
           debug("6 pressed");
           break;
         case 61:
         case 108:
+          PS2_num = 7;
           debug("7 pressed");
           break;
         case 62:
         case 117:
+          PS2_num = 8;
           debug("8 pressed");
           break;
         case 70:
         case 125:
+          PS2_num = 9;
           debug("9 pressed");
           break;
         default:
           debug("Nothing Pressed");
         }
-        
       }
     }
     OSTimeDlyHMSM(0, 0, 100, 0);
@@ -164,6 +176,7 @@ void Task_read_KEYs(void *pdata)
 
     if (state == PROG || state == VERIFIED || state == CLOSE)
       OSSemPost(SEM_timer_start);
+
     /**************************************************/
     /**************************************************/
 
@@ -206,6 +219,20 @@ void Task_read_KEYs(void *pdata)
       OSSemPost(SEM_state_change);
     }
 
+    /* Logics for Transitioning to CODE State */
+    // TODO:
+    // 1. Get logic for storing KEYBOARD INPUT
+    // 2. Design a storage system to store inputs
+    if (state == LOCK && PS2_num != -1)
+    {
+      OSSemPend(SEM_state_change, 0, &err);
+      state = CODE;
+      state_timer = 0;
+      OSSemPost(SEM_state_change);
+    }
+
+    /* Logics for Transitioning to LOCK State */
+    // TODO:
     OSSemPost(SEM_read_KEYS);
     OSTimeDlyHMSM(0, 0, 0, 100); /* Delay */
   }
@@ -249,18 +276,19 @@ int main(void)
   printf("URL: www.micrium.com\n\n\n");
 
   KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
+  PS2_num = -1;
 
   /* Initialization Code */
   // state = INIT;
 
   // TODO: Uncomment this code in Production
   /* For Debugging Purpose */
-  state = OPEN;
+  state = LOCK;
   /************************/
   state_timer = 0;
 
   /* Semaphore for activity/sequence control */
-  SEM_read_PS2 = OSSemCreate(0); /* Blocking initially */
+  SEM_read_PS2 = OSSemCreate(0);    /* Blocking initially */
   SEM_timer_start = OSSemCreate(0); /* Blocking initially */
 
   SEM_read_KEYS = OSSemCreate(1);

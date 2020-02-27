@@ -50,6 +50,8 @@ INT8U err;
 extern unsigned KEY_val;
 extern int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 
+extern int PS2_num;/* Used to store Num key press */
+
 extern int state_timer;
 extern int valid_input;
 
