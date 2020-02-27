@@ -52,7 +52,6 @@ unsigned KEY_val;
 int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 
 int state_timer;
-int valid_input;
 
 int cur_input_idx;
 int cur_input_code[MAX_DIGITS] = {-1, -1, -1, -1};
@@ -165,8 +164,8 @@ void Task_read_PS2(void *pdata)
       cur_input_code[cur_input_idx++] = PS2_num;
       PS2_num = -1; /* resetting PS2_num */
     }
-    
-    if(cur_input_idx >= MAX_DIGITS)
+
+    if (cur_input_idx >= MAX_DIGITS)
       cur_input_idx = 0;
 
     debug("Current Input Array: %d %d %d %d",
@@ -236,15 +235,47 @@ void Task_read_KEYs(void *pdata)
     }
 
     /* Logics for Transitioning to CODE State */
-    // TODO:
-    // 1. Get logic for storing KEYBOARD INPUT
-    // 2. Design a storage system to store inputs
     if (state == LOCK && PS2_num != -1)
     {
       OSSemPend(SEM_state_change, 0, &err);
       state = CODE;
       state_timer = 0;
       OSSemPost(SEM_state_change);
+    }
+
+    /* Logics for transitioning to Verified State */
+    if (state == CODE && KEY1_flag)
+    {
+      for (int i = 0; i < MAX_CODES; i++)
+      {
+        int matched = 0;
+        for (int j = 0; j < MAX_DIGITS; j++)
+        {
+          if (stored_codes[i][j] != cur_input_code[j])
+            continue;
+
+          /* if we have reached the last element of the array */
+          /* and and all digits matched */
+          if (j >= MAX_DIGITS - 1)
+          {
+            debug("ACCESS CODE MATCHED!!!");
+            OSSemPend(SEM_state_change, 0, &err);
+            state = VERIFIED;
+            OSSemPost(SEM_state_change);
+            matched = 1;
+            break;
+          }
+        }
+
+        if (matched == 1)
+        {
+          /* resetting input digits */
+          for (int j = 0; j < MAX_DIGITS; j++)
+              cur_input_code[j] = -1;
+
+          break;
+        }
+      }
     }
 
     /* Logics for Transitioning to LOCK State */
