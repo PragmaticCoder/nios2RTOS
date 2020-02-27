@@ -29,7 +29,7 @@ ALT_LDDEPS :=
 MAKEABLE_LIBRARY_ROOT_DIRS :=
 
 # Generic flags passed to the compiler for different types of input files.
-ALT_CFLAGS :=
+ALT_CFLAGS += -g -DNDEBUG
 ALT_CXXFLAGS :=
 ALT_CPPFLAGS :=
 ALT_ASFLAGS :=
@@ -142,7 +142,8 @@ ACDS_VERSION := 18.1
 ELF := ucos2nios2.elf
 
 # Paths to C, C++, and assembly source files.
-C_SRCS := hello_ucosii.c
+C_SRCS += hello_ucosii.c
+C_SRCS += utils.c
 CXX_SRCS :=
 ASM_SRCS :=
 
@@ -163,7 +164,7 @@ CREATE_LINKER_MAP := 1
 APP_CFLAGS_DEFINED_SYMBOLS :=
 APP_CFLAGS_UNDEFINED_SYMBOLS :=
 APP_CFLAGS_OPTIMIZATION := -O0
-APP_CFLAGS_DEBUG_LEVEL := -g
+APP_CFLAGS_DEBUG_LEVEL := -g -DNDEBUG
 APP_CFLAGS_WARNINGS := -Wall
 APP_CFLAGS_USER_FLAGS :=
 
