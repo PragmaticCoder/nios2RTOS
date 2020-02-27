@@ -74,6 +74,12 @@ void Task_state_timer(void *);
 // TODO: Implement Rendouvouz Synchnorization between Task_read_PS2 and
 // a new Timer Task.
 
+void reset_PS2_input(){
+  for (int i = 0; i < MAX_DIGITS ; i++)
+          cur_input_code[i] = -1;
+  cur_input_idx = 0;
+}
+
 /* Tasks Implementation */
 void Task_read_PS2(void *pdata)
 {
@@ -292,14 +298,15 @@ void Task_read_KEYs(void *pdata)
         {
           OSSemPost(SEM_flash_success); /* Signal flash fail if not matched! */
           /* resetting input digits */
-          for (int j = 0; j < MAX_DIGITS; j++)
-            cur_input_code[j] = -1;
+          reset_PS2_input();
           break;
         }
       }
-      
+
     fail:
       OSSemPost(SEM_flash_fail); /* Signal flash fail if not matched! */
+                                 /* Initializing rest of the array elements to -1 */
+      reset_PS2_input();
     }
 
     OSSemPost(SEM_read_KEYS);
