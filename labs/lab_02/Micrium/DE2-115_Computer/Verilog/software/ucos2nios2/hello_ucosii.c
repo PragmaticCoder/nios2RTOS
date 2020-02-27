@@ -39,6 +39,7 @@
 OS_STK task_read_keys_stk[TASK_STACKSIZE];
 OS_STK task2_stk[TASK_STACKSIZE];
 OS_STK task_read_ps2_stk[TASK_STACKSIZE];
+OS_STK task_verify_access_code[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
 
@@ -52,6 +53,8 @@ int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 
 int state_timer;
 int valid_input;
+
+int stored_codes[8][16] = {{0, 1, 0, 1, 0, 1, -1, -1}};
 
 int PS2_num;
 
@@ -293,6 +296,11 @@ int main(void)
 
   SEM_read_KEYS = OSSemCreate(1);
   SEM_state_change = OSSemCreate(1);
+
+  /* Initializing rest of the array elements to -1 */
+  for (int i = 1; i < MAX_CODES; i++)
+    for (int j = 0; j < MAX_DIGITS; j++)
+      stored_codes[i][j] = -1;
 
   /* Task creation */
   OSTaskCreateExt(Task_read_KEYs,

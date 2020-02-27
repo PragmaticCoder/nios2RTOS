@@ -20,6 +20,9 @@
 #define KEY2 0x4
 #define KEY3 0x8
 
+#define MAX_CODES 16
+#define MAX_DIGITS 8
+
 #define KEY_ptr (((volatile unsigned long *)KEY_BASE))
 #define SW_ptr (((volatile unsigned long *)SW_BASE))
 #define PS2_ptr (((volatile unsigned long *)PS2_BASE))
