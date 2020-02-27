@@ -37,15 +37,19 @@
 #define TASK_STACKSIZE 2048
 
 OS_STK task_read_keys_stk[TASK_STACKSIZE];
-OS_STK task2_stk[TASK_STACKSIZE];
+OS_STK task_state_timer_stk[TASK_STACKSIZE];
 OS_STK task_read_ps2_stk[TASK_STACKSIZE];
 OS_STK task_verify_access_code[TASK_STACKSIZE];
+OS_STK task_flash_success_stk[TASK_STACKSIZE];
+OS_STK task_flash_fail_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
 
 #define TASK_READ_KEYS_PRIORITY 1
-#define TASK2_PRIORITY 2
-#define TASK_READ_PS2_PRIORITY 4
+#define TASK_STATE_TIMER_PRIORITY 2
+#define TASK_READ_PS2_PRIORITY 3
+#define TASK_FLASH_SUCCESS_PRIORITY 4
+#define TASK_FLASH_FAIL_PRIORITY 5
 
 /* Global Variables */
 unsigned KEY_val;
@@ -182,6 +186,7 @@ void Task_read_KEYs(void *pdata)
   while (1)
   {
     OSSemPend(SEM_read_KEYS, 0, &err);
+    log_info("%u: \tState: %s", OSTime, Get_state_name(state));
 
     /***************************************************/
     /* Signaling Semaphores used for Activity Control */
@@ -234,6 +239,17 @@ void Task_read_KEYs(void *pdata)
       OSSemPost(SEM_state_change);
     }
 
+    /* Logics for Transitioning to LOCK State */
+    if (state == CLOSE && state_timer >= 5 && KEY1_flag)
+    {
+      OSSemPend(SEM_state_change, 0, &err);
+      state = LOCK;
+      state_timer = 0;
+
+      OSSemPend(SEM_timer_start, 0, &err); /* pausing state timer task here */
+      OSSemPost(SEM_state_change);
+    }
+
     /* Logics for Transitioning to CODE State */
     if (state == LOCK && PS2_num != -1)
     {
@@ -271,14 +287,12 @@ void Task_read_KEYs(void *pdata)
         {
           /* resetting input digits */
           for (int j = 0; j < MAX_DIGITS; j++)
-              cur_input_code[j] = -1;
-
+            cur_input_code[j] = -1;
           break;
         }
       }
     }
 
-    /* Logics for Transitioning to LOCK State */
     OSSemPost(SEM_read_KEYS);
     OSTimeDlyHMSM(0, 0, 0, 100); /* Delay */
   }
@@ -289,8 +303,9 @@ void Task_state_timer(void *pdata)
   debug("Started: Task_state_timer");
   while (1)
   {
-    log_info("%u: \tState: %s\t State Time: %ds", OSTime, Get_state_name(state), state_timer);
+    // OSSemPend(SEM_timer_start, 0, &err);
 
+    log_info("%u: \tState: %s\t State Time: %ds", OSTime, Get_state_name(state), state_timer);
     if (prev_state != state)
     {
       OSSemPend(SEM_state_change, 0, &err);
@@ -300,6 +315,28 @@ void Task_state_timer(void *pdata)
     }
 
     state_timer++;
+    OSTimeDlyHMSM(0, 0, 1, 0);
+  }
+}
+
+void Task_flash_success(void *pdata)
+{
+  debug("Started: Task_flash_success");
+
+  while (1)
+  {
+
+    OSTimeDlyHMSM(0, 0, 1, 0);
+  }
+}
+
+void Task_flash_fail(void *pdata)
+{
+  debug("Started: Task_flash_success");
+
+  while (1)
+  {
+
     OSTimeDlyHMSM(0, 0, 1, 0);
   }
 }
@@ -330,7 +367,7 @@ int main(void)
 
   // TODO: Uncomment this code in Production
   /* For Debugging Purpose */
-  state = LOCK;
+  state = INIT;
   /************************/
   state_timer = 0;
 
@@ -359,10 +396,10 @@ int main(void)
 
   OSTaskCreateExt(Task_state_timer,
                   NULL,
-                  (void *)&task2_stk[TASK_STACKSIZE - 1],
-                  TASK2_PRIORITY,
-                  TASK2_PRIORITY,
-                  task2_stk,
+                  (void *)&task_state_timer_stk[TASK_STACKSIZE - 1],
+                  TASK_STATE_TIMER_PRIORITY,
+                  TASK_STATE_TIMER_PRIORITY,
+                  task_state_timer_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);
