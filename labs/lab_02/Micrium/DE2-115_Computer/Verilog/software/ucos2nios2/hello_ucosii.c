@@ -54,6 +54,8 @@ int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 int state_timer;
 int valid_input;
 
+int cur_input_idx;
+int cur_input_code[MAX_DIGITS] = {-1, -1, -1, -1};
 int stored_codes[MAX_CODES][MAX_DIGITS] = {{0, 1, 0, 1}};
 
 int PS2_num;
@@ -91,8 +93,6 @@ void Task_read_PS2(void *pdata)
     if (RAVAIL > 0)
     {
       char PS2_val = PS2_data & 0xFF;
-
-      /* TODO: Refactor this code */
       if (PS2_val == -16)
       {
         flag = 1;
@@ -159,6 +159,19 @@ void Task_read_PS2(void *pdata)
         }
       }
     }
+
+    if (state == CODE && PS2_num != -1)
+    {
+      cur_input_code[cur_input_idx++] = PS2_num;
+      PS2_num = -1; /* resetting PS2_num */
+    }
+    
+    if(cur_input_idx >= MAX_DIGITS)
+      cur_input_idx = 0;
+
+    debug("Current Input Array: %d %d %d %d",
+          cur_input_code[0], cur_input_code[1], cur_input_code[2], cur_input_code[3]);
+
     OSTimeDlyHMSM(0, 0, 100, 0);
   }
 }
@@ -235,7 +248,6 @@ void Task_read_KEYs(void *pdata)
     }
 
     /* Logics for Transitioning to LOCK State */
-    // TODO:
     OSSemPost(SEM_read_KEYS);
     OSTimeDlyHMSM(0, 0, 0, 100); /* Delay */
   }
@@ -280,6 +292,7 @@ int main(void)
 
   KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
   PS2_num = -1;
+  cur_input_idx = 0;
 
   /* Initialization Code */
   // state = INIT;
