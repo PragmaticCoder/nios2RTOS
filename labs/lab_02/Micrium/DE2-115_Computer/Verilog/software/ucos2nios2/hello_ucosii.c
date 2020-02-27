@@ -61,6 +61,9 @@ void Task_read_PS2(void *);
 void Task_read_KEYs(void *);
 void Task_state_timer(void *);
 
+// TODO: Implement Rendouvouz Synchnorization between Task_read_PS2 and
+// a new Timer Task. 
+
 /* Tasks Implementation */
 void Task_read_PS2(void *pdata)
 {
