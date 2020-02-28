@@ -60,6 +60,7 @@ int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 
 int state_timer;
 int timer_code;
+int flag; /* key_release deteaction flag */
 
 int cur_input_idx;
 int cur_input_code[MAX_DIGITS] = {-1, -1, -1, -1};
@@ -84,6 +85,7 @@ void reset_PS2_input()
 {
   for (int i = 0; i < MAX_DIGITS; i++)
     cur_input_code[i] = -1;
+
   cur_input_idx = 0;
 }
 
@@ -96,12 +98,10 @@ void Task_read_PS2(void *pdata)
   int PS2_data, RAVAIL;
   *(PS2_ptr) = 0xFF; // reset PS/2
 
-  int flag = 0;
+  flag = 0;
 
   while (1)
   {
-    debug("Executing Read PS2");
-
     PS2_data = *(PS2_ptr);                  /* read the Data register in the PS/2 port */
     RAVAIL = (PS2_data & 0xFFFF0000) >> 16; /* extract the RAVAIL field */
 
@@ -177,8 +177,16 @@ void Task_read_PS2(void *pdata)
 
     if ((state == CODE || state == PROG) && PS2_num != -1)
     {
+
+      OSSemPend(SEM_timer_code, 0, &err);
+
       if (cur_input_idx % 2 == 1)
         cur_input_code[cur_input_idx++] = timer_code;
+
+      state_timer = 0;
+      timer_code = -1;
+
+      OSSemPost(SEM_timer_code);
 
       cur_input_code[cur_input_idx++] = PS2_num;
       PS2_num = -1; /* resetting PS2_num */
@@ -187,13 +195,10 @@ void Task_read_PS2(void *pdata)
     if (cur_input_idx >= MAX_DIGITS)
       cur_input_idx = 0;
 
-    debug("Current Input Array: %d %d %d %d",
-          cur_input_code[0], cur_input_code[1], cur_input_code[2], cur_input_code[3]);
-
     if (state == PROG && KEY1_flag && cur_input_code[MIN_DIGITS - 1] != -1)
       OSSemPost(SEM_read_PS2_done);
 
-    OSTimeDlyHMSM(0, 0, 0, 300);
+    OSTimeDlyHMSM(0, 0, 0, 100);
   }
 }
 
@@ -251,7 +256,7 @@ void Task_read_KEYs(void *pdata)
     }
 
     /* Logic for moving to CLOSE State */
-    if (state == INIT && SW0_VALUE == 0)
+    if ((state == INIT && SW0_VALUE == 0) || (state == VERIFIED && state_timer >= 10 && SW0_VALUE == 0))
     {
       OSSemPend(SEM_state_change, 0, &err);
       state = CLOSE;
@@ -272,7 +277,7 @@ void Task_read_KEYs(void *pdata)
       OSSemPost(SEM_add_code);
 
     /* Logics for Transitioning to PROG State */
-    if (state == OPEN && SW0_VALUE == 1)
+    if (state == OPEN && SW0_VALUE == 1 && KEY1_flag)
     {
       OSSemPend(SEM_state_change, 0, &err);
       state = PROG;
@@ -367,7 +372,7 @@ void Task_state_timer(void *pdata)
 
     state_timer++;
 
-    if (state == CODE && state_timer > 5)
+    if (state == CODE && timer_code > 5)
     {
       log_info("Time Out!");
       reset_PS2_input();
@@ -377,10 +382,8 @@ void Task_state_timer(void *pdata)
       timer_code = 0;
     }
 
-    if ((state == CODE || state == PROG) && timer_code <= 5)
-    {
+    if ((state == CODE || state == PROG) && timer_code < 5)
       timer_code++;
-    }
     else
       timer_code = 0;
 
@@ -391,6 +394,11 @@ void Task_state_timer(void *pdata)
       state_timer = 0;
       OSSemPost(SEM_state_change);
     }
+
+    debug("Current Input Array: %d %d %d %d",
+          cur_input_code[0], cur_input_code[1], cur_input_code[2], cur_input_code[3]);
+
+    debug("Timer Code: %d", timer_code);
 
     OSTimeDlyHMSM(0, 0, 1, 0);
   }
@@ -564,6 +572,7 @@ int main(void)
 
   SEM_read_KEYS = OSSemCreate(1);
   SEM_state_change = OSSemCreate(1);
+  SEM_timer_code = OSSemCreate(1);
 
   /* Initializing rest of the array elements to -1 */
   for (int i = 1; i < MAX_CODES; i++)
