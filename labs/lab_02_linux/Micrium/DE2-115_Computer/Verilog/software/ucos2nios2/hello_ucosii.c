@@ -430,7 +430,7 @@ void Task_add_code(void *pdata)
     // - Signal Success
     //    else:
     // Signal Failure
-    int matched = 0;
+    int all_matched = 0;
     int add_new_code = 0;
 
     for (int i = 0; i < MAX_CODES; i++)
@@ -442,27 +442,34 @@ void Task_add_code(void *pdata)
         break;
       }
 
+      int matched = 0;
       for (int j = 0; j < MAX_DIGITS; j++)
       {
-        /* if the value already exists */
-        // if (stored_codes[i][j] != cur_input_code[j] && i < MAX_CODES)
-        // {
-        //   matched = 0;
-        //   break; /* move to the next code */
-        // }
-
         // Add the code and post Success
         if (stored_codes[i][0] == -1)
         {
           add_new_code = 1;
           break;
         }
+
+        if (stored_codes[i][j] == cur_input_code[j])
+          matched++;
+
+        if (matched == MAX_DIGITS)
+        {
+          all_matched = 1;
+          break;
+        }
       }
 
-      if (matched)
+      if (all_matched)
       {
-        OSSemPost(SEM_flash_fail);
-        matched = 0;
+        // delete code
+        for (int k = 0; k < MAX_DIGITS; k++)
+          stored_codes[i][k] = 0;
+          
+        OSSemPost(SEM_flash_success);
+        all_matched = 0;
         break;
       }
 
