@@ -175,7 +175,7 @@ void Task_read_PS2(void *pdata)
       }
     }
 
-    if (state == CODE && PS2_num != -1)
+    if ((state == CODE || state == PROG )&& PS2_num != -1)
     {
       cur_input_code[cur_input_idx++] = PS2_num;
       PS2_num = -1; /* resetting PS2_num */
@@ -187,6 +187,8 @@ void Task_read_PS2(void *pdata)
     debug("Current Input Array: %d %d %d %d",
           cur_input_code[0], cur_input_code[1], cur_input_code[2], cur_input_code[3]);
 
+    debug("KEY1_flag: %d", KEY1_flag);
+    debug("cur_input_code: %d", cur_input_code[MIN_DIGITS-1]); 
     if (KEY1_flag && cur_input_code[MIN_DIGITS - 1] != -1)
       OSSemPost(SEM_read_PS2_done);
 
@@ -212,7 +214,7 @@ void Task_read_KEYs(void *pdata)
       OSSemPost(SEM_timer_start);
 
     /* OPEN & CLOSE STATE LED */
-    if (state == OPEN)
+    if (state == CLOSE)
     {
       *(LEDG_ptr) |= 0x01;
       *(LEDR_ptr) &= ~0x01;
@@ -344,7 +346,7 @@ void Task_read_KEYs(void *pdata)
     }
 
     OSSemPost(SEM_read_KEYS);
-    OSTimeDlyHMSM(0, 0, 0, 100); /* Delay */
+    OSTimeDlyHMSM(0, 0, 0, 300); /* Delay */
   }
 }
 
@@ -422,7 +424,8 @@ void Task_add_code(void *pdata)
     /* wait for Task read PS input to populate the global array */
     while (cur_input_code[MIN_DIGITS - 1] == -1)
     {
-      OSSemPend(SEM_read_PS2_done, 0, &err);
+      debug("Got Here");
+      OSSemPost(SEM_read_PS2);
       debug("Finished Reading values into the array and now in Task_add_code");
     }
     // TODO:
