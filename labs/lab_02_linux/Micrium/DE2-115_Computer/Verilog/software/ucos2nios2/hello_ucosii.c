@@ -374,16 +374,12 @@ void Task_flash_success(void *pdata)
   while (1)
   {
     OSSemPend(SEM_flash_success, 0, &err);
-    int pattern = 0x01;
+    int pattern = 0x7;
     debug("Flashing SUCCESS");
 
-    for (int i = 0; i < 1; i++)
-    {
-      pattern = pattern << 1;
-      *(LEDG_ptr) |= pattern;
-      OSTimeDlyHMSM(0, 0, 1, 0);
-      *(LEDG_ptr) &= ~pattern;
-    }
+    *(LEDG_ptr) |= pattern;
+    OSTimeDlyHMSM(0, 0, 1, 0);
+    *(LEDG_ptr) &= ~pattern;
 
     OSTimeDlyHMSM(0, 0, 1, 0);
   }
@@ -395,9 +391,13 @@ void Task_flash_fail(void *pdata)
 
   while (1)
   {
+    int pattern = 0x7;
     OSSemPend(SEM_flash_fail, 0, &err);
     debug("Flashing FAIL");
+
+    *(LEDR_ptr) |= pattern;
     OSTimeDlyHMSM(0, 0, 1, 0);
+    *(LEDR_ptr) &= ~pattern;
   }
 }
 
@@ -422,14 +422,7 @@ void Task_add_del_code(void *pdata)
     debug("Waiting for PS2 Key to read");
     OSSemPend(SEM_read_PS2_done, 0, &err);
 
-    debug("CALCULATE ))))))))))))))))))))))))))))))))))))");
-    // TODO:
-    // 1. Check the array for same input
-    // 2. If same input does not exist:
-    // - Add new value to Array
-    // - Signal Success
-    //    else:
-    // Signal Failure
+    debug("Add Delete Operation Invoked");
     int all_matched = 0;
     int add_new_code = 0;
 
