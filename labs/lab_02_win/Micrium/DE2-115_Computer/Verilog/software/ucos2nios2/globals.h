@@ -42,6 +42,7 @@ OS_EVENT *SEM_flash_success;
 OS_EVENT *SEM_flash_fail;
 OS_EVENT *SEM_add_code;
 OS_EVENT *SEM_delete_code;
+OS_EVENT *SEM_timer_code;
 
 /* States */
 typedef enum
