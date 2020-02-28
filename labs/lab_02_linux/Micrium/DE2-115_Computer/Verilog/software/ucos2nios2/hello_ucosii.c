@@ -177,7 +177,7 @@ void Task_read_PS2(void *pdata)
 
     if ((state == CODE || state == PROG) && PS2_num != -1)
     {
-      if (cur_input_idx % 2 == 0)
+      if (cur_input_idx % 2 == 1)
         cur_input_code[cur_input_idx++] = timer_code;
 
       cur_input_code[cur_input_idx++] = PS2_num;
