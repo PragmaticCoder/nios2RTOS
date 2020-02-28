@@ -192,7 +192,7 @@ void Task_read_PS2(void *pdata)
     if (KEY1_flag && cur_input_code[MIN_DIGITS - 1] != -1)
       OSSemPost(SEM_read_PS2_done);
 
-    OSTimeDlyHMSM(0, 0, 100, 0);
+    OSTimeDlyHMSM(0, 0, 0, 300);
   }
 }
 
@@ -439,7 +439,7 @@ void Task_add_code(void *pdata)
     debug("Attempting to Add values inside Array");
     debug("Within Task Add Code");
 
-    OSTimeDlyHMSM(0, 0, 300, 0);
+    OSTimeDlyHMSM(0, 0, 0, 300);
   }
 }
 
@@ -451,7 +451,7 @@ void Task_delete_code(void *pdata)
   {
     OSSemPend(SEM_delete_code, 0, &err);
     debug("Within Task Delete Code");
-    OSTimeDlyHMSM(0, 0, 300, 0);
+    OSTimeDlyHMSM(0, 0, 0, 300);
   }
 }
 
