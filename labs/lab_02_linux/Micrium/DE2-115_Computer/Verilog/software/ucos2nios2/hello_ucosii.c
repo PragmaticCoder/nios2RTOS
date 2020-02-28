@@ -99,7 +99,6 @@ void Task_read_PS2(void *pdata)
 
   while (1)
   {
-    OSSemPend(SEM_read_PS2, 0, &err);
     debug("Executing Read PS2");
 
     PS2_data = *(PS2_ptr);                  /* read the Data register in the PS/2 port */
@@ -422,12 +421,9 @@ void Task_add_code(void *pdata)
     OSSemPost(SEM_timer_start);
 
     /* wait for Task read PS input to populate the global array */
-    while (cur_input_code[MIN_DIGITS - 1] == -1)
-    {
-      debug("Got Here");
-      OSSemPost(SEM_read_PS2);
-      debug("Finished Reading values into the array and now in Task_add_code");
-    }
+    debug("Waiting for PS2 Key to read");
+    OSSemPend(SEM_read_PS2_done, 0 , &err);
+
     // TODO:
     // 1. Check the array for same input
     // 2. If same input does not exist:
@@ -436,8 +432,13 @@ void Task_add_code(void *pdata)
     //    else:
     // Signal Failure
 
-    debug("Attempting to Add values inside Array");
-    debug("Within Task Add Code");
+    // for(int i =0; i<MAX_CODES; i++)
+    // {
+    //   for (int j = 0; j < MAX_DIGITS; j++)
+    //   {
+    //     // if()
+    //   }
+    // }
 
     OSTimeDlyHMSM(0, 0, 0, 300);
   }
@@ -493,7 +494,6 @@ int main(void)
   SEM_flash_success = OSSemCreate(0); /* Blocking initially */
   SEM_flash_fail = OSSemCreate(0);    /* Blocking initially */
   SEM_add_code = OSSemCreate(0);      /* Blocking initially */
-  SEM_read_PS2_done = OSSemCreate(0); /* Blocking initially */
 
   SEM_read_KEYS = OSSemCreate(1);
   SEM_state_change = OSSemCreate(1);
@@ -564,15 +564,15 @@ int main(void)
                   NULL,
                   0);
 
-  OSTaskCreateExt(Task_delete_code,
-                  NULL,
-                  (void *)&task_delete_code_stk[TASK_STACKSIZE - 1],
-                  TASK_DELETE_CODE_PRIORITY,
-                  TASK_DELETE_CODE_PRIORITY,
-                  task_delete_code_stk,
-                  TASK_STACKSIZE,
-                  NULL,
-                  0);
+  // OSTaskCreateExt(Task_delete_code,
+  //                 NULL,
+  //                 (void *)&task_delete_code_stk[TASK_STACKSIZE - 1],
+  //                 TASK_DELETE_CODE_PRIORITY,
+  //                 TASK_DELETE_CODE_PRIORITY,
+  //                 task_delete_code_stk,
+  //                 TASK_STACKSIZE,
+  //                 NULL,
+  //                 0);
 
   OSStart();
 
