@@ -73,7 +73,7 @@ DoorState prev_state;
 void Task_read_PS2(void *);
 void Task_read_KEYs(void *);
 void Task_state_timer(void *);
-void Task_add_code(void *);
+void Task_add_del_code(void *);
 void Task_delete_code(void *);
 
 // TODO: Implement Rendouvouz Synchnorization between Task_read_PS2 and
@@ -401,15 +401,15 @@ void Task_flash_fail(void *pdata)
   }
 }
 
-void Task_add_code(void *pdata)
+void Task_add_del_code(void *pdata)
 {
-  debug("Started: Task_add_code");
+  debug("Started: Task_add_del_code");
 
   while (1)
   {
 
     OSSemPend(SEM_add_code, 0, &err);
-    debug("Running Task_add_code");
+    debug("Running Task_add_del_code");
 
     /* signaling the read ps2 input into cur_input_code array */
     OSSemPost(SEM_timer_start);
@@ -467,7 +467,7 @@ void Task_add_code(void *pdata)
         // delete code
         for (int k = 0; k < MAX_DIGITS; k++)
           stored_codes[i][k] = 0;
-          
+
         OSSemPost(SEM_flash_success);
         all_matched = 0;
         break;
@@ -600,7 +600,7 @@ int main(void)
                   NULL,
                   0);
 
-  OSTaskCreateExt(Task_add_code,
+  OSTaskCreateExt(Task_add_del_code,
                   NULL,
                   (void *)&task_add_code_stk[TASK_STACKSIZE - 1],
                   TASK_ADD_CODE_PRIORITY,
@@ -609,16 +609,6 @@ int main(void)
                   TASK_STACKSIZE,
                   NULL,
                   0);
-
-  // OSTaskCreateExt(Task_delete_code,
-  //                 NULL,
-  //                 (void *)&task_delete_code_stk[TASK_STACKSIZE - 1],
-  //                 TASK_DELETE_CODE_PRIORITY,
-  //                 TASK_DELETE_CODE_PRIORITY,
-  //                 task_delete_code_stk,
-  //                 TASK_STACKSIZE,
-  //                 NULL,
-  //                 0);
 
   OSStart();
 
