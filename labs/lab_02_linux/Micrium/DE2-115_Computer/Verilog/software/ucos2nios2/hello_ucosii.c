@@ -352,8 +352,6 @@ void Task_state_timer(void *pdata)
   debug("Started: Task_state_timer");
   while (1)
   {
-    // OSSemPend(SEM_timer_start, 0, &err);
-
     log_info("%u: \tState: %s\t State Time: %ds", OSTime, Get_state_name(state), state_timer);
     if (prev_state != state)
     {
@@ -388,7 +386,6 @@ void Task_flash_success(void *pdata)
 void Task_flash_fail(void *pdata)
 {
   debug("Started: Task_flash_fail");
-
   while (1)
   {
     int pattern = 0x7;
