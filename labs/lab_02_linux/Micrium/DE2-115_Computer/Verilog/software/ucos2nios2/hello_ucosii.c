@@ -59,6 +59,7 @@ unsigned KEY_val;
 int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 
 int state_timer;
+int timer_code;
 
 int cur_input_idx;
 int cur_input_code[MAX_DIGITS] = {-1, -1, -1, -1};
@@ -176,6 +177,9 @@ void Task_read_PS2(void *pdata)
 
     if ((state == CODE || state == PROG) && PS2_num != -1)
     {
+      if (cur_input_idx % 2 == 1)
+        cur_input_code[cur_input_idx++] = timer_code;
+
       cur_input_code[cur_input_idx++] = PS2_num;
       PS2_num = -1; /* resetting PS2_num */
     }
@@ -363,6 +367,23 @@ void Task_state_timer(void *pdata)
 
     state_timer++;
 
+    if (state == CODE && state_timer > 5)
+    {
+      log_info("Time Out!");
+      reset_PS2_input();
+      OSSemPost(SEM_flash_fail);
+      state == PROG;
+      state_timer = 0;
+      timer_code = 0;
+    }
+
+    if ((state == CODE || state == PROG) && timer_code < 5)
+    {
+      timer_code++;
+    }
+    else
+      timer_code = 0;
+
     if (state == PROG && ((state_timer >= 30) || ((cur_input_code[0] == -1) && KEY1_flag)))
     {
       OSSemPend(SEM_state_change, 0, &err);
@@ -370,6 +391,7 @@ void Task_state_timer(void *pdata)
       state_timer = 0;
       OSSemPost(SEM_state_change);
     }
+
     OSTimeDlyHMSM(0, 0, 1, 0);
   }
 }
@@ -520,6 +542,7 @@ int main(void)
 
   KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
   PS2_num = -1;
+  timer_code = 0;
   cur_input_idx = 0;
   state_timer = 0;
 
