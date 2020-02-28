@@ -381,7 +381,7 @@ void Task_flash_success(void *pdata)
   while (1)
   {
     OSSemPend(SEM_flash_success, 0, &err);
-    int pattern = 0x7;
+    int pattern = 0xE;
     debug("Flashing SUCCESS");
 
     *(LEDG_ptr) |= pattern;
@@ -397,7 +397,7 @@ void Task_flash_fail(void *pdata)
   debug("Started: Task_flash_fail");
   while (1)
   {
-    int pattern = 0x7;
+    int pattern = 0xE;
     OSSemPend(SEM_flash_fail, 0, &err);
     debug("Flashing FAIL");
 
