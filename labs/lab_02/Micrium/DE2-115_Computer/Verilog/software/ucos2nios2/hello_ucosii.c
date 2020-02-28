@@ -59,6 +59,7 @@ unsigned KEY_val;
 int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 
 int state_timer;
+int timer_code;
 
 int cur_input_idx;
 int cur_input_code[MAX_DIGITS] = {-1, -1, -1, -1};
@@ -73,7 +74,7 @@ DoorState prev_state;
 void Task_read_PS2(void *);
 void Task_read_KEYs(void *);
 void Task_state_timer(void *);
-void Task_add_code(void *);
+void Task_add_del_code(void *);
 void Task_delete_code(void *);
 
 // TODO: Implement Rendouvouz Synchnorization between Task_read_PS2 and
@@ -99,7 +100,6 @@ void Task_read_PS2(void *pdata)
 
   while (1)
   {
-    OSSemPend(SEM_read_PS2, 0, &err);
     debug("Executing Read PS2");
 
     PS2_data = *(PS2_ptr);                  /* read the Data register in the PS/2 port */
@@ -175,8 +175,11 @@ void Task_read_PS2(void *pdata)
       }
     }
 
-    if (state == CODE && PS2_num != -1)
+    if ((state == CODE || state == PROG) && PS2_num != -1)
     {
+      if (cur_input_idx % 2 == 1)
+        cur_input_code[cur_input_idx++] = timer_code;
+
       cur_input_code[cur_input_idx++] = PS2_num;
       PS2_num = -1; /* resetting PS2_num */
     }
@@ -187,10 +190,10 @@ void Task_read_PS2(void *pdata)
     debug("Current Input Array: %d %d %d %d",
           cur_input_code[0], cur_input_code[1], cur_input_code[2], cur_input_code[3]);
 
-    if (KEY1_flag && cur_input_code[MIN_DIGITS - 1] != -1)
+    if (state == PROG && KEY1_flag && cur_input_code[MIN_DIGITS - 1] != -1)
       OSSemPost(SEM_read_PS2_done);
 
-    OSTimeDlyHMSM(0, 0, 100, 0);
+    OSTimeDlyHMSM(0, 0, 0, 300);
   }
 }
 
@@ -208,11 +211,11 @@ void Task_read_KEYs(void *pdata)
     if (state == LOCK || state == CODE)
       OSSemPost(SEM_read_PS2);
 
-    if (state == VERIFIED || state == CLOSE)
+    if (state == CODE || state == PROG || state == CLOSE || state || VERIFIED)
       OSSemPost(SEM_timer_start);
 
     /* OPEN & CLOSE STATE LED */
-    if (state == OPEN)
+    if (state == CLOSE)
     {
       *(LEDG_ptr) |= 0x01;
       *(LEDR_ptr) &= ~0x01;
@@ -344,7 +347,7 @@ void Task_read_KEYs(void *pdata)
     }
 
     OSSemPost(SEM_read_KEYS);
-    OSTimeDlyHMSM(0, 0, 0, 100); /* Delay */
+    OSTimeDlyHMSM(0, 0, 0, 300); /* Delay */
   }
 }
 
@@ -353,8 +356,6 @@ void Task_state_timer(void *pdata)
   debug("Started: Task_state_timer");
   while (1)
   {
-    // OSSemPend(SEM_timer_start, 0, &err);
-
     log_info("%u: \tState: %s\t State Time: %ds", OSTime, Get_state_name(state), state_timer);
     if (prev_state != state)
     {
@@ -363,7 +364,34 @@ void Task_state_timer(void *pdata)
       state_timer = 0;
       OSSemPost(SEM_state_change);
     }
+
     state_timer++;
+
+    if (state == CODE && state_timer > 5)
+    {
+      log_info("Time Out!");
+      reset_PS2_input();
+      OSSemPost(SEM_flash_fail);
+      state == PROG;
+      state_timer = 0;
+      timer_code = 0;
+    }
+
+    if ((state == CODE || state == PROG) && timer_code <= 5)
+    {
+      timer_code++;
+    }
+    else
+      timer_code = 0;
+
+    if (state == PROG && ((state_timer >= 30) || ((cur_input_code[0] == -1) && KEY1_flag)))
+    {
+      OSSemPend(SEM_state_change, 0, &err);
+      state = OPEN;
+      state_timer = 0;
+      OSSemPost(SEM_state_change);
+    }
+
     OSTimeDlyHMSM(0, 0, 1, 0);
   }
 }
@@ -375,16 +403,12 @@ void Task_flash_success(void *pdata)
   while (1)
   {
     OSSemPend(SEM_flash_success, 0, &err);
-    int pattern = 0x01;
+    int pattern = 0xE;
     debug("Flashing SUCCESS");
 
-    for (int i = 0; i < 1; i++)
-    {
-      pattern = pattern << 1;
-      *(LEDG_ptr) |= pattern;
-      OSTimeDlyHMSM(0, 0, 1, 0);
-      *(LEDG_ptr) &= ~pattern;
-    }
+    *(LEDG_ptr) |= pattern;
+    OSTimeDlyHMSM(0, 0, 1, 0);
+    *(LEDG_ptr) &= ~pattern;
 
     OSTimeDlyHMSM(0, 0, 1, 0);
   }
@@ -393,50 +417,97 @@ void Task_flash_success(void *pdata)
 void Task_flash_fail(void *pdata)
 {
   debug("Started: Task_flash_fail");
-
   while (1)
   {
+    int pattern = 0xE;
     OSSemPend(SEM_flash_fail, 0, &err);
     debug("Flashing FAIL");
+
+    *(LEDR_ptr) |= pattern;
     OSTimeDlyHMSM(0, 0, 1, 0);
+    *(LEDR_ptr) &= ~pattern;
   }
 }
 
-void Task_add_code(void *pdata)
+void Task_add_del_code(void *pdata)
 {
-  debug("Started: Task_add_code");
+  debug("Started: Task_add_del_code");
 
   while (1)
   {
 
     OSSemPend(SEM_add_code, 0, &err);
-    debug("Running Task_add_code");
+    debug("Running Task_add_del_code");
+
+    /* signaling the read ps2 input into cur_input_code array */
+    OSSemPost(SEM_timer_start);
 
     /* signaling the read ps2 input into cur_input_code array */
     debug("Signalling read_PS2");
     OSSemPost(SEM_read_PS2);
 
-    /* signaling the read ps2 input into cur_input_code array */
-    OSSemPost(SEM_timer_start);
-
     /* wait for Task read PS input to populate the global array */
-    while (cur_input_code[MIN_DIGITS - 1] == -1)
+    debug("Waiting for PS2 Key to read");
+    OSSemPend(SEM_read_PS2_done, 0, &err);
+
+    debug("Add Delete Operation Invoked");
+    int all_matched = 0;
+    int add_new_code = 0;
+
+    for (int i = 0; i < MAX_CODES; i++)
     {
-      OSSemPend(SEM_read_PS2_done, 0, &err);
-      debug("Finished Reading values into the array and now in Task_add_code");
+      /* When storage is full */
+      if (stored_codes[MAX_CODES - 1][0] != -1)
+      {
+        OSSemPost(SEM_flash_fail);
+        break;
+      }
+
+      int matched = 0;
+      for (int j = 0; j < MAX_DIGITS; j++)
+      {
+        // Add the code and post Success
+        if (stored_codes[i][0] == -1)
+        {
+          add_new_code = 1;
+          break;
+        }
+
+        if (stored_codes[i][j] == cur_input_code[j])
+          matched++;
+
+        if (matched == MAX_DIGITS)
+        {
+          all_matched = 1;
+          break;
+        }
+      }
+
+      if (all_matched)
+      {
+        // delete code
+        for (int k = 0; k < MAX_DIGITS; k++)
+          stored_codes[i][k] = 0;
+
+        OSSemPost(SEM_flash_success);
+        all_matched = 0;
+        break;
+      }
+
+      if (add_new_code)
+      {
+        for (int j = 0; j < MAX_DIGITS; j++)
+        {
+          stored_codes[1][j] = cur_input_code[j];
+        }
+        OSSemPost(SEM_flash_success);
+        add_new_code = 0;
+        break;
+      }
     }
-    // TODO:
-    // 1. Check the array for same input
-    // 2. If same input does not exist:
-    // - Add new value to Array
-    // - Signal Success
-    //    else:
-    // Signal Failure
 
-    debug("Attempting to Add values inside Array");
-    debug("Within Task Add Code");
-
-    OSTimeDlyHMSM(0, 0, 300, 0);
+    reset_PS2_input();
+    OSTimeDlyHMSM(0, 0, 0, 300);
   }
 }
 
@@ -448,7 +519,7 @@ void Task_delete_code(void *pdata)
   {
     OSSemPend(SEM_delete_code, 0, &err);
     debug("Within Task Delete Code");
-    OSTimeDlyHMSM(0, 0, 300, 0);
+    OSTimeDlyHMSM(0, 0, 0, 300);
   }
 }
 
@@ -471,8 +542,8 @@ int main(void)
 
   KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
   PS2_num = -1;
+  timer_code = 0;
   cur_input_idx = 0;
-
   state_timer = 0;
 
   /* Initialization Code */
@@ -490,7 +561,6 @@ int main(void)
   SEM_flash_success = OSSemCreate(0); /* Blocking initially */
   SEM_flash_fail = OSSemCreate(0);    /* Blocking initially */
   SEM_add_code = OSSemCreate(0);      /* Blocking initially */
-  SEM_read_PS2_done = OSSemCreate(0); /* Blocking initially */
 
   SEM_read_KEYS = OSSemCreate(1);
   SEM_state_change = OSSemCreate(1);
@@ -551,22 +621,12 @@ int main(void)
                   NULL,
                   0);
 
-  OSTaskCreateExt(Task_add_code,
+  OSTaskCreateExt(Task_add_del_code,
                   NULL,
                   (void *)&task_add_code_stk[TASK_STACKSIZE - 1],
                   TASK_ADD_CODE_PRIORITY,
                   TASK_ADD_CODE_PRIORITY,
                   task_add_code_stk,
-                  TASK_STACKSIZE,
-                  NULL,
-                  0);
-
-  OSTaskCreateExt(Task_delete_code,
-                  NULL,
-                  (void *)&task_delete_code_stk[TASK_STACKSIZE - 1],
-                  TASK_DELETE_CODE_PRIORITY,
-                  TASK_DELETE_CODE_PRIORITY,
-                  task_delete_code_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);
