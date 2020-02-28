@@ -277,7 +277,7 @@ void Task_read_KEYs(void *pdata)
       OSSemPost(SEM_add_code);
 
     /* Logics for Transitioning to PROG State */
-    if (state == OPEN && SW0_VALUE == 1)
+    if (state == OPEN && SW0_VALUE == 1 && KEY1_flag)
     {
       OSSemPend(SEM_state_change, 0, &err);
       state = PROG;
