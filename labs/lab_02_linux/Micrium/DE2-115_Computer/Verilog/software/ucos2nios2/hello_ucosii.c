@@ -207,7 +207,7 @@ void Task_read_KEYs(void *pdata)
     if (state == LOCK || state == CODE)
       OSSemPost(SEM_read_PS2);
 
-    if (state == VERIFIED || state == CLOSE)
+    if (state == CODE || state == PROG || state == CLOSE || state || VERIFIED)
       OSSemPost(SEM_timer_start);
 
     /* OPEN & CLOSE STATE LED */
@@ -360,7 +360,16 @@ void Task_state_timer(void *pdata)
       state_timer = 0;
       OSSemPost(SEM_state_change);
     }
+
     state_timer++;
+
+    if (state == PROG && ((state_timer >= 30) || ((cur_input_code[0] == -1) && KEY1_flag)))
+    {
+      OSSemPend(SEM_state_change, 0, &err);
+      state = OPEN;
+      state_timer = 0;
+      OSSemPost(SEM_state_change);
+    }
     OSTimeDlyHMSM(0, 0, 1, 0);
   }
 }
@@ -512,7 +521,6 @@ int main(void)
   KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
   PS2_num = -1;
   cur_input_idx = 0;
-
   state_timer = 0;
 
   /* Initialization Code */
