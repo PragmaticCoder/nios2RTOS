@@ -430,14 +430,53 @@ void Task_add_code(void *pdata)
     // - Signal Success
     //    else:
     // Signal Failure
+    int matched = 0;
+    int add_new_code = 0;
 
-    // for(int i =0; i<MAX_CODES; i++)
-    // {
-    //   for (int j = 0; j < MAX_DIGITS; j++)
-    //   {
-    //     // if()
-    //   }
-    // }
+    for (int i = 0; i < MAX_CODES; i++)
+    {
+      /* When storage is full */
+      if (stored_codes[MAX_CODES - 1][0] != -1)
+      {
+        OSSemPost(SEM_flash_fail);
+        break;
+      }
+
+      for (int j = 0; j < MAX_DIGITS; j++)
+      {
+        /* if the value already exists */
+        // if (stored_codes[i][j] != cur_input_code[j] && i < MAX_CODES)
+        // {
+        //   matched = 0;
+        //   break; /* move to the next code */
+        // }
+
+        // Add the code and post Success
+        if (stored_codes[i][0] == -1)
+        {
+          add_new_code = 1;
+          break;
+        }
+      }
+
+      if (matched)
+      {
+        OSSemPost(SEM_flash_fail);
+        matched = 0;
+        break;
+      }
+
+      if (add_new_code)
+      {
+        for (int j = 0; j < MAX_DIGITS; j++)
+        {
+          stored_codes[1][j] = cur_input_code[j];
+        }
+        OSSemPost(SEM_flash_success);
+        add_new_code = 0;
+        break;
+      }
+    }
 
     reset_PS2_input();
     OSTimeDlyHMSM(0, 0, 0, 300);
