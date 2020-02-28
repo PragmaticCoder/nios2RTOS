@@ -174,7 +174,7 @@ void Task_read_PS2(void *pdata)
       }
     }
 
-    if ((state == CODE || state == PROG )&& PS2_num != -1)
+    if ((state == CODE || state == PROG) && PS2_num != -1)
     {
       cur_input_code[cur_input_idx++] = PS2_num;
       PS2_num = -1; /* resetting PS2_num */
@@ -186,9 +186,7 @@ void Task_read_PS2(void *pdata)
     debug("Current Input Array: %d %d %d %d",
           cur_input_code[0], cur_input_code[1], cur_input_code[2], cur_input_code[3]);
 
-    debug("KEY1_flag: %d", KEY1_flag);
-    debug("cur_input_code: %d", cur_input_code[MIN_DIGITS-1]); 
-    if (KEY1_flag && cur_input_code[MIN_DIGITS - 1] != -1)
+    if (state == PROG && KEY1_flag && cur_input_code[MIN_DIGITS - 1] != -1)
       OSSemPost(SEM_read_PS2_done);
 
     OSTimeDlyHMSM(0, 0, 0, 300);
@@ -414,16 +412,17 @@ void Task_add_code(void *pdata)
     debug("Running Task_add_code");
 
     /* signaling the read ps2 input into cur_input_code array */
+    OSSemPost(SEM_timer_start);
+
+    /* signaling the read ps2 input into cur_input_code array */
     debug("Signalling read_PS2");
     OSSemPost(SEM_read_PS2);
 
-    /* signaling the read ps2 input into cur_input_code array */
-    OSSemPost(SEM_timer_start);
-
     /* wait for Task read PS input to populate the global array */
     debug("Waiting for PS2 Key to read");
-    OSSemPend(SEM_read_PS2_done, 0 , &err);
+    OSSemPend(SEM_read_PS2_done, 0, &err);
 
+    debug("CALCULATE ))))))))))))))))))))))))))))))))))))");
     // TODO:
     // 1. Check the array for same input
     // 2. If same input does not exist:
@@ -440,6 +439,7 @@ void Task_add_code(void *pdata)
     //   }
     // }
 
+    reset_PS2_input();
     OSTimeDlyHMSM(0, 0, 0, 300);
   }
 }
