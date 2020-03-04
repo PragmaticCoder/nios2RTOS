@@ -7,7 +7,6 @@
 #include "address_map_nios2.h"
 #include "globals.h"
 
-#include "utils.h"
 // defines global values
 GameState state;
 

@@ -1,0 +1,2636 @@
+<EnsembleReport fabric="QSYS" kind="Computer_System" name="Computer_System" version="1.0">
+ 
+ 
+ 
+ <module kind="altera_up_avalon_audio_and_video_config" name="AV_Config" path="AV_Config">
+  
+  <interface kind="avalon_slave" name="avalon_av_config_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="Audio_Subsystem" name="Audio_Subsystem" path="Audio_Subsystem">
+  
+  <interface kind="avalon_slave" name="audio_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_up_avalon_audio" name="Audio_Subsystem_Audio" path="Audio_Subsystem.Audio">
+  
+  <interface kind="avalon_slave" name="avalon_audio_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_up_avalon_audio_pll" name="Audio_Subsystem_Audio_PLL" path="Audio_Subsystem.Audio_PLL">
+  
+  </module>
+ <module kind="clock_source" name="Audio_Subsystem_Sys_Clk" path="Audio_Subsystem.Sys_Clk">
+  
+  </module>
+ <module kind="altera_up_avalon_character_lcd" name="Char_LCD_16x2" path="Char_LCD_16x2">
+  
+  <interface kind="avalon_slave" name="avalon_lcd_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_avalon_pio" name="Expansion_JP5" path="Expansion_JP5">
+  
+  <interface kind="avalon_slave" name="s1">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="Altera_UP_Flash_Memory_IP_Core_Avalon_Interface" name="Flash" path="Flash">
+  
+  <interface kind="avalon_slave" name="flash_data">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>true</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>true</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+  <interface kind="avalon_slave" name="flash_erase_control">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+ </module>
+ <module kind="altera_avalon_pio" name="Green_LEDs" path="Green_LEDs">
+  
+  <interface kind="avalon_slave" name="s1">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_avalon_pio" name="HEX3_HEX0" path="HEX3_HEX0">
+  
+  <interface kind="avalon_slave" name="s1">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_avalon_pio" name="HEX7_HEX4" path="HEX7_HEX4">
+  
+  <interface kind="avalon_slave" name="s1">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_avalon_timer" name="Interval_Timer" path="Interval_Timer">
+  
+  <interface kind="avalon_slave" name="s1">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isTimerDevice</name>
+    <value>1</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_avalon_timer" name="Interval_Timer_2" path="Interval_Timer_2">
+  
+  <interface kind="avalon_slave" name="s1">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isTimerDevice</name>
+    <value>1</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_avalon_timer" name="Interval_Timer_2nd_Core" path="Interval_Timer_2nd_Core">
+  
+  <interface kind="avalon_slave" name="s1">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isTimerDevice</name>
+    <value>1</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_avalon_timer" name="Interval_Timer_2nd_Core_2" path="Interval_Timer_2nd_Core_2">
+  
+  <interface kind="avalon_slave" name="s1">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isTimerDevice</name>
+    <value>1</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_up_avalon_irda" name="IrDA" path="IrDA">
+  
+  <interface kind="avalon_slave" name="avalon_irda_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_avalon_jtag_uart" name="JTAG_UART" path="JTAG_UART">
+  
+  <interface kind="avalon_slave" name="avalon_jtag_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>1</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_avalon_jtag_uart" name="JTAG_UART_2nd_Core" path="JTAG_UART_2nd_Core">
+  
+  <interface kind="avalon_slave" name="avalon_jtag_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>1</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_jtag_avalon_master" name="JTAG_to_FPGA_Bridge" path="JTAG_to_FPGA_Bridge">
+  
+  <interface kind="avalon_master" name="master">
+   
+   <assignment>
+    <name>debug.providesServices</name>
+    <value>master</value>
+   </assignment>
+   <assignment>
+    <name>debug.visible</name>
+    <value>true</value>
+   </assignment>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Audio_Subsystem_Audio</moduleName>
+    <slaveName>avalon_audio_slave</slaveName>
+    <name>Audio_Subsystem_Audio.avalon_audio_slave</name>
+    <baseAddress>4280299584</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>AV_Config</moduleName>
+    <slaveName>avalon_av_config_slave</slaveName>
+    <name>AV_Config.avalon_av_config_slave</name>
+    <baseAddress>4280299520</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>IrDA</moduleName>
+    <slaveName>avalon_irda_slave</slaveName>
+    <name>IrDA.avalon_irda_slave</name>
+    <baseAddress>4280291360</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>JTAG_UART</moduleName>
+    <slaveName>avalon_jtag_slave</slaveName>
+    <name>JTAG_UART.avalon_jtag_slave</name>
+    <baseAddress>4280291328</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Char_LCD_16x2</moduleName>
+    <slaveName>avalon_lcd_slave</slaveName>
+    <name>Char_LCD_16x2.avalon_lcd_slave</name>
+    <baseAddress>4280299600</baseAddress>
+    <span>2</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>PS2_Port</moduleName>
+    <slaveName>avalon_ps2_slave</slaveName>
+    <name>PS2_Port.avalon_ps2_slave</name>
+    <baseAddress>4280287488</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>PS2_Port_Dual</moduleName>
+    <slaveName>avalon_ps2_slave</slaveName>
+    <name>PS2_Port_Dual.avalon_ps2_slave</name>
+    <baseAddress>4280287496</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Serial_Port</moduleName>
+    <slaveName>avalon_rs232_slave</slaveName>
+    <name>Serial_Port.avalon_rs232_slave</name>
+    <baseAddress>4280291344</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SD_Card</moduleName>
+    <slaveName>avalon_sdcard_slave</slaveName>
+    <name>SD_Card.avalon_sdcard_slave</name>
+    <baseAddress>184549376</baseAddress>
+    <span>1024</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SRAM</moduleName>
+    <slaveName>avalon_sram_slave</slaveName>
+    <name>SRAM.avalon_sram_slave</name>
+    <baseAddress>134217728</baseAddress>
+    <span>2097152</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>USB</moduleName>
+    <slaveName>avalon_usb_slave</slaveName>
+    <name>USB.avalon_usb_slave</name>
+    <baseAddress>4280287504</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA</moduleName>
+    <slaveName>avalon_dma_control_slave</slaveName>
+    <name>VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA.avalon_dma_control_slave</name>
+    <baseAddress>4280299568</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM</moduleName>
+    <slaveName>s1</slaveName>
+    <name>VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM.s1</name>
+    <baseAddress>150994944</baseAddress>
+    <span>8192</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SysID</moduleName>
+    <slaveName>control_slave</slaveName>
+    <name>SysID.control_slave</name>
+    <baseAddress>4280295488</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Flash</moduleName>
+    <slaveName>flash_data</slaveName>
+    <name>Flash.flash_data</name>
+    <baseAddress>201326592</baseAddress>
+    <span>8388608</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Flash</moduleName>
+    <slaveName>flash_erase_control</slaveName>
+    <name>Flash.flash_erase_control</name>
+    <baseAddress>201261056</baseAddress>
+    <span>4</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>VGA_Subsystem_VGA_Pixel_DMA</moduleName>
+    <slaveName>avalon_dma_control_slave</slaveName>
+    <name>VGA_Subsystem_VGA_Pixel_DMA.avalon_dma_control_slave</name>
+    <baseAddress>4280299552</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>VGA_Subsystem_VGA_Pixel_RGB_Resampler</moduleName>
+    <slaveName>avalon_rgb_slave</slaveName>
+    <name>VGA_Subsystem_VGA_Pixel_RGB_Resampler.avalon_rgb_slave</name>
+    <baseAddress>4280299536</baseAddress>
+    <span>4</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SDRAM</moduleName>
+    <slaveName>s1</slaveName>
+    <name>SDRAM.s1</name>
+    <baseAddress>0</baseAddress>
+    <span>134217728</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Red_LEDs</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Red_LEDs.s1</name>
+    <baseAddress>4280287232</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Green_LEDs</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Green_LEDs.s1</name>
+    <baseAddress>4280287248</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>HEX3_HEX0</moduleName>
+    <slaveName>s1</slaveName>
+    <name>HEX3_HEX0.s1</name>
+    <baseAddress>4280287264</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>HEX7_HEX4</moduleName>
+    <slaveName>s1</slaveName>
+    <name>HEX7_HEX4.s1</name>
+    <baseAddress>4280287280</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Slider_Switches</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Slider_Switches.s1</name>
+    <baseAddress>4280287296</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Pushbuttons</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Pushbuttons.s1</name>
+    <baseAddress>4280287312</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Expansion_JP5</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Expansion_JP5.s1</name>
+    <baseAddress>4280287328</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Interval_Timer</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Interval_Timer.s1</name>
+    <baseAddress>4280295424</baseAddress>
+    <span>32</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Interval_Timer_2</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Interval_Timer_2.s1</name>
+    <baseAddress>4280295456</baseAddress>
+    <span>32</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Video_In_Subsystem_Video_In_DMA</moduleName>
+    <slaveName>avalon_dma_control_slave</slaveName>
+    <name>Video_In_Subsystem_Video_In_DMA.avalon_dma_control_slave</name>
+    <baseAddress>4280299616</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller.s1</name>
+    <baseAddress>4280299632</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+  </interface>
+  </module>
+ <module kind="altera_nios2_gen2" name="Nios2" path="Nios2">
+  
+  <parameter name="debug_jtagInstanceID">
+   <value>0</value>
+   </parameter>
+  <parameter name="resetAbsoluteAddr">
+   <value>0</value>
+   </parameter>
+  <parameter name="exceptionAbsoluteAddr">
+   <value>32</value>
+   </parameter>
+  <interface kind="avalon_master" name="data_master">
+   
+   <assignment>
+    <name>debug.providesServices</name>
+    <value>master</value>
+   </assignment>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Audio_Subsystem_Audio</moduleName>
+    <slaveName>avalon_audio_slave</slaveName>
+    <name>Audio_Subsystem_Audio.avalon_audio_slave</name>
+    <baseAddress>4280299584</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>AV_Config</moduleName>
+    <slaveName>avalon_av_config_slave</slaveName>
+    <name>AV_Config.avalon_av_config_slave</name>
+    <baseAddress>4280299520</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>IrDA</moduleName>
+    <slaveName>avalon_irda_slave</slaveName>
+    <name>IrDA.avalon_irda_slave</name>
+    <baseAddress>4280291360</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>JTAG_UART</moduleName>
+    <slaveName>avalon_jtag_slave</slaveName>
+    <name>JTAG_UART.avalon_jtag_slave</name>
+    <baseAddress>4280291328</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Char_LCD_16x2</moduleName>
+    <slaveName>avalon_lcd_slave</slaveName>
+    <name>Char_LCD_16x2.avalon_lcd_slave</name>
+    <baseAddress>4280299600</baseAddress>
+    <span>2</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>PS2_Port</moduleName>
+    <slaveName>avalon_ps2_slave</slaveName>
+    <name>PS2_Port.avalon_ps2_slave</name>
+    <baseAddress>4280287488</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>PS2_Port_Dual</moduleName>
+    <slaveName>avalon_ps2_slave</slaveName>
+    <name>PS2_Port_Dual.avalon_ps2_slave</name>
+    <baseAddress>4280287496</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Serial_Port</moduleName>
+    <slaveName>avalon_rs232_slave</slaveName>
+    <name>Serial_Port.avalon_rs232_slave</name>
+    <baseAddress>4280291344</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SD_Card</moduleName>
+    <slaveName>avalon_sdcard_slave</slaveName>
+    <name>SD_Card.avalon_sdcard_slave</name>
+    <baseAddress>184549376</baseAddress>
+    <span>1024</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SRAM</moduleName>
+    <slaveName>avalon_sram_slave</slaveName>
+    <name>SRAM.avalon_sram_slave</name>
+    <baseAddress>134217728</baseAddress>
+    <span>2097152</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>USB</moduleName>
+    <slaveName>avalon_usb_slave</slaveName>
+    <name>USB.avalon_usb_slave</name>
+    <baseAddress>4280287504</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA</moduleName>
+    <slaveName>avalon_dma_control_slave</slaveName>
+    <name>VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA.avalon_dma_control_slave</name>
+    <baseAddress>4280299568</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM</moduleName>
+    <slaveName>s1</slaveName>
+    <name>VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM.s1</name>
+    <baseAddress>150994944</baseAddress>
+    <span>8192</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SysID</moduleName>
+    <slaveName>control_slave</slaveName>
+    <name>SysID.control_slave</name>
+    <baseAddress>4280295488</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Nios2</moduleName>
+    <slaveName>debug_mem_slave</slaveName>
+    <name>Nios2.debug_mem_slave</name>
+    <baseAddress>167772160</baseAddress>
+    <span>2048</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Flash</moduleName>
+    <slaveName>flash_data</slaveName>
+    <name>Flash.flash_data</name>
+    <baseAddress>201326592</baseAddress>
+    <span>8388608</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Flash</moduleName>
+    <slaveName>flash_erase_control</slaveName>
+    <name>Flash.flash_erase_control</name>
+    <baseAddress>201261056</baseAddress>
+    <span>4</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>VGA_Subsystem_VGA_Pixel_DMA</moduleName>
+    <slaveName>avalon_dma_control_slave</slaveName>
+    <name>VGA_Subsystem_VGA_Pixel_DMA.avalon_dma_control_slave</name>
+    <baseAddress>4280299552</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>VGA_Subsystem_VGA_Pixel_RGB_Resampler</moduleName>
+    <slaveName>avalon_rgb_slave</slaveName>
+    <name>VGA_Subsystem_VGA_Pixel_RGB_Resampler.avalon_rgb_slave</name>
+    <baseAddress>4280299536</baseAddress>
+    <span>4</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SDRAM</moduleName>
+    <slaveName>s1</slaveName>
+    <name>SDRAM.s1</name>
+    <baseAddress>0</baseAddress>
+    <span>134217728</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Red_LEDs</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Red_LEDs.s1</name>
+    <baseAddress>4280287232</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Green_LEDs</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Green_LEDs.s1</name>
+    <baseAddress>4280287248</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>HEX3_HEX0</moduleName>
+    <slaveName>s1</slaveName>
+    <name>HEX3_HEX0.s1</name>
+    <baseAddress>4280287264</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>HEX7_HEX4</moduleName>
+    <slaveName>s1</slaveName>
+    <name>HEX7_HEX4.s1</name>
+    <baseAddress>4280287280</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Slider_Switches</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Slider_Switches.s1</name>
+    <baseAddress>4280287296</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Pushbuttons</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Pushbuttons.s1</name>
+    <baseAddress>4280287312</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Expansion_JP5</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Expansion_JP5.s1</name>
+    <baseAddress>4280287328</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Interval_Timer</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Interval_Timer.s1</name>
+    <baseAddress>4280295424</baseAddress>
+    <span>32</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Interval_Timer_2</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Interval_Timer_2.s1</name>
+    <baseAddress>4280295456</baseAddress>
+    <span>32</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Video_In_Subsystem_Video_In_DMA</moduleName>
+    <slaveName>avalon_dma_control_slave</slaveName>
+    <name>Video_In_Subsystem_Video_In_DMA.avalon_dma_control_slave</name>
+    <baseAddress>4280299616</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller.s1</name>
+    <baseAddress>4280299632</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+  </interface>
+  <interface kind="avalon_master" name="instruction_master">
+   
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SRAM</moduleName>
+    <slaveName>avalon_sram_slave</slaveName>
+    <name>SRAM.avalon_sram_slave</name>
+    <baseAddress>134217728</baseAddress>
+    <span>2097152</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Nios2</moduleName>
+    <slaveName>debug_mem_slave</slaveName>
+    <name>Nios2.debug_mem_slave</name>
+    <baseAddress>167772160</baseAddress>
+    <span>2048</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Flash</moduleName>
+    <slaveName>flash_data</slaveName>
+    <name>Flash.flash_data</name>
+    <baseAddress>201326592</baseAddress>
+    <span>8388608</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SDRAM</moduleName>
+    <slaveName>s1</slaveName>
+    <name>SDRAM.s1</name>
+    <baseAddress>0</baseAddress>
+    <span>134217728</span>
+   </memoryBlock>
+  </interface>
+  <interface kind="avalon_slave" name="debug_mem_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.hideDevice</name>
+    <value>1</value>
+   </assignment>
+   <assignment>
+    <name>qsys.ui.connect</name>
+    <value>instruction_master,data_master</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_nios2_gen2" name="Nios2_2nd_Core" path="Nios2_2nd_Core">
+  
+  <parameter name="debug_jtagInstanceID">
+   <value>0</value>
+   </parameter>
+  <parameter name="resetAbsoluteAddr">
+   <value>67108864</value>
+   </parameter>
+  <parameter name="exceptionAbsoluteAddr">
+   <value>67108896</value>
+   </parameter>
+  <interface kind="avalon_master" name="data_master">
+   
+   <assignment>
+    <name>debug.providesServices</name>
+    <value>master</value>
+   </assignment>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Audio_Subsystem_Audio</moduleName>
+    <slaveName>avalon_audio_slave</slaveName>
+    <name>Audio_Subsystem_Audio.avalon_audio_slave</name>
+    <baseAddress>4280299584</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>AV_Config</moduleName>
+    <slaveName>avalon_av_config_slave</slaveName>
+    <name>AV_Config.avalon_av_config_slave</name>
+    <baseAddress>4280299520</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>IrDA</moduleName>
+    <slaveName>avalon_irda_slave</slaveName>
+    <name>IrDA.avalon_irda_slave</name>
+    <baseAddress>4280291360</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>JTAG_UART_2nd_Core</moduleName>
+    <slaveName>avalon_jtag_slave</slaveName>
+    <name>JTAG_UART_2nd_Core.avalon_jtag_slave</name>
+    <baseAddress>4280291328</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Char_LCD_16x2</moduleName>
+    <slaveName>avalon_lcd_slave</slaveName>
+    <name>Char_LCD_16x2.avalon_lcd_slave</name>
+    <baseAddress>4280299600</baseAddress>
+    <span>2</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>PS2_Port</moduleName>
+    <slaveName>avalon_ps2_slave</slaveName>
+    <name>PS2_Port.avalon_ps2_slave</name>
+    <baseAddress>4280287488</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>PS2_Port_Dual</moduleName>
+    <slaveName>avalon_ps2_slave</slaveName>
+    <name>PS2_Port_Dual.avalon_ps2_slave</name>
+    <baseAddress>4280287496</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Serial_Port</moduleName>
+    <slaveName>avalon_rs232_slave</slaveName>
+    <name>Serial_Port.avalon_rs232_slave</name>
+    <baseAddress>4280291344</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SD_Card</moduleName>
+    <slaveName>avalon_sdcard_slave</slaveName>
+    <name>SD_Card.avalon_sdcard_slave</name>
+    <baseAddress>184549376</baseAddress>
+    <span>1024</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SRAM</moduleName>
+    <slaveName>avalon_sram_slave</slaveName>
+    <name>SRAM.avalon_sram_slave</name>
+    <baseAddress>134217728</baseAddress>
+    <span>2097152</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>USB</moduleName>
+    <slaveName>avalon_usb_slave</slaveName>
+    <name>USB.avalon_usb_slave</name>
+    <baseAddress>4280287504</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA</moduleName>
+    <slaveName>avalon_dma_control_slave</slaveName>
+    <name>VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA.avalon_dma_control_slave</name>
+    <baseAddress>4280299568</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM</moduleName>
+    <slaveName>s1</slaveName>
+    <name>VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM.s1</name>
+    <baseAddress>150994944</baseAddress>
+    <span>8192</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SysID</moduleName>
+    <slaveName>control_slave</slaveName>
+    <name>SysID.control_slave</name>
+    <baseAddress>4280295488</baseAddress>
+    <span>8</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Nios2_2nd_Core</moduleName>
+    <slaveName>debug_mem_slave</slaveName>
+    <name>Nios2_2nd_Core.debug_mem_slave</name>
+    <baseAddress>167772160</baseAddress>
+    <span>2048</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Flash</moduleName>
+    <slaveName>flash_data</slaveName>
+    <name>Flash.flash_data</name>
+    <baseAddress>201326592</baseAddress>
+    <span>8388608</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Flash</moduleName>
+    <slaveName>flash_erase_control</slaveName>
+    <name>Flash.flash_erase_control</name>
+    <baseAddress>201261056</baseAddress>
+    <span>4</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>VGA_Subsystem_VGA_Pixel_DMA</moduleName>
+    <slaveName>avalon_dma_control_slave</slaveName>
+    <name>VGA_Subsystem_VGA_Pixel_DMA.avalon_dma_control_slave</name>
+    <baseAddress>4280299552</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>VGA_Subsystem_VGA_Pixel_RGB_Resampler</moduleName>
+    <slaveName>avalon_rgb_slave</slaveName>
+    <name>VGA_Subsystem_VGA_Pixel_RGB_Resampler.avalon_rgb_slave</name>
+    <baseAddress>4280299536</baseAddress>
+    <span>4</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SDRAM</moduleName>
+    <slaveName>s1</slaveName>
+    <name>SDRAM.s1</name>
+    <baseAddress>0</baseAddress>
+    <span>134217728</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Red_LEDs</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Red_LEDs.s1</name>
+    <baseAddress>4280287232</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Green_LEDs</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Green_LEDs.s1</name>
+    <baseAddress>4280287248</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>HEX3_HEX0</moduleName>
+    <slaveName>s1</slaveName>
+    <name>HEX3_HEX0.s1</name>
+    <baseAddress>4280287264</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>HEX7_HEX4</moduleName>
+    <slaveName>s1</slaveName>
+    <name>HEX7_HEX4.s1</name>
+    <baseAddress>4280287280</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Slider_Switches</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Slider_Switches.s1</name>
+    <baseAddress>4280287296</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Pushbuttons</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Pushbuttons.s1</name>
+    <baseAddress>4280287312</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Expansion_JP5</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Expansion_JP5.s1</name>
+    <baseAddress>4280287328</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Interval_Timer_2nd_Core</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Interval_Timer_2nd_Core.s1</name>
+    <baseAddress>4280295424</baseAddress>
+    <span>32</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Interval_Timer_2nd_Core_2</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Interval_Timer_2nd_Core_2.s1</name>
+    <baseAddress>4280295456</baseAddress>
+    <span>32</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Video_In_Subsystem_Video_In_DMA</moduleName>
+    <slaveName>avalon_dma_control_slave</slaveName>
+    <name>Video_In_Subsystem_Video_In_DMA.avalon_dma_control_slave</name>
+    <baseAddress>4280299616</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller</moduleName>
+    <slaveName>s1</slaveName>
+    <name>Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller.s1</name>
+    <baseAddress>4280299632</baseAddress>
+    <span>16</span>
+   </memoryBlock>
+  </interface>
+  <interface kind="avalon_master" name="instruction_master">
+   
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SRAM</moduleName>
+    <slaveName>avalon_sram_slave</slaveName>
+    <name>SRAM.avalon_sram_slave</name>
+    <baseAddress>134217728</baseAddress>
+    <span>2097152</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Nios2_2nd_Core</moduleName>
+    <slaveName>debug_mem_slave</slaveName>
+    <name>Nios2_2nd_Core.debug_mem_slave</name>
+    <baseAddress>167772160</baseAddress>
+    <span>2048</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>Flash</moduleName>
+    <slaveName>flash_data</slaveName>
+    <name>Flash.flash_data</name>
+    <baseAddress>201326592</baseAddress>
+    <span>8388608</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SDRAM</moduleName>
+    <slaveName>s1</slaveName>
+    <name>SDRAM.s1</name>
+    <baseAddress>0</baseAddress>
+    <span>134217728</span>
+   </memoryBlock>
+  </interface>
+  <interface kind="avalon_slave" name="debug_mem_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.hideDevice</name>
+    <value>1</value>
+   </assignment>
+   <assignment>
+    <name>qsys.ui.connect</name>
+    <value>instruction_master,data_master</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_nios_custom_instr_floating_point" name="Nios2_2nd_Core_Floating_Point" path="Nios2_2nd_Core_Floating_Point">
+  
+  </module>
+ <module kind="altera_nios_custom_instr_floating_point" name="Nios2_Floating_Point" path="Nios2_Floating_Point">
+  
+  </module>
+ <module kind="altera_up_avalon_ps2" name="PS2_Port" path="PS2_Port">
+  
+  <interface kind="avalon_slave" name="avalon_ps2_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_up_avalon_ps2" name="PS2_Port_Dual" path="PS2_Port_Dual">
+  
+  <interface kind="avalon_slave" name="avalon_ps2_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_avalon_pio" name="Pushbuttons" path="Pushbuttons">
+  
+  <interface kind="avalon_slave" name="s1">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_avalon_pio" name="Red_LEDs" path="Red_LEDs">
+  
+  <interface kind="avalon_slave" name="s1">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_avalon_new_sdram_controller" name="SDRAM" path="SDRAM">
+  
+  <interface kind="avalon_slave" name="s1">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>1</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="Altera_UP_SD_Card_Avalon_Interface" name="SD_Card" path="SD_Card">
+  
+  <interface kind="avalon_slave" name="avalon_sdcard_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_up_avalon_sram" name="SRAM" path="SRAM">
+  
+  <interface kind="avalon_slave" name="avalon_sram_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+ </module>
+ <module kind="altera_up_avalon_rs232" name="Serial_Port" path="Serial_Port">
+  
+  <interface kind="avalon_slave" name="avalon_rs232_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_avalon_pio" name="Slider_Switches" path="Slider_Switches">
+  
+  <interface kind="avalon_slave" name="s1">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_avalon_sysid_qsys" name="SysID" path="SysID">
+  
+  <parameter name="id">
+   <value>0</value>
+   </parameter>
+  <parameter name="timestamp">
+   <value>1555017408</value>
+   </parameter>
+  <interface kind="avalon_slave" name="control_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+ </module>
+ <module kind="altera_up_avalon_sys_sdram_pll" name="System_PLL" path="System_PLL">
+  
+  </module>
+ <module kind="altera_up_avalon_usb" name="USB" path="USB">
+  
+  <interface kind="avalon_slave" name="avalon_usb_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="VGA_Subsystem" name="VGA_Subsystem" path="VGA_Subsystem">
+  
+  <interface kind="avalon_slave" name="char_buffer_control_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  <interface kind="avalon_slave" name="char_buffer_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>1</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  <interface kind="avalon_slave" name="pixel_dma_control_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  <interface kind="avalon_master" name="pixel_dma_master">
+   
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SRAM</moduleName>
+    <slaveName>avalon_sram_slave</slaveName>
+    <name>SRAM.avalon_sram_slave</name>
+    <baseAddress>134217728</baseAddress>
+    <span>2097152</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SDRAM</moduleName>
+    <slaveName>s1</slaveName>
+    <name>SDRAM.s1</name>
+    <baseAddress>0</baseAddress>
+    <span>134217728</span>
+   </memoryBlock>
+  </interface>
+  <interface kind="avalon_slave" name="rgb_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="Char_Buf_Subsystem" name="VGA_Subsystem_Char_Buf_Subsystem" path="VGA_Subsystem.Char_Buf_Subsystem">
+  
+  <interface kind="avalon_slave" name="char_buffer_control_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  <interface kind="avalon_slave" name="char_buffer_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>1</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_up_avalon_video_ascii_to_image" name="VGA_Subsystem_Char_Buf_Subsystem_ASCII_to_Image" path="VGA_Subsystem.Char_Buf_Subsystem.ASCII_to_Image">
+  
+  </module>
+ <module kind="altera_up_avalon_video_dma_controller" name="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA" path="VGA_Subsystem.Char_Buf_Subsystem.Char_Buf_DMA">
+  
+  <interface kind="avalon_master" name="avalon_dma_master">
+   
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM</moduleName>
+    <slaveName>s2</slaveName>
+    <name>VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM.s2</name>
+    <baseAddress>150994944</baseAddress>
+    <span>8192</span>
+   </memoryBlock>
+  </interface>
+  <interface kind="avalon_slave" name="avalon_dma_control_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_up_avalon_video_rgb_resampler" name="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_RGB_Resampler" path="VGA_Subsystem.Char_Buf_Subsystem.Char_Buf_RGB_Resampler">
+  
+  <interface kind="avalon_slave" name="avalon_rgb_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_up_avalon_video_scaler" name="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_Scaler" path="VGA_Subsystem.Char_Buf_Subsystem.Char_Buf_Scaler">
+  
+  </module>
+ <module kind="altera_avalon_onchip_memory2" name="VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM" path="VGA_Subsystem.Char_Buf_Subsystem.Onchip_SRAM">
+  
+  <parameter name="initMemContent">
+   <value>true</value>
+   </parameter>
+  <parameter name="initializationFileName">
+   <value>onchip_mem.hex</value>
+   </parameter>
+  <parameter name="useNonDefaultInitFile">
+   <value>false</value>
+   </parameter>
+  <parameter name="autoInitializationFileName">
+   <value>Computer_System_VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM</value>
+   </parameter>
+  <interface kind="avalon_slave" name="s1">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>1</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  <interface kind="avalon_slave" name="s2">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>1</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_up_avalon_video_change_alpha" name="VGA_Subsystem_Char_Buf_Subsystem_Set_Black_Transparent" path="VGA_Subsystem.Char_Buf_Subsystem.Set_Black_Transparent">
+  
+  </module>
+ <module kind="clock_source" name="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk" path="VGA_Subsystem.Char_Buf_Subsystem.Sys_Clk">
+  
+  </module>
+ <module kind="clock_source" name="VGA_Subsystem_Sys_Clk" path="VGA_Subsystem.Sys_Clk">
+  
+  </module>
+ <module kind="altera_up_avalon_video_alpha_blender" name="VGA_Subsystem_VGA_Alpha_Blender" path="VGA_Subsystem.VGA_Alpha_Blender">
+  
+  </module>
+ <module kind="clock_source" name="VGA_Subsystem_VGA_Clk" path="VGA_Subsystem.VGA_Clk">
+  
+  </module>
+ <module kind="altera_up_avalon_video_vga_controller" name="VGA_Subsystem_VGA_Controller" path="VGA_Subsystem.VGA_Controller">
+  
+  </module>
+ <module kind="altera_up_avalon_video_dual_clock_buffer" name="VGA_Subsystem_VGA_Dual_Clock_FIFO" path="VGA_Subsystem.VGA_Dual_Clock_FIFO">
+  
+  </module>
+ <module kind="altera_up_avalon_video_dma_controller" name="VGA_Subsystem_VGA_Pixel_DMA" path="VGA_Subsystem.VGA_Pixel_DMA">
+  
+  <interface kind="avalon_master" name="avalon_dma_master">
+   
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SRAM</moduleName>
+    <slaveName>avalon_sram_slave</slaveName>
+    <name>SRAM.avalon_sram_slave</name>
+    <baseAddress>134217728</baseAddress>
+    <span>2097152</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SDRAM</moduleName>
+    <slaveName>s1</slaveName>
+    <name>SDRAM.s1</name>
+    <baseAddress>0</baseAddress>
+    <span>134217728</span>
+   </memoryBlock>
+  </interface>
+  <interface kind="avalon_slave" name="avalon_dma_control_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_up_avalon_video_dual_clock_buffer" name="VGA_Subsystem_VGA_Pixel_FIFO" path="VGA_Subsystem.VGA_Pixel_FIFO">
+  
+  </module>
+ <module kind="altera_up_avalon_video_rgb_resampler" name="VGA_Subsystem_VGA_Pixel_RGB_Resampler" path="VGA_Subsystem.VGA_Pixel_RGB_Resampler">
+  
+  <interface kind="avalon_slave" name="avalon_rgb_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_up_avalon_video_scaler" name="VGA_Subsystem_VGA_Pixel_Scaler" path="VGA_Subsystem.VGA_Pixel_Scaler">
+  
+  </module>
+ <module kind="Video_In_Subsystem" name="Video_In_Subsystem" path="Video_In_Subsystem">
+  
+  <interface kind="avalon_slave" name="video_in_dma_control_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  <interface kind="avalon_master" name="video_in_dma_master">
+   
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SRAM</moduleName>
+    <slaveName>avalon_sram_slave</slaveName>
+    <name>SRAM.avalon_sram_slave</name>
+    <baseAddress>134217728</baseAddress>
+    <span>2097152</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SDRAM</moduleName>
+    <slaveName>s1</slaveName>
+    <name>SDRAM.s1</name>
+    <baseAddress>0</baseAddress>
+    <span>134217728</span>
+   </memoryBlock>
+  </interface>
+  <interface kind="avalon_slave" name="video_in_edge_detection_control_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+ </module>
+ <module kind="clock_source" name="Video_In_Subsystem_Sys_Clk" path="Video_In_Subsystem.Sys_Clk">
+  
+  </module>
+ <module kind="altera_up_avalon_video_decoder" name="Video_In_Subsystem_Video_In" path="Video_In_Subsystem.Video_In">
+  
+  </module>
+ <module kind="altera_up_avalon_video_csc" name="Video_In_Subsystem_Video_In_CSC" path="Video_In_Subsystem.Video_In_CSC">
+  
+  </module>
+ <module kind="altera_up_avalon_video_chroma_resampler" name="Video_In_Subsystem_Video_In_Chroma_Resampler" path="Video_In_Subsystem.Video_In_Chroma_Resampler">
+  
+  </module>
+ <module kind="altera_up_avalon_video_clipper" name="Video_In_Subsystem_Video_In_Clipper" path="Video_In_Subsystem.Video_In_Clipper">
+  
+  </module>
+ <module kind="altera_up_avalon_video_dma_controller" name="Video_In_Subsystem_Video_In_DMA" path="Video_In_Subsystem.Video_In_DMA">
+  
+  <interface kind="avalon_slave" name="avalon_dma_control_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+  <interface kind="avalon_master" name="avalon_dma_master">
+   
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SRAM</moduleName>
+    <slaveName>avalon_sram_slave</slaveName>
+    <name>SRAM.avalon_sram_slave</name>
+    <baseAddress>134217728</baseAddress>
+    <span>2097152</span>
+   </memoryBlock>
+   <memoryBlock>
+    <isBridge>false</isBridge>
+    <moduleName>SDRAM</moduleName>
+    <slaveName>s1</slaveName>
+    <name>SDRAM.s1</name>
+    <baseAddress>0</baseAddress>
+    <span>134217728</span>
+   </memoryBlock>
+  </interface>
+ </module>
+ <module kind="Video_In_Edge_Detection_Subsystem" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem" path="Video_In_Subsystem.Video_In_Edge_Detection_Subsystem">
+  
+  <interface kind="avalon_slave" name="edge_detection_control_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_up_avalon_video_chroma_resampler" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Filter" path="Video_In_Subsystem.Video_In_Edge_Detection_Subsystem.Chroma_Filter">
+  
+  </module>
+ <module kind="altera_up_avalon_video_chroma_resampler" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Upsampler" path="Video_In_Subsystem.Video_In_Edge_Detection_Subsystem.Chroma_Upsampler">
+  
+  </module>
+ <module kind="altera_up_avalon_video_edge_detection" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection" path="Video_In_Subsystem.Video_In_Edge_Detection_Subsystem.Edge_Detection">
+  
+  </module>
+ <module kind="altera_avalon_pio" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller" path="Video_In_Subsystem.Video_In_Edge_Detection_Subsystem.Edge_Detection_Router_Controller">
+  
+  <interface kind="avalon_slave" name="s1">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>0</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>0</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="clock_source" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk" path="Video_In_Subsystem.Video_In_Edge_Detection_Subsystem.Sys_Clk">
+  
+  </module>
+ <module kind="altera_up_avalon_video_stream_router" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Merger" path="Video_In_Subsystem.Video_In_Edge_Detection_Subsystem.Video_Stream_Merger">
+  
+  </module>
+ <module kind="altera_up_avalon_video_stream_router" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Splitter" path="Video_In_Subsystem.Video_In_Edge_Detection_Subsystem.Video_Stream_Splitter">
+  
+  </module>
+ <module kind="altera_up_avalon_video_rgb_resampler" name="Video_In_Subsystem_Video_In_RGB_Resampler" path="Video_In_Subsystem.Video_In_RGB_Resampler">
+  
+  <interface kind="avalon_slave" name="avalon_rgb_slave">
+   
+   <assignment>
+    <name>embeddedsw.configuration.isFlash</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isMemoryDevice</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isNonVolatileStorage</name>
+    <value>false</value>
+   </assignment>
+   <assignment>
+    <name>embeddedsw.configuration.isPrintableDevice</name>
+    <value>false</value>
+   </assignment>
+   </interface>
+  </module>
+ <module kind="altera_up_avalon_video_scaler" name="Video_In_Subsystem_Video_In_Scaler" path="Video_In_Subsystem.Video_In_Scaler">
+  
+  </module>
+ <module kind="altera_up_avalon_video_pll" name="Video_PLL" path="Video_PLL">
+  
+  </module>
+ <connection end="Audio_Subsystem_Audio.clk" kind="clock" name="Audio_Subsystem_Sys_Clk.clk/Audio_Subsystem_Audio.clk" start="Audio_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="Audio_Subsystem_Audio.reset" kind="reset" name="Audio_Subsystem_Sys_Clk.clk_reset/Audio_Subsystem_Audio.reset" start="Audio_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM.s2" kind="avalon" name="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA.avalon_dma_master/VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM.s2" start="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA.avalon_dma_master" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_RGB_Resampler.avalon_rgb_sink" kind="avalon_streaming" name="VGA_Subsystem_Char_Buf_Subsystem_ASCII_to_Image.avalon_image_source/VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_RGB_Resampler.avalon_rgb_sink" start="VGA_Subsystem_Char_Buf_Subsystem_ASCII_to_Image.avalon_image_source" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_Scaler.avalon_scaler_sink" kind="avalon_streaming" name="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA.avalon_pixel_source/VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_Scaler.avalon_scaler_sink" start="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA.avalon_pixel_source" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Set_Black_Transparent.avalon_apply_alpha_sink" kind="avalon_streaming" name="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_RGB_Resampler.avalon_rgb_source/VGA_Subsystem_Char_Buf_Subsystem_Set_Black_Transparent.avalon_apply_alpha_sink" start="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_RGB_Resampler.avalon_rgb_source" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_ASCII_to_Image.avalon_ascii_sink" kind="avalon_streaming" name="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_Scaler.avalon_scaler_source/VGA_Subsystem_Char_Buf_Subsystem_ASCII_to_Image.avalon_ascii_sink" start="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_Scaler.avalon_scaler_source" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA.clk" kind="clock" name="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk/VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA.clk" start="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_Scaler.clk" kind="clock" name="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk/VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_Scaler.clk" start="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_ASCII_to_Image.clk" kind="clock" name="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk/VGA_Subsystem_Char_Buf_Subsystem_ASCII_to_Image.clk" start="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_RGB_Resampler.clk" kind="clock" name="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk/VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_RGB_Resampler.clk" start="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Set_Black_Transparent.clk" kind="clock" name="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk/VGA_Subsystem_Char_Buf_Subsystem_Set_Black_Transparent.clk" start="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM.clk1" kind="clock" name="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk/VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM.clk1" start="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA.reset" kind="reset" name="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk_reset/VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA.reset" start="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_Scaler.reset" kind="reset" name="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk_reset/VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_Scaler.reset" start="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_ASCII_to_Image.reset" kind="reset" name="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk_reset/VGA_Subsystem_Char_Buf_Subsystem_ASCII_to_Image.reset" start="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_RGB_Resampler.reset" kind="reset" name="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk_reset/VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_RGB_Resampler.reset" start="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Set_Black_Transparent.reset" kind="reset" name="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk_reset/VGA_Subsystem_Char_Buf_Subsystem_Set_Black_Transparent.reset" start="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM.reset1" kind="reset" name="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk_reset/VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM.reset1" start="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Dual_Clock_FIFO.avalon_dc_buffer_sink" kind="avalon_streaming" name="VGA_Subsystem_VGA_Alpha_Blender.avalon_blended_source/VGA_Subsystem_VGA_Dual_Clock_FIFO.avalon_dc_buffer_sink" start="VGA_Subsystem_VGA_Alpha_Blender.avalon_blended_source" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Alpha_Blender.avalon_foreground_sink" kind="avalon_streaming" name="VGA_Subsystem_Char_Buf_Subsystem_Set_Black_Transparent.avalon_apply_alpha_source/VGA_Subsystem_VGA_Alpha_Blender.avalon_foreground_sink" start="VGA_Subsystem_Char_Buf_Subsystem_Set_Black_Transparent.avalon_apply_alpha_source" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_RGB_Resampler.avalon_rgb_sink" kind="avalon_streaming" name="VGA_Subsystem_VGA_Pixel_FIFO.avalon_dc_buffer_source/VGA_Subsystem_VGA_Pixel_RGB_Resampler.avalon_rgb_sink" start="VGA_Subsystem_VGA_Pixel_FIFO.avalon_dc_buffer_source" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Controller.avalon_vga_sink" kind="avalon_streaming" name="VGA_Subsystem_VGA_Dual_Clock_FIFO.avalon_dc_buffer_source/VGA_Subsystem_VGA_Controller.avalon_vga_sink" start="VGA_Subsystem_VGA_Dual_Clock_FIFO.avalon_dc_buffer_source" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_FIFO.avalon_dc_buffer_sink" kind="avalon_streaming" name="VGA_Subsystem_VGA_Pixel_DMA.avalon_pixel_source/VGA_Subsystem_VGA_Pixel_FIFO.avalon_dc_buffer_sink" start="VGA_Subsystem_VGA_Pixel_DMA.avalon_pixel_source" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_Scaler.avalon_scaler_sink" kind="avalon_streaming" name="VGA_Subsystem_VGA_Pixel_RGB_Resampler.avalon_rgb_source/VGA_Subsystem_VGA_Pixel_Scaler.avalon_scaler_sink" start="VGA_Subsystem_VGA_Pixel_RGB_Resampler.avalon_rgb_source" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Alpha_Blender.avalon_background_sink" kind="avalon_streaming" name="VGA_Subsystem_VGA_Pixel_Scaler.avalon_scaler_source/VGA_Subsystem_VGA_Alpha_Blender.avalon_background_sink" start="VGA_Subsystem_VGA_Pixel_Scaler.avalon_scaler_source" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_DMA.clk" kind="clock" name="VGA_Subsystem_Sys_Clk.clk/VGA_Subsystem_VGA_Pixel_DMA.clk" start="VGA_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_RGB_Resampler.clk" kind="clock" name="VGA_Subsystem_Sys_Clk.clk/VGA_Subsystem_VGA_Pixel_RGB_Resampler.clk" start="VGA_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_Scaler.clk" kind="clock" name="VGA_Subsystem_Sys_Clk.clk/VGA_Subsystem_VGA_Pixel_Scaler.clk" start="VGA_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Alpha_Blender.clk" kind="clock" name="VGA_Subsystem_Sys_Clk.clk/VGA_Subsystem_VGA_Alpha_Blender.clk" start="VGA_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Controller.clk" kind="clock" name="VGA_Subsystem_VGA_Clk.clk/VGA_Subsystem_VGA_Controller.clk" start="VGA_Subsystem_VGA_Clk.clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_FIFO.clock_stream_in" kind="clock" name="VGA_Subsystem_Sys_Clk.clk/VGA_Subsystem_VGA_Pixel_FIFO.clock_stream_in" start="VGA_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Dual_Clock_FIFO.clock_stream_in" kind="clock" name="VGA_Subsystem_Sys_Clk.clk/VGA_Subsystem_VGA_Dual_Clock_FIFO.clock_stream_in" start="VGA_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_FIFO.clock_stream_out" kind="clock" name="VGA_Subsystem_Sys_Clk.clk/VGA_Subsystem_VGA_Pixel_FIFO.clock_stream_out" start="VGA_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Dual_Clock_FIFO.clock_stream_out" kind="clock" name="VGA_Subsystem_VGA_Clk.clk/VGA_Subsystem_VGA_Dual_Clock_FIFO.clock_stream_out" start="VGA_Subsystem_VGA_Clk.clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk_in" kind="clock" name="VGA_Subsystem_Sys_Clk.clk/VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk_in" start="VGA_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_DMA.reset" kind="reset" name="VGA_Subsystem_Sys_Clk.clk_reset/VGA_Subsystem_VGA_Pixel_DMA.reset" start="VGA_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_RGB_Resampler.reset" kind="reset" name="VGA_Subsystem_Sys_Clk.clk_reset/VGA_Subsystem_VGA_Pixel_RGB_Resampler.reset" start="VGA_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_Scaler.reset" kind="reset" name="VGA_Subsystem_Sys_Clk.clk_reset/VGA_Subsystem_VGA_Pixel_Scaler.reset" start="VGA_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Alpha_Blender.reset" kind="reset" name="VGA_Subsystem_Sys_Clk.clk_reset/VGA_Subsystem_VGA_Alpha_Blender.reset" start="VGA_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Controller.reset" kind="reset" name="VGA_Subsystem_VGA_Clk.clk_reset/VGA_Subsystem_VGA_Controller.reset" start="VGA_Subsystem_VGA_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_FIFO.reset_stream_in" kind="reset" name="VGA_Subsystem_Sys_Clk.clk_reset/VGA_Subsystem_VGA_Pixel_FIFO.reset_stream_in" start="VGA_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Dual_Clock_FIFO.reset_stream_in" kind="reset" name="VGA_Subsystem_Sys_Clk.clk_reset/VGA_Subsystem_VGA_Dual_Clock_FIFO.reset_stream_in" start="VGA_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_FIFO.reset_stream_out" kind="reset" name="VGA_Subsystem_Sys_Clk.clk_reset/VGA_Subsystem_VGA_Pixel_FIFO.reset_stream_out" start="VGA_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Dual_Clock_FIFO.reset_stream_out" kind="reset" name="VGA_Subsystem_VGA_Clk.clk_reset/VGA_Subsystem_VGA_Dual_Clock_FIFO.reset_stream_out" start="VGA_Subsystem_VGA_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk_in_reset" kind="reset" name="VGA_Subsystem_Sys_Clk.clk_reset/VGA_Subsystem_Char_Buf_Subsystem_Sys_Clk.clk_in_reset" start="VGA_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection.avalon_edge_detection_sink" kind="avalon_streaming" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Filter.avalon_chroma_source/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection.avalon_edge_detection_sink" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Filter.avalon_chroma_source" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Merger.avalon_stream_router_sink_1" kind="avalon_streaming" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Upsampler.avalon_chroma_source/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Merger.avalon_stream_router_sink_1" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Upsampler.avalon_chroma_source" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Upsampler.avalon_chroma_sink" kind="avalon_streaming" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection.avalon_edge_detection_source/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Upsampler.avalon_chroma_sink" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection.avalon_edge_detection_source" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Merger.avalon_stream_router_sink_0" kind="avalon_streaming" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Splitter.avalon_stream_router_source_0/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Merger.avalon_stream_router_sink_0" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Splitter.avalon_stream_router_source_0" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Filter.avalon_chroma_sink" kind="avalon_streaming" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Splitter.avalon_stream_router_source_1/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Filter.avalon_chroma_sink" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Splitter.avalon_stream_router_source_1" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Merger.avalon_sync_sink" kind="avalon_streaming" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Splitter.avalon_sync_source/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Merger.avalon_sync_sink" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Splitter.avalon_sync_source" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Splitter.clk" kind="clock" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Splitter.clk" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller.clk" kind="clock" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller.clk" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Filter.clk" kind="clock" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Filter.clk" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection.clk" kind="clock" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection.clk" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Upsampler.clk" kind="clock" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Upsampler.clk" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Merger.clk" kind="clock" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Merger.clk" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller.external_connection" kind="conduit" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Splitter.external_interface/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller.external_connection" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Splitter.external_interface" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Splitter.reset" kind="reset" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk_reset/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Splitter.reset" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller.reset" kind="reset" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk_reset/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller.reset" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Filter.reset" kind="reset" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk_reset/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Filter.reset" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection.reset" kind="reset" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk_reset/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection.reset" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Upsampler.reset" kind="reset" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk_reset/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Chroma_Upsampler.reset" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Merger.reset" kind="reset" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk_reset/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Merger.reset" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Splitter.avalon_stream_router_sink" kind="avalon_streaming" name="Video_In_Subsystem_Video_In_Chroma_Resampler.avalon_chroma_source/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Splitter.avalon_stream_router_sink" start="Video_In_Subsystem_Video_In_Chroma_Resampler.avalon_chroma_source" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Scaler.avalon_scaler_sink" kind="avalon_streaming" name="Video_In_Subsystem_Video_In_Clipper.avalon_clipper_source/Video_In_Subsystem_Video_In_Scaler.avalon_scaler_sink" start="Video_In_Subsystem_Video_In_Clipper.avalon_clipper_source" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_RGB_Resampler.avalon_rgb_sink" kind="avalon_streaming" name="Video_In_Subsystem_Video_In_CSC.avalon_csc_source/Video_In_Subsystem_Video_In_RGB_Resampler.avalon_rgb_sink" start="Video_In_Subsystem_Video_In_CSC.avalon_csc_source" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Chroma_Resampler.avalon_chroma_sink" kind="avalon_streaming" name="Video_In_Subsystem_Video_In.avalon_decoder_source/Video_In_Subsystem_Video_In_Chroma_Resampler.avalon_chroma_sink" start="Video_In_Subsystem_Video_In.avalon_decoder_source" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Clipper.avalon_clipper_sink" kind="avalon_streaming" name="Video_In_Subsystem_Video_In_RGB_Resampler.avalon_rgb_source/Video_In_Subsystem_Video_In_Clipper.avalon_clipper_sink" start="Video_In_Subsystem_Video_In_RGB_Resampler.avalon_rgb_source" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_DMA.avalon_dma_sink" kind="avalon_streaming" name="Video_In_Subsystem_Video_In_Scaler.avalon_scaler_source/Video_In_Subsystem_Video_In_DMA.avalon_dma_sink" start="Video_In_Subsystem_Video_In_Scaler.avalon_scaler_source" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_CSC.avalon_csc_sink" kind="avalon_streaming" name="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Merger.avalon_stream_router_source/Video_In_Subsystem_Video_In_CSC.avalon_csc_sink" start="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Video_Stream_Merger.avalon_stream_router_source" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In.clk" kind="clock" name="Video_In_Subsystem_Sys_Clk.clk/Video_In_Subsystem_Video_In.clk" start="Video_In_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Chroma_Resampler.clk" kind="clock" name="Video_In_Subsystem_Sys_Clk.clk/Video_In_Subsystem_Video_In_Chroma_Resampler.clk" start="Video_In_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_CSC.clk" kind="clock" name="Video_In_Subsystem_Sys_Clk.clk/Video_In_Subsystem_Video_In_CSC.clk" start="Video_In_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_RGB_Resampler.clk" kind="clock" name="Video_In_Subsystem_Sys_Clk.clk/Video_In_Subsystem_Video_In_RGB_Resampler.clk" start="Video_In_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Clipper.clk" kind="clock" name="Video_In_Subsystem_Sys_Clk.clk/Video_In_Subsystem_Video_In_Clipper.clk" start="Video_In_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Scaler.clk" kind="clock" name="Video_In_Subsystem_Sys_Clk.clk/Video_In_Subsystem_Video_In_Scaler.clk" start="Video_In_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_DMA.clk" kind="clock" name="Video_In_Subsystem_Sys_Clk.clk/Video_In_Subsystem_Video_In_DMA.clk" start="Video_In_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk_in" kind="clock" name="Video_In_Subsystem_Sys_Clk.clk/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk_in" start="Video_In_Subsystem_Sys_Clk.clk" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In.reset" kind="reset" name="Video_In_Subsystem_Sys_Clk.clk_reset/Video_In_Subsystem_Video_In.reset" start="Video_In_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Chroma_Resampler.reset" kind="reset" name="Video_In_Subsystem_Sys_Clk.clk_reset/Video_In_Subsystem_Video_In_Chroma_Resampler.reset" start="Video_In_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_CSC.reset" kind="reset" name="Video_In_Subsystem_Sys_Clk.clk_reset/Video_In_Subsystem_Video_In_CSC.reset" start="Video_In_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_RGB_Resampler.reset" kind="reset" name="Video_In_Subsystem_Sys_Clk.clk_reset/Video_In_Subsystem_Video_In_RGB_Resampler.reset" start="Video_In_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Clipper.reset" kind="reset" name="Video_In_Subsystem_Sys_Clk.clk_reset/Video_In_Subsystem_Video_In_Clipper.reset" start="Video_In_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Scaler.reset" kind="reset" name="Video_In_Subsystem_Sys_Clk.clk_reset/Video_In_Subsystem_Video_In_Scaler.reset" start="Video_In_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_DMA.reset" kind="reset" name="Video_In_Subsystem_Sys_Clk.clk_reset/Video_In_Subsystem_Video_In_DMA.reset" start="Video_In_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk_in_reset" kind="reset" name="Video_In_Subsystem_Sys_Clk.clk_reset/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Sys_Clk.clk_in_reset" start="Video_In_Subsystem_Sys_Clk.clk_reset" version="18.1">
+  </connection>
+ <connection end="Audio_Subsystem_Audio.avalon_audio_slave" kind="avalon" name="Nios2.data_master/Audio_Subsystem_Audio.avalon_audio_slave" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="Audio_Subsystem_Audio.avalon_audio_slave" kind="avalon" name="Nios2_2nd_Core.data_master/Audio_Subsystem_Audio.avalon_audio_slave" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="AV_Config.avalon_av_config_slave" kind="avalon" name="Nios2.data_master/AV_Config.avalon_av_config_slave" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="AV_Config.avalon_av_config_slave" kind="avalon" name="Nios2_2nd_Core.data_master/AV_Config.avalon_av_config_slave" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="IrDA.avalon_irda_slave" kind="avalon" name="Nios2.data_master/IrDA.avalon_irda_slave" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="IrDA.avalon_irda_slave" kind="avalon" name="Nios2_2nd_Core.data_master/IrDA.avalon_irda_slave" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="JTAG_UART.avalon_jtag_slave" kind="avalon" name="Nios2.data_master/JTAG_UART.avalon_jtag_slave" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="JTAG_UART_2nd_Core.avalon_jtag_slave" kind="avalon" name="Nios2_2nd_Core.data_master/JTAG_UART_2nd_Core.avalon_jtag_slave" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="Char_LCD_16x2.avalon_lcd_slave" kind="avalon" name="Nios2.data_master/Char_LCD_16x2.avalon_lcd_slave" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="Char_LCD_16x2.avalon_lcd_slave" kind="avalon" name="Nios2_2nd_Core.data_master/Char_LCD_16x2.avalon_lcd_slave" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="PS2_Port.avalon_ps2_slave" kind="avalon" name="Nios2.data_master/PS2_Port.avalon_ps2_slave" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="PS2_Port.avalon_ps2_slave" kind="avalon" name="Nios2_2nd_Core.data_master/PS2_Port.avalon_ps2_slave" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="PS2_Port_Dual.avalon_ps2_slave" kind="avalon" name="Nios2.data_master/PS2_Port_Dual.avalon_ps2_slave" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="PS2_Port_Dual.avalon_ps2_slave" kind="avalon" name="Nios2_2nd_Core.data_master/PS2_Port_Dual.avalon_ps2_slave" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="Serial_Port.avalon_rs232_slave" kind="avalon" name="Nios2.data_master/Serial_Port.avalon_rs232_slave" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="Serial_Port.avalon_rs232_slave" kind="avalon" name="Nios2_2nd_Core.data_master/Serial_Port.avalon_rs232_slave" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="SD_Card.avalon_sdcard_slave" kind="avalon" name="Nios2.data_master/SD_Card.avalon_sdcard_slave" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="SD_Card.avalon_sdcard_slave" kind="avalon" name="Nios2_2nd_Core.data_master/SD_Card.avalon_sdcard_slave" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="SRAM.avalon_sram_slave" kind="avalon" name="Nios2.data_master/SRAM.avalon_sram_slave" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="SRAM.avalon_sram_slave" kind="avalon" name="Nios2_2nd_Core.data_master/SRAM.avalon_sram_slave" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="USB.avalon_usb_slave" kind="avalon" name="Nios2.data_master/USB.avalon_usb_slave" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="USB.avalon_usb_slave" kind="avalon" name="Nios2_2nd_Core.data_master/USB.avalon_usb_slave" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA.avalon_dma_control_slave" kind="avalon" name="Nios2.data_master/VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA.avalon_dma_control_slave" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA.avalon_dma_control_slave" kind="avalon" name="Nios2_2nd_Core.data_master/VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA.avalon_dma_control_slave" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM.s1" kind="avalon" name="Nios2.data_master/VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM.s1" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM.s1" kind="avalon" name="Nios2_2nd_Core.data_master/VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM.s1" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="SysID.control_slave" kind="avalon" name="Nios2.data_master/SysID.control_slave" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="SysID.control_slave" kind="avalon" name="Nios2_2nd_Core.data_master/SysID.control_slave" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="Nios2.debug_mem_slave" kind="avalon" name="Nios2.data_master/Nios2.debug_mem_slave" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="Nios2_2nd_Core.debug_mem_slave" kind="avalon" name="Nios2_2nd_Core.data_master/Nios2_2nd_Core.debug_mem_slave" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="Flash.flash_data" kind="avalon" name="Nios2.data_master/Flash.flash_data" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="Flash.flash_data" kind="avalon" name="Nios2_2nd_Core.data_master/Flash.flash_data" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="Flash.flash_erase_control" kind="avalon" name="Nios2.data_master/Flash.flash_erase_control" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="Flash.flash_erase_control" kind="avalon" name="Nios2_2nd_Core.data_master/Flash.flash_erase_control" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_DMA.avalon_dma_control_slave" kind="avalon" name="Nios2.data_master/VGA_Subsystem_VGA_Pixel_DMA.avalon_dma_control_slave" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_DMA.avalon_dma_control_slave" kind="avalon" name="Nios2_2nd_Core.data_master/VGA_Subsystem_VGA_Pixel_DMA.avalon_dma_control_slave" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_RGB_Resampler.avalon_rgb_slave" kind="avalon" name="Nios2.data_master/VGA_Subsystem_VGA_Pixel_RGB_Resampler.avalon_rgb_slave" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_RGB_Resampler.avalon_rgb_slave" kind="avalon" name="Nios2_2nd_Core.data_master/VGA_Subsystem_VGA_Pixel_RGB_Resampler.avalon_rgb_slave" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="SDRAM.s1" kind="avalon" name="Nios2.data_master/SDRAM.s1" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="SDRAM.s1" kind="avalon" name="Nios2_2nd_Core.data_master/SDRAM.s1" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="Red_LEDs.s1" kind="avalon" name="Nios2.data_master/Red_LEDs.s1" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="Red_LEDs.s1" kind="avalon" name="Nios2_2nd_Core.data_master/Red_LEDs.s1" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="Green_LEDs.s1" kind="avalon" name="Nios2.data_master/Green_LEDs.s1" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="Green_LEDs.s1" kind="avalon" name="Nios2_2nd_Core.data_master/Green_LEDs.s1" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="HEX3_HEX0.s1" kind="avalon" name="Nios2.data_master/HEX3_HEX0.s1" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="HEX3_HEX0.s1" kind="avalon" name="Nios2_2nd_Core.data_master/HEX3_HEX0.s1" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="HEX7_HEX4.s1" kind="avalon" name="Nios2.data_master/HEX7_HEX4.s1" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="HEX7_HEX4.s1" kind="avalon" name="Nios2_2nd_Core.data_master/HEX7_HEX4.s1" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="Slider_Switches.s1" kind="avalon" name="Nios2.data_master/Slider_Switches.s1" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="Slider_Switches.s1" kind="avalon" name="Nios2_2nd_Core.data_master/Slider_Switches.s1" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="Pushbuttons.s1" kind="avalon" name="Nios2.data_master/Pushbuttons.s1" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="Pushbuttons.s1" kind="avalon" name="Nios2_2nd_Core.data_master/Pushbuttons.s1" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="Expansion_JP5.s1" kind="avalon" name="Nios2.data_master/Expansion_JP5.s1" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="Expansion_JP5.s1" kind="avalon" name="Nios2_2nd_Core.data_master/Expansion_JP5.s1" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="Interval_Timer.s1" kind="avalon" name="Nios2.data_master/Interval_Timer.s1" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="Interval_Timer_2.s1" kind="avalon" name="Nios2.data_master/Interval_Timer_2.s1" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="Interval_Timer_2nd_Core.s1" kind="avalon" name="Nios2_2nd_Core.data_master/Interval_Timer_2nd_Core.s1" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="Interval_Timer_2nd_Core_2.s1" kind="avalon" name="Nios2_2nd_Core.data_master/Interval_Timer_2nd_Core_2.s1" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_DMA.avalon_dma_control_slave" kind="avalon" name="Nios2.data_master/Video_In_Subsystem_Video_In_DMA.avalon_dma_control_slave" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_DMA.avalon_dma_control_slave" kind="avalon" name="Nios2_2nd_Core.data_master/Video_In_Subsystem_Video_In_DMA.avalon_dma_control_slave" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller.s1" kind="avalon" name="Nios2.data_master/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller.s1" start="Nios2.data_master" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller.s1" kind="avalon" name="Nios2_2nd_Core.data_master/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller.s1" start="Nios2_2nd_Core.data_master" version="18.1">
+  </connection>
+ <connection end="SRAM.avalon_sram_slave" kind="avalon" name="Nios2_2nd_Core.instruction_master/SRAM.avalon_sram_slave" start="Nios2_2nd_Core.instruction_master" version="18.1">
+  </connection>
+ <connection end="SRAM.avalon_sram_slave" kind="avalon" name="Nios2.instruction_master/SRAM.avalon_sram_slave" start="Nios2.instruction_master" version="18.1">
+  </connection>
+ <connection end="Nios2.debug_mem_slave" kind="avalon" name="Nios2.instruction_master/Nios2.debug_mem_slave" start="Nios2.instruction_master" version="18.1">
+  </connection>
+ <connection end="Nios2_2nd_Core.debug_mem_slave" kind="avalon" name="Nios2_2nd_Core.instruction_master/Nios2_2nd_Core.debug_mem_slave" start="Nios2_2nd_Core.instruction_master" version="18.1">
+  </connection>
+ <connection end="Flash.flash_data" kind="avalon" name="Nios2_2nd_Core.instruction_master/Flash.flash_data" start="Nios2_2nd_Core.instruction_master" version="18.1">
+  </connection>
+ <connection end="Flash.flash_data" kind="avalon" name="Nios2.instruction_master/Flash.flash_data" start="Nios2.instruction_master" version="18.1">
+  </connection>
+ <connection end="SDRAM.s1" kind="avalon" name="Nios2_2nd_Core.instruction_master/SDRAM.s1" start="Nios2_2nd_Core.instruction_master" version="18.1">
+  </connection>
+ <connection end="SDRAM.s1" kind="avalon" name="Nios2.instruction_master/SDRAM.s1" start="Nios2.instruction_master" version="18.1">
+  </connection>
+ <connection end="Audio_Subsystem_Audio.avalon_audio_slave" kind="avalon" name="JTAG_to_FPGA_Bridge.master/Audio_Subsystem_Audio.avalon_audio_slave" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="AV_Config.avalon_av_config_slave" kind="avalon" name="JTAG_to_FPGA_Bridge.master/AV_Config.avalon_av_config_slave" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="IrDA.avalon_irda_slave" kind="avalon" name="JTAG_to_FPGA_Bridge.master/IrDA.avalon_irda_slave" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="JTAG_UART.avalon_jtag_slave" kind="avalon" name="JTAG_to_FPGA_Bridge.master/JTAG_UART.avalon_jtag_slave" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="Char_LCD_16x2.avalon_lcd_slave" kind="avalon" name="JTAG_to_FPGA_Bridge.master/Char_LCD_16x2.avalon_lcd_slave" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="PS2_Port.avalon_ps2_slave" kind="avalon" name="JTAG_to_FPGA_Bridge.master/PS2_Port.avalon_ps2_slave" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="PS2_Port_Dual.avalon_ps2_slave" kind="avalon" name="JTAG_to_FPGA_Bridge.master/PS2_Port_Dual.avalon_ps2_slave" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="Serial_Port.avalon_rs232_slave" kind="avalon" name="JTAG_to_FPGA_Bridge.master/Serial_Port.avalon_rs232_slave" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="SD_Card.avalon_sdcard_slave" kind="avalon" name="JTAG_to_FPGA_Bridge.master/SD_Card.avalon_sdcard_slave" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="SRAM.avalon_sram_slave" kind="avalon" name="JTAG_to_FPGA_Bridge.master/SRAM.avalon_sram_slave" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="USB.avalon_usb_slave" kind="avalon" name="JTAG_to_FPGA_Bridge.master/USB.avalon_usb_slave" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA.avalon_dma_control_slave" kind="avalon" name="JTAG_to_FPGA_Bridge.master/VGA_Subsystem_Char_Buf_Subsystem_Char_Buf_DMA.avalon_dma_control_slave" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM.s1" kind="avalon" name="JTAG_to_FPGA_Bridge.master/VGA_Subsystem_Char_Buf_Subsystem_Onchip_SRAM.s1" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="SysID.control_slave" kind="avalon" name="JTAG_to_FPGA_Bridge.master/SysID.control_slave" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="Flash.flash_data" kind="avalon" name="JTAG_to_FPGA_Bridge.master/Flash.flash_data" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="Flash.flash_erase_control" kind="avalon" name="JTAG_to_FPGA_Bridge.master/Flash.flash_erase_control" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_DMA.avalon_dma_control_slave" kind="avalon" name="JTAG_to_FPGA_Bridge.master/VGA_Subsystem_VGA_Pixel_DMA.avalon_dma_control_slave" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Pixel_RGB_Resampler.avalon_rgb_slave" kind="avalon" name="JTAG_to_FPGA_Bridge.master/VGA_Subsystem_VGA_Pixel_RGB_Resampler.avalon_rgb_slave" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="SDRAM.s1" kind="avalon" name="JTAG_to_FPGA_Bridge.master/SDRAM.s1" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="Red_LEDs.s1" kind="avalon" name="JTAG_to_FPGA_Bridge.master/Red_LEDs.s1" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="Green_LEDs.s1" kind="avalon" name="JTAG_to_FPGA_Bridge.master/Green_LEDs.s1" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="HEX3_HEX0.s1" kind="avalon" name="JTAG_to_FPGA_Bridge.master/HEX3_HEX0.s1" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="HEX7_HEX4.s1" kind="avalon" name="JTAG_to_FPGA_Bridge.master/HEX7_HEX4.s1" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="Slider_Switches.s1" kind="avalon" name="JTAG_to_FPGA_Bridge.master/Slider_Switches.s1" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="Pushbuttons.s1" kind="avalon" name="JTAG_to_FPGA_Bridge.master/Pushbuttons.s1" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="Expansion_JP5.s1" kind="avalon" name="JTAG_to_FPGA_Bridge.master/Expansion_JP5.s1" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="Interval_Timer.s1" kind="avalon" name="JTAG_to_FPGA_Bridge.master/Interval_Timer.s1" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="Interval_Timer_2.s1" kind="avalon" name="JTAG_to_FPGA_Bridge.master/Interval_Timer_2.s1" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_DMA.avalon_dma_control_slave" kind="avalon" name="JTAG_to_FPGA_Bridge.master/Video_In_Subsystem_Video_In_DMA.avalon_dma_control_slave" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller.s1" kind="avalon" name="JTAG_to_FPGA_Bridge.master/Video_In_Subsystem_Video_In_Edge_Detection_Subsystem_Edge_Detection_Router_Controller.s1" start="JTAG_to_FPGA_Bridge.master" version="18.1">
+  </connection>
+ <connection end="SRAM.avalon_sram_slave" kind="avalon" name="VGA_Subsystem_VGA_Pixel_DMA.avalon_dma_master/SRAM.avalon_sram_slave" start="VGA_Subsystem_VGA_Pixel_DMA.avalon_dma_master" version="18.1">
+  </connection>
+ <connection end="SDRAM.s1" kind="avalon" name="VGA_Subsystem_VGA_Pixel_DMA.avalon_dma_master/SDRAM.s1" start="VGA_Subsystem_VGA_Pixel_DMA.avalon_dma_master" version="18.1">
+  </connection>
+ <connection end="SRAM.avalon_sram_slave" kind="avalon" name="Video_In_Subsystem_Video_In_DMA.avalon_dma_master/SRAM.avalon_sram_slave" start="Video_In_Subsystem_Video_In_DMA.avalon_dma_master" version="18.1">
+  </connection>
+ <connection end="SDRAM.s1" kind="avalon" name="Video_In_Subsystem_Video_In_DMA.avalon_dma_master/SDRAM.s1" start="Video_In_Subsystem_Video_In_DMA.avalon_dma_master" version="18.1">
+  </connection>
+ <connection end="Nios2.clk" kind="clock" name="System_PLL.sys_clk/Nios2.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="Nios2_2nd_Core.clk" kind="clock" name="System_PLL.sys_clk/Nios2_2nd_Core.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="JTAG_to_FPGA_Bridge.clk" kind="clock" name="System_PLL.sys_clk/JTAG_to_FPGA_Bridge.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="SDRAM.clk" kind="clock" name="System_PLL.sys_clk/SDRAM.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="SRAM.clk" kind="clock" name="System_PLL.sys_clk/SRAM.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="SD_Card.clk" kind="clock" name="System_PLL.sys_clk/SD_Card.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="Flash.clk" kind="clock" name="System_PLL.sys_clk/Flash.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="Red_LEDs.clk" kind="clock" name="System_PLL.sys_clk/Red_LEDs.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="Green_LEDs.clk" kind="clock" name="System_PLL.sys_clk/Green_LEDs.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="HEX3_HEX0.clk" kind="clock" name="System_PLL.sys_clk/HEX3_HEX0.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="HEX7_HEX4.clk" kind="clock" name="System_PLL.sys_clk/HEX7_HEX4.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="Slider_Switches.clk" kind="clock" name="System_PLL.sys_clk/Slider_Switches.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="Pushbuttons.clk" kind="clock" name="System_PLL.sys_clk/Pushbuttons.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="Expansion_JP5.clk" kind="clock" name="System_PLL.sys_clk/Expansion_JP5.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="PS2_Port.clk" kind="clock" name="System_PLL.sys_clk/PS2_Port.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="PS2_Port_Dual.clk" kind="clock" name="System_PLL.sys_clk/PS2_Port_Dual.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="USB.clk" kind="clock" name="System_PLL.sys_clk/USB.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="JTAG_UART.clk" kind="clock" name="System_PLL.sys_clk/JTAG_UART.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="JTAG_UART_2nd_Core.clk" kind="clock" name="System_PLL.sys_clk/JTAG_UART_2nd_Core.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="Serial_Port.clk" kind="clock" name="System_PLL.sys_clk/Serial_Port.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="IrDA.clk" kind="clock" name="System_PLL.sys_clk/IrDA.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="Interval_Timer.clk" kind="clock" name="System_PLL.sys_clk/Interval_Timer.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="Interval_Timer_2.clk" kind="clock" name="System_PLL.sys_clk/Interval_Timer_2.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="Interval_Timer_2nd_Core.clk" kind="clock" name="System_PLL.sys_clk/Interval_Timer_2nd_Core.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="Interval_Timer_2nd_Core_2.clk" kind="clock" name="System_PLL.sys_clk/Interval_Timer_2nd_Core_2.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="SysID.clk" kind="clock" name="System_PLL.sys_clk/SysID.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="AV_Config.clk" kind="clock" name="System_PLL.sys_clk/AV_Config.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="Char_LCD_16x2.clk" kind="clock" name="System_PLL.sys_clk/Char_LCD_16x2.clk" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Sys_Clk.clk_in" kind="clock" name="System_PLL.sys_clk/VGA_Subsystem_Sys_Clk.clk_in" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="Audio_Subsystem_Sys_Clk.clk_in" kind="clock" name="System_PLL.sys_clk/Audio_Subsystem_Sys_Clk.clk_in" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Sys_Clk.clk_in" kind="clock" name="System_PLL.sys_clk/Video_In_Subsystem_Sys_Clk.clk_in" start="System_PLL.sys_clk" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Clk.clk_in" kind="clock" name="Video_PLL.vga_clk/VGA_Subsystem_VGA_Clk.clk_in" start="Video_PLL.vga_clk" version="18.1">
+  </connection>
+ <connection end="Audio_Subsystem_Audio.interrupt" kind="interrupt" name="Nios2.irq/Audio_Subsystem_Audio.interrupt" start="Nios2.irq" version="18.1">
+  </connection>
+ <connection end="Audio_Subsystem_Audio.interrupt" kind="interrupt" name="Nios2_2nd_Core.irq/Audio_Subsystem_Audio.interrupt" start="Nios2_2nd_Core.irq" version="18.1">
+  </connection>
+ <connection end="PS2_Port.interrupt" kind="interrupt" name="Nios2.irq/PS2_Port.interrupt" start="Nios2.irq" version="18.1">
+  </connection>
+ <connection end="PS2_Port.interrupt" kind="interrupt" name="Nios2_2nd_Core.irq/PS2_Port.interrupt" start="Nios2_2nd_Core.irq" version="18.1">
+  </connection>
+ <connection end="PS2_Port_Dual.interrupt" kind="interrupt" name="Nios2.irq/PS2_Port_Dual.interrupt" start="Nios2.irq" version="18.1">
+  </connection>
+ <connection end="PS2_Port_Dual.interrupt" kind="interrupt" name="Nios2_2nd_Core.irq/PS2_Port_Dual.interrupt" start="Nios2_2nd_Core.irq" version="18.1">
+  </connection>
+ <connection end="USB.interrupt" kind="interrupt" name="Nios2.irq/USB.interrupt" start="Nios2.irq" version="18.1">
+  </connection>
+ <connection end="USB.interrupt" kind="interrupt" name="Nios2_2nd_Core.irq/USB.interrupt" start="Nios2_2nd_Core.irq" version="18.1">
+  </connection>
+ <connection end="Serial_Port.interrupt" kind="interrupt" name="Nios2.irq/Serial_Port.interrupt" start="Nios2.irq" version="18.1">
+  </connection>
+ <connection end="Serial_Port.interrupt" kind="interrupt" name="Nios2_2nd_Core.irq/Serial_Port.interrupt" start="Nios2_2nd_Core.irq" version="18.1">
+  </connection>
+ <connection end="IrDA.interrupt" kind="interrupt" name="Nios2.irq/IrDA.interrupt" start="Nios2.irq" version="18.1">
+  </connection>
+ <connection end="IrDA.interrupt" kind="interrupt" name="Nios2_2nd_Core.irq/IrDA.interrupt" start="Nios2_2nd_Core.irq" version="18.1">
+  </connection>
+ <connection end="Pushbuttons.irq" kind="interrupt" name="Nios2.irq/Pushbuttons.irq" start="Nios2.irq" version="18.1">
+  </connection>
+ <connection end="Pushbuttons.irq" kind="interrupt" name="Nios2_2nd_Core.irq/Pushbuttons.irq" start="Nios2_2nd_Core.irq" version="18.1">
+  </connection>
+ <connection end="Expansion_JP5.irq" kind="interrupt" name="Nios2.irq/Expansion_JP5.irq" start="Nios2.irq" version="18.1">
+  </connection>
+ <connection end="Expansion_JP5.irq" kind="interrupt" name="Nios2_2nd_Core.irq/Expansion_JP5.irq" start="Nios2_2nd_Core.irq" version="18.1">
+  </connection>
+ <connection end="JTAG_UART.irq" kind="interrupt" name="Nios2.irq/JTAG_UART.irq" start="Nios2.irq" version="18.1">
+  </connection>
+ <connection end="JTAG_UART_2nd_Core.irq" kind="interrupt" name="Nios2_2nd_Core.irq/JTAG_UART_2nd_Core.irq" start="Nios2_2nd_Core.irq" version="18.1">
+  </connection>
+ <connection end="Interval_Timer.irq" kind="interrupt" name="Nios2.irq/Interval_Timer.irq" start="Nios2.irq" version="18.1">
+  </connection>
+ <connection end="Interval_Timer_2.irq" kind="interrupt" name="Nios2.irq/Interval_Timer_2.irq" start="Nios2.irq" version="18.1">
+  </connection>
+ <connection end="Interval_Timer_2nd_Core.irq" kind="interrupt" name="Nios2_2nd_Core.irq/Interval_Timer_2nd_Core.irq" start="Nios2_2nd_Core.irq" version="18.1">
+  </connection>
+ <connection end="Interval_Timer_2nd_Core_2.irq" kind="interrupt" name="Nios2_2nd_Core.irq/Interval_Timer_2nd_Core_2.irq" start="Nios2_2nd_Core.irq" version="18.1">
+  </connection>
+ <connection end="Nios2_Floating_Point.s1" kind="nios_custom_instruction" name="Nios2.custom_instruction_master/Nios2_Floating_Point.s1" start="Nios2.custom_instruction_master" version="18.1">
+  </connection>
+ <connection end="Nios2_2nd_Core_Floating_Point.s1" kind="nios_custom_instruction" name="Nios2_2nd_Core.custom_instruction_master/Nios2_2nd_Core_Floating_Point.s1" start="Nios2_2nd_Core.custom_instruction_master" version="18.1">
+  </connection>
+ <connection end="Nios2.reset" kind="reset" name="Nios2.debug_reset_request/Nios2.reset" start="Nios2.debug_reset_request" version="18.1">
+  </connection>
+ <connection end="Nios2_2nd_Core.reset" kind="reset" name="Nios2_2nd_Core.debug_reset_request/Nios2_2nd_Core.reset" start="Nios2_2nd_Core.debug_reset_request" version="18.1">
+  </connection>
+ <connection end="JTAG_to_FPGA_Bridge.clk_reset" kind="reset" name="System_PLL.reset_source/JTAG_to_FPGA_Bridge.clk_reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="Nios2.reset" kind="reset" name="System_PLL.reset_source/Nios2.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="Nios2_2nd_Core.reset" kind="reset" name="System_PLL.reset_source/Nios2_2nd_Core.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="SDRAM.reset" kind="reset" name="System_PLL.reset_source/SDRAM.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="SRAM.reset" kind="reset" name="System_PLL.reset_source/SRAM.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="SD_Card.reset" kind="reset" name="System_PLL.reset_source/SD_Card.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="Flash.reset" kind="reset" name="System_PLL.reset_source/Flash.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="Red_LEDs.reset" kind="reset" name="System_PLL.reset_source/Red_LEDs.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="Green_LEDs.reset" kind="reset" name="System_PLL.reset_source/Green_LEDs.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="HEX3_HEX0.reset" kind="reset" name="System_PLL.reset_source/HEX3_HEX0.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="HEX7_HEX4.reset" kind="reset" name="System_PLL.reset_source/HEX7_HEX4.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="Slider_Switches.reset" kind="reset" name="System_PLL.reset_source/Slider_Switches.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="Pushbuttons.reset" kind="reset" name="System_PLL.reset_source/Pushbuttons.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="Expansion_JP5.reset" kind="reset" name="System_PLL.reset_source/Expansion_JP5.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="PS2_Port.reset" kind="reset" name="System_PLL.reset_source/PS2_Port.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="PS2_Port_Dual.reset" kind="reset" name="System_PLL.reset_source/PS2_Port_Dual.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="USB.reset" kind="reset" name="System_PLL.reset_source/USB.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="JTAG_UART.reset" kind="reset" name="System_PLL.reset_source/JTAG_UART.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="JTAG_UART_2nd_Core.reset" kind="reset" name="System_PLL.reset_source/JTAG_UART_2nd_Core.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="Serial_Port.reset" kind="reset" name="System_PLL.reset_source/Serial_Port.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="IrDA.reset" kind="reset" name="System_PLL.reset_source/IrDA.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="Interval_Timer.reset" kind="reset" name="System_PLL.reset_source/Interval_Timer.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="Interval_Timer_2.reset" kind="reset" name="System_PLL.reset_source/Interval_Timer_2.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="Interval_Timer_2nd_Core.reset" kind="reset" name="System_PLL.reset_source/Interval_Timer_2nd_Core.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="Interval_Timer_2nd_Core_2.reset" kind="reset" name="System_PLL.reset_source/Interval_Timer_2nd_Core_2.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="SysID.reset" kind="reset" name="System_PLL.reset_source/SysID.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="AV_Config.reset" kind="reset" name="System_PLL.reset_source/AV_Config.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="Char_LCD_16x2.reset" kind="reset" name="System_PLL.reset_source/Char_LCD_16x2.reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_Sys_Clk.clk_in_reset" kind="reset" name="System_PLL.reset_source/VGA_Subsystem_Sys_Clk.clk_in_reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="Audio_Subsystem_Sys_Clk.clk_in_reset" kind="reset" name="System_PLL.reset_source/Audio_Subsystem_Sys_Clk.clk_in_reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="Video_In_Subsystem_Sys_Clk.clk_in_reset" kind="reset" name="System_PLL.reset_source/Video_In_Subsystem_Sys_Clk.clk_in_reset" start="System_PLL.reset_source" version="18.1">
+  </connection>
+ <connection end="VGA_Subsystem_VGA_Clk.clk_in_reset" kind="reset" name="Video_PLL.reset_source/VGA_Subsystem_VGA_Clk.clk_in_reset" start="Video_PLL.reset_source" version="18.1">
+  </connection>
+ </EnsembleReport>
