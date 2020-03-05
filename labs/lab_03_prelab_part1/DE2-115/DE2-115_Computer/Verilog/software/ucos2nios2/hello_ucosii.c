@@ -86,11 +86,12 @@ int main(void)
 /* **************************** VGA Display Setup *************************** */
 
   video_resolution = (int *)(PIXEL_BUF_CTRL_BASE + 0x8);
+  rgb_status = (int *)(RGB_RESAMPLER_BASE);
+
   screen_x                        = *video_resolution & 0xFFFF;
   screen_y                        = (*video_resolution >> 16) & 0xFFFF;
 
-  rgb_status = (int *)(RGB_RESAMPLER_BASE);
-  int            db         = get_data_bits(*rgb_status & 0x3F);
+  int db = get_data_bits(*rgb_status & 0x3F);
 
   /* check if resolution is smaller than the standard 320 x 240 */
   res_offset = (screen_x == 160) ? 1 : 0;
