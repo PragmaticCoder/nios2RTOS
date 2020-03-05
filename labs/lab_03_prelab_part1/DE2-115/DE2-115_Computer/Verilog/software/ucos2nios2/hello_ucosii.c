@@ -34,12 +34,12 @@
 /* Definition of Task Stacks */
 #define   TASK_STACKSIZE       2048
 OS_STK    task1_stk[TASK_STACKSIZE];
-OS_STK    task2_stk[TASK_STACKSIZE];
+OS_STK    task_disp_vga_char_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
 
 #define TASK1_PRIORITY      1
-#define TASK2_PRIORITY      2
+#define TASK_VGA_CHAR_PRIORITY 2
 
 /* Prints "Hello World" and sleeps for three seconds */
 void task1(void* pdata)
@@ -51,11 +51,11 @@ void task1(void* pdata)
   }
 }
 /* Prints "Hello World" and sleeps for three seconds */
-void task2(void* pdata)
+void Task_VGA_char(void* pdata)
 {
   while (1)
   { 
-    printf("Hello from task2\n");
+    printf("Hello from Task_VGA_char\n");
     OSTimeDlyHMSM(0, 0, 3, 0);
   }
 }
@@ -88,12 +88,12 @@ int main(void)
                   0);
               
                
-  OSTaskCreateExt(task2,
+  OSTaskCreateExt(Task_VGA_char,
                   NULL,
-                  (void *)&task2_stk[TASK_STACKSIZE-1],
-                  TASK2_PRIORITY,
-                  TASK2_PRIORITY,
-                  task2_stk,
+                  (void *)&task_disp_vga_char_stk[TASK_STACKSIZE-1],
+                  TASK_VGA_CHAR_PRIORITY,
+                  TASK_VGA_CHAR_PRIORITY,
+                  task_disp_vga_char_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);
