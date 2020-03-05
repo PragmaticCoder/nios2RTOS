@@ -28,9 +28,8 @@
 **************************************************************************/
 
 
-#include <stdio.h>
-#include "includes.h"
-#include "address_map_nios2.h"
+#include "globals.h"
+#include "utils.h"
 
 /* function prototypes */
 void video_text(int, int, char *);
