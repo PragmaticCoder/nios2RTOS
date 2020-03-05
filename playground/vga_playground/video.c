@@ -35,14 +35,21 @@ int main(void) {
     col_offset = (db == 8) ? 1 : 0;
 
     /* create a message to be displayed on the video and LCD displays */
-    char text_top_row[40]    = "Intel FPGA\0";
-    char text_bottom_row[40] = "Computer Systems\0";
+    char text_top_row[40]       = "Intel FPGA\0";
+    char clear_text_top_row[40] = "          \0";
+
+    char text_bottom_row[40]        = "Computer Systems\0";
+    char clear_text_bottom_row[40]  = "                \0";
 
     /* update color */
     short background_color = resample_rgb(db, INTEL_BLUE);
 
+    video_text(35, 29, clear_text_top_row);
     video_text(35, 29, text_top_row);
+
+    video_text(32, 30, clear_text_bottom_row);
     video_text(32, 30, text_bottom_row);
+    
     video_box(0, 0, STANDARD_X, STANDARD_Y, 0); // clear the screen
     video_box(31 * 4, 28 * 4, 49 * 4 - 1, 32 * 4 - 1, background_color);
 }
