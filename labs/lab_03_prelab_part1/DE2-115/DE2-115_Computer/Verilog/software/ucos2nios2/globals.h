@@ -18,7 +18,16 @@
 
 /* Global Variables */
 INT8U err;
+
 unsigned KEY_val;
 int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
+
+volatile int * video_resolution;
+volatile int * rgb_status;
+
+int screen_x;
+int screen_y;
+int res_offset;
+int col_offset;
 
 #endif
