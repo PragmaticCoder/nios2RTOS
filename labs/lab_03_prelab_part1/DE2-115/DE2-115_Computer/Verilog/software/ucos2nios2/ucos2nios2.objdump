@@ -41,43 +41,43 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  11 .debug_abbrev 0000b141  00000000  00000000  0004dacb  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_line   0000e851  00000000  00000000  00058c0c  2**0
+ 12 .debug_line   0000e850  00000000  00000000  00058c0c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_frame  000038cc  00000000  00000000  00067460  2**2
+ 13 .debug_frame  000038cc  00000000  00000000  0006745c  2**2
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    00005553  00000000  00000000  0006ad2c  2**0
+ 14 .debug_str    00005553  00000000  00000000  0006ad28  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_loc    000178aa  00000000  00000000  0007027f  2**0
+ 15 .debug_loc    000178aa  00000000  00000000  0007027b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_alt_sim_info 00000020  00000000  00000000  00087b2c  2**2
+ 16 .debug_alt_sim_info 00000020  00000000  00000000  00087b28  2**2
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_ranges 000018c0  00000000  00000000  00087b50  2**3
+ 17 .debug_ranges 000018c0  00000000  00000000  00087b48  2**3
                   CONTENTS, READONLY, DEBUGGING
- 18 .thread_model 00000006  00000000  00000000  0008ea21  2**0
+ 18 .thread_model 00000006  00000000  00000000  0008ea19  2**0
                   CONTENTS, READONLY
- 19 .cpu          00000005  00000000  00000000  0008ea27  2**0
+ 19 .cpu          00000005  00000000  00000000  0008ea1f  2**0
                   CONTENTS, READONLY
- 20 .qsys         00000001  00000000  00000000  0008ea2c  2**0
+ 20 .qsys         00000001  00000000  00000000  0008ea24  2**0
                   CONTENTS, READONLY
- 21 .simulation_enabled 00000001  00000000  00000000  0008ea2d  2**0
+ 21 .simulation_enabled 00000001  00000000  00000000  0008ea25  2**0
                   CONTENTS, READONLY
- 22 .sysid_hash   00000004  00000000  00000000  0008ea2e  2**0
+ 22 .sysid_hash   00000004  00000000  00000000  0008ea26  2**0
                   CONTENTS, READONLY
- 23 .sysid_base   00000004  00000000  00000000  0008ea32  2**0
+ 23 .sysid_base   00000004  00000000  00000000  0008ea2a  2**0
                   CONTENTS, READONLY
- 24 .sysid_time   00000004  00000000  00000000  0008ea36  2**0
+ 24 .sysid_time   00000004  00000000  00000000  0008ea2e  2**0
                   CONTENTS, READONLY
- 25 .stderr_dev   00000009  00000000  00000000  0008ea3a  2**0
+ 25 .stderr_dev   00000009  00000000  00000000  0008ea32  2**0
                   CONTENTS, READONLY
- 26 .stdin_dev    00000009  00000000  00000000  0008ea43  2**0
+ 26 .stdin_dev    00000009  00000000  00000000  0008ea3b  2**0
                   CONTENTS, READONLY
- 27 .stdout_dev   00000009  00000000  00000000  0008ea4c  2**0
+ 27 .stdout_dev   00000009  00000000  00000000  0008ea44  2**0
                   CONTENTS, READONLY
- 28 .sopc_system_name 0000000f  00000000  00000000  0008ea55  2**0
+ 28 .sopc_system_name 0000000f  00000000  00000000  0008ea4d  2**0
                   CONTENTS, READONLY
- 29 .quartus_project_dir 0000004d  00000000  00000000  0008ea64  2**0
+ 29 .quartus_project_dir 0000004d  00000000  00000000  0008ea5c  2**0
                   CONTENTS, READONLY
- 30 .sopcinfo     001d2080  00000000  00000000  0008eab1  2**0
+ 30 .sopcinfo     001d2080  00000000  00000000  0008eaa9  2**0
                   CONTENTS, READONLY
 SYMBOL TABLE:
 00000000 l    d  .entry	00000000 .entry
@@ -1320,22 +1320,23 @@ int main(void)
      304:	00bfc834 	movhi	r2,65312
      308:	108c0a04 	addi	r2,r2,12328
      30c:	d0a7cf15 	stw	r2,-24772(gp)
-  screen_x                        = *video_resolution & 0xFFFF;
-     310:	d0a7cf17 	ldw	r2,-24772(gp)
-     314:	10800017 	ldw	r2,0(r2)
-     318:	10bfffcc 	andi	r2,r2,65535
-     31c:	d0a7d015 	stw	r2,-24768(gp)
-  screen_y                        = (*video_resolution >> 16) & 0xFFFF;
-     320:	d0a7cf17 	ldw	r2,-24772(gp)
-     324:	10800017 	ldw	r2,0(r2)
-     328:	1004d43a 	srli	r2,r2,16
-     32c:	d0a7d515 	stw	r2,-24748(gp)
-
   rgb_status = (int *)(RGB_RESAMPLER_BASE);
-     330:	00bfc834 	movhi	r2,65312
-     334:	108c0404 	addi	r2,r2,12304
-     338:	d0a7da15 	stw	r2,-24728(gp)
-  int            db         = get_data_bits(*rgb_status & 0x3F);
+     310:	00bfc834 	movhi	r2,65312
+     314:	108c0404 	addi	r2,r2,12304
+     318:	d0a7da15 	stw	r2,-24728(gp)
+
+  screen_x                        = *video_resolution & 0xFFFF;
+     31c:	d0a7cf17 	ldw	r2,-24772(gp)
+     320:	10800017 	ldw	r2,0(r2)
+     324:	10bfffcc 	andi	r2,r2,65535
+     328:	d0a7d015 	stw	r2,-24768(gp)
+  screen_y                        = (*video_resolution >> 16) & 0xFFFF;
+     32c:	d0a7cf17 	ldw	r2,-24772(gp)
+     330:	10800017 	ldw	r2,0(r2)
+     334:	1004d43a 	srli	r2,r2,16
+     338:	d0a7d515 	stw	r2,-24748(gp)
+
+  int db = get_data_bits(*rgb_status & 0x3F);
      33c:	d0a7da17 	ldw	r2,-24728(gp)
      340:	10800017 	ldw	r2,0(r2)
      344:	10800fcc 	andi	r2,r2,63
