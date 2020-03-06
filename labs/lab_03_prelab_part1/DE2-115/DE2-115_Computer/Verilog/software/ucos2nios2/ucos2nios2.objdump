@@ -1303,7 +1303,6 @@ Task_read_KEYs(void* pdata)
      2f4:	29666304 	addi	r5,r5,-26228
      2f8:	1809883a 	mov	r4,r3
      2fc:	0000cc80 	call	cc8 <fprintf>
-
     Check_KEYs(&KEY0_flag, &KEY1_flag, &KEY2_flag, &KEY3_flag);
      300:	d1e7df04 	addi	r7,gp,-24708
      304:	d1a7d604 	addi	r6,gp,-24744
@@ -1324,7 +1323,7 @@ Task_read_KEYs(void* pdata)
       debug("MOVE RIGHT");
      334:	d0a00317 	ldw	r2,-32756(gp)
      338:	10800317 	ldw	r2,12(r2)
-     33c:	01c00d44 	movi	r7,53
+     33c:	01c00d04 	movi	r7,52
      340:	018000b4 	movhi	r6,2
      344:	31a65504 	addi	r6,r6,-26284
      348:	014000b4 	movhi	r5,2
@@ -1345,7 +1344,7 @@ Task_read_KEYs(void* pdata)
       debug("MOVE DOWN");
      370:	d0a00317 	ldw	r2,-32756(gp)
      374:	10800317 	ldw	r2,12(r2)
-     378:	01c00ec4 	movi	r7,59
+     378:	01c00e84 	movi	r7,58
      37c:	018000b4 	movhi	r6,2
      380:	31a65504 	addi	r6,r6,-26284
      384:	014000b4 	movhi	r5,2
@@ -1366,7 +1365,7 @@ Task_read_KEYs(void* pdata)
       debug("MOVE UP");
      3ac:	d0a00317 	ldw	r2,-32756(gp)
      3b0:	10800317 	ldw	r2,12(r2)
-     3b4:	01c01044 	movi	r7,65
+     3b4:	01c01004 	movi	r7,64
      3b8:	018000b4 	movhi	r6,2
      3bc:	31a65504 	addi	r6,r6,-26284
      3c0:	014000b4 	movhi	r5,2
@@ -1387,7 +1386,7 @@ Task_read_KEYs(void* pdata)
       debug("MOVE LEFT");
      3e8:	d0a00317 	ldw	r2,-32756(gp)
      3ec:	10800317 	ldw	r2,12(r2)
-     3f0:	01c011c4 	movi	r7,71
+     3f0:	01c01184 	movi	r7,70
      3f4:	018000b4 	movhi	r6,2
      3f8:	31a65504 	addi	r6,r6,-26284
      3fc:	014000b4 	movhi	r5,2
@@ -1427,7 +1426,7 @@ Task_VGA_char(void* pdata)
   debug("Started: Task_VGA_char");
      448:	d0a00317 	ldw	r2,-32756(gp)
      44c:	10800317 	ldw	r2,12(r2)
-     450:	01c01544 	movi	r7,85
+     450:	01c01504 	movi	r7,84
      454:	018000b4 	movhi	r6,2
      458:	31a65504 	addi	r6,r6,-26284
      45c:	014000b4 	movhi	r5,2
@@ -1441,7 +1440,7 @@ Task_VGA_char(void* pdata)
      470:	10c00317 	ldw	r3,12(r2)
      474:	d0a80117 	ldw	r2,-24572(gp)
      478:	d8800015 	stw	r2,0(sp)
-     47c:	01c01604 	movi	r7,88
+     47c:	01c015c4 	movi	r7,87
      480:	018000b4 	movhi	r6,2
      484:	31a65504 	addi	r6,r6,-26284
      488:	014000b4 	movhi	r5,2
@@ -1817,7 +1816,7 @@ Check_KEYs(int* KEY0_ptr, int* KEY1_ptr, int* KEY2_ptr, int* KEY3_ptr)
      82c:	29676d04 	addi	r5,r5,-25164
      830:	1009883a 	mov	r4,r2
      834:	0000cc80 	call	cc8 <fprintf>
-    KEY3_flag= 1;
+    KEY3_flag = 1;
      838:	00800044 	movi	r2,1
      83c:	d0a7df15 	stw	r2,-24708(gp)
   }
@@ -1837,6 +1836,7 @@ Check_KEYs(int* KEY0_ptr, int* KEY1_ptr, int* KEY2_ptr, int* KEY3_ptr)
      868:	29677404 	addi	r5,r5,-25136
      86c:	1809883a 	mov	r4,r3
      870:	0000cc80 	call	cc8 <fprintf>
+    
 }
      874:	0001883a 	nop
      878:	e037883a 	mov	sp,fp

@@ -45,7 +45,6 @@ Task_read_KEYs(void* pdata)
     OSSemPend(SEM_read_KEYs, 0, &err);
 
     debug("%u: \tHello from Task_read_KEYs", OSTime);
-
     Check_KEYs(&KEY0_flag, &KEY1_flag, &KEY2_flag, &KEY3_flag);
     video_text(pos_x, pos_y, clear_text); /* clearing previous text */
 

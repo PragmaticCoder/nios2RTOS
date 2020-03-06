@@ -31,11 +31,12 @@ Check_KEYs(int* KEY0_ptr, int* KEY1_ptr, int* KEY2_ptr, int* KEY3_ptr)
   } else if (KEY_val == KEY3) // check KEY3
   {
     debug("KEY3 Pressed!");
-    KEY3_flag= 1;
+    KEY3_flag = 1;
   }
 
   if (KEY_val)
     debug("KEY_value: %d", KEY_val);
+    
 }
 
 /*******************************************************************************
