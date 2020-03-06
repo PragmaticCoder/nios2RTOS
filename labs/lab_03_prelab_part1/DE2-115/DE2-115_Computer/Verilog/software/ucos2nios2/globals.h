@@ -30,4 +30,7 @@ int screen_y;
 int res_offset;
 int col_offset;
 
+/* Semaphores */
+OS_EVENT* SEM_read_KEYs;
+
 #endif

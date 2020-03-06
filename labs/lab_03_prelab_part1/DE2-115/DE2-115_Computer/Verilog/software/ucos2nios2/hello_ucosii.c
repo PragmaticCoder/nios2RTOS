@@ -1,3 +1,5 @@
+#undef NDEBUG
+
 #include "globals.h"
 #include "utils.h"
 
@@ -29,8 +31,8 @@ void
 Task_read_KEYs(void* pdata)
 {
   while (1) {
-    printf("Hello from Task_read_KEYs\n");
-    OSTimeDlyHMSM(0, 0, 3, 0);
+    debug("%u: \tHEllo from Task_read_KEYs", OSTime);
+    OSTimeDly(1);
   }
 }
 
@@ -39,8 +41,8 @@ void
 Task_VGA_char(void* pdata)
 {
   while (1) {
-    printf("Hello from Task_VGA_char\n");
-    OSTimeDlyHMSM(0, 0, 3, 0);
+    debug("%u: \tHello from Task_VGA_char", OSTime);
+    OSTimeDly(1);
   }
 }
 
@@ -48,6 +50,12 @@ Task_VGA_char(void* pdata)
 int
 main(void)
 {
+
+  /* ************************ Semaphores Initialization ***********************
+   */
+
+  SEM_read_KEYs = OSSemCreate(1);
+
   /* **************************** VGA Display Setup ***************************
    */
 
