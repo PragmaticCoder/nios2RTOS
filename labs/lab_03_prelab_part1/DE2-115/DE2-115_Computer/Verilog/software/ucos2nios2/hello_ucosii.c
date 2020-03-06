@@ -8,7 +8,6 @@
 #define INTEL_BLUE 0x0071C5
 /* global variables */
 
-int screen_x;
 extern volatile int* video_resolution;
 extern volatile int* rgb_status;
 
@@ -16,6 +15,17 @@ extern int screen_x;
 extern int screen_y;
 extern int res_offset;
 extern int col_offset;
+extern int pos_x;
+extern int pos_y;
+
+extern unsigned KEY_val;
+extern int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
+
+const char text_disp[2] = "C\0";
+const char clear_text[2] = " \0";
+const char clear_row_text[81] =
+  "                                                  "
+  "                              \0";
 
 /* Definition of Task Stacks */
 #define TASK_STACKSIZE 2048
@@ -31,9 +41,37 @@ void
 Task_read_KEYs(void* pdata)
 {
   debug("Started: Task_read_KEYs");
+  char clear_text[2] = " \0";
 
   for (;;) {
+    OSSemPend(SEM_read_KEYs, 0, &err);
+
     debug("%u: \tHello from Task_read_KEYs", OSTime);
+    Check_KEYs(&KEY0_flag, &KEY1_flag, &KEY2_flag, &KEY3_flag);
+
+    if (KEY0_flag) {
+      debug("MOVE RIGHT");
+      ++pos_x;
+    }
+
+    if (KEY1_flag) {
+      debug("MOVE DOWN");
+      ++pos_y;
+    }
+
+    if (KEY2_flag) {
+      debug("MOVE UP");
+      --pos_y;
+    }
+
+    if (KEY3_flag) {
+      debug("MOVE LEFT");
+      --pos_x;
+    }
+
+    KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
+
+    OSSemPost(SEM_read_KEYs);
     OSTimeDly(1);
   }
 }
@@ -46,6 +84,8 @@ Task_VGA_char(void* pdata)
 
   for (;;) {
     debug("%u: \tHello from Task_VGA_char", OSTime);
+    video_text(pos_x, pos_y, text_disp);
+
     OSTimeDly(1);
   }
 }
@@ -54,6 +94,11 @@ Task_VGA_char(void* pdata)
 int
 main(void)
 {
+
+  /* ***************************** Initialization *****************************
+   */
+
+  KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
 
   /* ************************ Semaphores Initialization ***********************
    */
@@ -69,6 +114,10 @@ main(void)
   screen_x = *video_resolution & 0xFFFF;
   screen_y = (*video_resolution >> 16) & 0xFFFF;
 
+  /* letter initially positioned at the centre of screen */
+  pos_x = 40;
+  pos_y = 30;
+
   int db = get_data_bits(*rgb_status & 0x3F);
 
   /* check if resolution is smaller than the standard 320 x 240 */
@@ -77,18 +126,18 @@ main(void)
   /* check if number of data bits is less than the standard 16-bits */
   col_offset = (db == 8) ? 1 : 0;
 
-  /* create a message to be displayed on the video and LCD displays */
-  char text_disp[2] = "C\0";
-  char clear_text_row[40] = "                                      \0";
-
   /* update color */
   short background_color = resample_rgb(db, INTEL_BLUE);
 
-  video_text(40, 30, clear_text_row);
-  video_text(40, 30, text_disp);
+  /* clearing all characters from the screen */
+  for (int i = 0; i < 60; i++)
+    video_text(0, i, clear_row_text);
+
+  /* displaying character for the first time */
+  video_text(pos_x, pos_y, text_disp);
 
   video_box(0, 0, STANDARD_X, STANDARD_Y, 0); // clear the screen
-  // video_box(31 * 4, 28 * 4, 49 * 4 - 1, 32 * 4 - 1, background_color);
+  video_box(31 * 4, 28 * 4, 49 * 4 - 1, 32 * 4 - 1, background_color);
 
   /* **************************************************************************
    */

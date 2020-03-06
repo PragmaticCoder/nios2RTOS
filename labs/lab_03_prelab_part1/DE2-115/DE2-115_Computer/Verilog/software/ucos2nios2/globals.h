@@ -27,8 +27,12 @@ volatile int* rgb_status;
 
 int screen_x;
 int screen_y;
+
 int res_offset;
 int col_offset;
+
+int pos_x;
+int pos_y;
 
 /* Semaphores */
 OS_EVENT* SEM_read_KEYs;

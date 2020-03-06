@@ -19,5 +19,7 @@ int
 resample_rgb(int, int);
 int
 get_data_bits(int);
+void
+clear_all_chars();
 
 #endif /* UTILS_H_ */
