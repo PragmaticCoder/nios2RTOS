@@ -30,8 +30,8 @@ OS_STK task_disp_vga_char_stk[TASK_STACKSIZE];
 void
 Task_read_KEYs(void* pdata)
 {
-  while (1) {
-    debug("%u: \tHEllo from Task_read_KEYs", OSTime);
+  for (;;) {
+    debug("%u: \tHello from Task_read_KEYs", OSTime);
     OSTimeDly(1);
   }
 }
@@ -40,7 +40,7 @@ Task_read_KEYs(void* pdata)
 void
 Task_VGA_char(void* pdata)
 {
-  while (1) {
+  for (;;) {
     debug("%u: \tHello from Task_VGA_char", OSTime);
     OSTimeDly(1);
   }
