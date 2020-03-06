@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>ucosii</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>6-Mar-2020 3:36:40 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1583530600692</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>6-Mar-2020 3:52:20 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1583531540849</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>/home/ala273/engr-ece/cme332/labs/lab_02_demo/Micrium/DE2-115_Computer/Verilog/software/door_lock_bsp</BspGeneratedLocation>
         <BspSettingsFile>./settings.bsp</BspSettingsFile>
         <SopcDesignFile>../../Computer_System.sopcinfo</SopcDesignFile>
