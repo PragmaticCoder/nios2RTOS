@@ -17,22 +17,19 @@ extern int col_offset;
 
 /* Definition of Task Stacks */
 #define TASK_STACKSIZE 2048
-OS_STK task1_stk[TASK_STACKSIZE];
+OS_STK task_key_press_stk[TASK_STACKSIZE];
 OS_STK task_disp_vga_char_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
-
-#define TASK1_PRIORITY 1
+#define TASK_KEY_PRESS_PRIORITY 1
 #define TASK_VGA_CHAR_PRIORITY 2
-
-/* function prototypes */
 
 /* Prints "Hello World" and sleeps for three seconds */
 void
-task1(void* pdata)
+Task_read_KEYs(void* pdata)
 {
   while (1) {
-    printf("Hello from task1\n");
+    printf("Hello from Task_read_KEYs\n");
     OSTimeDlyHMSM(0, 0, 3, 0);
   }
 }
@@ -114,12 +111,12 @@ main(void)
 
   printf("URL: www.micrium.com\n\n\n");
 
-  OSTaskCreateExt(task1,
+  OSTaskCreateExt(Task_read_KEYs,
                   NULL,
-                  (void*)&task1_stk[TASK_STACKSIZE - 1],
-                  TASK1_PRIORITY,
-                  TASK1_PRIORITY,
-                  task1_stk,
+                  (void*)&task_key_press_stk[TASK_STACKSIZE - 1],
+                  TASK_KEY_PRESS_PRIORITY,
+                  TASK_KEY_PRESS_PRIORITY,
+                  task_key_press_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);
