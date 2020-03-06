@@ -1,6 +1,8 @@
 #ifndef _GLOBALS_H_
 #define _GLOBALS_H_
 
+#undef NDEBUG
+
 #include "address_map_nios2.h"
 #include "debug.h"
 #include "includes.h"

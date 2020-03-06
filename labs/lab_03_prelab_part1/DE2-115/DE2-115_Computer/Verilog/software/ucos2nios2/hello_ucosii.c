@@ -1,5 +1,3 @@
-#undef NDEBUG
-
 #include "globals.h"
 #include "utils.h"
 
@@ -41,35 +39,39 @@ void
 Task_read_KEYs(void* pdata)
 {
   debug("Started: Task_read_KEYs");
-  char clear_text[2] = " \0";
+  KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
 
   for (;;) {
     OSSemPend(SEM_read_KEYs, 0, &err);
 
     debug("%u: \tHello from Task_read_KEYs", OSTime);
+
     Check_KEYs(&KEY0_flag, &KEY1_flag, &KEY2_flag, &KEY3_flag);
+    video_text(pos_x, pos_y, clear_text); /* clearing previous text */
 
     if (KEY0_flag) {
       debug("MOVE RIGHT");
       ++pos_x;
+      KEY0_flag = 0;
     }
 
     if (KEY1_flag) {
       debug("MOVE DOWN");
       ++pos_y;
+      KEY1_flag = 0;
     }
 
     if (KEY2_flag) {
       debug("MOVE UP");
       --pos_y;
+      KEY2_flag = 0;
     }
 
     if (KEY3_flag) {
       debug("MOVE LEFT");
       --pos_x;
+      KEY3_flag = 0;
     }
-
-    KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
 
     OSSemPost(SEM_read_KEYs);
     OSTimeDly(1);

@@ -19,19 +19,19 @@ Check_KEYs(int* KEY0_ptr, int* KEY1_ptr, int* KEY2_ptr, int* KEY3_ptr)
 
   if (KEY_val == KEY0) {
     debug("KEY0 Pressed!"); // check KEY0
-    *KEY0_ptr = 1;
+    KEY0_flag = 1;
   } else if (KEY_val == KEY1) // check KEY1
   {
     debug("KEY1 Pressed!");
-    *KEY1_ptr = 1;
+    KEY1_flag = 1;
   } else if (KEY_val == KEY2) // check KEY2
   {
     debug("KEY2 Pressed!");
-    *KEY2_ptr = 1;
+    KEY2_flag = 1;
   } else if (KEY_val == KEY3) // check KEY3
   {
     debug("KEY3 Pressed!");
-    *KEY3_ptr = 1;
+    KEY3_flag= 1;
   }
 
   if (KEY_val)
