@@ -36,6 +36,7 @@ task1(void* pdata)
     OSTimeDlyHMSM(0, 0, 3, 0);
   }
 }
+
 /* Display Character using VGA Output */
 void
 Task_VGA_char(void* pdata)
@@ -45,6 +46,7 @@ Task_VGA_char(void* pdata)
     OSTimeDlyHMSM(0, 0, 3, 0);
   }
 }
+
 /* The main function creates two task and starts multi-tasking */
 int
 main(void)
