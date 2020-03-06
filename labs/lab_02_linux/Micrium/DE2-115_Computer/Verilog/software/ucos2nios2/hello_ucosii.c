@@ -198,7 +198,7 @@ void Task_read_PS2(void *pdata)
     if (state == PROG && KEY1_flag && cur_input_code[MIN_DIGITS - 1] != -1)
       OSSemPost(SEM_read_PS2_done);
 
-    OSTimeDlyHMSM(0, 0, 0, 100);
+    OSTimeDly(1);
   }
 }
 
@@ -352,7 +352,7 @@ void Task_read_KEYs(void *pdata)
     }
 
     OSSemPost(SEM_read_KEYS);
-    OSTimeDlyHMSM(0, 0, 0, 300); /* Delay */
+    OSTimeDly(1);
   }
 }
 
@@ -399,8 +399,7 @@ void Task_state_timer(void *pdata)
           cur_input_code[0], cur_input_code[1], cur_input_code[2], cur_input_code[3]);
 
     debug("Timer Code: %d", timer_code);
-
-    OSTimeDlyHMSM(0, 0, 1, 0);
+    OSTimeDly(1);
   }
 }
 
@@ -417,8 +416,6 @@ void Task_flash_success(void *pdata)
     *(LEDG_ptr) |= pattern;
     OSTimeDlyHMSM(0, 0, 1, 0);
     *(LEDG_ptr) &= ~pattern;
-
-    OSTimeDlyHMSM(0, 0, 1, 0);
   }
 }
 
@@ -515,7 +512,7 @@ void Task_add_del_code(void *pdata)
     }
 
     reset_PS2_input();
-    OSTimeDlyHMSM(0, 0, 0, 300);
+    OSTimeDly(1);
   }
 }
 
@@ -527,7 +524,7 @@ void Task_delete_code(void *pdata)
   {
     OSSemPend(SEM_delete_code, 0, &err);
     debug("Within Task Delete Code");
-    OSTimeDlyHMSM(0, 0, 0, 300);
+    OSTimeDly(1);
   }
 }
 
