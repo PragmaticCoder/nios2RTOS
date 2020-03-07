@@ -24,4 +24,4 @@ mkdir -p "${micrium_dir}"
 mkdir -p "${de2_115_dir}"
 mkdir -p "${verilog_dir}"
 
-cp -r /opt/intelFPGA_lite/18.1/Univeristy_Program/Computer_Systems/DE2-115/DE2-115_Computer/verilog/* "${verilog_dir}/"
+cp -r /opt/intelFPGA*/18.1/University_Program/Computer_Systems/DE2-115/DE2-115_Computer/verilog/* "${verilog_dir}/"
