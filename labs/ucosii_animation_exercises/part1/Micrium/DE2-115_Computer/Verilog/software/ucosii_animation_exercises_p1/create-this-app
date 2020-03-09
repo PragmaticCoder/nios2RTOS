@@ -3,9 +3,9 @@
 # This script creates the hello_ucosii application in this directory.
 
 
-BSP_DIR=../ucos2nios2_bsp
+BSP_DIR=../ucosii_animation_exercises_p1_bsp
 QUARTUS_PROJECT_DIR=../../
-NIOS2_APP_GEN_ARGS="--elf-name ucos2nios2.elf --set OBJDUMP_INCLUDE_SOURCE 1 --src-files hello_ucosii.c"
+NIOS2_APP_GEN_ARGS="--elf-name ucosii_animation_exercises_p1.elf --set OBJDUMP_INCLUDE_SOURCE 1 --src-files hello_ucosii.c"
 
 
 # First, check to see if $SOPC_KIT_NIOS2 environmental variable is set.

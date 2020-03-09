@@ -2,9 +2,9 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>ucosii</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Mar 5, 2020 1:50:41 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1583437841550</BspGeneratedUnixTimeStamp>
-        <BspGeneratedLocation>/home/crypto/cme332/labs/lab_03_prelab_part1/DE2-115/DE2-115_Computer/Verilog/software/ucos2nios2_bsp</BspGeneratedLocation>
+        <BspGeneratedTimeStamp>Mar 8, 2020 11:59:39 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1583733579184</BspGeneratedUnixTimeStamp>
+        <BspGeneratedLocation>/home/crypto/cme332/labs/ucosii_animation_exercises/part1/Micrium/DE2-115_Computer/Verilog/software/ucosii_animation_exercises_p1_bsp</BspGeneratedLocation>
         <BspSettingsFile>./settings.bsp</BspSettingsFile>
         <SopcDesignFile>../../Computer_System.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>

@@ -1,6 +1,0 @@
-{
-    "files.associations": {
-        "globals.h": "c"
-    },
-    "clang-format.fallbackStyle": "Mozilla"
-}

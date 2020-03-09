@@ -29,7 +29,7 @@ ALT_LDDEPS :=
 MAKEABLE_LIBRARY_ROOT_DIRS :=
 
 # Generic flags passed to the compiler for different types of input files.
-ALT_CFLAGS := -g -DNDEBUG
+ALT_CFLAGS :=
 ALT_CXXFLAGS :=
 ALT_CPPFLAGS :=
 ALT_ASFLAGS :=
@@ -139,11 +139,10 @@ ACDS_VERSION := 18.1
 # Define path to the application ELF. 
 # It may be used by the makefile fragments so is defined before including them. 
 # 
-ELF := ucos2nios2.elf
+ELF := ucosii_animation_exercises_p1.elf
 
 # Paths to C, C++, and assembly source files.
-C_SRCS += hello_ucosii.c
-C_SRCS += utils.c
+C_SRCS := hello_ucosii.c
 CXX_SRCS :=
 ASM_SRCS :=
 
@@ -178,7 +177,7 @@ CRT0 :=
 SYS_LIB :=
 
 # Define path to the root of the BSP.
-BSP_ROOT_DIR := ../ucos2nios2_bsp/
+BSP_ROOT_DIR := ../ucosii_animation_exercises_p1_bsp/
 
 # List of application specific include directories, library directories and library names
 APP_INCLUDE_DIRS :=
