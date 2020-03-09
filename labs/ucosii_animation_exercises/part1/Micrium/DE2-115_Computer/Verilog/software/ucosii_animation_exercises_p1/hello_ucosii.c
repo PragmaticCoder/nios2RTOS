@@ -46,7 +46,7 @@ Task_read_KEYs(void* pdata)
 
     debug("%u: \tHello from Task_read_KEYs", OSTime);
     Check_KEYs(&KEY0_flag, &KEY1_flag, &KEY2_flag, &KEY3_flag);
-    video_text(pos_x, pos_y, clear_text); /* clearing previous text */
+    VGA_text(pos_x, pos_y, clear_text); /* clearing previous text */
 
     if (KEY0_flag) {
       debug("MOVE RIGHT");
@@ -85,7 +85,7 @@ Task_VGA_char(void* pdata)
 
   for (;;) {
     debug("%u: \tHello from Task_VGA_char", OSTime);
-    video_text(pos_x, pos_y, text_disp);
+    VGA_text(pos_x, pos_y, text_disp);
 
     OSTimeDly(1);
   }
@@ -132,13 +132,13 @@ main(void)
 
   /* clearing all characters from the screen */
   for (int i = 0; i < 60; i++)
-    video_text(0, i, clear_row_text);
+    VGA_text(0, i, clear_row_text);
 
   /* displaying character for the first time */
-  video_text(pos_x, pos_y, text_disp);
+  VGA_text(pos_x, pos_y, text_disp);
 
-  video_box(0, 0, STANDARD_X, STANDARD_Y, 0); // clear the screen
-  video_box(31 * 4, 28 * 4, 49 * 4 - 1, 32 * 4 - 1, background_color);
+  VGA_box(0, 0, STANDARD_X, STANDARD_Y, 0); // clear the screen
+  VGA_box(31 * 4, 28 * 4, 49 * 4 - 1, 32 * 4 - 1, background_color);
 
   /* **************************************************************************
    */

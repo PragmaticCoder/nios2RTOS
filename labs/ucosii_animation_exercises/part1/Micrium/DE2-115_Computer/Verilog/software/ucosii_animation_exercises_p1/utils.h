@@ -12,9 +12,9 @@
 void
 Check_KEYs(int*, int*, int*, int*);
 void
-video_text(int, int, char*);
+VGA_text(int, int, char*);
 void
-video_box(int, int, int, int, short);
+VGA_box(int, int, int, int, short);
 int
 resample_rgb(int, int);
 int

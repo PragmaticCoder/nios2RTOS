@@ -43,7 +43,7 @@ Check_KEYs(int* KEY0_ptr, int* KEY1_ptr, int* KEY2_ptr, int* KEY3_ptr)
  * Subroutine to send a string of text to the video monitor
  ******************************************************************************/
 void
-video_text(int x, int y, char* text_ptr)
+VGA_text(int x, int y, char* text_ptr)
 {
   int offset;
   volatile char* char_buf = (char*)FPGA_CHAR_BASE; // video character buffer
@@ -63,7 +63,7 @@ video_text(int x, int y, char* text_ptr)
  * in resolution and color bits.
  ******************************************************************************/
 void
-video_box(int x1, int y1, int x2, int y2, short pixel_color)
+VGA_box(int x1, int y1, int x2, int y2, short pixel_color)
 {
   int pixel_buf_ptr = *(int*)PIXEL_BUF_CTRL_BASE;
   int pixel_ptr, row, col;
