@@ -821,7 +821,7 @@
 #define OS_CPU_HOOKS_EN 1
 #define OS_DEBUG_EN 1
 #define OS_EVENT_NAME_SIZE 32
-#define OS_FLAGS_NBITS 16
+#define OS_FLAGS_NBITS 32
 #define OS_FLAG_ACCEPT_EN 1
 #define OS_FLAG_DEL_EN 1
 #define OS_FLAG_EN 1
