@@ -101,6 +101,23 @@ VGA_char_box(int x, int y, short color)
 }
 
 /* ************************************************************************** */
+/*         Synced Animated Character embedded on top of character box         */
+/* ************************************************************************** */
+void
+VGA_animated_char(int x, int y, char* text_ptr, short char_bg_color)
+{
+  /* clearing all characters from the screen */
+  for (int i = 0; i < 60; i++)
+    VGA_text(0, i, clear_row_text);
+
+  /* displaying chara cter for the first time */
+  VGA_text(x, y, text_ptr);
+
+  VGA_box(0, 0, STANDARD_X, STANDARD_Y, 0); // clear the screen
+  VGA_char_box(x, y, char_bg_color);
+}
+
+/* ************************************************************************** */
 /*               Resamples 24-bit color to 16-bit or 8-bit color              */
 /* ************************************************************************** */
 int

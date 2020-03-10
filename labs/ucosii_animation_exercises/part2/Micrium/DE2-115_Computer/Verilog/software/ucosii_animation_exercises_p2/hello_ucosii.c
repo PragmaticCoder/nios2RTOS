@@ -1,9 +1,6 @@
 #include "globals.h"
 #include "utils.h"
 
-#define STANDARD_X 320
-#define STANDARD_Y 240
-#define INTEL_BLUE 0x0071C5
 /* global variables */
 
 extern volatile int* video_resolution;
@@ -19,9 +16,9 @@ extern int pos_y;
 extern unsigned KEY_val;
 extern int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 
-const char text_disp[2] = "C\0";
-const char clear_text[2] = " \0";
-const char clear_row_text[81] =
+extern char text_disp[2] = "C\0";
+extern char clear_text[2] = " \0";
+extern char clear_row_text[81] =
   "                                                  "
   "                              \0";
 
@@ -129,16 +126,7 @@ main(void)
 
   /* update color */
   short background_color = resample_rgb(db, INTEL_BLUE);
-
-  /* clearing all characters from the screen */
-  for (int i = 0; i < 60; i++)
-    VGA_text(0, i, clear_row_text);
-
-  /* displaying character for the first time */
-  VGA_text(pos_x, pos_y, text_disp);
-
-  VGA_box(0, 0, STANDARD_X, STANDARD_Y, 0); // clear the screen
-  VGA_char_box(pos_x, pos_y, background_color);
+  VGA_animated_char(pos_x, pos_y, text_disp, background_color);
 
   /* **************************************************************************
    */

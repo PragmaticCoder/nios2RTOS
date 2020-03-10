@@ -18,6 +18,10 @@
 
 #define KEY_ptr (((volatile unsigned long*)KEY_BASE))
 
+#define STANDARD_X 320
+#define STANDARD_Y 240
+#define INTEL_BLUE 0x0071C5
+
 /* Global Variables */
 INT8U err;
 
@@ -35,6 +39,10 @@ int col_offset;
 
 int pos_x;
 int pos_y;
+
+char text_disp[2];
+char clear_text[2];
+char clear_row_text[81];
 
 /* Semaphores */
 OS_EVENT* SEM_read_KEYs;
