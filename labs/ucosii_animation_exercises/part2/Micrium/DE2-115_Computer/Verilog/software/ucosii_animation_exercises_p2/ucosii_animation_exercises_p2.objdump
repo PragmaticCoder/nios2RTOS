@@ -1587,13 +1587,13 @@ main(void)
      5c4:	000b883a 	mov	r5,zero
      5c8:	0009883a 	mov	r4,zero
      5cc:	00009200 	call	920 <VGA_box>
-  VGA_box(31 * 4, 28 * 4, 49 * 4 - 1, 32 * 4 - 1, background_color);
+  VGA_box(40 * 4, 30 * 4, 41 * 4 - 1, 31 * 4 - 1, background_color);
      5d0:	e0bfff0f 	ldh	r2,-4(fp)
      5d4:	d8800015 	stw	r2,0(sp)
-     5d8:	01c01fc4 	movi	r7,127
-     5dc:	018030c4 	movi	r6,195
-     5e0:	01401c04 	movi	r5,112
-     5e4:	01001f04 	movi	r4,124
+     5d8:	01c01ec4 	movi	r7,123
+     5dc:	018028c4 	movi	r6,163
+     5e0:	01401e04 	movi	r5,120
+     5e4:	01002804 	movi	r4,160
      5e8:	00009200 	call	920 <VGA_box>
 
   /* **************************************************************************
