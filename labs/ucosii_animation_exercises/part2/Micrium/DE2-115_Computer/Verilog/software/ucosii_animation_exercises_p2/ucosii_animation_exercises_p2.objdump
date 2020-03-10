@@ -1431,7 +1431,7 @@ Task_VGA_char(void* pdata)
      450:	0000dd00 	call	dd0 <fprintf>
 
   for (;;) {
-    debug("%u: \tTask_VGA_char: (pos_x, pos_y) = (%d, %d)", OSTime, pos_x, pos_y);
+    debug(
      454:	d0a00317 	ldw	r2,-32756(gp)
      458:	12000317 	ldw	r8,12(r2)
      45c:	d0a81717 	ldw	r2,-24484(gp)
@@ -1440,13 +1440,14 @@ Task_VGA_char(void* pdata)
      468:	d9000215 	stw	r4,8(sp)
      46c:	d8c00115 	stw	r3,4(sp)
      470:	d8800015 	stw	r2,0(sp)
-     474:	01c01544 	movi	r7,85
+     474:	01c01584 	movi	r7,86
      478:	018000b4 	movhi	r6,2
      47c:	31a68204 	addi	r6,r6,-26104
      480:	014000b4 	movhi	r5,2
      484:	2966bf04 	addi	r5,r5,-25860
      488:	4009883a 	mov	r4,r8
      48c:	0000dd00 	call	dd0 <fprintf>
+      "%u: \tTask_VGA_char: (pos_x, pos_y) = (%d, %d)", OSTime, pos_x, pos_y);
     VGA_animated_char(pos_x, pos_y, text_disp, background_color);
      490:	d0a7f417 	ldw	r2,-24624(gp)
      494:	d0e7f217 	ldw	r3,-24632(gp)
@@ -2109,19 +2110,18 @@ VGA_animated_char(int x, int y, char* text_ptr, short char_bg_color)
      b20:	103ff51e 	bne	r2,zero,af8 <VGA_animated_char+0x44>
     VGA_text(0, i, clear_row_text);
 
-  /* displaying chara cter for the first time */
-  VGA_text(x, y, text_ptr);
-     b24:	e1bffe17 	ldw	r6,-8(fp)
-     b28:	e17ffd17 	ldw	r5,-12(fp)
-     b2c:	e13ffc17 	ldw	r4,-16(fp)
-     b30:	00008440 	call	844 <VGA_text>
-
+  /* displaying character for the first time */
   VGA_char_box(x, y, char_bg_color);
-     b34:	e0bfff0f 	ldh	r2,-4(fp)
-     b38:	100d883a 	mov	r6,r2
+     b24:	e0bfff0f 	ldh	r2,-4(fp)
+     b28:	100d883a 	mov	r6,r2
+     b2c:	e17ffd17 	ldw	r5,-12(fp)
+     b30:	e13ffc17 	ldw	r4,-16(fp)
+     b34:	0000a100 	call	a10 <VGA_char_box>
+  VGA_text(x, y, text_ptr);
+     b38:	e1bffe17 	ldw	r6,-8(fp)
      b3c:	e17ffd17 	ldw	r5,-12(fp)
      b40:	e13ffc17 	ldw	r4,-16(fp)
-     b44:	0000a100 	call	a10 <VGA_char_box>
+     b44:	00008440 	call	844 <VGA_text>
 }
      b48:	0001883a 	nop
      b4c:	e037883a 	mov	sp,fp
