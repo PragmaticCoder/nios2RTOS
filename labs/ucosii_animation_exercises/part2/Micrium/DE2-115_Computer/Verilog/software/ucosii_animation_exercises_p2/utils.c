@@ -36,7 +36,6 @@ Check_KEYs(int* KEY0_ptr, int* KEY1_ptr, int* KEY2_ptr, int* KEY3_ptr)
 
   if (KEY_val)
     debug("KEY_value: %d", KEY_val);
-    
 }
 
 /*******************************************************************************
@@ -57,11 +56,11 @@ VGA_text(int x, int y, char* text_ptr)
   }
 }
 
-/*******************************************************************************
- * Draw a filled rectangle on the video monitor
- * Takes in points assuming 320x240 resolution and adjusts based on differences
- * in resolution and color bits.
- ******************************************************************************/
+/* ************************************************************************** */
+/*        Draw a filled rectangle on the video monitor                        */
+/*        Takes in points assuming 320x240 resolution and adjusts based on    */
+/*        differences in resolution and color bits.                           */
+/* ************************************************************************** */
 void
 VGA_box(int x1, int y1, int x2, int y2, short pixel_color)
 {
@@ -83,6 +82,22 @@ VGA_box(int x1, int y1, int x2, int y2, short pixel_color)
         pixel_buf_ptr + (row << (10 - res_offset - col_offset)) + (col << 1);
       *(short*)pixel_ptr = pixel_color; // set pixel color
     }
+}
+
+/* ************************************************************************** */
+/*              Draw a rectangle box that fills up the character.             */
+/*              Character to Pixel mapping: 1 character = 4 pixels            */
+/* ************************************************************************** */
+
+void
+VGA_char_box(int x, int y, short color)
+{
+  int x1 = x * 4;
+  int y1 = y * 4;
+  int x2 = ((x + 1) * 4) - 1;
+  int y2 = ((y + 1) * 4) - 1;
+
+  VGA_box(x1, y1, x2, y2, color);
 }
 
 /* ************************************************************************** */

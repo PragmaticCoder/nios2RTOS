@@ -15,6 +15,8 @@ void
 VGA_text(int, int, char*);
 void
 VGA_box(int, int, int, int, short);
+void
+VGA_char_box(int, int, short);
 int
 resample_rgb(int, int);
 int

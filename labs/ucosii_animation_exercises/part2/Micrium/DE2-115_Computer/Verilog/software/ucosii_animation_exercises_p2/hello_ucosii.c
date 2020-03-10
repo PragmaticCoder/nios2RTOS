@@ -138,7 +138,7 @@ main(void)
   VGA_text(pos_x, pos_y, text_disp);
 
   VGA_box(0, 0, STANDARD_X, STANDARD_Y, 0); // clear the screen
-  VGA_box(40 * 4, 30 * 4, 41 * 4 - 1, 31 * 4 - 1, background_color);
+  VGA_char_box(pos_x, pos_y, background_color);
 
   /* **************************************************************************
    */
