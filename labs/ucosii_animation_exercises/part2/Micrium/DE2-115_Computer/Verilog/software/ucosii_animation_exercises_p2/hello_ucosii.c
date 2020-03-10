@@ -22,6 +22,8 @@ extern char clear_row_text[81] =
   "                                                  "
   "                              \0";
 
+short background_color;
+
 /* Definition of Task Stacks */
 #define TASK_STACKSIZE 2048
 OS_STK task_key_press_stk[TASK_STACKSIZE];
@@ -43,7 +45,6 @@ Task_read_KEYs(void* pdata)
 
     debug("%u: \tHello from Task_read_KEYs", OSTime);
     Check_KEYs(&KEY0_flag, &KEY1_flag, &KEY2_flag, &KEY3_flag);
-    VGA_text(pos_x, pos_y, clear_text); /* clearing previous text */
 
     if (KEY0_flag) {
       debug("MOVE RIGHT");
@@ -81,8 +82,9 @@ Task_VGA_char(void* pdata)
   debug("Started: Task_VGA_char");
 
   for (;;) {
-    debug("%u: \tHello from Task_VGA_char", OSTime);
-    VGA_text(pos_x, pos_y, text_disp);
+    debug(
+      "%u: \tTask_VGA_char: (pos_x, pos_y) = (%d, %d)", OSTime, pos_x, pos_y);
+    VGA_animated_char(pos_x, pos_y, text_disp, background_color);
 
     OSTimeDly(1);
   }
@@ -125,7 +127,7 @@ main(void)
   col_offset = (db == 8) ? 1 : 0;
 
   /* update color */
-  short background_color = resample_rgb(db, INTEL_BLUE);
+  background_color = resample_rgb(db, INTEL_BLUE);
   VGA_animated_char(pos_x, pos_y, text_disp, background_color);
 
   /* **************************************************************************
