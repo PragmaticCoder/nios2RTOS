@@ -33,4 +33,7 @@ clear_all_chars();
 void
 VGA_animated_char(int x, int y, char* text_ptr, short char_bg_color);
 
+void
+VGA_info_right(int x, int y, char* text_ptr, short char_bg_color);
+
 #endif /* UTILS_H_ */

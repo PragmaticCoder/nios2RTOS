@@ -79,16 +79,29 @@ Task_read_KEYs(void* pdata)
 static void
 Task_VGA_init(void)
 {
+  debug("Clearing the screen initially");
+  VGA_box(0, 0, STANDARD_X, STANDARD_Y, 0); /* clear the screen */
+  /* clearing all characters from the screen */
+  for (int i = 0; i < 60; i++)
+    VGA_text(0, i, clear_row_text);
+
   debug("Initializing VGA Display");
-  VGA_animated_char(0, 20, "                                                                                ", background_color);
-  VGA_animated_char(70, 0, "          ", background_color);
-  VGA_animated_char(70, 1, "CATCH     ", background_color);
-  VGA_animated_char(70, 2, "THE       ", background_color);
-  VGA_animated_char(70, 3, "NUMBERS!  ", background_color);
-  VGA_animated_char(70, 4, "          ", background_color);
-  VGA_animated_char(70, 5, "SCORE:    ", background_color);
-  VGA_animated_char(70, 6, "00000000  ", background_color);
-  VGA_animated_char(70, 8, "          ", background_color);
+  VGA_info_right(0,
+                 20,
+                 "                                                          "
+                 "                      ",
+                 background_color);
+                 
+  VGA_info_right(70,  0, "          ", background_color);
+  VGA_info_right(70,  1, "CATCH     ", background_color);
+  VGA_info_right(70,  2, "THE       ", background_color);
+  VGA_info_right(70,  3, "NUMBERS!  ", background_color);
+  VGA_info_right(70,  4, "          ", background_color);
+  VGA_info_right(70,  5, "SCORE:    ", background_color);
+  VGA_info_right(70,  6, "00000000  ", background_color);
+  VGA_info_right(70,  8, "          ", background_color);
+  VGA_info_right(70,  9, "TIME:     ", background_color);
+  VGA_info_right(70, 10, "SCORE:    ", background_color);
 }
 
 /* Display Character using VGA Output */
@@ -178,8 +191,8 @@ main(void)
   printf("Email: sales@micrium.com\n");
 
   printf("URL: www.micrium.com\n\n\n");
-  
-  Task_VGA_init();/* Initial Display Layout Setup */
+
+  Task_VGA_init(); /* Initial Display Layout Setup */
 
   OSTaskCreateExt(Task_read_KEYs,
                   NULL,

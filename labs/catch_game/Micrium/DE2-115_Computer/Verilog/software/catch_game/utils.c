@@ -106,14 +106,18 @@ VGA_char_box(int x, int y, short color)
 void
 VGA_animated_char(int x, int y, char* text_ptr, short char_bg_color)
 {
-  VGA_box(0, 0, STANDARD_X, STANDARD_Y, 0); /* clear the screen */
-  /* TODO: May need to modify it such that only that character gets cleared */
-  /* clearing all characters from the screen */
-  // for (int i = 0; i < 60; i++)
-    // VGA_text(0, i, clear_row_text);
-
   /* displaying character for the first time */
   VGA_char_box(x, y, char_bg_color);
+  VGA_text(x, y, text_ptr);
+}
+
+void
+VGA_info_right(int x, int y, char* text_ptr, short char_bg_color)
+{
+  int i = 0;
+  for (i = pos_x; i < pos_x + 10; i++)
+    VGA_char_box(i, y, char_bg_color);
+
   VGA_text(x, y, text_ptr);
 }
 
