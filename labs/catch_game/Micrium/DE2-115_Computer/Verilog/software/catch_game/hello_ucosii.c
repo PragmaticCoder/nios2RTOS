@@ -75,6 +75,22 @@ Task_read_KEYs(void* pdata)
   }
 }
 
+/* Initial Display Setup */
+static void
+Task_VGA_init(void)
+{
+  debug("Initializing VGA Display");
+  VGA_animated_char(0, 20, "                                                                                ", background_color);
+  VGA_animated_char(70, 0, "          ", background_color);
+  VGA_animated_char(70, 1, "CATCH     ", background_color);
+  VGA_animated_char(70, 2, "THE       ", background_color);
+  VGA_animated_char(70, 3, "NUMBERS!  ", background_color);
+  VGA_animated_char(70, 4, "          ", background_color);
+  VGA_animated_char(70, 5, "SCORE:    ", background_color);
+  VGA_animated_char(70, 6, "00000000  ", background_color);
+  VGA_animated_char(70, 8, "          ", background_color);
+}
+
 /* Display Character using VGA Output */
 void
 Task_VGA_char(void* pdata)
@@ -162,6 +178,8 @@ main(void)
   printf("Email: sales@micrium.com\n");
 
   printf("URL: www.micrium.com\n\n\n");
+  
+  Task_VGA_init();/* Initial Display Layout Setup */
 
   OSTaskCreateExt(Task_read_KEYs,
                   NULL,
