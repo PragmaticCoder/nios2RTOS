@@ -1074,6 +1074,7 @@ endif
 $(OBJDUMP_NAME) : $(ELF)
 	@$(ECHO) Info: Creating $@
 	$(OBJDUMP) $(OBJDUMP_FLAGS) $< >$@
+make: *** [Makefile:654: Makefile] Error 1
 
 # Rule for printing the name of the elf file
 .PHONY: print-elf-name
