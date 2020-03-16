@@ -214,36 +214,6 @@ main(void)
   /* **************************************************************************
    */
 
-  printf("MicroC/OS-II Licensing Terms\n");
-  printf("============================\n");
-
-  printf("Micrium\'s uC/OS-II is a real-time operating system (RTOS) available "
-         "in source code.\n");
-
-  printf("This is not open-source software.\n");
-
-  printf("This RTOS can be used free of charge only for non-commercial "
-         "purposes and academic projects,\n");
-
-  printf("any other use of the code is subject to the terms of an end-user "
-         "license agreement\n");
-
-  printf("for more information please see the license files included in the "
-         "BSP project or contact Micrium.\n");
-
-  printf("Anyone planning to use a Micrium RTOS in a commercial product must "
-         "purchase a commercial license\n");
-
-  printf("from the owner of the software, Silicon Laboratories Inc.\n");
-
-  printf("Licensing information is available at:\n");
-
-  printf("Phone: +1 954-217-2036\n");
-
-  printf("Email: sales@micrium.com\n");
-
-  printf("URL: www.micrium.com\n\n\n");
-
   Task_VGA_init(); /* Initial Display Layout Setup */
 
   OSTaskCreateExt(Task_read_KEYs,
