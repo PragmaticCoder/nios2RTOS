@@ -49,8 +49,10 @@ char clear_text[2];
 char clear_row_text[81];
 
 int score;
+int game_hh, game_mm, game_ss;
 
 /* Semaphores */
 OS_EVENT* SEM_read_KEYs;
+OS_EVENT* SEM_game_timer;
 
 #endif
