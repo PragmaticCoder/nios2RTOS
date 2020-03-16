@@ -1,7 +1,7 @@
 /*
  * utils.h
  *
- *  Created on: Feb 26, 2020
+ *  Created on: March 08, 2020
  *      Author: Alvi
  */
 
@@ -28,12 +28,15 @@ int
 get_data_bits(int);
 
 void
-clear_all_chars();
-
-void
 VGA_animated_char(int x, int y, char* text_ptr, short char_bg_color);
 
 void
 VGA_info_right(int x, int y, char* text_ptr, short char_bg_color);
+
+void
+VGA_display_sidebar(short sidebar_color);
+
+void
+VGA_clear_display(void);
 
 #endif /* UTILS_H_ */

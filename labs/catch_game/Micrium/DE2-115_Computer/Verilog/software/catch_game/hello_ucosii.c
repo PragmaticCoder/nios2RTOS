@@ -27,6 +27,7 @@ extern char clear_row_text[81] =
   "                              \0";
 
 short background_color;
+short sidebar_color;
 
 /* Definition of Task Stacks */
 #define TASK_STACKSIZE 2048
@@ -92,66 +93,7 @@ Task_VGA_init(void)
   for (int i = 0; i < 60; i++)
     VGA_text(0, i, clear_row_text);
 
-  VGA_info_right(70, 0, "          ", background_color);
-  VGA_info_right(70, 1, " CATCH    ", background_color);
-  VGA_info_right(70, 2, " THE      ", background_color);
-  VGA_info_right(70, 3, " NUMBERS! ", background_color);
-  VGA_info_right(70, 4, "          ", background_color);
-  VGA_info_right(70, 5, " SCORE:   ", background_color);
-  VGA_info_right(70, 6, "        0 ", background_color);
-  VGA_info_right(70, 7, "          ", background_color);
-  VGA_info_right(70, 8, " TIME:    ", background_color);
-  VGA_info_right(70, 9, " 00:00:00 ", background_color);
-  VGA_info_right(70, 10, "          ", background_color);
-  VGA_info_right(70, 11, "          ", background_color);
-  VGA_info_right(70, 12, "          ", background_color);
-  VGA_info_right(70, 13, "          ", background_color);
-  VGA_info_right(70, 14, "          ", background_color);
-  VGA_info_right(70, 15, "          ", background_color);
-  VGA_info_right(70, 16, "          ", background_color);
-  VGA_info_right(70, 17, "          ", background_color);
-  VGA_info_right(70, 18, "          ", background_color);
-  VGA_info_right(70, 19, "          ", background_color);
-  VGA_info_right(70, 20, "          ", background_color);
-  VGA_info_right(70, 21, "          ", background_color);
-  VGA_info_right(70, 22, "          ", background_color);
-  VGA_info_right(70, 23, "          ", background_color);
-  VGA_info_right(70, 24, "          ", background_color);
-  VGA_info_right(70, 25, "          ", background_color);
-  VGA_info_right(70, 26, "          ", background_color);
-  VGA_info_right(70, 27, "          ", background_color);
-  VGA_info_right(70, 28, "          ", background_color);
-  VGA_info_right(70, 29, "          ", background_color);
-  VGA_info_right(70, 30, "          ", background_color);
-  VGA_info_right(70, 31, "          ", background_color);
-  VGA_info_right(70, 32, "          ", background_color);
-  VGA_info_right(70, 33, "          ", background_color);
-  VGA_info_right(70, 34, "          ", background_color);
-  VGA_info_right(70, 35, "          ", background_color);
-  VGA_info_right(70, 36, "          ", background_color);
-  VGA_info_right(70, 37, "          ", background_color);
-  VGA_info_right(70, 38, "          ", background_color);
-  VGA_info_right(70, 39, "          ", background_color);
-  VGA_info_right(70, 40, "          ", background_color);
-  VGA_info_right(70, 41, "          ", background_color);
-  VGA_info_right(70, 42, "          ", background_color);
-  VGA_info_right(70, 43, "          ", background_color);
-  VGA_info_right(70, 44, "          ", background_color);
-  VGA_info_right(70, 45, "          ", background_color);
-  VGA_info_right(70, 46, "          ", background_color);
-  VGA_info_right(70, 47, "          ", background_color);
-  VGA_info_right(70, 48, "          ", background_color);
-  VGA_info_right(70, 49, "          ", background_color);
-  VGA_info_right(70, 50, "          ", background_color);
-  VGA_info_right(70, 51, "          ", background_color);
-  VGA_info_right(70, 52, "          ", background_color);
-  VGA_info_right(70, 53, "          ", background_color);
-  VGA_info_right(70, 54, "          ", background_color);
-  VGA_info_right(70, 55, "          ", background_color);
-  VGA_info_right(70, 56, " PRESS    ", background_color);
-  VGA_info_right(70, 57, "  ECE     ", background_color);
-  VGA_info_right(70, 58, " TO QUIT  ", background_color);
-  VGA_info_right(70, 59, "          ", background_color);
+  VGA_display_sidebar(background_color);
 }
 
 /* Display Character using VGA Output */

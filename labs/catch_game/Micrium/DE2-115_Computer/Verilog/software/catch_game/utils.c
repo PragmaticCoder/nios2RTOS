@@ -1,7 +1,7 @@
 /*
  * utils.c
  *
- *  Created on: Feb 26, 2020
+ *  Created on: March 08, 2020
  *      Author: Alvi
  */
 
@@ -115,7 +115,7 @@ void
 VGA_info_right(int x, int y, char* text_ptr, short char_bg_color)
 {
   int i = 0;
-  for (i = x; i < x + 9; i++)
+  for (i = x; i < x + 10; i++)
     VGA_char_box(i, y, char_bg_color);
 
   VGA_text(x, y, text_ptr);
@@ -176,4 +176,73 @@ get_data_bits(int mode)
     case 0x39:
       return 40;
   }
+}
+
+/* ************************************************************************** */
+/*                            Display Right Sidebar                           */
+/* ************************************************************************** */
+
+void
+VGA_display_sidebar(short sidebar_color)
+{
+  VGA_info_right(70, 0, "          ", sidebar_color);
+  VGA_info_right(70, 1, " CATCH    ", sidebar_color);
+  VGA_info_right(70, 2, " THE      ", sidebar_color);
+  VGA_info_right(70, 3, " NUMBERS! ", sidebar_color);
+  VGA_info_right(70, 4, "          ", sidebar_color);
+  VGA_info_right(70, 5, " SCORE:   ", sidebar_color);
+  VGA_info_right(70, 6, "        0 ", sidebar_color);
+  VGA_info_right(70, 7, "          ", sidebar_color);
+  VGA_info_right(70, 8, " TIME:    ", sidebar_color);
+  VGA_info_right(70, 9, " 00:00:00 ", sidebar_color);
+  VGA_info_right(70, 10, "          ", sidebar_color);
+  VGA_info_right(70, 11, "          ", sidebar_color);
+  VGA_info_right(70, 12, "          ", sidebar_color);
+  VGA_info_right(70, 13, "          ", sidebar_color);
+  VGA_info_right(70, 14, "          ", sidebar_color);
+  VGA_info_right(70, 15, "          ", sidebar_color);
+  VGA_info_right(70, 16, "          ", sidebar_color);
+  VGA_info_right(70, 17, "          ", sidebar_color);
+  VGA_info_right(70, 18, "          ", sidebar_color);
+  VGA_info_right(70, 19, "          ", sidebar_color);
+  VGA_info_right(70, 20, "          ", sidebar_color);
+  VGA_info_right(70, 21, "          ", sidebar_color);
+  VGA_info_right(70, 22, "          ", sidebar_color);
+  VGA_info_right(70, 23, "          ", sidebar_color);
+  VGA_info_right(70, 24, "          ", sidebar_color);
+  VGA_info_right(70, 25, "          ", sidebar_color);
+  VGA_info_right(70, 26, "          ", sidebar_color);
+  VGA_info_right(70, 27, "          ", sidebar_color);
+  VGA_info_right(70, 28, "          ", sidebar_color);
+  VGA_info_right(70, 29, "          ", sidebar_color);
+  VGA_info_right(70, 30, "          ", sidebar_color);
+  VGA_info_right(70, 31, "          ", sidebar_color);
+  VGA_info_right(70, 32, "          ", sidebar_color);
+  VGA_info_right(70, 33, "          ", sidebar_color);
+  VGA_info_right(70, 34, "          ", sidebar_color);
+  VGA_info_right(70, 35, "          ", sidebar_color);
+  VGA_info_right(70, 36, "          ", sidebar_color);
+  VGA_info_right(70, 37, "          ", sidebar_color);
+  VGA_info_right(70, 38, "          ", sidebar_color);
+  VGA_info_right(70, 39, "          ", sidebar_color);
+  VGA_info_right(70, 40, "          ", sidebar_color);
+  VGA_info_right(70, 41, "          ", sidebar_color);
+  VGA_info_right(70, 42, "          ", sidebar_color);
+  VGA_info_right(70, 43, "          ", sidebar_color);
+  VGA_info_right(70, 44, "          ", sidebar_color);
+  VGA_info_right(70, 45, "          ", sidebar_color);
+  VGA_info_right(70, 46, "          ", sidebar_color);
+  VGA_info_right(70, 47, "          ", sidebar_color);
+  VGA_info_right(70, 48, "          ", sidebar_color);
+  VGA_info_right(70, 49, "          ", sidebar_color);
+  VGA_info_right(70, 50, "          ", sidebar_color);
+  VGA_info_right(70, 51, "          ", sidebar_color);
+  VGA_info_right(70, 52, "          ", sidebar_color);
+  VGA_info_right(70, 53, "          ", sidebar_color);
+  VGA_info_right(70, 54, "          ", sidebar_color);
+  VGA_info_right(70, 55, "          ", sidebar_color);
+  VGA_info_right(70, 56, " PRESS    ", sidebar_color);
+  VGA_info_right(70, 57, "  ECE     ", sidebar_color);
+  VGA_info_right(70, 58, " TO QUIT  ", sidebar_color);
+  VGA_info_right(70, 59, "          ", sidebar_color);
 }
