@@ -8,10 +8,14 @@ extern volatile int* rgb_status;
 
 extern int screen_x;
 extern int screen_y;
+
 extern int res_offset;
 extern int col_offset;
+
 extern int pos_x;
 extern int pos_y;
+
+extern int score;
 
 extern unsigned KEY_val;
 extern int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
@@ -79,30 +83,25 @@ Task_read_KEYs(void* pdata)
 static void
 Task_VGA_init(void)
 {
+  debug("Initializing VGA Display");
   debug("Clearing the screen initially");
-  VGA_box(0, 0, STANDARD_X, STANDARD_Y, 0); /* clear the screen */
 
+  VGA_box(0, 0, STANDARD_X, STANDARD_Y, 0); /* clear the screen */
+  
   /* clearing all characters from the screen */
   for (int i = 0; i < 60; i++)
     VGA_text(0, i, clear_row_text);
 
-  debug("Initializing VGA Display");
-  VGA_info_right(0,
-                 20,
-                 "                                                          "
-                 "                      ",
-                 background_color);
-                 
   VGA_info_right(70,  0, "          ", background_color);
-  VGA_info_right(70,  1, "CATCH     ", background_color);
-  VGA_info_right(70,  2, "THE       ", background_color);
-  VGA_info_right(70,  3, "NUMBERS!  ", background_color);
+  VGA_info_right(70,  1, " CATCH    ", background_color);
+  VGA_info_right(70,  2, " THE      ", background_color);
+  VGA_info_right(70,  3, " NUMBERS! ", background_color);
   VGA_info_right(70,  4, "          ", background_color);
-  VGA_info_right(70,  5, "SCORE:    ", background_color);
-  VGA_info_right(70,  6, "00000000  ", background_color);
+  VGA_info_right(70,  5, " SCORE:   ", background_color);
+  VGA_info_right(70,  6, "        0 ", background_color);
   VGA_info_right(70,  7, "          ", background_color);
-  VGA_info_right(70,  8, "TIME:     ", background_color);
-  VGA_info_right(70,  9, "SCORE:    ", background_color);
+  VGA_info_right(70,  8, " TIME:    ", background_color);
+  VGA_info_right(70,  9, " 00:00:00 ", background_color);
   VGA_info_right(70, 10, "          ", background_color);
   VGA_info_right(70, 11, "          ", background_color);
   VGA_info_right(70, 12, "          ", background_color);
@@ -141,12 +140,18 @@ Task_VGA_init(void)
   VGA_info_right(70, 45, "          ", background_color);
   VGA_info_right(70, 46, "          ", background_color);
   VGA_info_right(70, 47, "          ", background_color);
-  VGA_info_right(70, 48, "PRESS     ", background_color);
-  VGA_info_right(70, 49, "'ECE'     ", background_color);
-  VGA_info_right(70, 50, "TO QUIT   ", background_color);
+  VGA_info_right(70, 48, "          ", background_color);
+  VGA_info_right(70, 49, "          ", background_color);
+  VGA_info_right(70, 50, "          ", background_color);
   VGA_info_right(70, 51, "          ", background_color);
   VGA_info_right(70, 52, "          ", background_color);
   VGA_info_right(70, 53, "          ", background_color);
+  VGA_info_right(70, 54, "          ", background_color);
+  VGA_info_right(70, 55, "          ", background_color);
+  VGA_info_right(70, 56, " PRESS    ", background_color);
+  VGA_info_right(70, 57, "  ECE     ", background_color);
+  VGA_info_right(70, 58, " TO QUIT  ", background_color);
+  VGA_info_right(70, 59, "          ", background_color);
 }
 
 /* Display Character using VGA Output */
@@ -171,6 +176,8 @@ main(void)
 
   /* ***************************** Initialization *****************************
    */
+
+  score = 0;
 
   KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
 

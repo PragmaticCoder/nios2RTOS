@@ -45,6 +45,8 @@ char text_disp[2];
 char clear_text[2];
 char clear_row_text[81];
 
+int score;
+
 /* Semaphores */
 OS_EVENT* SEM_read_KEYs;
 
