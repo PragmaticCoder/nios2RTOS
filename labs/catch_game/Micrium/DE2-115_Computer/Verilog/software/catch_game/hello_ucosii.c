@@ -85,14 +85,8 @@ static void
 Task_VGA_init(void)
 {
   debug("Initializing VGA Display");
-  debug("Clearing the screen initially");
 
-  VGA_box(0, 0, STANDARD_X, STANDARD_Y, 0); /* clear the screen */
-
-  /* clearing all characters from the screen */
-  for (int i = 0; i < 60; i++)
-    VGA_text(0, i, clear_row_text);
-
+  VGA_clear_screen();
   VGA_display_sidebar(background_color);
 }
 
