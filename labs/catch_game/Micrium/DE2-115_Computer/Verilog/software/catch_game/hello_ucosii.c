@@ -87,21 +87,21 @@ Task_VGA_init(void)
   debug("Clearing the screen initially");
 
   VGA_box(0, 0, STANDARD_X, STANDARD_Y, 0); /* clear the screen */
-  
+
   /* clearing all characters from the screen */
   for (int i = 0; i < 60; i++)
     VGA_text(0, i, clear_row_text);
 
-  VGA_info_right(70,  0, "          ", background_color);
-  VGA_info_right(70,  1, " CATCH    ", background_color);
-  VGA_info_right(70,  2, " THE      ", background_color);
-  VGA_info_right(70,  3, " NUMBERS! ", background_color);
-  VGA_info_right(70,  4, "          ", background_color);
-  VGA_info_right(70,  5, " SCORE:   ", background_color);
-  VGA_info_right(70,  6, "        0 ", background_color);
-  VGA_info_right(70,  7, "          ", background_color);
-  VGA_info_right(70,  8, " TIME:    ", background_color);
-  VGA_info_right(70,  9, " 00:00:00 ", background_color);
+  VGA_info_right(70, 0, "          ", background_color);
+  VGA_info_right(70, 1, " CATCH    ", background_color);
+  VGA_info_right(70, 2, " THE      ", background_color);
+  VGA_info_right(70, 3, " NUMBERS! ", background_color);
+  VGA_info_right(70, 4, "          ", background_color);
+  VGA_info_right(70, 5, " SCORE:   ", background_color);
+  VGA_info_right(70, 6, "        0 ", background_color);
+  VGA_info_right(70, 7, "          ", background_color);
+  VGA_info_right(70, 8, " TIME:    ", background_color);
+  VGA_info_right(70, 9, " 00:00:00 ", background_color);
   VGA_info_right(70, 10, "          ", background_color);
   VGA_info_right(70, 11, "          ", background_color);
   VGA_info_right(70, 12, "          ", background_color);
@@ -163,6 +163,7 @@ Task_VGA_char(void* pdata)
   for (;;) {
     debug(
       "%u: \tTask_VGA_char: (pos_x, pos_y) = (%d, %d)", OSTime, pos_x, pos_y);
+
     VGA_animated_char(pos_x, pos_y, text_disp, background_color);
 
     OSTimeDly(1);
