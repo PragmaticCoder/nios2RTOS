@@ -141,11 +141,11 @@ Task_VGA_init(void)
   VGA_info_right(70, 45, "          ", background_color);
   VGA_info_right(70, 46, "          ", background_color);
   VGA_info_right(70, 47, "          ", background_color);
-  VGA_info_right(70, 48, "          ", background_color);
-  VGA_info_right(70, 49, "          ", background_color);
-  VGA_info_right(70, 50, "PRESS     ", background_color);
-  VGA_info_right(70, 51, "'ECE'     ", background_color);
-  VGA_info_right(70, 52, "TO QUIT   ", background_color);
+  VGA_info_right(70, 48, "PRESS     ", background_color);
+  VGA_info_right(70, 49, "'ECE'     ", background_color);
+  VGA_info_right(70, 50, "TO QUIT   ", background_color);
+  VGA_info_right(70, 51, "          ", background_color);
+  VGA_info_right(70, 52, "          ", background_color);
   VGA_info_right(70, 53, "          ", background_color);
 }
 
@@ -201,7 +201,7 @@ main(void)
   col_offset = (db == 8) ? 1 : 0;
 
   /* update color */
-  background_color = resample_rgb(db, INTEL_BLUE);
+  background_color = resample_rgb(db, INTEL_RED);
   VGA_animated_char(pos_x, pos_y, text_disp, background_color);
 
   /* **************************************************************************

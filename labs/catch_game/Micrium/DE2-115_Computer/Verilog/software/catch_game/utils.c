@@ -115,7 +115,7 @@ void
 VGA_info_right(int x, int y, char* text_ptr, short char_bg_color)
 {
   int i = 0;
-  for (i = pos_x; i < pos_x + 10; i++)
+  for (i = x; i < x + 10; i++)
     VGA_char_box(i, y, char_bg_color);
 
   VGA_text(x, y, text_ptr);
