@@ -38,7 +38,9 @@ OS_STK task_disp_vga_char_stk[TASK_STACKSIZE];
 #define TASK_KEY_PRESS_PRIORITY 1
 #define TASK_VGA_CHAR_PRIORITY 2
 
-/* Prints "Hello World" and sleeps for three seconds */
+/* ************************************************************************** */
+/*                   Detecting KEY1, KEY2, KEY3, KEY4 Press                   */
+/* ************************************************************************** */
 void
 Task_read_KEYs(void* pdata)
 {
