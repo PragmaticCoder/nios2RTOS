@@ -81,6 +81,7 @@ Task_VGA_init(void)
 {
   debug("Clearing the screen initially");
   VGA_box(0, 0, STANDARD_X, STANDARD_Y, 0); /* clear the screen */
+
   /* clearing all characters from the screen */
   for (int i = 0; i < 60; i++)
     VGA_text(0, i, clear_row_text);
@@ -99,9 +100,53 @@ Task_VGA_init(void)
   VGA_info_right(70,  4, "          ", background_color);
   VGA_info_right(70,  5, "SCORE:    ", background_color);
   VGA_info_right(70,  6, "00000000  ", background_color);
-  VGA_info_right(70,  8, "          ", background_color);
-  VGA_info_right(70,  9, "TIME:     ", background_color);
-  VGA_info_right(70, 10, "SCORE:    ", background_color);
+  VGA_info_right(70,  7, "          ", background_color);
+  VGA_info_right(70,  8, "TIME:     ", background_color);
+  VGA_info_right(70,  9, "SCORE:    ", background_color);
+  VGA_info_right(70, 10, "          ", background_color);
+  VGA_info_right(70, 11, "          ", background_color);
+  VGA_info_right(70, 12, "          ", background_color);
+  VGA_info_right(70, 13, "          ", background_color);
+  VGA_info_right(70, 14, "          ", background_color);
+  VGA_info_right(70, 15, "          ", background_color);
+  VGA_info_right(70, 16, "          ", background_color);
+  VGA_info_right(70, 17, "          ", background_color);
+  VGA_info_right(70, 18, "          ", background_color);
+  VGA_info_right(70, 19, "          ", background_color);
+  VGA_info_right(70, 20, "          ", background_color);
+  VGA_info_right(70, 21, "          ", background_color);
+  VGA_info_right(70, 22, "          ", background_color);
+  VGA_info_right(70, 23, "          ", background_color);
+  VGA_info_right(70, 24, "          ", background_color);
+  VGA_info_right(70, 25, "          ", background_color);
+  VGA_info_right(70, 26, "          ", background_color);
+  VGA_info_right(70, 27, "          ", background_color);
+  VGA_info_right(70, 28, "          ", background_color);
+  VGA_info_right(70, 29, "          ", background_color);
+  VGA_info_right(70, 30, "          ", background_color);
+  VGA_info_right(70, 31, "          ", background_color);
+  VGA_info_right(70, 32, "          ", background_color);
+  VGA_info_right(70, 33, "          ", background_color);
+  VGA_info_right(70, 34, "          ", background_color);
+  VGA_info_right(70, 35, "          ", background_color);
+  VGA_info_right(70, 36, "          ", background_color);
+  VGA_info_right(70, 37, "          ", background_color);
+  VGA_info_right(70, 38, "          ", background_color);
+  VGA_info_right(70, 39, "          ", background_color);
+  VGA_info_right(70, 40, "          ", background_color);
+  VGA_info_right(70, 41, "          ", background_color);
+  VGA_info_right(70, 42, "          ", background_color);
+  VGA_info_right(70, 43, "          ", background_color);
+  VGA_info_right(70, 44, "          ", background_color);
+  VGA_info_right(70, 45, "          ", background_color);
+  VGA_info_right(70, 46, "          ", background_color);
+  VGA_info_right(70, 47, "          ", background_color);
+  VGA_info_right(70, 48, "          ", background_color);
+  VGA_info_right(70, 49, "          ", background_color);
+  VGA_info_right(70, 50, "PRESS     ", background_color);
+  VGA_info_right(70, 51, "'ECE'     ", background_color);
+  VGA_info_right(70, 52, "TO QUIT   ", background_color);
+  VGA_info_right(70, 53, "          ", background_color);
 }
 
 /* Display Character using VGA Output */
