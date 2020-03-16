@@ -111,6 +111,9 @@ VGA_animated_char(int x, int y, char* text_ptr, short char_bg_color)
   VGA_text(x, y, text_ptr);
 }
 
+/* ************************************************************************** */
+/*            Display Character and Pixel Configuration for Sidebar           */
+/* ************************************************************************** */
 void
 VGA_info_right(int x, int y, char* text_ptr, short char_bg_color)
 {

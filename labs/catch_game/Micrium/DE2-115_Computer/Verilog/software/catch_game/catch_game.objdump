@@ -2118,7 +2118,9 @@ VGA_animated_char(int x, int y, char* text_ptr, short char_bg_color)
      b54:	f800283a 	ret
 
 00000b58 <VGA_info_right>:
-
+/* ************************************************************************** */
+/*            Display Character and Pixel Configuration for Sidebar           */
+/* ************************************************************************** */
 void
 VGA_info_right(int x, int y, char* text_ptr, short char_bg_color)
 {
@@ -2143,7 +2145,7 @@ VGA_info_right(int x, int y, char* text_ptr, short char_bg_color)
      b94:	e17ffd17 	ldw	r5,-12(fp)
      b98:	e13ffb17 	ldw	r4,-20(fp)
      b9c:	0000a540 	call	a54 <VGA_char_box>
-
+/* ************************************************************************** */
 void
 VGA_info_right(int x, int y, char* text_ptr, short char_bg_color)
 {
