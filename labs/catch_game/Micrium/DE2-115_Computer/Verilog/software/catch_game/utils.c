@@ -256,7 +256,29 @@ VGA_display_sidebar(short sidebar_color)
   VGA_info_right(70, 54, "          ", sidebar_color);
   VGA_info_right(70, 55, "          ", sidebar_color);
   VGA_info_right(70, 56, " PRESS    ", sidebar_color);
-  VGA_info_right(70, 57, "  ECE     ", sidebar_color);
+  VGA_info_right(70, 57, "  ESC     ", sidebar_color);
   VGA_info_right(70, 58, " TO QUIT  ", sidebar_color);
   VGA_info_right(70, 59, "          ", sidebar_color);
+}
+
+/* ************************************************************************** */
+/*                              Display Game Time                             */
+/* ************************************************************************** */
+void
+VGA_gametime_display(int hour, int minute, int second)
+{
+  char buffer[10];
+
+  int cx;
+  cx = snprintf(buffer, 10, " %02d:%02d:%02d\0", game_hh, game_mm, game_ss);
+
+  debug("buffer: %s", buffer);
+  check(cx >= 0, "cx out of range");
+
+  VGA_text(70, 9, buffer);
+  return;
+
+error:
+  log_err("Error caused while formatting string");
+  log_err("buffer: %s", buffer);
 }

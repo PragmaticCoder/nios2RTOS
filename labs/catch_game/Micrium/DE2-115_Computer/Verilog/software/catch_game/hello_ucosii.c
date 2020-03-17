@@ -65,9 +65,11 @@ Task_game_timer(void* pdata)
     if (game_hh >= 60)
       game_hh, game_mm, game_ss = 0, 0, 0;
 
-    debug("GAME TIME: %2d:%2d:%2d", game_hh, game_mm, game_ss);
-    OSSemPost(SEM_game_timer);
+    debug("GAME TIME: %02d:%02d:%02d", game_hh, game_mm, game_ss);
 
+    VGA_gametime_display(game_hh, game_mm, game_ss);
+
+    OSSemPost(SEM_game_timer);
     OSTimeDlyHMSM(0, 0, 1, 0);
   }
 }

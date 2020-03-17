@@ -42,4 +42,7 @@ VGA_clear_all_characters(void);
 void
 VGA_clear_screen(void);
 
+void
+VGA_gametime_display(int hour, int minute, int second);
+
 #endif /* UTILS_H_ */
