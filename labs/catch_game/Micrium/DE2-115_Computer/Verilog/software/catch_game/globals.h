@@ -20,8 +20,11 @@
 
 #define STANDARD_X 320
 #define STANDARD_Y 240
+
 #define INTEL_BLUE 0x0071C5
-#define INTEL_RED  0xF6291B
+#define INTEL_RED 0xF6291B
+
+#define GAMESCREEN_WIDTH 70
 
 /* Global Variables */
 INT8U err;
@@ -46,8 +49,10 @@ char clear_text[2];
 char clear_row_text[81];
 
 int score;
+int game_hh, game_mm, game_ss;
 
 /* Semaphores */
 OS_EVENT* SEM_read_KEYs;
+OS_EVENT* SEM_game_timer;
 
 #endif

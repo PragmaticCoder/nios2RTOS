@@ -16,6 +16,7 @@ extern int pos_x;
 extern int pos_y;
 
 extern int score;
+extern int game_hh, game_mm, game_ss;
 
 extern unsigned KEY_val;
 extern int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
@@ -33,12 +34,49 @@ short sidebar_color;
 #define TASK_STACKSIZE 2048
 OS_STK task_key_press_stk[TASK_STACKSIZE];
 OS_STK task_disp_vga_char_stk[TASK_STACKSIZE];
+OS_STK task_game_timer_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
-#define TASK_KEY_PRESS_PRIORITY 1
-#define TASK_VGA_CHAR_PRIORITY 2
+#define TASK_GAME_TIMER_PRIORITY 2
+#define TASK_KEY_PRESS_PRIORITY 4
+#define TASK_VGA_CHAR_PRIORITY 5
 
-/* Prints "Hello World" and sleeps for three seconds */
+/* ************************************************************************** */
+/*                     Track Elapsed Time: Total Game Time                    */
+/* ************************************************************************** */
+void
+Task_game_timer(void* pdata)
+{
+  debug("Started Game Timer");
+  for (;;) {
+    OSSemPend(SEM_game_timer, 0, &err);
+    game_ss++;
+
+    if (game_ss >= 60) {
+      game_mm++;
+      game_ss = 0;
+    }
+
+    if (game_mm >= 60) {
+      game_hh++;
+      game_mm = 0;
+    }
+
+    if (game_hh >= 60)
+      game_hh, game_mm, game_ss = 0, 0, 0;
+
+    debug("GAME TIME: %02d:%02d:%02d", game_hh, game_mm, game_ss);
+
+    VGA_gametime_display(game_hh, game_mm, game_ss);
+
+    OSSemPost(SEM_game_timer);
+    OSTimeDlyHMSM(0, 0, 1, 0);
+  }
+}
+
+/* ************************************************************************** */
+/*                   Detecting KEY1, KEY2, KEY3, KEY4 Press                   */
+/* ************************************************************************** */
 void
 Task_read_KEYs(void* pdata)
 {
@@ -85,14 +123,8 @@ static void
 Task_VGA_init(void)
 {
   debug("Initializing VGA Display");
-  debug("Clearing the screen initially");
 
-  VGA_box(0, 0, STANDARD_X, STANDARD_Y, 0); /* clear the screen */
-
-  /* clearing all characters from the screen */
-  for (int i = 0; i < 60; i++)
-    VGA_text(0, i, clear_row_text);
-
+  VGA_clear_screen();
   VGA_display_sidebar(background_color);
 }
 
@@ -121,6 +153,7 @@ main(void)
    */
 
   score = 0;
+  game_hh, game_mm, game_ss = 0, 0, 0;
 
   KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
 
@@ -128,6 +161,7 @@ main(void)
    */
 
   SEM_read_KEYs = OSSemCreate(1);
+  SEM_game_timer = OSSemCreate(1);
 
   /* **************************** VGA Display Setup ***************************
    */
@@ -159,6 +193,16 @@ main(void)
 
   Task_VGA_init(); /* Initial Display Layout Setup */
 
+  OSTaskCreateExt(Task_game_timer,
+                  NULL,
+                  (void*)&task_game_timer_stk[TASK_STACKSIZE - 1],
+                  TASK_GAME_TIMER_PRIORITY,
+                  TASK_GAME_TIMER_PRIORITY,
+                  task_game_timer_stk,
+                  TASK_STACKSIZE,
+                  NULL,
+                  0);
+
   OSTaskCreateExt(Task_read_KEYs,
                   NULL,
                   (void*)&task_key_press_stk[TASK_STACKSIZE - 1],
@@ -178,6 +222,7 @@ main(void)
                   TASK_STACKSIZE,
                   NULL,
                   0);
+
   OSStart();
   return 0;
 }
