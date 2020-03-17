@@ -35,9 +35,11 @@ short sidebar_color;
 OS_STK task_key_press_stk[TASK_STACKSIZE];
 OS_STK task_disp_vga_char_stk[TASK_STACKSIZE];
 OS_STK task_game_timer_stk[TASK_STACKSIZE];
+OS_STK task_ps2_keyboard_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
 #define TASK_GAME_TIMER_PRIORITY 2
+#define TASK_PS2_KEYBOARD_PRIORITY 3
 #define TASK_KEY_PRESS_PRIORITY 4
 #define TASK_VGA_CHAR_PRIORITY 5
 
@@ -135,10 +137,25 @@ Task_VGA_char(void* pdata)
   debug("Started: Task_VGA_char");
 
   for (;;) {
-    debug(
-      "%u: \tTask_VGA_char: (pos_x, pos_y) = (%d, %d)", OSTime, pos_x, pos_y);
-
+    debug("%u: (pos_x, pos_y) = (%d, %d)", OSTime, pos_x, pos_y);
     VGA_animated_char(pos_x, pos_y, text_disp, background_color);
+
+    OSTimeDly(1);
+  }
+}
+
+/* ************************************************************************** */
+/*                    Reads PS2 Keyboard input periodically                   */
+/* ************************************************************************** */
+
+void
+Task_read_PS2_Keyboard(void* pdata)
+{
+  debug("Started: Read PS2 Keyboard Task");
+
+  for (;;) {
+    debug("Reading PS2 Input");
+    read_PS2_KeyboardInput();
 
     OSTimeDly(1);
   }
@@ -199,6 +216,16 @@ main(void)
                   TASK_GAME_TIMER_PRIORITY,
                   TASK_GAME_TIMER_PRIORITY,
                   task_game_timer_stk,
+                  TASK_STACKSIZE,
+                  NULL,
+                  0);
+
+  OSTaskCreateExt(Task_read_PS2_Keyboard,
+                  NULL,
+                  (void*)&task_ps2_keyboard_stk[TASK_STACKSIZE - 1],
+                  TASK_PS2_KEYBOARD_PRIORITY,
+                  TASK_PS2_KEYBOARD_PRIORITY,
+                  task_ps2_keyboard_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);

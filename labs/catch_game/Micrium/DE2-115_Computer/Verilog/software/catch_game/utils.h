@@ -45,4 +45,7 @@ VGA_clear_screen(void);
 void
 VGA_gametime_display(int hour, int minute, int second);
 
+void
+read_PS2_KeyboardInput(void);
+
 #endif /* UTILS_H_ */
