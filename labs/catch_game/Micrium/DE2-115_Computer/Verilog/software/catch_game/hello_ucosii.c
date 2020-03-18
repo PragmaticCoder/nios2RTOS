@@ -13,8 +13,17 @@ extern int screen_y;
 extern int res_offset;
 extern int col_offset;
 
+extern int basket_pos_x;
+extern int basket_pos_y;
+
 extern int pos1_x;
 extern int pos1_y;
+
+extern int pos2_x;
+extern int pos2_y;
+
+extern int pos3_x;
+extern int pos3_y;
 
 extern int score;
 extern int game_hh, game_mm, game_ss;
@@ -29,6 +38,7 @@ extern char clear_row_text[70] =
   
 
 short background_color;
+short basket_color;
 short sidebar_color;
 
 /* Definition of Task Stacks */
@@ -94,27 +104,21 @@ Task_read_KEYs(void* pdata)
     debug("%u: \tHello from Task_read_KEYs", OSTime);
     Check_KEYs(&KEY0_flag, &KEY1_flag, &KEY2_flag, &KEY3_flag);
 
-    if (KEY0_flag && pos1_x < 69) {
+    if (KEY0_flag && basket_pos_x < 69) {
       debug("MOVE RIGHT");
-      ++pos1_x;
+
+      VGA_clear_game_row(59);
+      ++basket_pos_x;
+
       KEY0_flag = 0;
     }
 
-    if (KEY1_flag) {
-      debug("MOVE DOWN");
-      ++pos1_y;
-      KEY1_flag = 0;
-    }
-
-    if (KEY2_flag) {
-      debug("MOVE UP");
-      --pos1_y;
-      KEY2_flag = 0;
-    }
-
-    if (KEY3_flag && pos1_x > 0) {
+    if (KEY3_flag && basket_pos_x > 0) {
       debug("MOVE LEFT");
-      --pos1_x;
+
+      VGA_clear_game_row(59);
+      --basket_pos_x;
+
       KEY3_flag = 0;
     }
 
@@ -140,8 +144,8 @@ Task_VGA_char(void* pdata)
   debug("Started: Task_VGA_char");
 
   for (;;) {
-    // debug("%u: (pos1_x, pos1_y) = (%d, %d)", OSTime, pos1_x, pos1_y);
-    // VGA_animated_char(pos1_x, pos1_y, text_disp, background_color);
+    debug("%u:Basket Position (pos1_x, pos1_y) = (%d, %d)", OSTime, basket_pos_x, basket_pos_y);
+    VGA_animated_char(basket_pos_x, 59, "U", basket_color);
 
     OSTimeDly(1);
   }
@@ -176,9 +180,8 @@ Task_falling_blocks(void* pdata)
     {
       int lower = 0;
       int upper = 69;
-
-      pos1_x = (rand() % 
-           (upper - lower + 1)) + lower; 
+  
+      pos1_x = (rand() % (upper - lower + 1)) + lower;
       pos1_y = 0;
     }
 
@@ -219,7 +222,10 @@ main(void)
   screen_x = *video_resolution & 0xFFFF;
   screen_y = (*video_resolution >> 16) & 0xFFFF;
 
-  /* letter initially positioned at the centre of screen */
+  /* initially basket positioned at the center of screen */
+  basket_pos_x = 40;
+
+  /* letter initially positioned at the center of screen */
   pos1_x = 40;
   pos1_y = 0;
 
@@ -233,6 +239,8 @@ main(void)
 
   /* update color */
   background_color = resample_rgb(db, INTEL_RED);
+  basket_color = resample_rgb(db, INTEL_LIGHT_YELLOW);
+
   VGA_animated_char(pos1_x, pos1_y, text_disp, background_color);
 
   /* **************************************************************************

@@ -166,7 +166,7 @@ VGA_clear_screen(void)
 void
 VGA_clear_game_row(int pos_y)
 {
-  // VGA_box(0, pos_y, STANDARD_X, STANDARD_Y, 0);
+
   for (int i = 0; i < 70; i++)
     VGA_char_box(i, pos_y, 0);
 

@@ -23,6 +23,7 @@
 
 #define INTEL_BLUE 0x0071C5
 #define INTEL_RED 0xF6291B
+#define INTEL_LIGHT_YELLOW 0xFFFFCCC
 
 #define GAMESCREEN_WIDTH 70
 
@@ -41,8 +42,17 @@ int screen_y;
 int res_offset;
 int col_offset;
 
+int basket_pos_x;
+int basket_pos_y;
+
 int pos1_x;
 int pos1_y;
+
+int pos2_x;
+int pos2_y;
+
+int pos3_x;
+int pos3_y;
 
 char text_disp[2];
 char clear_text[2];
