@@ -221,7 +221,7 @@ VGA_display_sidebar(short sidebar_color)
   VGA_info_right(70, 3, " NUMBERS! ", sidebar_color);
   VGA_info_right(70, 4, "          ", sidebar_color);
   VGA_info_right(70, 5, " SCORE:   ", sidebar_color);
-  VGA_info_right(70, 6, "        0 ", sidebar_color);
+  VGA_info_right(70, 6, "      000 ", sidebar_color);
   VGA_info_right(70, 7, "          ", sidebar_color);
   VGA_info_right(70, 8, " TIME:    ", sidebar_color);
   VGA_info_right(70, 9, " 00:00:00 ", sidebar_color);

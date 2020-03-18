@@ -179,6 +179,7 @@ Task_falling_blocks(void* pdata)
     debug("Falling block: pos: (%d, %d)", pos1_x, pos1_y);
 
     if (pos1_y >= 60) {
+
       int lower = 0;
       int upper = 69;
 
@@ -191,7 +192,7 @@ Task_falling_blocks(void* pdata)
 
     VGA_animated_char(pos1_x, pos1_y, text_disp, background_color);
 
-    if (pos1_y == 59 && basket_pos_x == pos1_x){
+    if (pos1_y == 59 && basket_pos_x == pos1_x) {
       score++;
       VGA_display_score(score);
     }

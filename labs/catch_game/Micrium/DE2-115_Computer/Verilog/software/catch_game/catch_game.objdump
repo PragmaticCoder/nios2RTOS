@@ -1716,6 +1716,7 @@ Task_falling_blocks(void* pdata)
      6cc:	d0a7fb17 	ldw	r2,-24596(gp)
      6d0:	10800f10 	cmplti	r2,r2,60
      6d4:	1000101e 	bne	r2,zero,718 <Task_falling_blocks+0xb4>
+
       int lower = 0;
      6d8:	e03ffd15 	stw	zero,-12(fp)
       int upper = 69;
@@ -1761,7 +1762,7 @@ Task_falling_blocks(void* pdata)
      754:	1009883a 	mov	r4,r2
      758:	0000e080 	call	e08 <VGA_animated_char>
 
-    if (pos1_y == 59 && basket_pos_x == pos1_x){
+    if (pos1_y == 59 && basket_pos_x == pos1_x) {
      75c:	d0a7fb17 	ldw	r2,-24596(gp)
      760:	10800ed8 	cmpnei	r2,r2,59
      764:	1000091e 	bne	r2,zero,78c <Task_falling_blocks+0x128>
@@ -1783,7 +1784,7 @@ Task_falling_blocks(void* pdata)
      790:	10c00317 	ldw	r3,12(r2)
      794:	d0a7f317 	ldw	r2,-24628(gp)
      798:	d8800015 	stw	r2,0(sp)
-     79c:	01c031c4 	movi	r7,199
+     79c:	01c03204 	movi	r7,200
      7a0:	018000b4 	movhi	r6,2
      7a4:	31ba2804 	addi	r6,r6,-5984
      7a8:	014000b4 	movhi	r5,2
@@ -2892,7 +2893,7 @@ VGA_display_sidebar(short sidebar_color)
     12f8:	01400144 	movi	r5,5
     12fc:	01001184 	movi	r4,70
     1300:	0000e680 	call	e68 <VGA_info_right>
-  VGA_info_right(70, 6, "        0 ", sidebar_color);
+  VGA_info_right(70, 6, "      000 ", sidebar_color);
     1304:	e0bfff0f 	ldh	r2,-4(fp)
     1308:	100f883a 	mov	r7,r2
     130c:	018000b4 	movhi	r6,2
