@@ -17,6 +17,7 @@ extern int basket_pos_y;
 
 extern int pos1_x;
 extern int pos1_y;
+extern int pos1_val;
 
 extern int pos2_x;
 extern int pos2_y;
@@ -30,7 +31,7 @@ extern int game_hh, game_mm, game_ss;
 extern unsigned KEY_val;
 extern int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 
-extern char text_disp[2] = "C\0";
+extern char text_disp[1];
 extern char clear_text[2] = " \0";
 extern char clear_row_text[70] =
   "                                                                      \0";
@@ -75,7 +76,7 @@ Task_game_timer(void* pdata)
       game_mm = 0;
     }
 
-    if (game_hh >= 60)
+    if (game_hh >= 24)
       game_hh, game_mm, game_ss = 0, 0, 0;
 
     debug("GAME TIME: %02d:%02d:%02d", game_hh, game_mm, game_ss);
@@ -185,6 +186,12 @@ Task_falling_blocks(void* pdata)
 
       pos1_x = (rand() % (upper - lower + 1)) + lower;
       pos1_y = 0;
+
+      upper = 9;
+      lower = 1;
+
+      pos1_val = (rand() % (upper - lower + 1)) + lower;
+      snprintf(text_disp, 2, "%d\0", pos1_val);
     }
 
     VGA_clear_game_row(pos1_y);
@@ -193,7 +200,7 @@ Task_falling_blocks(void* pdata)
     VGA_animated_char(pos1_x, pos1_y, text_disp, background_color);
 
     if (pos1_y == 59 && basket_pos_x == pos1_x) {
-      score++;
+      score += pos1_val;
       VGA_display_score(score);
     }
 
@@ -234,9 +241,19 @@ main(void)
   /* initially basket positioned at the center of screen */
   basket_pos_x = 40;
 
-  /* letter initially positioned at the center of screen */
-  pos1_x = 40;
+  /* letter initially positioning falling box randomly */
+
+  int lower = 0;
+  int upper = 69;
+
+  pos1_x = (rand() % (upper - lower + 1)) + lower;
   pos1_y = 0;
+
+  upper = 9;
+  lower = 1;
+
+  pos1_val = (rand() % (upper - lower + 1)) + lower;
+  snprintf(text_disp, 2, "%d\0", pos1_val);
 
   int db = get_data_bits(*rgb_status & 0x3F);
 

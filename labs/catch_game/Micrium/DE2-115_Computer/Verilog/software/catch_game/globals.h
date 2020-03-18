@@ -54,7 +54,11 @@ int pos2_y;
 int pos3_x;
 int pos3_y;
 
-char text_disp[2];
+int pos1_val;
+int pos2_val;
+int pos3_val;
+
+char text_disp[1];
 char clear_text[2];
 char clear_row_text[70];
 
