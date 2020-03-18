@@ -318,15 +318,18 @@ HEX_PS2(char b1, char b2, char b3)
   unsigned char hex_segs[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
   unsigned int shift_buffer, nibble;
   unsigned char code;
+  
   int i;
 
   shift_buffer = (b1 << 16) | (b2 << 8) | b3;
+
   for (i = 0; i < 6; ++i) {
     nibble = shift_buffer & 0x0000000F; // character is in rightmost nibble
     code = seven_seg_decode_table[nibble];
     hex_segs[i] = code;
     shift_buffer = shift_buffer >> 4;
   }
+
   /* drive the hex displays */
   *(HEX3_HEX0_ptr) = *(int*)(hex_segs);
   *(HEX5_HEX4_ptr) = *(int*)(hex_segs + 4);

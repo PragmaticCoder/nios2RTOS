@@ -1,7 +1,6 @@
 #include "globals.h"
 #include "utils.h"
 
-
 /* global variables */
 
 extern volatile int* video_resolution;
@@ -35,7 +34,6 @@ extern char text_disp[2] = "C\0";
 extern char clear_text[2] = " \0";
 extern char clear_row_text[70] =
   "                                                                      \0";
-  
 
 short background_color;
 short basket_color;
@@ -144,7 +142,10 @@ Task_VGA_char(void* pdata)
   debug("Started: Task_VGA_char");
 
   for (;;) {
-    debug("%u:Basket Position (pos1_x, pos1_y) = (%d, %d)", OSTime, basket_pos_x, basket_pos_y);
+    debug("%u:Basket Position (pos1_x, pos1_y) = (%d, %d)",
+          OSTime,
+          basket_pos_x,
+          basket_pos_y);
     VGA_animated_char(basket_pos_x, 59, "U", basket_color);
 
     OSTimeDly(1);
@@ -176,11 +177,10 @@ Task_falling_blocks(void* pdata)
   for (;;) {
     debug("Falling block: pos: (%d, %d)", pos1_x, pos1_y);
 
-    if (pos1_y >= 60)
-    {
+    if (pos1_y >= 60) {
       int lower = 0;
       int upper = 69;
-  
+
       pos1_x = (rand() % (upper - lower + 1)) + lower;
       pos1_y = 0;
     }
@@ -189,6 +189,11 @@ Task_falling_blocks(void* pdata)
     pos1_y++;
 
     VGA_animated_char(pos1_x, pos1_y, text_disp, background_color);
+
+    if (pos1_y == 59 && basket_pos_x == pos1_x)
+      score++;
+
+    debug("SCORE: %d", score);
 
     OSTimeDly(1);
   }
