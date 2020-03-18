@@ -146,6 +146,7 @@ Task_VGA_char(void* pdata)
           OSTime,
           basket_pos_x,
           basket_pos_y);
+
     VGA_animated_char(basket_pos_x, 59, "U", basket_color);
 
     OSTimeDly(1);
@@ -190,8 +191,10 @@ Task_falling_blocks(void* pdata)
 
     VGA_animated_char(pos1_x, pos1_y, text_disp, background_color);
 
-    if (pos1_y == 59 && basket_pos_x == pos1_x)
+    if (pos1_y == 59 && basket_pos_x == pos1_x){
       score++;
+      VGA_display_score(score);
+    }
 
     debug("SCORE: %d", score);
 

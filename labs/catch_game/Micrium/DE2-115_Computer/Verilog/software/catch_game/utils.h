@@ -51,5 +51,8 @@ read_PS2_KeyboardInput(void);
 void
 VGA_clear_game_row(int pos_y);
 
+void
+VGA_display_score(int score);
+
 
 #endif /* UTILS_H_ */

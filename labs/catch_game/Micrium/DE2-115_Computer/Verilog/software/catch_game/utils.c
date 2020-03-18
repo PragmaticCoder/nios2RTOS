@@ -1,7 +1,7 @@
 /*
  * utils.c
  *
- *  Created on: March 08, 2020
+ *  Created on: March 12, 2020
  *      Author: Alvi
  */
 
@@ -299,6 +299,28 @@ error:
   log_err("buffer: %s", buffer);
 }
 
+/* ************************************************************************** */
+/*                             Display Game Score                             */
+/* ************************************************************************** */
+void
+VGA_display_score(int score)
+{
+  char buffer[10];
+
+  int cx;
+  cx = snprintf(buffer, 10, "      %03d\0", score);
+
+  debug("buffer: %s", buffer);
+  check(cx >= 0, "cx out of range");
+
+  VGA_text(70, 6, buffer);
+  return;
+
+error:
+  log_err("Error caused while formatting string");
+  log_err("buffer: %s", buffer);
+}
+
 /****************************************************************************************
  * Subroutine to show a string of HEX data on the HEX displays
  ****************************************************************************************/
@@ -318,7 +340,7 @@ HEX_PS2(char b1, char b2, char b3)
   unsigned char hex_segs[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
   unsigned int shift_buffer, nibble;
   unsigned char code;
-  
+
   int i;
 
   shift_buffer = (b1 << 16) | (b2 << 8) | b3;
@@ -361,7 +383,6 @@ read_PS2_KeyboardInput(void)
       HEX_PS2(byte1, byte2, byte3);
 
       if ((byte2 == (char)0xAA) && (byte3 == (char)0x00))
-        // mouse inserted; initialize sending of data
         *(PS2_ptr) = 0xF4;
     }
   }
