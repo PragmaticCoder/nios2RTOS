@@ -145,6 +145,10 @@ resample_rgb(int num_bits, int color)
   return color;
 }
 
+/* ************************************************************************** */
+/*                             Clear game screen                              */
+/* ************************************************************************** */
+
 void
 VGA_clear_screen(void)
 {
@@ -154,6 +158,19 @@ VGA_clear_screen(void)
   /* clearing all characters from the screen */
   for (int i = 0; i < 60; i++)
     VGA_text(0, i, clear_row_text);
+}
+
+/* ************************************************************************** */
+/*                            Clear Game Screen Row                           */
+/* ************************************************************************** */
+void
+VGA_clear_game_row(int pos_y)
+{
+  // VGA_box(0, pos_y, STANDARD_X, STANDARD_Y, 0);
+  for (int i = 0; i < 70; i++)
+    VGA_char_box(i, pos_y, 0);
+
+  VGA_text(0, pos_y, clear_row_text);
 }
 
 /* ************************************************************************** */
@@ -331,7 +348,7 @@ read_PS2_KeyboardInput(void)
   while (1) {
     PS2_data = *(PS2_ptr);      // read the Data register in the PS/2 port
     RVALID = PS2_data & 0x8000; // extract the RVALID field
-    
+
     if (RVALID) {
       /* shift the next data byte into the display */
       byte1 = byte2;

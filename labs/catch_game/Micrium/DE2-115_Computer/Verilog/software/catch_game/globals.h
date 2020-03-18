@@ -46,7 +46,7 @@ int pos_y;
 
 char text_disp[2];
 char clear_text[2];
-char clear_row_text[81];
+char clear_row_text[70];
 
 int score;
 int game_hh, game_mm, game_ss;

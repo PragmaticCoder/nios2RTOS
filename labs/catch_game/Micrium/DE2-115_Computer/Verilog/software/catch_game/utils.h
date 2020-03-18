@@ -48,4 +48,8 @@ VGA_gametime_display(int hour, int minute, int second);
 void
 read_PS2_KeyboardInput(void);
 
+void
+VGA_clear_game_row(int pos_y);
+
+
 #endif /* UTILS_H_ */

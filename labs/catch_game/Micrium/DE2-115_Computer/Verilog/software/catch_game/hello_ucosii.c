@@ -23,9 +23,8 @@ extern int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 
 extern char text_disp[2] = "C\0";
 extern char clear_text[2] = " \0";
-extern char clear_row_text[81] =
-  "                                                  "
-  "                              \0";
+extern char clear_row_text[70] =
+  "                                                                      \0";
 
 short background_color;
 short sidebar_color;
@@ -35,13 +34,15 @@ short sidebar_color;
 OS_STK task_key_press_stk[TASK_STACKSIZE];
 OS_STK task_disp_vga_char_stk[TASK_STACKSIZE];
 OS_STK task_game_timer_stk[TASK_STACKSIZE];
+OS_STK task_falling_blocks[TASK_STACKSIZE];
 OS_STK task_ps2_keyboard_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
-#define TASK_GAME_TIMER_PRIORITY 2
-#define TASK_PS2_KEYBOARD_PRIORITY 3
-#define TASK_KEY_PRESS_PRIORITY 4
-#define TASK_VGA_CHAR_PRIORITY 5
+#define TASK_GAME_TIMER_PRIORITY 5
+#define TASK_KEY_PRESS_PRIORITY 1
+#define TASK_FALLING_BLOCKS 2
+#define TASK_VGA_CHAR_PRIORITY 3
+#define TASK_PS2_KEYBOARD_PRIORITY 6
 
 /* ************************************************************************** */
 /*                     Track Elapsed Time: Total Game Time                    */
@@ -91,7 +92,7 @@ Task_read_KEYs(void* pdata)
     debug("%u: \tHello from Task_read_KEYs", OSTime);
     Check_KEYs(&KEY0_flag, &KEY1_flag, &KEY2_flag, &KEY3_flag);
 
-    if (KEY0_flag) {
+    if (KEY0_flag && pos_x < 69) {
       debug("MOVE RIGHT");
       ++pos_x;
       KEY0_flag = 0;
@@ -109,7 +110,7 @@ Task_read_KEYs(void* pdata)
       KEY2_flag = 0;
     }
 
-    if (KEY3_flag) {
+    if (KEY3_flag && pos_x > 0) {
       debug("MOVE LEFT");
       --pos_x;
       KEY3_flag = 0;
@@ -137,8 +138,8 @@ Task_VGA_char(void* pdata)
   debug("Started: Task_VGA_char");
 
   for (;;) {
-    debug("%u: (pos_x, pos_y) = (%d, %d)", OSTime, pos_x, pos_y);
-    VGA_animated_char(pos_x, pos_y, text_disp, background_color);
+    // debug("%u: (pos_x, pos_y) = (%d, %d)", OSTime, pos_x, pos_y);
+    // VGA_animated_char(pos_x, pos_y, text_disp, background_color);
 
     OSTimeDly(1);
   }
@@ -156,6 +157,25 @@ Task_read_PS2_Keyboard(void* pdata)
   for (;;) {
     debug("Reading PS2 Input");
     read_PS2_KeyboardInput();
+
+    OSTimeDly(1);
+  }
+}
+
+void
+Task_falling_blocks(void* pdata)
+{
+  debug("Started: Falling Block");
+
+  for (;;) {
+    debug("Falling block: pos: (%d, %d)", pos_x, pos_y);
+
+    if (pos_y >= 60)
+      pos_y = 0;
+
+    VGA_clear_game_row(pos_y);
+    pos_y++;
+    VGA_animated_char(pos_x, pos_y, text_disp, background_color);
 
     OSTimeDly(1);
   }
@@ -191,7 +211,7 @@ main(void)
 
   /* letter initially positioned at the centre of screen */
   pos_x = 40;
-  pos_y = 30;
+  pos_y = 0;
 
   int db = get_data_bits(*rgb_status & 0x3F);
 
@@ -246,6 +266,16 @@ main(void)
                   TASK_VGA_CHAR_PRIORITY,
                   TASK_VGA_CHAR_PRIORITY,
                   task_disp_vga_char_stk,
+                  TASK_STACKSIZE,
+                  NULL,
+                  0);
+
+  OSTaskCreateExt(Task_falling_blocks,
+                  NULL,
+                  (void*)&task_falling_blocks[TASK_STACKSIZE - 1],
+                  TASK_FALLING_BLOCKS,
+                  TASK_FALLING_BLOCKS,
+                  task_falling_blocks,
                   TASK_STACKSIZE,
                   NULL,
                   0);
