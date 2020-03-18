@@ -1,6 +1,7 @@
 #include "globals.h"
 #include "utils.h"
 
+
 /* global variables */
 
 extern volatile int* video_resolution;
@@ -25,6 +26,7 @@ extern char text_disp[2] = "C\0";
 extern char clear_text[2] = " \0";
 extern char clear_row_text[70] =
   "                                                                      \0";
+  
 
 short background_color;
 short sidebar_color;
@@ -171,7 +173,14 @@ Task_falling_blocks(void* pdata)
     debug("Falling block: pos: (%d, %d)", pos_x, pos_y);
 
     if (pos_y >= 60)
+    {
+      int lower = 0;
+      int upper = 69;
+
+      pos_x = (rand() % 
+           (upper - lower + 1)) + lower; 
       pos_y = 0;
+    }
 
     VGA_clear_game_row(pos_y);
     pos_y++;
