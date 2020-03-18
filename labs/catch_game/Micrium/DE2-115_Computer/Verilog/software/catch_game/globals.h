@@ -41,8 +41,8 @@ int screen_y;
 int res_offset;
 int col_offset;
 
-int pos_x;
-int pos_y;
+int pos1_x;
+int pos1_y;
 
 char text_disp[2];
 char clear_text[2];

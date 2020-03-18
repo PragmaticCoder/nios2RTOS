@@ -13,8 +13,8 @@ extern int screen_y;
 extern int res_offset;
 extern int col_offset;
 
-extern int pos_x;
-extern int pos_y;
+extern int pos1_x;
+extern int pos1_y;
 
 extern int score;
 extern int game_hh, game_mm, game_ss;
@@ -94,27 +94,27 @@ Task_read_KEYs(void* pdata)
     debug("%u: \tHello from Task_read_KEYs", OSTime);
     Check_KEYs(&KEY0_flag, &KEY1_flag, &KEY2_flag, &KEY3_flag);
 
-    if (KEY0_flag && pos_x < 69) {
+    if (KEY0_flag && pos1_x < 69) {
       debug("MOVE RIGHT");
-      ++pos_x;
+      ++pos1_x;
       KEY0_flag = 0;
     }
 
     if (KEY1_flag) {
       debug("MOVE DOWN");
-      ++pos_y;
+      ++pos1_y;
       KEY1_flag = 0;
     }
 
     if (KEY2_flag) {
       debug("MOVE UP");
-      --pos_y;
+      --pos1_y;
       KEY2_flag = 0;
     }
 
-    if (KEY3_flag && pos_x > 0) {
+    if (KEY3_flag && pos1_x > 0) {
       debug("MOVE LEFT");
-      --pos_x;
+      --pos1_x;
       KEY3_flag = 0;
     }
 
@@ -140,8 +140,8 @@ Task_VGA_char(void* pdata)
   debug("Started: Task_VGA_char");
 
   for (;;) {
-    // debug("%u: (pos_x, pos_y) = (%d, %d)", OSTime, pos_x, pos_y);
-    // VGA_animated_char(pos_x, pos_y, text_disp, background_color);
+    // debug("%u: (pos1_x, pos1_y) = (%d, %d)", OSTime, pos1_x, pos1_y);
+    // VGA_animated_char(pos1_x, pos1_y, text_disp, background_color);
 
     OSTimeDly(1);
   }
@@ -170,21 +170,22 @@ Task_falling_blocks(void* pdata)
   debug("Started: Falling Block");
 
   for (;;) {
-    debug("Falling block: pos: (%d, %d)", pos_x, pos_y);
+    debug("Falling block: pos: (%d, %d)", pos1_x, pos1_y);
 
-    if (pos_y >= 60)
+    if (pos1_y >= 60)
     {
       int lower = 0;
       int upper = 69;
 
-      pos_x = (rand() % 
+      pos1_x = (rand() % 
            (upper - lower + 1)) + lower; 
-      pos_y = 0;
+      pos1_y = 0;
     }
 
-    VGA_clear_game_row(pos_y);
-    pos_y++;
-    VGA_animated_char(pos_x, pos_y, text_disp, background_color);
+    VGA_clear_game_row(pos1_y);
+    pos1_y++;
+
+    VGA_animated_char(pos1_x, pos1_y, text_disp, background_color);
 
     OSTimeDly(1);
   }
@@ -219,8 +220,8 @@ main(void)
   screen_y = (*video_resolution >> 16) & 0xFFFF;
 
   /* letter initially positioned at the centre of screen */
-  pos_x = 40;
-  pos_y = 0;
+  pos1_x = 40;
+  pos1_y = 0;
 
   int db = get_data_bits(*rgb_status & 0x3F);
 
@@ -232,7 +233,7 @@ main(void)
 
   /* update color */
   background_color = resample_rgb(db, INTEL_RED);
-  VGA_animated_char(pos_x, pos_y, text_disp, background_color);
+  VGA_animated_char(pos1_x, pos1_y, text_disp, background_color);
 
   /* **************************************************************************
    */
