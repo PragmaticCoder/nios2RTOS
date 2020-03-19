@@ -148,7 +148,7 @@ Task_VGA_char(void* pdata)
           basket_pos_x,
           basket_pos_y);
 
-    VGA_animated_char(basket_pos_x, 59, "U", basket_color);
+    VGA_animated_char(basket_pos_x, 59, " ", basket_color);
 
     OSTimeDly(1);
   }

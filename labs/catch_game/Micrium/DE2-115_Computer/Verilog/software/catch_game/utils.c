@@ -366,24 +366,31 @@ read_PS2_KeyboardInput(void)
   volatile int* PS2_ptr = (int*)PS2_BASE;
 
   int PS2_data, RVALID;
-  char byte1 = 0, byte2 = 0, byte3 = 0;
+  char byte1 = 0, byte2 = 0, byte3 = 0, byte4 = 0, byte5 = 0;
 
-  *(PS2_ptr) = 0xFF; // reset
+  *(PS2_ptr) = 0xFF; // reset PS/2
 
   while (1) {
-    PS2_data = *(PS2_ptr);      // read the Data register in the PS/2 port
-    RVALID = PS2_data & 0x8000; // extract the RVALID field
+    PS2_data = *(PS2_ptr); // read the Data register in the PS/2 port
+    RVALID = (PS2_data & 0xFFFF0000) >> 16; // extract the RVALID field
 
-    if (RVALID) {
+    if (RVALID > 0) {
       /* shift the next data byte into the display */
       byte1 = byte2;
       byte2 = byte3;
-      byte3 = PS2_data & 0xFF;
+      byte3 = byte4;
+      byte4 = byte5;
+      byte5 = PS2_data & 0xFF;
 
-      HEX_PS2(byte1, byte2, byte3);
+      debug("byte1: 0x%02x | byte2: 0x%02x | byte3: 0x%02x | byte4: 0x%02x | "
+            "byte5: 0x%02x",
+            byte1 & 0xFF,
+            byte2 & 0xFF,
+            byte3 & 0xFF,
+            byte4 & 0xFF,
+            byte5 && 0xFF);
 
-      if ((byte2 == (char)0xAA) && (byte3 == (char)0x00))
-        *(PS2_ptr) = 0xF4;
+      HEX_PS2(byte3, byte4, byte5);
     }
   }
 }
