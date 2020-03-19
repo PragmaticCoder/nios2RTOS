@@ -321,42 +321,6 @@ error:
   log_err("buffer: %s", buffer);
 }
 
-/****************************************************************************************
- * Subroutine to show a string of HEX data on the HEX displays
- ****************************************************************************************/
-void
-HEX_PS2(char b1, char b2, char b3)
-{
-  volatile int* HEX3_HEX0_ptr = (int*)HEX3_HEX0_BASE;
-  volatile int* HEX5_HEX4_ptr = (int*)HEX5_HEX4_BASE;
-
-  /* SEVEN_SEGMENT_DECODE_TABLE gives the on/off settings for all segments in
-   * a single 7-seg display in the DE1-SoC Computer, for the hex digits 0 - F
-   */
-  unsigned char seven_seg_decode_table[] = { 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D,
-                                             0x7D, 0x07, 0x7F, 0x67, 0x77, 0x7C,
-                                             0x39, 0x5E, 0x79, 0x71 };
-
-  unsigned char hex_segs[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
-  unsigned int shift_buffer, nibble;
-  unsigned char code;
-
-  int i;
-
-  shift_buffer = (b1 << 16) | (b2 << 8) | b3;
-
-  for (i = 0; i < 6; ++i) {
-    nibble = shift_buffer & 0x0000000F; // character is in rightmost nibble
-    code = seven_seg_decode_table[nibble];
-    hex_segs[i] = code;
-    shift_buffer = shift_buffer >> 4;
-  }
-
-  /* drive the hex displays */
-  *(HEX3_HEX0_ptr) = *(int*)(hex_segs);
-  *(HEX5_HEX4_ptr) = *(int*)(hex_segs + 4);
-}
-
 /* ************************************************************************** */
 /*                           Read PS2 Keyboard Input                          */
 /* ************************************************************************** */
@@ -388,9 +352,8 @@ read_PS2_KeyboardInput(void)
             byte2 & 0xFF,
             byte3 & 0xFF,
             byte4 & 0xFF,
-            byte5 && 0xFF);
+            byte5 & 0xFF);
 
-      HEX_PS2(byte3, byte4, byte5);
     }
   }
 }

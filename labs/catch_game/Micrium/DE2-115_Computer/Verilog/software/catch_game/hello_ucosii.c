@@ -167,7 +167,8 @@ Task_read_PS2_Keyboard(void* pdata)
     debug("Reading PS2 Input");
     read_PS2_KeyboardInput();
 
-    OSTimeDly(1);
+    OSTimeDlyHMSM(0, 0, 1, 0);
+    // OSTimeDly(1);
   }
 }
 
