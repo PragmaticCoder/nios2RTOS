@@ -66,8 +66,15 @@ char clear_row_text[70];
 int score;
 int game_hh, game_mm, game_ss;
 
+/* Keyboard Press */
+int left_key_pressed;
+int right_key_pressed;
+int esc_key_pressed;
+int enter_key_pressed;
+
 /* Semaphores */
 OS_EVENT* SEM_read_KEYs;
 OS_EVENT* SEM_game_timer;
+OS_EVENT* SEM_KEY_press;
 
 #endif

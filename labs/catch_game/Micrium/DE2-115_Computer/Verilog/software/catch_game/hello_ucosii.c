@@ -34,7 +34,11 @@ extern int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 extern char text_disp[1];
 extern char clear_text[2] = " \0";
 extern char clear_row_text[70] =
-  "                                                                      \0";
+  "                                                                    \0";
+extern int left_key_pressed;
+extern int right_key_pressed;
+extern int esc_key_pressed;
+extern int enter_key_pressed;
 
 short background_color;
 short basket_color;
@@ -62,6 +66,7 @@ void
 Task_game_timer(void* pdata)
 {
   debug("Started Game Timer");
+
   for (;;) {
     OSSemPend(SEM_game_timer, 0, &err);
     game_ss++;
@@ -78,8 +83,6 @@ Task_game_timer(void* pdata)
 
     if (game_hh >= 24)
       game_hh, game_mm, game_ss = 0, 0, 0;
-
-    debug("GAME TIME: %02d:%02d:%02d", game_hh, game_mm, game_ss);
 
     VGA_gametime_display(game_hh, game_mm, game_ss);
 
@@ -99,8 +102,6 @@ Task_read_KEYs(void* pdata)
 
   for (;;) {
     OSSemPend(SEM_read_KEYs, 0, &err);
-
-    debug("%u: \tHello from Task_read_KEYs", OSTime);
     Check_KEYs(&KEY0_flag, &KEY1_flag, &KEY2_flag, &KEY3_flag);
 
     if (KEY0_flag && basket_pos_x < 69) {
@@ -143,11 +144,6 @@ Task_VGA_char(void* pdata)
   debug("Started: Task_VGA_char");
 
   for (;;) {
-    debug("%u:Basket Position (pos1_x, pos1_y) = (%d, %d)",
-          OSTime,
-          basket_pos_x,
-          basket_pos_y);
-
     VGA_animated_char(basket_pos_x, 59, " ", basket_color);
 
     OSTimeDly(1);
@@ -164,11 +160,8 @@ Task_read_PS2_Keyboard(void* pdata)
   debug("Started: Read PS2 Keyboard Task");
 
   for (;;) {
-    debug("Reading PS2 Input");
     read_PS2_KeyboardInput();
-
-    OSTimeDlyHMSM(0, 0, 1, 0);
-    // OSTimeDly(1);
+    OSTimeDly(1);
   }
 }
 
@@ -178,8 +171,6 @@ Task_falling_blocks(void* pdata)
   debug("Started: Falling Block");
 
   for (;;) {
-    debug("Falling block: pos: (%d, %d)", pos1_x, pos1_y);
-
     if (pos1_y >= 60) {
 
       int lower = 0;
@@ -212,8 +203,6 @@ Task_falling_blocks(void* pdata)
       VGA_display_score(score);
     }
 
-    debug("SCORE: %d", score);
-
     OSTimeDly(1);
   }
 }
@@ -231,11 +220,17 @@ main(void)
 
   KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
 
+  left_key_pressed = 0;
+  right_key_pressed = 0;
+  esc_key_pressed = 0;
+  enter_key_pressed = 0;
+
   /* ************************ Semaphores Initialization ***********************
    */
 
   SEM_read_KEYs = OSSemCreate(1);
   SEM_game_timer = OSSemCreate(1);
+  SEM_KEY_press = OSSemCreate(1);
 
   /* **************************** VGA Display Setup ***************************
    */

@@ -10,6 +10,10 @@
 /* Global Variables*/
 extern unsigned KEY_val;
 extern int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
+extern int left_key_pressed;
+extern int right_key_pressed;
+extern int esc_key_pressed;
+extern int enter_key_pressed;
 
 void
 Check_KEYs(int* KEY0_ptr, int* KEY1_ptr, int* KEY2_ptr, int* KEY3_ptr)
@@ -283,12 +287,10 @@ VGA_display_sidebar(short sidebar_color)
 void
 VGA_gametime_display(int hour, int minute, int second)
 {
-  char buffer[10];
-
   int cx;
+  char buffer[10];
+  
   cx = snprintf(buffer, 10, " %02d:%02d:%02d\0", game_hh, game_mm, game_ss);
-
-  debug("buffer: %s", buffer);
   check(cx >= 0, "cx out of range");
 
   VGA_text(70, 9, buffer);
@@ -330,7 +332,7 @@ read_PS2_KeyboardInput(void)
   volatile int* PS2_ptr = (int*)PS2_BASE;
 
   int PS2_data, RVALID;
-  char byte1 = 0, byte2 = 0, byte3 = 0, byte4 = 0, byte5 = 0;
+  unsigned char byte1 = 0, byte2 = 0, byte3 = 0, byte4 = 0, byte5 = 0;
 
   *(PS2_ptr) = 0xFF; // reset PS/2
 
@@ -354,6 +356,32 @@ read_PS2_KeyboardInput(void)
             byte4 & 0xFF,
             byte5 & 0xFF);
 
+      if (byte4 == 0xE0 && byte5 == 0x6B)
+        left_key_pressed = 1;
+      else if (byte3 == 0xE0 && byte4 == 0xF0 && byte5 == 0x6B)
+        left_key_pressed = 0;
+
+      if (byte4 == 0xE0 && byte5 == 0x74)
+        right_key_pressed = 1;
+      else if (byte3 == 0xE0 && byte4 == 0xF0 && byte5 == 0x74)
+        right_key_pressed = 0;
+
+      if (byte5 == 0x76)
+        esc_key_pressed = 1;
+      else if (byte4 == 0xF0 && byte5 == 0x76)
+        esc_key_pressed = 0;
+
+      if (byte5 == 0x5A)
+        enter_key_pressed = 1;
+      else if (byte4 == 0xF0 && byte5 == 0x5A)
+        enter_key_pressed = 0;
+
+      debug("left_key_pressed: %d | right_key_pressed: %d | esc_key_pressed: "
+            "%d | enter_key_pressed: %d",
+            left_key_pressed,
+            right_key_pressed,
+            esc_key_pressed,
+            enter_key_pressed);
     }
   }
 }
