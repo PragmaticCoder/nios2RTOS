@@ -26,6 +26,7 @@
 #define INTEL_LIGHT_YELLOW 0xFFFFCCC
 
 #define GAMESCREEN_WIDTH 70
+#define GAMESCREEN_HEIGHT 60
 
 /* Global Variables */
 INT8U err;

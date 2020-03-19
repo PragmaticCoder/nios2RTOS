@@ -182,7 +182,14 @@ Task_falling_blocks(void* pdata)
     if (pos1_y >= 60) {
 
       int lower = 0;
-      int upper = 69;
+      int upper = GAMESCREEN_WIDTH - 1;
+
+      /* Assuming the basket's velocity is same as falling block */
+      if (basket_pos_x - lower > GAMESCREEN_HEIGHT)
+        lower = basket_pos_x - GAMESCREEN_HEIGHT;
+
+      if (upper - basket_pos_x > GAMESCREEN_HEIGHT)
+        upper = basket_pos_x + GAMESCREEN_HEIGHT;
 
       pos1_x = (rand() % (upper - lower + 1)) + lower;
       pos1_y = 0;
