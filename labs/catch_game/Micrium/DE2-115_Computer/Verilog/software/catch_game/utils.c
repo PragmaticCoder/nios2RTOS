@@ -289,7 +289,7 @@ VGA_gametime_display(int hour, int minute, int second)
 {
   int cx;
   char buffer[10];
-  
+
   cx = snprintf(buffer, 10, " %02d:%02d:%02d\0", game_hh, game_mm, game_ss);
   check(cx >= 0, "cx out of range");
 
@@ -358,22 +358,26 @@ read_PS2_KeyboardInput(void)
 
       if (byte4 == 0xE0 && byte5 == 0x6B)
         left_key_pressed = 1;
-      else if (byte3 == 0xE0 && byte4 == 0xF0 && byte5 == 0x6B)
+
+      if (byte3 == 0xE0 && byte4 == 0xF0 && byte5 == 0x6B)
         left_key_pressed = 0;
 
       if (byte4 == 0xE0 && byte5 == 0x74)
         right_key_pressed = 1;
-      else if (byte3 == 0xE0 && byte4 == 0xF0 && byte5 == 0x74)
+
+      if (byte3 == 0xE0 && byte4 == 0xF0 && byte5 == 0x74)
         right_key_pressed = 0;
 
       if (byte5 == 0x76)
         esc_key_pressed = 1;
-      else if (byte4 == 0xF0 && byte5 == 0x76)
+
+      if (byte4 == 0xF0 && byte5 == 0x76)
         esc_key_pressed = 0;
 
       if (byte5 == 0x5A)
         enter_key_pressed = 1;
-      else if (byte4 == 0xF0 && byte5 == 0x5A)
+
+      if (byte4 == 0xF0 && byte5 == 0x5A)
         enter_key_pressed = 0;
 
       debug("left_key_pressed: %d | right_key_pressed: %d | esc_key_pressed: "
@@ -382,6 +386,9 @@ read_PS2_KeyboardInput(void)
             right_key_pressed,
             esc_key_pressed,
             enter_key_pressed);
+    } else {
+      left_key_pressed, right_key_pressed, esc_key_pressed,
+        enter_key_pressed = 0, 0, 0, 0;
     }
   }
 }

@@ -34,7 +34,7 @@ extern int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 extern char text_disp[1];
 extern char clear_text[2] = " \0";
 extern char clear_row_text[70] =
-  "                                                                    \0";
+  "                                                                      \0";
 extern int left_key_pressed;
 extern int right_key_pressed;
 extern int esc_key_pressed;
@@ -95,16 +95,16 @@ Task_game_timer(void* pdata)
 /*                   Detecting KEY1, KEY2, KEY3, KEY4 Press                   */
 /* ************************************************************************** */
 void
-Task_read_KEYs(void* pdata)
+Task_move_basket(void* pdata)
 {
-  debug("Started: Task_read_KEYs");
+  debug("Started: Task_move_basket");
   KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
 
   for (;;) {
     OSSemPend(SEM_read_KEYs, 0, &err);
     Check_KEYs(&KEY0_flag, &KEY1_flag, &KEY2_flag, &KEY3_flag);
 
-    if (KEY0_flag && basket_pos_x < 69) {
+    if ((KEY0_flag || right_key_pressed) && basket_pos_x < 69) {
       debug("MOVE RIGHT");
 
       VGA_clear_game_row(59);
@@ -113,7 +113,7 @@ Task_read_KEYs(void* pdata)
       KEY0_flag = 0;
     }
 
-    if (KEY3_flag && basket_pos_x > 0) {
+    if ((KEY3_flag || left_key_pressed) && basket_pos_x > 0) {
       debug("MOVE LEFT");
 
       VGA_clear_game_row(59);
@@ -297,7 +297,7 @@ main(void)
                   NULL,
                   0);
 
-  OSTaskCreateExt(Task_read_KEYs,
+  OSTaskCreateExt(Task_move_basket,
                   NULL,
                   (void*)&task_key_press_stk[TASK_STACKSIZE - 1],
                   TASK_KEY_PRESS_PRIORITY,
