@@ -50,6 +50,7 @@ short sidebar_color;
 
 /* Definition of Task Stacks */
 #define TASK_STACKSIZE 2048
+OS_STK task_vga_init_stk[TASK_STACKSIZE];
 OS_STK task_move_basket_stk[TASK_STACKSIZE];
 OS_STK task_disp_vga_char_stk[TASK_STACKSIZE];
 OS_STK task_game_timer_stk[TASK_STACKSIZE];
@@ -58,12 +59,13 @@ OS_STK task_ps2_keyboard_stk[TASK_STACKSIZE];
 OS_STK task_state_controller_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
-#define TASK_MOVE_BASKET_PRIORITY 1
-#define TASK_STATE_CONTROLLER_PRIORITY 2
-#define TASK_FALLING_BLOCKS 3
-#define TASK_VGA_CHAR_PRIORITY 4
-#define TASK_GAME_TIMER_PRIORITY 5
-#define TASK_PS2_KEYBOARD_PRIORITY 6
+#define TASK_VGA_INIT_PRIORITY 1
+#define TASK_MOVE_BASKET_PRIORITY 2
+#define TASK_STATE_CONTROLLER_PRIORITY 3
+#define TASK_FALLING_BLOCKS 4
+#define TASK_VGA_CHAR_PRIORITY 5
+#define TASK_GAME_TIMER_PRIORITY 6
+#define TASK_PS2_KEYBOARD_PRIORITY 7
 
 /* Function Prototypes */
 void
@@ -72,8 +74,8 @@ Task_game_timer(void*);
 void
 Task_move_basket(void*);
 
-static void
-Task_VGA_init(void);
+void
+Task_VGA_init(void*);
 
 void
 Task_VGA_char(void*);
@@ -126,43 +128,45 @@ void
 Task_move_basket(void* pdata)
 {
   debug("Started: Task_move_basket");
-  KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
 
   for (;;) {
-    OSSemPend(SEM_read_KEYs, 0, &err);
-    Check_KEYs(&KEY0_flag, &KEY1_flag, &KEY2_flag, &KEY3_flag);
 
-    if ((KEY0_flag || right_key_pressed) && basket_pos_x < 69) {
+    if (right_key_pressed && basket_pos_x < 69) {
       debug("MOVE RIGHT");
-
       VGA_clear_game_row(59);
       ++basket_pos_x;
-
-      KEY0_flag = 0;
     }
 
-    if ((KEY3_flag || left_key_pressed) && basket_pos_x > 0) {
+    if (left_key_pressed && basket_pos_x > 0) {
       debug("MOVE LEFT");
-
       VGA_clear_game_row(59);
       --basket_pos_x;
-
-      KEY3_flag = 0;
     }
 
-    OSSemPost(SEM_read_KEYs);
     OSTimeDly(1);
   }
 }
 
 /* Initial Display Setup */
-static void
-Task_VGA_init(void)
+void
+Task_VGA_init(void* pdata)
 {
-  debug("Initializing VGA Display");
+  debug("Started VGA initialization task");
 
-  VGA_clear_screen();
-  VGA_display_sidebar(background_color);
+  for (;;) {
+
+    OSSemPend(SEM_VGA_init, 0, &err);
+
+    debug("Initializing VGA Display");
+
+    game_hh, game_mm, game_ss = 0, 0, 0;
+    score = 0;
+
+    VGA_clear_screen();
+    VGA_display_sidebar(background_color);
+
+    OSTimeDly(1);
+  }
 }
 
 /* Display Character using VGA Output */
@@ -173,7 +177,6 @@ Task_VGA_char(void* pdata)
 
   for (;;) {
     VGA_animated_char(basket_pos_x, 59, " ", basket_color);
-
     OSTimeDly(1);
   }
 }
@@ -188,7 +191,9 @@ Task_read_PS2_Keyboard(void* pdata)
   debug("Started: Read PS2 Keyboard Task");
 
   for (;;) {
+    OSSemPend(SEM_KEY_press, 0, &err);
     read_PS2_KeyboardInput();
+    OSSemPost(SEM_KEY_press);
     OSTimeDly(1);
   }
 }
@@ -202,6 +207,9 @@ Task_falling_blocks(void* pdata)
   debug("Started: Falling Block");
 
   for (;;) {
+
+    OSSemPend(SEM_falling_blocks, 0, &err);
+
     if (pos1_y >= 60) {
 
       int lower = 0;
@@ -245,15 +253,26 @@ Task_GameState_controller(void* pdata)
 
   for (;;) {
 
-    if (esc_key_pressed && game_state == PAUSE)
+    /************************ Pre State Transition *************************/
+    
+    if (esc_key_pressed && game_state == PAUSE) {
+      OSSemPost(SEM_VGA_init);
       game_state = INIT;
+    }
 
     if ((enter_key_pressed && game_state == INIT) ||
-        (any_key_pressed && !esc_key_pressed))
+        (any_key_pressed && !esc_key_pressed && game_state == PAUSE))
       game_state = PLAY;
 
     if (esc_key_pressed && game_state == PLAY)
       game_state = PAUSE;
+
+    /************** Handling Tasks post state transition **************/
+
+    if (game_state == PLAY) {
+      OSSemPost(SEM_falling_blocks);
+      OSSemPost(SEM_game_timer);
+    }
 
     debug("Game State: %s", get_State_name(game_state));
     OSTimeDly(1);
@@ -281,9 +300,13 @@ main(void)
 
   /************************* Semaphores Initialization **********************/
 
+  SEM_VGA_init = OSSemCreate(1);
   SEM_read_KEYs = OSSemCreate(1);
-  SEM_game_timer = OSSemCreate(1);
   SEM_KEY_press = OSSemCreate(1);
+
+  SEM_game_timer = OSSemCreate(0);
+  SEM_falling_blocks = OSSemCreate(0);
+  SEM_moving_basket = OSSemCreate(0);
 
   /**************************** VGA Display Setup ***************************/
 
@@ -325,7 +348,17 @@ main(void)
   debug("Game State: %s", get_State_name(game_state));
 
   VGA_animated_char(pos1_x, pos1_y, text_disp, background_color);
-  Task_VGA_init(); /* Initial Display Layout Setup */
+  // Task_VGA_init(); /* Initial Display Layout Setup */
+
+  OSTaskCreateExt(Task_VGA_init,
+                  NULL,
+                  (void*)&task_vga_init_stk[TASK_STACKSIZE - 1],
+                  TASK_VGA_INIT_PRIORITY,
+                  TASK_VGA_INIT_PRIORITY,
+                  task_vga_init_stk,
+                  TASK_STACKSIZE,
+                  NULL,
+                  0);
 
   OSTaskCreateExt(Task_game_timer,
                   NULL,

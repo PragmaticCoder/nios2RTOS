@@ -76,7 +76,10 @@ int any_key_pressed;
 /* Semaphores */
 OS_EVENT* SEM_read_KEYs;
 OS_EVENT* SEM_game_timer;
+OS_EVENT* SEM_falling_blocks;
+OS_EVENT* SEM_moving_basket;
 OS_EVENT* SEM_KEY_press;
+OS_EVENT* SEM_VGA_init;
 
 /* Game State */
 typedef enum
