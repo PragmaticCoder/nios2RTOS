@@ -288,7 +288,6 @@ main(void)
 
   score = 0;
   game_hh, game_mm, game_ss = 0, 0, 0;
-  KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
 
   any_key_pressed = 0;
 
