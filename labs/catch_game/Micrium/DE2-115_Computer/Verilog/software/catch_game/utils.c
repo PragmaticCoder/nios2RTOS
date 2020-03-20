@@ -241,14 +241,14 @@ void
 VGA_display_sidebar(short sidebar_color)
 {
   VGA_info_right(70, 0, "          ", sidebar_color);
-  VGA_info_right(70, 1, " CATCH    ", sidebar_color);
-  VGA_info_right(70, 2, " THE      ", sidebar_color);
-  VGA_info_right(70, 3, " NUMBERS! ", sidebar_color);
+  VGA_info_right(70, 1, " Catch the", sidebar_color);
+  VGA_info_right(70, 2, " Numbers! ", sidebar_color);
+  VGA_info_right(70, 3, "          ", sidebar_color);
   VGA_info_right(70, 4, "          ", sidebar_color);
-  VGA_info_right(70, 5, " SCORE:   ", sidebar_color);
+  VGA_info_right(70, 5, " Score:   ", sidebar_color);
   VGA_info_right(70, 6, "      000 ", sidebar_color);
   VGA_info_right(70, 7, "          ", sidebar_color);
-  VGA_info_right(70, 8, " TIME:    ", sidebar_color);
+  VGA_info_right(70, 8, " Time:    ", sidebar_color);
   VGA_info_right(70, 9, " 00:00:00 ", sidebar_color);
   VGA_info_right(70, 10, "          ", sidebar_color);
   VGA_info_right(70, 11, "          ", sidebar_color);
@@ -296,9 +296,9 @@ VGA_display_sidebar(short sidebar_color)
   VGA_info_right(70, 53, "          ", sidebar_color);
   VGA_info_right(70, 54, "          ", sidebar_color);
   VGA_info_right(70, 55, "          ", sidebar_color);
-  VGA_info_right(70, 56, " PRESS    ", sidebar_color);
-  VGA_info_right(70, 57, "  ESC     ", sidebar_color);
-  VGA_info_right(70, 58, " TO QUIT  ", sidebar_color);
+  VGA_info_right(70, 56, " Press    ", sidebar_color);
+  VGA_info_right(70, 57, " 'ESC'    ", sidebar_color);
+  VGA_info_right(70, 58, " to Pause ", sidebar_color);
   VGA_info_right(70, 59, "          ", sidebar_color);
 }
 
