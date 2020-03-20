@@ -99,7 +99,9 @@ Task_game_timer(void* pdata)
 
   for (;;) {
     OSSemPend(SEM_game_timer, 0, &err);
-    game_ss++;
+
+    if (game_state == PLAY)
+      game_ss++;
 
     if (game_ss >= 60) {
       game_mm++;
