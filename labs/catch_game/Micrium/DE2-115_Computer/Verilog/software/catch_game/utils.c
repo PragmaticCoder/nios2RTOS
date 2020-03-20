@@ -19,9 +19,9 @@ extern int enter_key_pressed;
 /*                                State Tracker                               */
 /* ************************************************************************** */
 const char*
-get_State_name(GameState game_state)
+get_State_name(Game_State_t game_state)
 {
-  switch (door_state) {
+  switch (game_state) {
     case INIT:
       return "INIT";
     case PLAY:

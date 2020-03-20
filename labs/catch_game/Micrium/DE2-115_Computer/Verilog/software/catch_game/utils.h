@@ -55,6 +55,6 @@ void
 VGA_display_score(int score);
 
 const char*
-get_State_name(GameState game_state)
+get_State_name(Game_State_t game_state);
 
 #endif /* UTILS_H_ */

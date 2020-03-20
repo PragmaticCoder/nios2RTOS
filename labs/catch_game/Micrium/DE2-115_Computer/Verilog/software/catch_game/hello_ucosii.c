@@ -59,6 +59,25 @@ OS_STK task_ps2_keyboard_stk[TASK_STACKSIZE];
 #define TASK_VGA_CHAR_PRIORITY 3
 #define TASK_PS2_KEYBOARD_PRIORITY 6
 
+/* Function Prototypes */
+void
+Task_game_timer(void*);
+
+void
+Task_move_basket(void*);
+
+static void
+Task_VGA_init(void);
+
+void
+Task_VGA_char(void*);
+
+void
+Task_read_PS2_Keyboard(void*);
+
+void
+Task_read_PS2_Keyboard(void*);
+
 /* ************************************************************************** */
 /*                     Track Elapsed Time: Total Game Time                    */
 /* ************************************************************************** */
