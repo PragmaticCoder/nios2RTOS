@@ -358,13 +358,15 @@ read_PS2_KeyboardInput(void)
       if (byte3 == 0xE0 && byte4 == 0xF0 && byte5 == 0x74)
         right_key_pressed = 0;
 
-      if (byte5 == 0x76)
+      if (byte4 != 0xF0 && byte5 == 0x76) {
         esc_key_pressed = 1;
+        return;
+      }
 
       if (byte4 == 0xF0 && byte5 == 0x76)
         esc_key_pressed = 0;
 
-      if (byte4 != 0xF0 && byte5 == 0x5A){
+      if (byte4 != 0xF0 && byte5 == 0x5A) {
         enter_key_pressed = 1;
         return;
       }

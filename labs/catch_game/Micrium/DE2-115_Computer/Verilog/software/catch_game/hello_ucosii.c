@@ -115,8 +115,6 @@ Task_game_timer(void* pdata)
       game_hh, game_mm, game_ss = 0, 0, 0;
 
     VGA_gametime_display(game_hh, game_mm, game_ss);
-
-    OSSemPost(SEM_game_timer);
     OSTimeDlyHMSM(0, 0, 1, 0);
   }
 }
@@ -130,6 +128,8 @@ Task_move_basket(void* pdata)
   debug("Started: Task_move_basket");
 
   for (;;) {
+
+    OSSemPend(SEM_moving_basket, 0, &err);
 
     if (right_key_pressed && basket_pos_x < 69) {
       debug("MOVE RIGHT");
@@ -261,9 +261,10 @@ Task_GameState_controller(void* pdata)
     }
 
     if ((enter_key_pressed && game_state == INIT) ||
-        (any_key_pressed && !esc_key_pressed && game_state == PAUSE))
+        (any_key_pressed && !esc_key_pressed && game_state == PAUSE)) {
+      OSSemPost(SEM_game_timer);
       game_state = PLAY;
-
+    }
     if (esc_key_pressed && game_state == PLAY)
       game_state = PAUSE;
 
@@ -271,7 +272,7 @@ Task_GameState_controller(void* pdata)
 
     if (game_state == PLAY) {
       OSSemPost(SEM_falling_blocks);
-      OSSemPost(SEM_game_timer);
+      OSSemPost(SEM_moving_basket);
     }
 
     debug("Game State: %s", get_State_name(game_state));
