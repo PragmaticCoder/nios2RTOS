@@ -14,6 +14,7 @@ extern int left_key_pressed;
 extern int right_key_pressed;
 extern int esc_key_pressed;
 extern int enter_key_pressed;
+extern int any_key_pressed;
 
 /* ************************************************************************** */
 /*                                State Tracker                               */
@@ -377,6 +378,12 @@ read_PS2_KeyboardInput(void)
             byte4 & 0xFF,
             byte5 & 0xFF);
 
+      if (byte4 == 0xE0)
+        any_key_pressed = 1;
+
+      if (byte4 == 0xF0)
+        any_key_pressed = 0;
+
       if (byte4 == 0xE0 && byte5 == 0x6B)
         left_key_pressed = 1;
 
@@ -401,15 +408,16 @@ read_PS2_KeyboardInput(void)
       if (byte4 == 0xF0 && byte5 == 0x5A)
         enter_key_pressed = 0;
 
-      debug("left_key_pressed: %d | right_key_pressed: %d | esc_key_pressed: "
-            "%d | enter_key_pressed: %d",
+      debug("any_key_pressed: %d | left_key_pressed: %d | right_key_pressed: "
+            "%d | esc_key_pressed:%d | enter_key_pressed: %d",
+            any_key_pressed,
             left_key_pressed,
             right_key_pressed,
             esc_key_pressed,
             enter_key_pressed);
     } else {
-      left_key_pressed, right_key_pressed, esc_key_pressed,
-        enter_key_pressed = 0, 0, 0, 0;
+      any_key_pressed, left_key_pressed, right_key_pressed, esc_key_pressed,
+        enter_key_pressed = 0, 0, 0, 0, 0;
     }
   }
 }

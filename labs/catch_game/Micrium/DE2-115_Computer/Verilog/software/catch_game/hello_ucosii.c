@@ -28,7 +28,7 @@ extern int pos3_y;
 extern int score;
 extern int game_hh, game_mm, game_ss;
 
-extern Game_State_t;
+Game_State_t game_state;
 
 extern unsigned KEY_val;
 extern int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
@@ -37,6 +37,8 @@ extern char text_disp[1];
 extern char clear_text[2] = " \0";
 extern char clear_row_text[70] =
   "                                                                      \0";
+
+extern int any_key_pressed;
 extern int left_key_pressed;
 extern int right_key_pressed;
 extern int esc_key_pressed;
@@ -48,18 +50,20 @@ short sidebar_color;
 
 /* Definition of Task Stacks */
 #define TASK_STACKSIZE 2048
-OS_STK task_key_press_stk[TASK_STACKSIZE];
+OS_STK task_move_basket_stk[TASK_STACKSIZE];
 OS_STK task_disp_vga_char_stk[TASK_STACKSIZE];
 OS_STK task_game_timer_stk[TASK_STACKSIZE];
 OS_STK task_falling_blocks[TASK_STACKSIZE];
 OS_STK task_ps2_keyboard_stk[TASK_STACKSIZE];
+OS_STK task_state_controller_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
-#define TASK_KEY_PRESS_PRIORITY 1
-#define TASK_FALLING_BLOCKS 2
-#define TASK_VGA_CHAR_PRIORITY 3
-#define TASK_GAME_TIMER_PRIORITY 4
-#define TASK_PS2_KEYBOARD_PRIORITY 5
+#define TASK_MOVE_BASKET_PRIORITY 1
+#define TASK_STATE_CONTROLLER_PRIORITY 2
+#define TASK_FALLING_BLOCKS 3
+#define TASK_VGA_CHAR_PRIORITY 4
+#define TASK_GAME_TIMER_PRIORITY 5
+#define TASK_PS2_KEYBOARD_PRIORITY 6
 
 /* Function Prototypes */
 void
@@ -79,6 +83,9 @@ Task_read_PS2_Keyboard(void*);
 
 void
 Task_falling_blocks(void*);
+
+void
+Task_GameState_controller(void* pdata);
 
 /* ************************************************************************** */
 /*                     Track Elapsed Time: Total Game Time                    */
@@ -186,6 +193,9 @@ Task_read_PS2_Keyboard(void* pdata)
   }
 }
 
+/* ************************************************************************** */
+/*           Generates Falling Blocks with Random Position and Value          */
+/* ************************************************************************** */
 void
 Task_falling_blocks(void* pdata)
 {
@@ -228,32 +238,54 @@ Task_falling_blocks(void* pdata)
   }
 }
 
+void
+Task_GameState_controller(void* pdata)
+{
+  debug("Started Game State controller task");
+
+  for (;;) {
+
+    if (esc_key_pressed && game_state == PAUSE)
+      game_state = INIT;
+
+    if ((enter_key_pressed && game_state == INIT) ||
+        (any_key_pressed && !esc_key_pressed))
+      game_state = PLAY;
+
+    if (esc_key_pressed && game_state == PLAY)
+      game_state = PAUSE;
+
+    debug("Game State: %s", get_State_name(game_state));
+    OSTimeDly(1);
+  }
+}
+
 /* The main function creates two task and starts multi-tasking */
 int
 main(void)
 {
 
-  /* ***************************** Initialization *****************************
-   */
+  /****************************** Initialization *****************************/
 
   score = 0;
   game_hh, game_mm, game_ss = 0, 0, 0;
   KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
 
+  any_key_pressed = 0;
+
   left_key_pressed = 0;
   right_key_pressed = 0;
+
   esc_key_pressed = 0;
   enter_key_pressed = 0;
 
-  /* ************************ Semaphores Initialization ***********************
-   */
+  /************************* Semaphores Initialization **********************/
 
   SEM_read_KEYs = OSSemCreate(1);
   SEM_game_timer = OSSemCreate(1);
   SEM_KEY_press = OSSemCreate(1);
 
-  /* **************************** VGA Display Setup ***************************
-   */
+  /**************************** VGA Display Setup ***************************/
 
   video_resolution = (int*)(PIXEL_BUF_CTRL_BASE + 0x8);
   rgb_status = (int*)(RGB_RESAMPLER_BASE);
@@ -289,11 +321,10 @@ main(void)
   background_color = resample_rgb(db, INTEL_RED);
   basket_color = resample_rgb(db, INTEL_LIGHT_YELLOW);
 
+  game_state = INIT;
+  debug("Game State: %s", get_State_name(game_state));
+
   VGA_animated_char(pos1_x, pos1_y, text_disp, background_color);
-
-  /* **************************************************************************
-   */
-
   Task_VGA_init(); /* Initial Display Layout Setup */
 
   OSTaskCreateExt(Task_game_timer,
@@ -302,6 +333,16 @@ main(void)
                   TASK_GAME_TIMER_PRIORITY,
                   TASK_GAME_TIMER_PRIORITY,
                   task_game_timer_stk,
+                  TASK_STACKSIZE,
+                  NULL,
+                  0);
+
+  OSTaskCreateExt(Task_GameState_controller,
+                  NULL,
+                  (void*)&task_state_controller_stk[TASK_STACKSIZE - 1],
+                  TASK_STATE_CONTROLLER_PRIORITY,
+                  TASK_STATE_CONTROLLER_PRIORITY,
+                  task_state_controller_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);
@@ -318,10 +359,10 @@ main(void)
 
   OSTaskCreateExt(Task_move_basket,
                   NULL,
-                  (void*)&task_key_press_stk[TASK_STACKSIZE - 1],
-                  TASK_KEY_PRESS_PRIORITY,
-                  TASK_KEY_PRESS_PRIORITY,
-                  task_key_press_stk,
+                  (void*)&task_move_basket_stk[TASK_STACKSIZE - 1],
+                  TASK_MOVE_BASKET_PRIORITY,
+                  TASK_MOVE_BASKET_PRIORITY,
+                  task_move_basket_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);

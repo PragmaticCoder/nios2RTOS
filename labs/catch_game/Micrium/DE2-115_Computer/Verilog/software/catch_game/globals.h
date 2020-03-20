@@ -71,6 +71,7 @@ int left_key_pressed;
 int right_key_pressed;
 int esc_key_pressed;
 int enter_key_pressed;
+int any_key_pressed;
 
 /* Semaphores */
 OS_EVENT* SEM_read_KEYs;
@@ -78,7 +79,6 @@ OS_EVENT* SEM_game_timer;
 OS_EVENT* SEM_KEY_press;
 
 /* Game State */
-
 typedef enum
 {
   INIT,
