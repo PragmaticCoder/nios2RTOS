@@ -54,5 +54,7 @@ VGA_clear_game_row(int pos_y);
 void
 VGA_display_score(int score);
 
+const char*
+get_State_name(GameState game_state)
 
 #endif /* UTILS_H_ */

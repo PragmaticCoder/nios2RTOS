@@ -15,6 +15,27 @@ extern int right_key_pressed;
 extern int esc_key_pressed;
 extern int enter_key_pressed;
 
+/* ************************************************************************** */
+/*                                State Tracker                               */
+/* ************************************************************************** */
+const char*
+get_State_name(GameState game_state)
+{
+  switch (door_state) {
+    case INIT:
+      return "INIT";
+    case PLAY:
+      return "PLAY";
+    case PAUSE:
+      return "PAUSE";
+    default:
+      return "INVALID";
+  }
+}
+
+/* ************************************************************************** */
+/*                                Key Detection                               */
+/* ************************************************************************** */
 void
 Check_KEYs(int* KEY0_ptr, int* KEY1_ptr, int* KEY2_ptr, int* KEY3_ptr)
 {

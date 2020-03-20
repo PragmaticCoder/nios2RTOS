@@ -77,4 +77,13 @@ OS_EVENT* SEM_read_KEYs;
 OS_EVENT* SEM_game_timer;
 OS_EVENT* SEM_KEY_press;
 
+/* Game State */
+
+typedef enum
+{
+  INIT,
+  PLAY,
+  PAUSE
+} Game_State_t;
+
 #endif
