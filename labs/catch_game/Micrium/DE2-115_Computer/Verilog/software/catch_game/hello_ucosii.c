@@ -58,8 +58,8 @@ OS_STK task_ps2_keyboard_stk[TASK_STACKSIZE];
 #define TASK_KEY_PRESS_PRIORITY 1
 #define TASK_FALLING_BLOCKS 2
 #define TASK_VGA_CHAR_PRIORITY 3
-#define TASK_GAME_TIMER_PRIORITY 5
-#define TASK_PS2_KEYBOARD_PRIORITY 6
+#define TASK_GAME_TIMER_PRIORITY 4
+#define TASK_PS2_KEYBOARD_PRIORITY 5
 
 /* Function Prototypes */
 void
@@ -238,7 +238,6 @@ main(void)
 
   score = 0;
   game_hh, game_mm, game_ss = 0, 0, 0;
-
   KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag = 0, 0, 0, 0;
 
   left_key_pressed = 0;
@@ -266,7 +265,6 @@ main(void)
   basket_pos_x = 40;
 
   /* letter initially positioning falling box randomly */
-
   int lower = 0;
   int upper = 69;
 
