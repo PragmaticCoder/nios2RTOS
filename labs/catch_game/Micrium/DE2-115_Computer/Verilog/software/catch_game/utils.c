@@ -8,8 +8,6 @@
 #include "globals.h"
 
 /* Global Variables*/
-extern unsigned KEY_val;
-extern int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 extern int left_key_pressed;
 extern int right_key_pressed;
 extern int esc_key_pressed;
@@ -32,36 +30,6 @@ get_State_name(Game_State_t game_state)
     default:
       return "INVALID";
   }
-}
-
-/* ************************************************************************** */
-/*                                Key Detection                               */
-/* ************************************************************************** */
-void
-Check_KEYs(int* KEY0_ptr, int* KEY1_ptr, int* KEY2_ptr, int* KEY3_ptr)
-{
-
-  KEY_val = *(KEY_ptr);
-
-  if (KEY_val == KEY0) {
-    debug("KEY0 Pressed!"); // check KEY0
-    KEY0_flag = 1;
-  } else if (KEY_val == KEY1) // check KEY1
-  {
-    debug("KEY1 Pressed!");
-    KEY1_flag = 1;
-  } else if (KEY_val == KEY2) // check KEY2
-  {
-    debug("KEY2 Pressed!");
-    KEY2_flag = 1;
-  } else if (KEY_val == KEY3) // check KEY3
-  {
-    debug("KEY3 Pressed!");
-    KEY3_flag = 1;
-  }
-
-  if (KEY_val)
-    debug("KEY_value: %d", KEY_val);
 }
 
 /*******************************************************************************
@@ -378,12 +346,6 @@ read_PS2_KeyboardInput(void)
             byte4 & 0xFF,
             byte5 & 0xFF);
 
-      if (byte4 == 0xE0)
-        any_key_pressed = 1;
-
-      if (byte4 == 0xF0)
-        any_key_pressed = 0;
-
       if (byte4 == 0xE0 && byte5 == 0x6B)
         left_key_pressed = 1;
 
@@ -407,6 +369,12 @@ read_PS2_KeyboardInput(void)
 
       if (byte4 == 0xF0 && byte5 == 0x5A)
         enter_key_pressed = 0;
+      
+      if (byte4 == 0xE0)
+        any_key_pressed = 1;
+
+      if (byte4 == 0xF0)
+        any_key_pressed = 0;
 
       debug("any_key_pressed: %d | left_key_pressed: %d | right_key_pressed: "
             "%d | esc_key_pressed:%d | enter_key_pressed: %d",

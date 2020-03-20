@@ -254,7 +254,7 @@ Task_GameState_controller(void* pdata)
   for (;;) {
 
     /************************ Pre State Transition *************************/
-    
+
     if (esc_key_pressed && game_state == PAUSE) {
       OSSemPost(SEM_VGA_init);
       game_state = INIT;
@@ -298,11 +298,14 @@ main(void)
   esc_key_pressed = 0;
   enter_key_pressed = 0;
 
+  game_state = INIT;
+
   /************************* Semaphores Initialization **********************/
 
   SEM_VGA_init = OSSemCreate(1);
   SEM_read_KEYs = OSSemCreate(1);
   SEM_KEY_press = OSSemCreate(1);
+  SEM_state_transition = OSSemCreate(1);
 
   SEM_game_timer = OSSemCreate(0);
   SEM_falling_blocks = OSSemCreate(0);
@@ -344,11 +347,9 @@ main(void)
   background_color = resample_rgb(db, INTEL_RED);
   basket_color = resample_rgb(db, INTEL_LIGHT_YELLOW);
 
-  game_state = INIT;
   debug("Game State: %s", get_State_name(game_state));
 
   VGA_animated_char(pos1_x, pos1_y, text_disp, background_color);
-  // Task_VGA_init(); /* Initial Display Layout Setup */
 
   OSTaskCreateExt(Task_VGA_init,
                   NULL,
@@ -356,6 +357,16 @@ main(void)
                   TASK_VGA_INIT_PRIORITY,
                   TASK_VGA_INIT_PRIORITY,
                   task_vga_init_stk,
+                  TASK_STACKSIZE,
+                  NULL,
+                  0);
+
+  OSTaskCreateExt(Task_read_PS2_Keyboard,
+                  NULL,
+                  (void*)&task_ps2_keyboard_stk[TASK_STACKSIZE - 1],
+                  TASK_PS2_KEYBOARD_PRIORITY,
+                  TASK_PS2_KEYBOARD_PRIORITY,
+                  task_ps2_keyboard_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);
@@ -376,16 +387,6 @@ main(void)
                   TASK_STATE_CONTROLLER_PRIORITY,
                   TASK_STATE_CONTROLLER_PRIORITY,
                   task_state_controller_stk,
-                  TASK_STACKSIZE,
-                  NULL,
-                  0);
-
-  OSTaskCreateExt(Task_read_PS2_Keyboard,
-                  NULL,
-                  (void*)&task_ps2_keyboard_stk[TASK_STACKSIZE - 1],
-                  TASK_PS2_KEYBOARD_PRIORITY,
-                  TASK_PS2_KEYBOARD_PRIORITY,
-                  task_ps2_keyboard_stk,
                   TASK_STACKSIZE,
                   NULL,
                   0);

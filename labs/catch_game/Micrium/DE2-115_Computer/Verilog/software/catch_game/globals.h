@@ -80,6 +80,7 @@ OS_EVENT* SEM_falling_blocks;
 OS_EVENT* SEM_moving_basket;
 OS_EVENT* SEM_KEY_press;
 OS_EVENT* SEM_VGA_init;
+OS_EVENT* SEM_state_transition;
 
 /* Game State */
 typedef enum
