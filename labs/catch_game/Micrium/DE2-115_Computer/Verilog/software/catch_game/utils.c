@@ -362,20 +362,24 @@ read_PS2_KeyboardInput(void)
         esc_key_pressed = 1;
       }
 
-      if (byte4 == 0xF0 && byte5 == 0x76)
+      if (byte4 == 0xF0 && byte5 == 0x76) {
         esc_key_pressed = 0;
-
-      if (byte4 != 0xF0 && byte5 == 0x5A) {
-        enter_key_pressed = 1;
       }
-      if (byte4 == 0xF0 && byte5 == 0x5A)
-        enter_key_pressed = 0;
 
       if (byte4 == 0xE0)
         any_key_pressed = 1;
 
       if (byte4 == 0xF0)
         any_key_pressed = 0;
+
+      if (byte4 == 0xF0 && byte5 == 0x5A)
+        enter_key_pressed = 0;
+        
+      if (byte4 != 0xF0 && byte5 == 0x5A) {
+        enter_key_pressed = 1;
+        return;
+      }
+      
 
       debug("any_key_pressed: %d | left_key_pressed: %d | right_key_pressed: "
             "%d | esc_key_pressed:%d | enter_key_pressed: %d",

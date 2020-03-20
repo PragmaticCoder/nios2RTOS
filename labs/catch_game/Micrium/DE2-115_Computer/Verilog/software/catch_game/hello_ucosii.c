@@ -279,7 +279,7 @@ Task_GameState_controller(void* pdata)
       game_state = INIT;
     }
 
-    if ((enter_key_pressed && game_state == INIT) ||
+    if ((enter_key_pressed && (game_state == INIT || game_state == PAUSE)) ||
         (any_key_pressed && !esc_key_pressed && game_state == PAUSE)) {
       OSSemPost(SEM_game_timer);
       game_state = PLAY;
@@ -292,7 +292,10 @@ Task_GameState_controller(void* pdata)
     if (game_state == PLAY) {
       OSSemPost(SEM_falling_blocks);
       OSSemPost(SEM_moving_basket);
+      OSSemPost(SEM_game_timer);
     }
+
+    // if()
 
     debug("Game State: %s", get_State_name(game_state));
     OSTimeDly(1);
