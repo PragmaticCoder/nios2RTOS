@@ -28,6 +28,8 @@ extern int pos3_y;
 extern int score;
 extern int game_hh, game_mm, game_ss;
 
+extern Game_State_t;
+
 extern unsigned KEY_val;
 extern int KEY0_flag, KEY1_flag, KEY2_flag, KEY3_flag;
 
@@ -53,10 +55,10 @@ OS_STK task_falling_blocks[TASK_STACKSIZE];
 OS_STK task_ps2_keyboard_stk[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
-#define TASK_GAME_TIMER_PRIORITY 5
 #define TASK_KEY_PRESS_PRIORITY 1
 #define TASK_FALLING_BLOCKS 2
 #define TASK_VGA_CHAR_PRIORITY 3
+#define TASK_GAME_TIMER_PRIORITY 5
 #define TASK_PS2_KEYBOARD_PRIORITY 6
 
 /* Function Prototypes */
@@ -76,7 +78,7 @@ void
 Task_read_PS2_Keyboard(void*);
 
 void
-Task_read_PS2_Keyboard(void*);
+Task_falling_blocks(void*);
 
 /* ************************************************************************** */
 /*                     Track Elapsed Time: Total Game Time                    */

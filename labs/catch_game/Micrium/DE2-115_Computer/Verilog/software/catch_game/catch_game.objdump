@@ -1331,7 +1331,7 @@ Task_game_timer(void* pdata)
   debug("Started Game Timer");
      298:	d0a00217 	ldw	r2,-32760(gp)
      29c:	10800317 	ldw	r2,12(r2)
-     2a0:	01c015c4 	movi	r7,87
+     2a0:	01c01644 	movi	r7,89
      2a4:	018000b4 	movhi	r6,2
      2a8:	31ba4704 	addi	r6,r6,-5860
      2ac:	014000b4 	movhi	r5,2
@@ -1419,7 +1419,7 @@ Task_move_basket(void* pdata)
   debug("Started: Task_move_basket");
      378:	d0a00217 	ldw	r2,-32760(gp)
      37c:	10800317 	ldw	r2,12(r2)
-     380:	01c01dc4 	movi	r7,119
+     380:	01c01e44 	movi	r7,121
      384:	018000b4 	movhi	r6,2
      388:	31ba4704 	addi	r6,r6,-5860
      38c:	014000b4 	movhi	r5,2
@@ -1454,7 +1454,7 @@ Task_move_basket(void* pdata)
       debug("MOVE RIGHT");
      3e4:	d0a00217 	ldw	r2,-32760(gp)
      3e8:	10800317 	ldw	r2,12(r2)
-     3ec:	01c01fc4 	movi	r7,127
+     3ec:	01c02044 	movi	r7,129
      3f0:	018000b4 	movhi	r6,2
      3f4:	31ba4704 	addi	r6,r6,-5860
      3f8:	014000b4 	movhi	r5,2
@@ -1484,7 +1484,7 @@ Task_move_basket(void* pdata)
       debug("MOVE LEFT");
      438:	d0a00217 	ldw	r2,-32760(gp)
      43c:	10800317 	ldw	r2,12(r2)
-     440:	01c02204 	movi	r7,136
+     440:	01c02284 	movi	r7,138
      444:	018000b4 	movhi	r6,2
      448:	31ba4704 	addi	r6,r6,-5860
      44c:	014000b4 	movhi	r5,2
@@ -1528,7 +1528,7 @@ Task_VGA_init(void)
   debug("Initializing VGA Display");
      49c:	d0a00217 	ldw	r2,-32760(gp)
      4a0:	10800317 	ldw	r2,12(r2)
-     4a4:	01c02644 	movi	r7,153
+     4a4:	01c026c4 	movi	r7,155
      4a8:	018000b4 	movhi	r6,2
      4ac:	31ba4704 	addi	r6,r6,-5860
      4b0:	014000b4 	movhi	r5,2
@@ -1567,7 +1567,7 @@ Task_VGA_char(void* pdata)
   debug("Started: Task_VGA_char");
      508:	d0a00217 	ldw	r2,-32760(gp)
      50c:	10800317 	ldw	r2,12(r2)
-     510:	01c028c4 	movi	r7,163
+     510:	01c02944 	movi	r7,165
      514:	018000b4 	movhi	r6,2
      518:	31ba4704 	addi	r6,r6,-5860
      51c:	014000b4 	movhi	r5,2
@@ -1610,7 +1610,7 @@ Task_read_PS2_Keyboard(void* pdata)
   debug("Started: Read PS2 Keyboard Task");
      578:	d0a00217 	ldw	r2,-32760(gp)
      57c:	10800317 	ldw	r2,12(r2)
-     580:	01c02cc4 	movi	r7,179
+     580:	01c02d44 	movi	r7,181
      584:	018000b4 	movhi	r6,2
      588:	31ba4704 	addi	r6,r6,-5860
      58c:	014000b4 	movhi	r5,2
@@ -1641,7 +1641,7 @@ Task_falling_blocks(void* pdata)
   debug("Started: Falling Block");
      5c0:	d0a00217 	ldw	r2,-32760(gp)
      5c4:	10800317 	ldw	r2,12(r2)
-     5c8:	01c02f84 	movi	r7,190
+     5c8:	01c03004 	movi	r7,192
      5cc:	018000b4 	movhi	r6,2
      5d0:	31ba4704 	addi	r6,r6,-5860
      5d4:	014000b4 	movhi	r5,2
