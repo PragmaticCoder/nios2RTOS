@@ -159,6 +159,25 @@ Task_VGA_init(void* pdata)
 
     debug("Initializing VGA Display");
 
+    int lower = 0;
+    int upper = 69;
+
+    pos1_x = (rand() % (upper - lower + 1)) + lower;
+    pos1_y = 0;
+
+    pos2_x = (rand() % (upper - lower + 1)) + lower;
+    pos2_y = 0;
+
+    while (pos1_x == pos2_x) {
+      pos2_x = (rand() % (upper - lower + 1)) + lower;
+    }
+
+    pos1_val = (rand() % (upper - lower + 1)) + lower;
+    snprintf(text_disp, 2, "%d\0", pos1_val);
+
+    pos2_val = (rand() % (upper - lower + 1)) + lower;
+    snprintf(text_disp, 2, "%d\0", pos2_val);
+
     game_hh, game_mm, game_ss = 0, 0, 0;
     score = 0;
 
